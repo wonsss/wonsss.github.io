@@ -61,6 +61,7 @@
     "eslint-plugin-react": "^7.11.1",
     "fs-extra": "^7.0.1",
     "gatsby-post-gen": "^1.0.0",
+    "gh-pages": "^4.0.0",
     "gray-matter": "^4.0.2",
     "inquirer": "^6.2.2",
     "prettier": "^1.14.2",
@@ -85,7 +86,7 @@
     "develop": "gatsby develop",
     "start": "npm run develop",
     "build": "gatsby build",
-    "deploy": "gatsby build && gh-pages -d public -b master -r 'git@github.com:${your github id}/${github page name}.github.io.git'",
+    "deploy": "gatsby build && gh-pages -d public -b master -r 'bigdatajang@gmail.com:wonsss/marco.github.io.git'",
     "fix-semi": "eslint --quiet --ignore-pattern node_modules --ignore-pattern public --parser babel-eslint --no-eslintrc --rule '{\"semi\": [2, \"never\"], \"no-extra-semi\": [2]}' --fix gatsby-node.js"
   }
 }
