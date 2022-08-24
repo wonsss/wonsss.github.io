@@ -1,9 +1,9 @@
 module.exports = {
-  title: `마르코의 기술 블로그`,
-  description: `Frontend`,
-  author: `[Marco]`,
-  introduction: `반갑습니다`,
-  siteUrl: `https://gatsby-starter-bee.netlify.com`, // Your blog site url
+  title: `Marco`,
+  description: `Frontend 기술 블로그`,
+  author: `Marco`,
+  introduction: ``,
+  siteUrl: `https://wonsss.github.io`, // Your blog site url
   social: {
     twitter: ``, // Your Twitter account
     github: `wonsss`, // Your GitHub account
@@ -12,7 +12,7 @@ module.exports = {
     linkedin: ``, // Your LinkedIn account
     instagram: ``, // Your Instagram account
   },
-  icon: `content/assets/felog.png`, // Add your favicon
+  icon: `content/assets/logo.png`, // Add your favicon
   keywords: [`blog`],
   comment: {
     disqusShortName: '', // Your disqus-short-name. "marco-tech" not using disqus
