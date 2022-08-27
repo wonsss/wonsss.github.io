@@ -1,7 +1,7 @@
 ---
 title: PWA의 핵심, 서비스 워커란?
 date: 2022-08-27 20:08:29
-category: pwa
+category: PWA
 thumbnail: { thumbnailSrc }
 draft: false
 ---
