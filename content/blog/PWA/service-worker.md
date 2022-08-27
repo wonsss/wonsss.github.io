@@ -1,7 +1,7 @@
 ---
 title: PWA의 핵심, 서비스 워커란?
 date: 2022-08-27 20:08:29
-category: PWA
+category: pwa
 thumbnail: { thumbnailSrc }
 draft: false
 ---
@@ -48,7 +48,7 @@ draft: false
     })
     ```
 
-  - `self` 는 서비스 워커의 전역 실행 컨텍스트인 [`ServiceWorkerGlobalSpace`](https://developer.mozilla.org/ko/docs/Web/API/ServiceWorkerGlobalScope)를 뜻한다.
+  - `self` 는 서비스 워커의 전역 실행 컨텍스트인 [`ServiceWorkerGlobalSpace`](https://developer.mozilla.org/ko/docs/Web/API/ServiceWorkerGlobalScope)를 뜻한다. 스크립트가 실행되는 컨텍스트에 따라 window가 될 수도 있고 서비스 워커의 전역 객체가 될 수도 있다. 따라서 self를 사용하여 모든 환경에서 동일한 코`드를 사용할 수 있도록 구현할 수 있다.
 
 ### index에서 서비스워커 등록
 

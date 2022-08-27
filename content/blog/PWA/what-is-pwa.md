@@ -1,7 +1,7 @@
 ---
 title: 프로그레시브 웹 앱이란?
 date: 2022-08-24 17:08:11
-category: PWA
+category: pwa
 thumbnail: { thumbnailSrc }
 draft: false
 ---
