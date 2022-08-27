@@ -11,7 +11,7 @@ draft: false
 ([서비스 워커](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API)는 [웹 워커](https://developer.mozilla.org/ko/docs/Web/API/Web_Workers_API/Using_web_workers)의 일종이다. 서비스 워커만의 특징과 서비스 워커도 갖고 있는 웹 워커의 공통적인 특징 등을 구분하여 정리했다.)
 
 - **별도의 워커 스레드에서 동작(웹 워커)**
-  - 자바스크립트는 `싱글 스레드` (메인 스레드) 기반으로 동작하기 때문에 오랜 시간이 소요되는 복잡한 작업을 메인 스레드에서 수행할 경우 웹 페이지가 멈추거나 버벅이는 문제가 발생할 수 있다. 따라서 이러한 복잡한 작업들은 웹 워커를 통해 메인 스레드가 아닌 별도의 워커 스레드에서 연산하도록 구현하여 메인 스레드의 부담을 줄이고 성능 하락을 방지한다.
+  - 자바스크립트는 싱글 스레드(메인 스레드) 기반으로 동작하기 때문에 오랜 시간이 소요되는 복잡한 작업을 메인 스레드에서 수행할 경우 웹 페이지가 멈추거나 버벅이는 문제가 발생할 수 있다. 따라서 이러한 복잡한 작업들은 웹 워커를 통해 메인 스레드가 아닌 별도의 워커 스레드에서 연산하도록 구현하여 메인 스레드의 부담을 줄이고 성능 하락을 방지한다.
 - **직접적인 DOM 접근/조작 불가(웹 워커)**
   - 웹 워커는 별도의 실행 컨텍스트를 가진 워커 스레드에서 동작하므로 DOM에 직접 접근할 수 없다.
 - **백그라운드 환경에서 동작(서비스 워커)**
@@ -48,7 +48,7 @@ draft: false
     })
     ```
 
-  - `self` 는 서비스 워커의 전역 실행 컨텍스트인 `[ServiceWorkerGlobalSpace](https://developer.mozilla.org/ko/docs/Web/API/ServiceWorkerGlobalScope)`를 뜻한다.
+  - `self` 는 서비스 워커의 전역 실행 컨텍스트인 [`ServiceWorkerGlobalSpace`](https://developer.mozilla.org/ko/docs/Web/API/ServiceWorkerGlobalScope)를 뜻한다.
 
 ### index에서 서비스워커 등록
 
@@ -100,7 +100,7 @@ draft: false
 ## 서비스 워커를 통해 처리할 수 있는 이벤트
 
 - 다음 이벤트들이 서비스 워커 전역 객체 내 이벤트이다.
-  - `[activate](https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerGlobalScope/activate_event)`, `fetch`, `[install](https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerGlobalScope/install_event)`, `[message](https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerGlobalScope/message_event)`, `[notificationclick](https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerGlobalScope/notificationclick_event)`, `notificationclose`, `[push](https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerGlobalScope/push_event)`, `[pushsubscriptionchange](https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerGlobalScope/pushsubscriptionchange_event)`, `sync`
+  - [`activate`](https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerGlobalScope/activate_event), `fetch`, [`install`](https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerGlobalScope/install_event), [`message`](https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerGlobalScope/message_event), [`notificationclick`](https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerGlobalScope/notificationclick_event), `notificationclose`, [`push`](https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerGlobalScope/push_event), [`pushsubscriptionchange`](https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerGlobalScope/pushsubscriptionchange_event), `sync`
 
 ### 서비스 워커 설치 관련 이벤트
 
@@ -115,19 +115,19 @@ draft: false
 ### 백그라운드 동기화 관련 이벤트
 
 - `sync` : 네트워크가 오프라인에서 온라인이 될 경우나 이미 온라인인 경우 발생
-  - `[sync 이벤트](https://developer.mozilla.org/en-US/docs/Web/API/SyncEvent)` 를 통해 백그라운드 동기화 작업을 할 수 있다.
+  - [`sync 이벤트`](https://developer.mozilla.org/en-US/docs/Web/API/SyncEvent) 를 통해 백그라운드 동기화 작업을 할 수 있다.
   - sync 이벤트는 네트워크 환경이 `오프라인` 에서 `온라인` 으로 변경되었을 때 발생한다.
 
 ### 브라우저 요청 관련 이벤트
 
 - `fetch` : [`fetch()`](https://developer.mozilla.org/en-US/docs/Web/API/fetch) 메서드가 호출될 경우 발생
-  - `[fetch 이벤트](https://developer.mozilla.org/en-US/docs/Web/API/FetchEvent)`는 웹 페이지에서 네트워크 요청을 수행할 때 발생한다. 해당 이벤트를 통해 웹 페이지와 서버 사이에서의 요청을 제어할 수 있다.  `[FetchEvent.respondWith()](https://developer.mozilla.org/ko/docs/Web/API/FetchEvent/respondWith)` 메서드를 사용해 요청에 대한 응답을 원하는 방식으로 자유롭게 바꿀 수 있다.
+  - [`fetch 이벤트`](https://developer.mozilla.org/en-US/docs/Web/API/FetchEvent)는 웹 페이지에서 네트워크 요청을 수행할 때 발생한다. 해당 이벤트를 통해 웹 페이지와 서버 사이에서의 요청을 제어할 수 있다.  [`FetchEvent.respondWith()`](https://developer.mozilla.org/ko/docs/Web/API/FetchEvent/respondWith) 메서드를 사용해 요청에 대한 응답을 원하는 방식으로 자유롭게 바꿀 수 있다.
   - 이러한 fetch 이벤트를 활용하여 오프라인 환경에서 미리 저장해둔 리소스를 대신 응답함으로써 오프라인 지원 웹 사이트를 구현할 수 있다.
 
 ### 푸시 알림 관련 이벤트
 
 - `push` : 서버로부터 push notification을 수신할 경우 발생
-  - `[push 이벤트](https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerGlobalScope/push_event)` 는 서버로부터 푸시 메시지를 수신할 때 발생한다.
+  - [`push 이벤트`](https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerGlobalScope/push_event) 는 서버로부터 푸시 메시지를 수신할 때 발생한다.
   - 서비스 워커는 사용자가 웹 페이지를 닫아도, 백그라운드에서 계속 작동하기 때문에 푸시 이벤트를 수신할 수 있다.
 - `pushsubscriptionchange` : push subscription이 브라우저에 의해 새로 고침된 경우나, 폐기된 경우에 발생
 - `notificationclick` : 사용자가 알림을 클릭할 경우 발생
@@ -140,9 +140,9 @@ draft: false
 ## 서비스 워커의 생명주기
 
 ![서비스워커 생애주기](../image/lifecycle_service_worker.png)
-이미지 출처 : [https://www.oreilly.com/library/view/building-progressive-web/9781491961643/ch04.html](https://www.oreilly.com/library/view/building-progressive-web/9781491961643/ch04.html)
+이미지 출처 : [oreilly](https://www.oreilly.com/library/view/building-progressive-web/9781491961643/ch04.html)
 
-- 서비스 워커는 register를 통해 등록되면, install부터 activate 및 redundnat 상태까지 생명주기를 거친다.
+- 서비스 워커는 register를 통해 등록되면, install부터 activate 및 redundant 상태까지 생명주기를 거친다.
 - 생명주기
   - `installing`
   - `installed(waiting)`
@@ -156,7 +156,7 @@ draft: false
 
 - 서비스워커를 수정하고 새로고침을 해도, 이미 활성화되어 있는 서비스 워커가 존재하면 기존의 서비스 워커가 제어하고 있는 클라이언트가 존재하지 않을 때까지 대기 상태를 유지한다.
   - 새로운 서비스 워커를 활성화하려면, 개발자 도구에서 skipWating을 직접 누르거나, 기존 서비스 워커가 제어하는 클라이언트(웹 페이지)를 모두 닫는 방법이 있다.
-  - 또는 아래 코드처럼 `[ServiceWorkerGlobalScope.skipWaiting()](https://developer.mozilla.org/ko/docs/Web/API/ServiceWorkerGlobalScope/skipWaiting)를 사용해` 대기 상태를 건너뛰고 즉시 활성화할 수 있다.
+  - 또는 아래 코드처럼 [`ServiceWorkerGlobalScope.skipWaiting()`](https://developer.mozilla.org/ko/docs/Web/API/ServiceWorkerGlobalScope/skipWaiting)를 사용해 대기 상태를 건너뛰고 즉시 활성화할 수 있다.
 
 ```jsx
 // 서비스 워커 설치할 때
@@ -169,7 +169,7 @@ self.addEventListener('install', event => {
 ### 서비스 워커 활성화 시 클라이언트 제어권 즉시 부여(activating → activated)
 
 - 서비스 워커가 없던 상태에서 로드된 클라이언트는 새로 설치된 서비스 워커에서 즉시 제어할 수 없다.
-- 제어하기 위해서는 페이지를 새로고침하거나, 아래 코드처럼 `[Clients.claim()](https://developer.mozilla.org/ko/docs/Web/API/Clients/claim)` 를 사용해 제어권을 즉시 가져와야 한다.
+- 제어하기 위해서는 페이지를 새로고침하거나, 아래 코드처럼 [`Clients.claim()`](https://developer.mozilla.org/ko/docs/Web/API/Clients/claim) 를 사용해 제어권을 즉시 가져와야 한다.
 
 ```jsx
 // 서비스 워커 설치 중일 때
