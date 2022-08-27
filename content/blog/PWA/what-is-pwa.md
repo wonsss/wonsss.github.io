@@ -88,10 +88,11 @@ draft: false
 
 - Apple은 2023년에 iOS의 safari에서도 Web push notifications에 대한 지원을 추가할 계획이라고 한다.
 - 계획대로 진행된다면, 기존에 web push가 지원되던 환경인 window, mac, android 외에 iOS까지 추가되어 대부분의 디바이스에서 알림 기능이 가능해진다. 이후 PWA에 대한 수요가 더 높아질 것으로 기대된다.
+- 관련 영상 : **WWDC2022 - Meet Web Push for Safari** [https://developer.apple.com/videos/play/wwdc2022/10098/](https://developer.apple.com/videos/play/wwdc2022/10098/)
 
 ![ios16 preview - web push 지원 계획](../image/ios_web_push.png)
 
-출처 : [https://www.apple.com/ios/ios-16-preview/features/](https://www.apple.com/ios/ios-16-preview/features/)
+iOS16 preview 링크 : [https://www.apple.com/ios/ios-16-preview/features/](https://www.apple.com/ios/ios-16-preview/features/)
 
 > 참고
 >
