@@ -25,9 +25,10 @@ draft: false
 
 - 그러나 Apple은 입장을 빠르게 변경하여 2007년 10월에는 iPhone용 SDK를, 그리고 2008년 7월에는 App Store를 발표했다. Apple은 App Store 덕분에 엄청난 수익을 얻어왔으니, 돌이켜 보면 입장 변경의 이유는 꽤 자명해보인다.
 - 이후 거의 10년 간 “유니버셜 앱"이라는 개념은 동결되었다. 그 동안 네이티브 앱은 모바일 네트워크를 지배하고, 구글과 애플이 모바일 파워를 구축하는 데 도움을 주었다.
-- 모바일 퍼스트
 - PWA가 정식 데뷔를 한 2016년 이후 PWA는 테크놀로지 업계에서 “The Next Big Thing”으로 인식되었다. 2017년에는 경쟁사였던 Google과 Microsoft가 PWA 표준을 개발하는데 파트너십을 맺기로 결정했다. 덕분에 PWA는 크롬 OS, 안드로이드, 윈도우에서 작동하기 시작했고, 이제는 PWA를 Microsoft Store에도 게시할 수 있다.
 - 2018년에 Apple도 PWA에 대한 지원을 발표했으나, 핵심 PWA 기술 중 `Service Worker` 등만 지원했을 뿐, `Push 알림` 등의 기술은 아직 도입하지 않는 심각한 한계가 존재한다.
+
+<https://www.apple.com/ios/ios-16-preview/features/>
 
 ## PWA의 정의
 
@@ -83,7 +84,17 @@ draft: false
 - [https://www.pwastats.com](https://www.pwastats.com/)
 - [https://appsco.pe/](https://appsco.pe/toplist)
 
+## iOS의 웹 푸시 지원 계획
+
+- Apple은 2023년에 iOS의 safari에서도 Web push notifications에 대한 지원을 추가할 계획이라고 한다.
+- 계획대로 진행된다면, 기존에 web push가 지원되던 환경인 window, mac, android 외에 iOS까지 추가되어 대부분의 디바이스에서 알림 기능이 가능해진다. 이후 PWA에 대한 수요가 더 높아질 것으로 기대된다.
+
+![ios16 preview - web push 지원 계획](../image/ios_web_push.png)
+
+출처 : [https://www.apple.com/ios/ios-16-preview/features/](https://www.apple.com/ios/ios-16-preview/features/)
+
 > 참고
 >
+> - MDN
 > - [https://www.divante.com/pwabook/chapter/02-the-history-of-pwas](https://www.divante.com/pwabook/chapter/02-the-history-of-pwas)
 > - SNS 앱 예제로 배우는 프로그레시브 웹 앱
