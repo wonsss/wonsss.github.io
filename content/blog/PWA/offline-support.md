@@ -59,7 +59,7 @@ self.addEventListener('install', event => {
 
 ### 캐시에서 응답하기
 
-- `**cahces.match()**`
+- `caches.match()`
   - [https://developer.mozilla.org/en-US/docs/Web/API/CacheStorage/match](https://developer.mozilla.org/en-US/docs/Web/API/CacheStorage/match)
   - match()는 캐시된 리소스를 찾기 위한 메소드이며 프로미스를 반환한다.
 - `event.respondWith()`
@@ -248,10 +248,7 @@ request.onupgradeneeded = event => {
 
     ```jsx
     // 트랜잭션 생성
-    const transaction = db.transaction(
-      ['toDoList-task', 'toDoList-status'],
-      'readwrite'
-    )
+    const transaction = db.transaction('toDoList', 'readwrite')
 
     // 객체 저장소 가져오기
     // 트랜잭션 생성 후 사용할 객체 저장소를 가져와야 데이터를 조작할 수 있다.
@@ -274,7 +271,7 @@ request.onupgradeneeded = event => {
 
   - [https://developer.mozilla.org/en-US/docs/Web/API/IDBObjectStore/openCursor](https://developer.mozilla.org/en-US/docs/Web/API/IDBObjectStore/openCursor)
   - 커서는 순회하며 결과 데이터를 가리킬 수 있는 요소이다. 커서를 통해 여러 데이터에 쉽게 접근할 수 있다. 조회뿐만 아니라 수정, 삭제 등의 작업도 바로 처리할 수 있다.
-  - 커서는 openCursor() 메서드로 열 수 있다. 커서가 성공적으로 열리면, 커서 객체에 접근할 수 있고 curosr.value 속성을 통해 커서가 가리키는 데이터를 참조할 수 있다.
+  - 커서는 openCursor() 메서드로 열 수 있다. 커서가 성공적으로 열리면, 커서 객체에 접근할 수 있고 cursor.value 속성을 통해 커서가 가리키는 데이터를 참조할 수 있다.
     - 첫 번째 인자는 조회할 데이터의 조건을 받는다.
       - lowerBound(값) : 지정된 값 이상의 값을 검색
       - upperBound(값) : 지정된 값 이하의 값을 검색
@@ -286,7 +283,7 @@ request.onupgradeneeded = event => {
       - nextunique: 앞에서 뒤로 이동하되 동일한 값은 한 번만
       - prevunique: 뒤에서 앞으로 이동하되 동일한 값은 한 번만ㅎ
   - 다음 데이터를 참조하려면 커서의 continue() 메서드를 사용한다. 이동에 성공하면 요청 객체의 성공 이벤트가 다시 발생한다. 커서가 마지막에 도달하면 커서의 값이 null이 된다.
-  - 데이터 수정 시, 커서의 undate() 메서드를 사용한다. (커서를 통한 데이터 수정은 객체 저장소가 내부키를 사용하는 경우에만 가능하다)
+  - 데이터 수정 시, 커서의 update() 메서드를 사용한다. (커서를 통한 데이터 수정은 객체 저장소가 내부키를 사용하는 경우에만 가능하다)
   - 데이터 삭제 시, 커서의 delete() 메서드를 사용한다.
 
     ```jsx

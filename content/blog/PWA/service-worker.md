@@ -155,7 +155,7 @@ draft: false
 ### 수정된 서비스워커 활성화하기(installed/waiting → activating)
 
 - 서비스워커를 수정하고 새로고침을 해도, 이미 활성화되어 있는 서비스 워커가 존재하면 기존의 서비스 워커가 제어하고 있는 클라이언트가 존재하지 않을 때까지 대기 상태를 유지한다.
-  - 새로운 서비스 워커를 활성화하려면, 개발자 도구에서 skipWating을 직접 누르거나, 기존 서비스 워커가 제어하는 클라이언트(웹 페이지)를 모두 닫는 방법이 있다.
+  - 새로운 서비스 워커를 활성화하려면, 개발자 도구에서 skipWaiting을 직접 누르거나, 기존 서비스 워커가 제어하는 클라이언트(웹 페이지)를 모두 닫는 방법이 있다.
   - 또는 아래 코드처럼 [`ServiceWorkerGlobalScope.skipWaiting()`](https://developer.mozilla.org/ko/docs/Web/API/ServiceWorkerGlobalScope/skipWaiting)를 사용해 대기 상태를 건너뛰고 즉시 활성화할 수 있다.
 
 ```jsx
