@@ -129,13 +129,13 @@ draft: false
   <meta name="apple-mobile-web-app-capable" content="yes" />
   ```
 
-- iOS에서 앱 이름을 지정하려면, apple-mobile-web-app-title를 통해 지정해야 한다. 지정하지 않으면 <title> 태그의 값이 사용된다.
+- iOS에서 앱 이름을 지정하려면, apple-mobile-web-app-title를 통해 지정해야 한다. 지정하지 않으면 `<title>` 태그의 값이 사용된다.
 
   ```jsx
   <meta name="apple-mobile-web-app-title" content="Smody" />
   ```
 
-- iOS는 웹 앱 매니페스트에서 추가한 아이콘을 사용하지 않기 때문에, 다음과 같은 <link> 태그를 통해 아이콘을 사용할 수 있다.
+- iOS는 웹 앱 매니페스트에서 추가한 아이콘을 사용하지 않기 때문에, 다음과 같은 `<link>` 태그를 통해 아이콘을 사용할 수 있다.
 
   ```jsx
   <link
