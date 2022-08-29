@@ -6,7 +6,7 @@ thumbnail: { thumbnailSrc }
 draft: false
 ---
 
-## 캐시 스토리지
+## 1.캐시 스토리지
 
 - `캐시 스토리지`는 `브라우저`에 리소스를 직접 저장하고 관리할 수 있는 공간이다. 도메인은 여러 개의 이름이 지정된 `Cache` 객체를 가질 수 있으며 그 객체들은 `ServiceWorker` 가 완전히 제어한다.
 - 사용자가 PWA 웹 페이지 처음 접속 시, 서비스 워커가 등록되고 설치(install)되는데, 이 때 웹 페이지 구성에 필요한 리소스를 모두 캐시 스토리지에 미리 캐싱한다. 캐시 스토리지에 캐싱된 리소스는 필요할 때 언제든(오프라인 상태일지라도) 불러올 수 있다.
@@ -23,7 +23,7 @@ draft: false
     self.caches
     ```
 
-### 리소스 캐싱하기
+### 1-1. 리소스 캐싱하기
 
 - `caches.open()`
   - [https://developer.mozilla.org/en-US/docs/Web/API/CacheStorage/open](https://developer.mozilla.org/en-US/docs/Web/API/CacheStorage/open)
@@ -57,7 +57,7 @@ self.addEventListener('install', event => {
 
 ![개발자도구-캐시된 리소스](../image/cached-resource.png)
 
-### 캐시에서 응답하기
+### 1-2. 캐시에서 응답하기
 
 - `caches.match()`
   - [https://developer.mozilla.org/en-US/docs/Web/API/CacheStorage/match](https://developer.mozilla.org/en-US/docs/Web/API/CacheStorage/match)
@@ -87,7 +87,7 @@ self.addEventListener('fetch', event => {
 
 ![offline-cache.gif](../image/offline-cache.gif)
 
-### 캐시 관리
+### 1-3. 캐시 관리
 
 - 사용하지 않는 불필요한 캐시도 제거해야 한다.
 - 캐시 삭제 시점 - activate
@@ -124,12 +124,12 @@ self.addEventListener('activate', event => {
 
 ![불필요한 캐시 삭제](../image/delete-cache.gif)
 
-## IndexedDB
+## 2. IndexedDB
 
 - 컨텐츠 데이터를 저장 및 관리하기 위한 저장소로서, IndexedDB를 활용할 수 있다.
 - IndexedDB는 브라우저에서 `객체`를 저장하고 `트랜잭션 기반`으로 데이터를 처리하는 데이터베이스이다.
 
-### IndexedDB 특징
+### 2-1. IndexedDB 특징
 
 - IndexedDB는 `데이터베이스`, `객체 저장소` , `데이터` 라는 구성요소로 이루어져 있다. 웹 페이지 도메인별로 여러 개의 `데이터베이스`를 생성할 수 있고, 하나의 `데이터베이스`에는 여러 개의 `객체 저장소` 를 생성하여 `데이터`를 저장할 수 있다.
 - 자바스크립트로 처리할 수 있는 `대부분의 데이터 형식`을 저장할 수 있다. 원시값, 객체 외에도 이미지, 동영상, 사운드 등의 데이터가 될 수 있는 Blob(Binary Large Object) 형식도 저장할 수 있다.
@@ -141,7 +141,7 @@ self.addEventListener('activate', event => {
   - 오프라인 상태에서 데이터 관리를 하려면 서비스 워커에서 사용할 수 있는 IndexedDB가 필요하다.
 - 다만, 초기 구현이 로컬스토리지 등과 비교하여 까다롭다.
 
-### 데이터베이스 생성
+### 2-2. 데이터베이스 생성
 
 - **`IDBFactory.open()`**
   - [https://developer.mozilla.org/en-US/docs/Web/API/IDBFactory/open](https://developer.mozilla.org/en-US/docs/Web/API/IDBFactory/open)
@@ -166,7 +166,7 @@ DBOpenRequest.onsuccess = event => {
   - 데이터베이스 연결 객체
   - [https://developer.mozilla.org/en-US/docs/Web/API/IDBDatabase](https://developer.mozilla.org/en-US/docs/Web/API/IDBDatabase)
 
-### 객체 저장소(IDBObjectStore)
+### 2-3. 객체 저장소(IDBObjectStore)
 
 ```jsx
 request.onupgradeneeded = event => {
@@ -191,21 +191,21 @@ request.onupgradeneeded = event => {
       - `keyPath` 옵션을 통해 사용되는 기본키는 내부키(in-line-key)라고 불린다.
       - 실제 저장되는 데이터 내부의 특정 값을 기본으로 사용한다.
 
-            ```jsx
-            db.createObjectStore(객체저장소 이름, {keyPath : 'id'});
-            // 데이터 내부의 프로퍼티 중 key가 'id'인 값을 기본키로 사용한다.
-            ```
+        ```jsx
+        db.createObjectStore(객체저장소 이름, {keyPath : 'id'});
+        // 데이터 내부의 프로퍼티 중 key가 'id'인 값을 기본키로 사용한다.
+        ```
 
     - 외부키
 
       - `autoIncrement` 옵션을 통해 데이터와 상관없이 자동 증가되는 기본키 값은 외부키(out-of-line key)라고 불린다.
       - 데이터와 관계없는 별도의 키를 새로 생성한다.
 
-            ```jsx
-            db.createObjectStore(객체저장소 이름, {autoIncrement: true});
-            ```
+        ```jsx
+        db.createObjectStore(객체저장소 이름, {autoIncrement: true});
+        ```
 
-### 색인 추가하기
+### 2-4. 색인 추가하기
 
 - 기본키 이외의 값을 검색하는 기능이 필요하면 별도의 색인을 추가하여 특정 값을 검색할 수 있다.
 - `IDBObjectStore.createIndex(indexName, keyPath, objectParameters)`
@@ -232,7 +232,7 @@ request.onupgradeneeded = event => {
 
   - 위 코드에서 toDoList-task, toDoList-status 색인이 생성됐다. 이는 toDoList 객체 저장소에 존재하는 데이터의 task와 status 값을 검색할 수 있음을 의미한다.
 
-### 트랜잭션
+### 2-5. 트랜잭션
 
 - 트랜잭션 모드
   - `versionChange`
@@ -260,7 +260,7 @@ request.onupgradeneeded = event => {
   - `abort` : 중단
   - `error` : 에러
 
-### 데이터 접근/조작
+### 2-6. 데이터 접근/조작
 
 - **`IDBObjectStore.add()` - 데이터 추가**
   - [https://developer.mozilla.org/en-US/docs/Web/API/IDBObjectStore/add](https://developer.mozilla.org/en-US/docs/Web/API/IDBObjectStore/add)

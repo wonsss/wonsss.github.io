@@ -13,7 +13,7 @@ draft: false
   - **MessageChannel Interface**
   - **Clients** Interface
 
-## **Broadcast Channel API**
+## 1. **Broadcast Channel API**
 
 - [https://developer.mozilla.org/en-US/docs/Web/API/Broadcast_Channel_API](https://developer.mozilla.org/en-US/docs/Web/API/Broadcast_Channel_API)
 - 서비스 워커에게 Port를 전달할 필요가 없어서 비교적 간단한 방식이다.
@@ -57,7 +57,7 @@ broadcast.onmessage = event => {
 broadcast.close()
 ```
 
-## **MessageChannel Interface**
+## 2. **MessageChannel Interface**
 
 - [https://developer.mozilla.org/en-US/docs/Web/API/MessageChannel](https://developer.mozilla.org/en-US/docs/Web/API/MessageChannel)
 - Channel Messaging API의 인터페이스이며, 새 메시지 채널을 만들어 이를 통해 양방향으로 메시지를 주고 받을 수 있다.
@@ -116,7 +116,7 @@ self.addEventListener("message", event => {
 }
 ```
 
-## **Clients** Interface
+## 3. **Clients** Interface
 
 - 서비스 워커에게 채널에 대한 정보를 전달하지 않아도 된다. 서비스 워커에서 Clients 인터페이스를 통해 클라이언트에게 접근할 수 있다.
 - Clients 인터페이스는 `Clients.matchAll()` 이나 `Clients.get()` 메서드를 통해 Client 객체로 접근 방법을 제공한다. Clients 인터페이스는 서비스 워커 내에서 `self.clients` 를 통해 접근할 수 있다.

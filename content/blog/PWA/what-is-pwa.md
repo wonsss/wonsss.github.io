@@ -6,7 +6,7 @@ thumbnail: { thumbnailSrc }
 draft: false
 ---
 
-## PWA 개발의 역사
+## 1. PWA 개발의 역사
 
 ![pwa 개발 마일스톤](../image/pwa_history.png)
 
@@ -27,10 +27,9 @@ draft: false
 - 이후 거의 10년 간 “유니버셜 앱"이라는 개념은 동결되었다. 그 동안 네이티브 앱은 모바일 네트워크를 지배하고, 구글과 애플이 모바일 파워를 구축하는 데 도움을 주었다.
 - PWA가 정식 데뷔를 한 2016년 이후 PWA는 테크놀로지 업계에서 “The Next Big Thing”으로 인식되었다. 2017년에는 경쟁사였던 Google과 Microsoft가 PWA 표준을 개발하는데 파트너십을 맺기로 결정했다. 덕분에 PWA는 크롬 OS, 안드로이드, 윈도우에서 작동하기 시작했고, 이제는 PWA를 Microsoft Store에도 게시할 수 있다.
 - 2018년에 Apple도 PWA에 대한 지원을 발표했으나, 핵심 PWA 기술 중 `Service Worker` 등만 지원했을 뿐, `Push 알림` 등의 기술은 아직 도입하지 않는 심각한 한계가 존재한다.
+  - <https://www.apple.com/ios/ios-16-preview/features/>
 
-<https://www.apple.com/ios/ios-16-preview/features/>
-
-## PWA의 정의
+## 2. PWA의 정의
 
 - Progressive Web Application은 `웹의 편리한 접근성`과 `네이티브 앱의 기능적인 장점 및 사용성`을 결합한 차세대 웹 앱을 의미한다.
 - 더 명확한 정의는?
@@ -38,7 +37,7 @@ draft: false
 - 어떤 플랫폼에서 작동하는지?
   - PWA는 일반적인 `웹 환경` 내에서, `서비스 워커` 및 여러 API를 통해 `네이티브 앱에서만 구현할 수 있던 다양한 기능`을 사용자에게 제공한다.
 
-## PWA의 장점
+## 3. PWA의 장점
 
 - 사용자
   - 짧은 로딩 시간과 적은 용량
@@ -53,7 +52,7 @@ draft: false
   - App Store 또는 Google Play에서 유료 개발자 계정이 필요 없음
   - 앱 업데이트를 독립적으로 가능
 
-## PWA가 되기 위한 핵심 조건 3가지
+## 4. PWA가 되기 위한 핵심 조건 3가지
 
 1. HTTPS
    - 기존의 웹 페이지보다 더욱 강력하고 민감한 새 기능을 제공하기 때문에 `보안` 문제가 선결되어야 한다. 따라서 PWA는 HTTPS 환경(또는 로컬호스트)에서만 작동하도록 제한되어 있다.
@@ -62,9 +61,9 @@ draft: false
 3. Service Worker
    - 오프라인 환경에서의 웹페이지 접근, 백그라운드 동기화, 푸시 알림 등 다양한 기능은 서비스 워커를 통해 제공된다.
 
-## PWA 도입 사례
+## 5. PWA 도입 사례
 
-### Twitter Lite
+### 5-1. Twitter Lite
 
 - Twitter Lite는 [mobile.twitter.com](http://mobile.twitter.com/) 에서 사용할 수 있는 프로그레시브 웹 앱이다. Twitter Lite는 빠르고, 데이터를 덜 사용하며, 저장공간(기존 앱에 비해 3% 미만)은 덜 차지하며, 최신 브라우저에서 푸시 알림과 오프라인 사용을 지원한다. 이를 통해 사용자 경험을 크게 개선하고 재참여율을 높였다고 한다.
 
@@ -79,12 +78,12 @@ draft: false
 
 ![twitter lite](../image/twitter_lite.png)
 
-### 기타 사례 확인
+### 5-2. 기타 사례 확인
 
 - [https://www.pwastats.com](https://www.pwastats.com/)
 - [https://appsco.pe/](https://appsco.pe/toplist)
 
-## iOS의 웹 푸시 지원 계획
+## 6. iOS의 웹 푸시 지원 계획
 
 - Apple은 2023년에 iOS의 safari에서도 Web push notifications에 대한 지원을 추가할 계획이라고 한다.
 - 계획대로 진행된다면, 기존에 web push가 지원되던 환경인 window, mac, android 외에 iOS까지 추가되어 대부분의 디바이스에서 알림 기능이 가능해진다. 이후 PWA에 대한 수요가 더 높아질 것으로 기대된다.

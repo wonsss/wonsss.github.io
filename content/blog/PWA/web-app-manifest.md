@@ -6,7 +6,7 @@ thumbnail: { thumbnailSrc }
 draft: false
 ---
 
-## Web App Manifest란?
+## 1. Web App Manifest란?
 
 - `Web App Manifest` 는 프로그레시브 웹 앱에 대해 브라우저에게 알려주며 사용자의 데스크톱이나 모바일 기기에 `설치`할 때 어떻게 작동해야 하는지 알려주는 JSON 형식의 파일이다.
   - 참고로 여기서 `설치` 란, 앱 스토어를 거치지 않고 기기의 홈 화면에 설치하는 것을 의미한다. 그렇지만, 일반 웹 앱처럼 단순히 홈 화면에 링크/북마크를 하는 것은 아니며, PWA는 사전 다운로드를 통해 오프라인에서도 동작할 수 있다.
@@ -15,7 +15,7 @@ draft: false
 
   ![install-app.gif](../image/install-app.gif)
 
-## Manifest 파일 만들기
+## 2. Manifest 파일 만들기
 
 - 이번에 팀 프로젝트 시 작성한 매니페스트는 다음과 같다. 속성 이름과 값을 통해 해당 속성이 어떤 역할을 하는지 대략 유추될 것이다. 이 중에서 헷갈릴 수 있는 몇 가지를 살펴보자.
 - `orientation`
@@ -113,7 +113,7 @@ draft: false
 }
 ```
 
-### 웹 사이트에 Manifest 추가
+### 2-1. 웹 사이트에 Manifest 추가
 
 - `mainfest.json` 파일을 최상위 디렉터리에 만들고, 웹 페이지에서 이를 불러올 수 있도록 index.html 파일의 <head> 태그 내부에 아래와 같이 <link> 태그를 사용해 추가한다.
 
@@ -121,7 +121,7 @@ draft: false
 <link rel="manifest" href="manifest.json" />
 ```
 
-### 애플 모바일 기기 지원을 위한 설정
+### 2-2. 애플 모바일 기기 지원을 위한 설정
 
 - iOS에서 웹 앱 관련 설정을 적용하려면, apple-mobile-web-app-capable 설정을 yes로 지정해야 한다.
 
@@ -175,6 +175,13 @@ draft: false
       content="black-translucent"
     />
     ```
+
+## 3. Tool
+
+- VS Code Extension - PWABuilder Studio
+  - <https://marketplace.visualstudio.com/items?itemName=PWABuilder.pwa-studio>
+  - vs code에서 사용할 수 있는 익스텐션이다. 현재 프로젝트의 manifest와 service worker 유무를 파악하여, 없다면 새로 만들 수 있도록 도와주며, 이미 있으면 어떤 항목이 미비한지 체크할 수 있다.
+  - ![pwa-builder](../image/pwa-builder.png)
 
 > 참고자료
 >

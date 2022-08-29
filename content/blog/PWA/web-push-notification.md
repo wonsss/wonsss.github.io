@@ -6,7 +6,7 @@ thumbnail: { thumbnailSrc }
 draft: false
 ---
 
-## Web Push Notification이란?
+## 1. Web Push Notification이란?
 
 - 웹 푸시 알림은 브라우저를 통해 웹 사이트에서 사용자의 기기로 전송되는 실행 가능한 메시지이다.
 
@@ -16,7 +16,7 @@ draft: false
   - web-push는 HTTPS에서만 사용 가능하다(개발용인 localhost도 가능)
     ![웹 푸시 구독 예시](../image/web-push-subscribe.gif)
 
-### Web Push의 브라우저 호환성
+### 1-1. Web Push의 브라우저 호환성
 
 - Google과 Microsoft는 협력하여 PWA 및 Web Push 생태계를 이끌어 가고 있으나, Apple은 폐쇄적으로 iOS에서 Web Push를 지원하지 않고 있었다. 현재 iOS를 제외하고 대부분의 기기(PC, 모바일)와 크롬 등의 주요 브라우저에서 지원되고 있다.
 
@@ -24,7 +24,7 @@ draft: false
 
 - 그러나 희망적이게도 Apple이 WWDC22에서 Web Push에 대한 지원 계획을 밝히며, Web Push가 점점 웹 기술 표준이 되어가고 있다.
 
-### **iOS의 웹 푸시 지원 계획**
+### 1-2. **iOS의 웹 푸시 지원 계획**
 
 - Apple은 2023년에 iOS의 safari에서도 Web push notifications에 대한 지원을 추가할 계획이라고 한다.
 - 계획대로 진행된다면, 기존에 web push가 지원되던 환경인 window, mac, android 외에 iOS까지 추가되어 대부분의 디바이스에서 Web Push 알림 기능이 가능해진다.
@@ -35,7 +35,7 @@ draft: false
 
 - 관련 영상 : **WWDC2022 - Meet Web Push for Safari** [https://developer.apple.com/videos/play/wwdc2022/10098/](https://developer.apple.com/videos/play/wwdc2022/10098/)
 
-## Web Push Protocol
+## 2. Web Push Protocol
 
 ![Web Push Protocol](../image/web-push-protocol.png)
 
@@ -54,7 +54,7 @@ draft: false
     - APNs [https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/sending_notification_requests_to_apns/](https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/sending_notification_requests_to_apns/)
     - FCM [https://firebase.google.com/docs/cloud-messaging?hl=ko](https://firebase.google.com/docs/cloud-messaging?hl=ko)
 
-### 구독 과정
+### 2-1. 구독 과정
 
 웹 사이트에서 푸시 알림 구독 과정은 다음과 같다.
 
@@ -78,7 +78,7 @@ draft: false
     }
     ```
 
-### 구독 취소 과정
+### 2-2. 구독 취소 과정
 
 구독 취소 과정도 구독 과정과 비슷하나 더 간단하다.
 
@@ -106,7 +106,7 @@ draft: false
   4. [전송] `서버` 는 푸시 메시지를 보낼 때 사용자 구독 정보와 메시지를 비공개키로 암호화한 후 `푸시 서비스` 로 전달한다
   5. [전송] `푸시 서비스`는 공개키를 사용하여 검증한 후 `클라이언트` 로 푸시 메시지를 전달한다
 
-### VAPID Key 생성
+### 2-3. VAPID Key 생성
 
 - [https://github.com/web-push-libs/web-push](https://github.com/web-push-libs/web-push)
 
@@ -118,7 +118,7 @@ npx web-push generate-vapid-keys
 
   ![vapid-key](../image/vapid-key.png)
 
-### [서버] 서버에 VAPID Key 등록
+### 2-4. [서버] 서버에 VAPID Key 등록
 
 - VAPID 공개키와 비공개키를 서버의 default.json파일에 추가한다.
 
@@ -132,7 +132,7 @@ npx web-push generate-vapid-keys
     }
     ```
 
-### 푸시 서비스(Firebase)에 VAPID Key 등록
+### 2-5. 푸시 서비스(Firebase)에 VAPID Key 등록
 
 - Firebase에서 아까 생성한 VAPID Key를 등록한다.
 
@@ -144,7 +144,7 @@ npx web-push generate-vapid-keys
 
     ![firebase setting](../image/firebase-setting.png)
 
-### 서버에게 VAPID 공개키 요청
+### 2-6. 서버에게 VAPID 공개키 요청
 
 - 클라이언트는 VAPID 키를 아직 알지 못한다. 클라이언트(브라우저)가 푸시 서비스를 구독하려면 `VAPID 공개키`가 필요하다.
 
@@ -160,18 +160,18 @@ npx web-push generate-vapid-keys
 
     - 서버는 공개키를 줄 수 있는 GET 메서드 API를 구현해둔다.
 
-## Notifications API
+## 3. Notifications API
 
 - [https://developer.mozilla.org/ko/docs/Web/API/Notifications_API](https://developer.mozilla.org/ko/docs/Web/API/Notifications_API)
 - Notifications API는 사용자에게 보이게 될 시스템 알림을 구성하기 위한 기능을 제공한다.
 
-### `Notification.requestPermission()` - “알림 권한 승인 요청”
+### 3-1. `Notification.requestPermission()` - “알림 권한 승인 요청”
 
 - [https://developer.mozilla.org/en-US/docs/Web/API/Notification/requestPermission](https://developer.mozilla.org/en-US/docs/Web/API/Notification/requestPermission)
 - 일단, 사용자로부터 알림 권한을 획득한 경우에만 알림을 표시할 수 있으므로, 알림 권한 승인을 요청하는 `Notification.requestPermission()`메서드를 사용한다.
   - 참고로, 앞서 언급했듯이 아직 iOS에서는 지원되지 않는다.
 
-### **`Notification.permission` - “알림 권한 상태”**
+### 3-2. **`Notification.permission` - “알림 권한 상태”**
 
 - [https://developer.mozilla.org/en-US/docs/Web/API/Notification/permission](https://developer.mozilla.org/en-US/docs/Web/API/Notification/permission)
 - 알림 권한 상태는 **`Notification.permission` 을 통해 확인할 수 있으며, 다음과 같이 세 가지 중에 하나이다.**
@@ -207,7 +207,7 @@ const subscribe = () => {
 }
 ```
 
-### **`ServiceWorkerRegistration.showNotification()` - “휴대폰에서 브라우저 꺼져 있어도 알림이 뜨네”**
+### 3-3. **`ServiceWorkerRegistration.showNotification()` - “휴대폰에서 브라우저 꺼져 있어도 알림이 뜨네”**
 
 - [https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerRegistration/showNotification](https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerRegistration/showNotification)
 - `new Notification()` 을 통한 알림은 테스크탑 환경에서는 작동하나, 모바일 기기나 백그라운드에서 환경에서 작동하지 않는다. 왜냐하면, 알림을 보여주는 것은 브라우저가 아닌 OS이기 때문이다. 이러한 문제는 서비스워커에서 **`ServiceWorkerRegistration.showNotification()` 를 사용함으로써, 모바일 및 백그라운드 환경에서도 알림을 생성할 수 있다.**
@@ -243,7 +243,7 @@ function showNotification() {
 }
 ```
 
-## Push API
+## 4. Push API
 
 - [https://developer.mozilla.org/ko/docs/Web/API/Push_API](https://developer.mozilla.org/ko/docs/Web/API/Push_API)
 - `Push API` 를 사용하여 `클라이언트` 에서 `푸시 서비스` 로 구독 요청
@@ -265,7 +265,7 @@ function showNotification() {
   })
   ```
 
-### `PushManager` - “알림 구독할게요”
+### 4-1. `PushManager` - “알림 구독할게요”
 
 - [https://developer.mozilla.org/en-US/docs/Web/API/PushManager](https://developer.mozilla.org/en-US/docs/Web/API/PushManager)
 - 이 인터페이스는 `ServiceWorkerRegistration.pushManager` 를 통해 접근할 수 있다.
@@ -274,7 +274,7 @@ function showNotification() {
   - `pushManager`에는 `푸시 서비스` 에게 직접 구독 요청할 수 있는 `subscribe()` 메서드가 존재한다. `subscribe(option)` 메서드의 첫 번째 인자에 publicKey를 담은 옵션 객체를 전달한다.
   - 구독 요청이 성공하면 `클라이언트`는 응답값으로 “구독 정보” `PushSubscription` 객체를 받는다.
 
-### `PushSubscription` - “여기로 알림 보내주시는 곳은 맞는데, 이제 구독 취소할게요”
+### 4-2.`PushSubscription` - “여기로 알림 보내주시는 곳은 맞는데, 이제 구독 취소할게요”
 
 - [https://developer.mozilla.org/en-US/docs/Web/API/PushSubscription](https://developer.mozilla.org/en-US/docs/Web/API/PushSubscription)
 - `endpoint`
@@ -318,7 +318,7 @@ self.addEventListener('push', event => {
 })
 ```
 
-## 종합 및 예시 - 알림 구독 버튼의 콜백 함수(`subscribe()`)
+## 5. 종합 및 예시 - 알림 구독 버튼의 콜백 함수(`subscribe()`)
 
 - 앞에서 살펴본 개념을 종합하여, 이번 프로젝트에서 작성했던 알림 구독 관련 코드를 전체적으로 살펴보자. 알림 구독 버튼의 클릭 이벤트 리스너에 부착한 `subscribe()` 콜백 함수부터 시작하여, 해당 콜백 함수 내부에서 분기하여 실행하는 구독 취소 함수( `pushUnsubscribe()` )와 구독 함수(`pushSubscribe()`) 등을 차례로 확인한다.
 
@@ -349,7 +349,7 @@ self.addEventListener('push', event => {
   }
   ```
 
-### 구독 취소 함수(`pushUnsubscribe()`)
+### 5-1. 구독 취소 함수(`pushUnsubscribe()`)
 
 - 클라이언트에 저장된 pushSubscription이 이미 있는 경우, 구독 취소를 요청하기 위해 `pushUnsubscribe()` 함수를 호출한다.
 
@@ -375,7 +375,7 @@ self.addEventListener('push', event => {
   }
   ```
 
-### 구독 함수(`pushSubscribe()`)
+### 5-2. 구독 함수(`pushSubscribe()`)
 
 - 클라이언트에 저장된 pushSubscription이 없는 경우, 푸시 서비스에 구독 요청을 하고 서버에게 구독 정보를 전달하는 `pushSubscribe()` 함수를 호출한다.
 - 전달 예시 코드(`pushSubscribe()` 함수)

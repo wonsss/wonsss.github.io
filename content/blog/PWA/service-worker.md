@@ -6,18 +6,18 @@ thumbnail: { thumbnailSrc }
 draft: false
 ---
 
-## 서비스 워커, 웹 워커
+## 1. 서비스 워커, 웹 워커
 
 서비스 워커는 웹 워커의 일종이다. 서비스 워커와 웹 워커는 매우 유사한 인터페이스를 갖고 있으나, 각각의 의도와 기능은 매우 다르다. 공통점과 차이점은 다음과 같다.
 
-### 서비스 워커와 웹 워커의 공통점
+### 1-1. 서비스 워커와 웹 워커의 공통점
 
 - 별도의 워커 스레드에서 동작
 - 직접적인 DOM 접근/조작 불가(웹 워커)
   - 별도의 실행 컨텍스트를 가진 워커 스레드에서 동작하므로 DOM에 직접 접근할 수 없다.
 - 클라이언트와 postMessage API를 사용하여 통신한다.
 
-### 서비스 워커와 웹 워커의 차이점
+### 1-2. 서비스 워커와 웹 워커의 차이점
 
 - 서비스 워커
 
@@ -33,9 +33,9 @@ draft: false
   - 자바스크립트는 싱글 스레드(메인 스레드) 기반으로 동작하기 때문에 오랜 시간이 소요되는 복잡한 작업을 메인 스레드에서 수행할 경우 웹 페이지가 멈추거나 버벅이는 문제가 발생할 수 있다. 따라서 이러한 복잡한 작업들은 웹 워커를 통해 메인 스레드가 아닌 별도의 워커 스레드에서 연산하도록 구현하여 메인 스레드의 부담을 줄이고 성능 하락을 방지한다. 이처럼 UI의 응답성을 방해하지 않으면서 많은 연산 작업을 수행하기 위해 사용된다.
   - 웹 워커의 작동은 하나의 탭으로 제한된다.
 
-## 서비스 워커 등록
+## 2. 서비스 워커 등록
 
-### 서비스워커 파일 생성
+### 2-1. 서비스워커 파일 생성
 
 - `pwaServiceWorker.js`
 
@@ -63,7 +63,7 @@ draft: false
 
   - `self` 는 서비스 워커의 전역 실행 컨텍스트인 [`ServiceWorkerGlobalSpace`](https://developer.mozilla.org/ko/docs/Web/API/ServiceWorkerGlobalScope)를 뜻한다. 스크립트가 실행되는 컨텍스트에 따라 window가 될 수도 있고 서비스 워커의 전역 객체가 될 수도 있다. 따라서 self를 사용하여 모든 환경에서 동일한 코`드를 사용할 수 있도록 구현할 수 있다.
 
-### index에서 서비스워커 등록
+### 2-2. index에서 서비스워커 등록
 
 - `src/index.tsx` 파일 내에 서비스 워커를 추가하는 아래 코드 추가
 
@@ -99,23 +99,23 @@ draft: false
 
   - 만약 개발모드에서 msw를 사용한다면 서비스워커가 중복되므로 등록하는 서비스워커를 환경에 따라 분기하는 것이 좋다. 서비스워커는 동시에 하나 밖에 등록되지 않는다. 예를 들어 아래와 같이 분기할 수 있다.
 
-        ```jsx
-        if (isProd || isLocal) {
-          registerPwaServiceWorker();
-        }
+    ```jsx
+    if (isProd || isLocal) {
+      registerPwaServiceWorker()
+    }
 
-        if (isDev) {
-          const { mockServiceWorker } = require('./mocks/browser');
-          mockServiceWorker.start();
-        }
-        ```
+    if (isDev) {
+      const { mockServiceWorker } = require('./mocks/browser')
+      mockServiceWorker.start()
+    }
+    ```
 
-## 서비스 워커를 통해 처리할 수 있는 이벤트
+## 3. 서비스 워커를 통해 처리할 수 있는 이벤트
 
 - 다음 이벤트들이 서비스 워커 전역 객체 내 이벤트이다.
   - [`activate`](https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerGlobalScope/activate_event), `fetch`, [`install`](https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerGlobalScope/install_event), [`message`](https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerGlobalScope/message_event), [`notificationclick`](https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerGlobalScope/notificationclick_event), `notificationclose`, [`push`](https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerGlobalScope/push_event), [`pushsubscriptionchange`](https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerGlobalScope/pushsubscriptionchange_event), `sync`
 
-### 서비스 워커 설치 관련 이벤트
+### 3-1. 서비스 워커 설치 관련 이벤트
 
 설치 및 활성화 시 최초 1회만 발생하므로, 주로 웹 페이지 구성에 필요한 리소스를 미리 준비하거나 이전의 서비스 워커가 구성해둔 데이터를 지우는 등의 작업을 수행한다.
 
@@ -125,19 +125,19 @@ draft: false
 - `activate` : 서비스워커의 생명주기가 activating, activated 시 발생
   - activate 시점에서는 과거의 캐시를 지우고, 구버전 서비스 워커에 관련된 항목을 청소하는 등 여러가지를 정리하기에 좋다.
 
-### 백그라운드 동기화 관련 이벤트
+### 3-2. 백그라운드 동기화 관련 이벤트
 
 - `sync` : 네트워크가 오프라인에서 온라인이 될 경우나 이미 온라인인 경우 발생
   - [`sync 이벤트`](https://developer.mozilla.org/en-US/docs/Web/API/SyncEvent) 를 통해 백그라운드 동기화 작업을 할 수 있다.
   - sync 이벤트는 네트워크 환경이 `오프라인` 에서 `온라인` 으로 변경되었을 때 발생한다.
 
-### 브라우저 요청 관련 이벤트
+### 3-3. 브라우저 요청 관련 이벤트
 
 - `fetch` : [`fetch()`](https://developer.mozilla.org/en-US/docs/Web/API/fetch) 메서드가 호출될 경우 발생
   - [`fetch 이벤트`](https://developer.mozilla.org/en-US/docs/Web/API/FetchEvent)는 웹 페이지에서 네트워크 요청을 수행할 때 발생한다. 해당 이벤트를 통해 웹 페이지와 서버 사이에서의 요청을 제어할 수 있다.  [`FetchEvent.respondWith()`](https://developer.mozilla.org/ko/docs/Web/API/FetchEvent/respondWith) 메서드를 사용해 요청에 대한 응답을 원하는 방식으로 자유롭게 바꿀 수 있다.
   - 이러한 fetch 이벤트를 활용하여 오프라인 환경에서 미리 저장해둔 리소스를 대신 응답함으로써 오프라인 지원 웹 사이트를 구현할 수 있다.
 
-### 푸시 알림 관련 이벤트
+### 3-4. 푸시 알림 관련 이벤트
 
 - `push` : 서버로부터 push notification을 수신할 경우 발생
   - [`push 이벤트`](https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerGlobalScope/push_event) 는 서버로부터 푸시 메시지를 수신할 때 발생한다.
@@ -146,11 +146,11 @@ draft: false
 - `notificationclick` : 사용자가 알림을 클릭할 경우 발생
 - `notificationclose` : 사용자가 알림을 닫을 경우 발생
 
-### 클라이언트와 통신 관련 이벤트
+### 3-5. 클라이언트와 통신 관련 이벤트
 
 - `message` : 클라인언트로부터 메시지가 수신될 경우 발생
 
-## 서비스 워커의 생명주기
+## 4. 서비스 워커의 생명주기
 
 ![서비스워커 생애주기](../image/lifecycle_service_worker.png)
 이미지 출처 : [oreilly](https://www.oreilly.com/library/view/building-progressive-web/9781491961643/ch04.html)
@@ -165,7 +165,7 @@ draft: false
   - `redundant`
     - redundant 상태는 설치와 활성화 작업 도중 문제가 발생하거나 새로운 서비스 워커로 대체되었을 때의 상태를 의미하며 곧 소멸될 서비스 워커의 상태를 나타낸다.
 
-### 수정된 서비스워커 활성화하기(installed/waiting → activating)
+### 4-1. 수정된 서비스워커 활성화하기(installed/waiting → activating)
 
 - 서비스워커를 수정하고 새로고침을 해도, 이미 활성화되어 있는 서비스 워커가 존재하면 기존의 서비스 워커가 제어하고 있는 클라이언트가 존재하지 않을 때까지 대기 상태를 유지한다.
   - 새로운 서비스 워커를 활성화하려면, 개발자 도구에서 skipWaiting을 직접 누르거나, 기존 서비스 워커가 제어하는 클라이언트(웹 페이지)를 모두 닫는 방법이 있다.
@@ -179,7 +179,7 @@ self.addEventListener('install', event => {
 })
 ```
 
-### 서비스 워커 활성화 시 클라이언트 제어권 즉시 부여(activating → activated)
+### 4-2. 서비스 워커 활성화 시 클라이언트 제어권 즉시 부여(activating → activated)
 
 - 서비스 워커가 없던 상태에서 로드된 클라이언트는 새로 설치된 서비스 워커에서 즉시 제어할 수 없다.
 - 제어하기 위해서는 페이지를 새로고침하거나, 아래 코드처럼 [`Clients.claim()`](https://developer.mozilla.org/ko/docs/Web/API/Clients/claim) 를 사용해 제어권을 즉시 가져와야 한다.
