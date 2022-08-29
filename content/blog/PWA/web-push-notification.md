@@ -66,7 +66,7 @@ draft: false
   - 서버는 구독 정보를 저장해두었다가, 푸시 알림이 필요할 때 꺼내서 사용한다.
   - 구독 정보에는 브라우저를 식별하는 정보가 담겨있다.
 
-    ```jsx
+    ```tsx
     // 구독정보
     {
       "endpoint": "https://fcm.googleapis.com/fcm/send/eM_5INpg~~",
@@ -110,7 +110,7 @@ draft: false
 
 - [https://github.com/web-push-libs/web-push](https://github.com/web-push-libs/web-push)
 
-```jsx
+```tsx
 npx web-push generate-vapid-keys
 ```
 
@@ -124,7 +124,7 @@ npx web-push generate-vapid-keys
 
   - default.json 파일은 애플리케이션 서버 설정 파일이며, 이후 푸시 서비스에게 메시지를 전달할 때 설정 파일에 저장된 VAPID 키 값을 불러온 후 사용한다.
 
-    ```jsx
+    ```tsx
     {
       "subject": "mailto:smody@abc.com", //  VAPID 인증 데이터에 포함되는 연락처
       "vapidPublic": "", // 생성된 VAPID 공개키
@@ -150,7 +150,7 @@ npx web-push generate-vapid-keys
 
   - 클라이언트는 서버에게 공개키 요청 API를 호출한다.
 
-    ```jsx
+    ```tsx
     const getVapidPublicKey = () => {
       return axios.get('/web-push/public-key')
     }
@@ -179,7 +179,7 @@ npx web-push generate-vapid-keys
   - `denied` : 사용자가 거부한 상태
   - `granted` : 사용자가 허가한 상태
 
-```jsx
+```tsx
 const subscribe = () => {
   if (!('Notification' in window)) {
     // 브라우저가 Notification API를 지원하는지 확인한다.
@@ -224,7 +224,7 @@ const subscribe = () => {
   - 참고로 위와 같은 옵션을 이용한 다양한 web push 데모를 아래 웹 사이트에서 실행해 볼 수 있다.
     - <https://web-push-book.gauntface.com/demos/notification-examples/>
 
-```jsx
+```tsx
 // ServiceWorkerRegistration.showNotification() 예시
 navigator.serviceWorker.register('sw.js')
 
@@ -250,7 +250,7 @@ function showNotification() {
   - Push API는 웹 앱이 현재 로드되어 있지 않더라도 서버로부터 메시지를 받을 수 있도록 하는 기능이다. 이는 개발자들이 비동기적으로 사용자에게 새로운 내용을 시기적절하게 전달할 수 있도록 만들어 준다.
 - Push API를 사용하기 위해, `navigator.serviceWorker`를 통해, **`ServiceWorkerRegistration.pushManager`** 에 접근한다.
 
-  ```jsx
+  ```tsx
   const option = {
     // 푸시 알림을 사용자에게 보여줄지에 대한 여부이며 true로 설정
     userVisibleOnly: true,
@@ -284,7 +284,7 @@ function showNotification() {
 
 ![PushSubscription](../image/PushSubscription.png)
 
-```jsx
+```tsx
 {
  "endpoint": "https://fcm.googleapis.com/fcm/send/eM_5INpgUqU:APA91bFGn9FTIkMy-9ubS_Nln~~~~~",
   "expirationTime": null,
@@ -301,7 +301,7 @@ function showNotification() {
 - 해당 브라우저의 서비스워커에 전달된 푸시 메시지가 있을 경우 발생하는 이벤트이다.
 - 서버의 푸시 메시지 전달 요청을 받은 푸시 서비스에서 해당 브라우저에게 푸시 메시지를 전달하여 서비스워커의 push 이벤트를 트리거한다. 이벤트리스너 콜백함수에서 `self.registration.showNotification()` 를 호출하면, 푸시 메시지가 백그라운드 여부 등에 상관 없이 브라우저에 표시된다.
 
-```jsx
+```tsx
 // service-worker.js
 // 서버에서 보내온 푸시 메시지 data가 event 객체에 담겨온다.
 // 아래 코드에서는 서버에서 보내온 푸시 메시지 데이터 {title, body}로 해당 브라우저에 알림 생성한다
@@ -322,7 +322,7 @@ self.addEventListener('push', event => {
 
 - 앞에서 살펴본 개념을 종합하여, 이번 프로젝트에서 작성했던 알림 구독 관련 코드를 전체적으로 살펴보자. 알림 구독 버튼의 클릭 이벤트 리스너에 부착한 `subscribe()` 콜백 함수부터 시작하여, 해당 콜백 함수 내부에서 분기하여 실행하는 구독 취소 함수( `pushUnsubscribe()` )와 구독 함수(`pushSubscribe()`) 등을 차례로 확인한다.
 
-  ```jsx
+  ```tsx
   // subscribe() 함수 예시 코드
   import { pushStatus } from 'pwa/pushStatus'
 
@@ -353,7 +353,7 @@ self.addEventListener('push', event => {
 
 - 클라이언트에 저장된 pushSubscription이 이미 있는 경우, 구독 취소를 요청하기 위해 `pushUnsubscribe()` 함수를 호출한다.
 
-  ```jsx
+  ```tsx
   import { pushStatus } from 'pwa/pushStatus'
 
   const pushUnsubscribe = () => {
@@ -380,7 +380,7 @@ self.addEventListener('push', event => {
 - 클라이언트에 저장된 pushSubscription이 없는 경우, 푸시 서비스에 구독 요청을 하고 서버에게 구독 정보를 전달하는 `pushSubscribe()` 함수를 호출한다.
 - 전달 예시 코드(`pushSubscribe()` 함수)
 
-  ```jsx
+  ```tsx
   import { pushStatus } from 'pwa/pushStatus'
   import { urlB64ToUint8Array } from 'utils'
 
@@ -413,7 +413,7 @@ self.addEventListener('push', event => {
 
     - VAPID 공개키를 `브라우저`에서 `푸시 서비스`로 전달 시, `Uint8Array` 형식으로 변환하여 전달해야 하므로, 다음과 같은 유틸 함수를 사용한다.
 
-      ```jsx
+      ```tsx
       const urlB64ToUint8Array = (base64String: string) => {
         const padding = '='.repeat((4 - (base64String.length % 4)) % 4)
         const base64 = (base64String + padding)
@@ -426,6 +426,7 @@ self.addEventListener('push', event => {
         for (let i = 0; i < rawData.length; i++) {
           outputArray[i] = rawData.charCodeAt(i)
         }
+
         return outputArray
       }
       ```
@@ -434,7 +435,7 @@ self.addEventListener('push', event => {
 
     - `클라이언트` → `서버` 로 “구독 정보” `PushSubscription` 객체를 전달하는 POST 요청
 
-      ```jsx
+      ```tsx
       const postSubscribe = async (subscription: PushSubscription) => {
         return authApiClient.axios.post('/web-push/subscribe', subscription)
       }
@@ -444,7 +445,7 @@ self.addEventListener('push', event => {
 
     - 편의를 위해 클라이언트에서 푸시 관련 상태를 별도의 객체(pushStatus)에서 모아 관리하였다.
 
-      ```jsx
+      ```tsx
       // pushStatus.ts
       type PushStatus = {
         pushSupport: boolean
@@ -453,7 +454,7 @@ self.addEventListener('push', event => {
         notificationPermission?: 'granted' | 'default' | 'denied'
       }
 
-      export const isSupported = () =>
+      export const isSupported =
         'serviceWorker' in navigator &&
         'Notification' in window &&
         'PushManager' in window
@@ -478,6 +479,23 @@ self.addEventListener('push', event => {
 
 - 이와 같이 알림 구독이 완료됐다. 푸시 메시지를 받아서 보여주는 것은 앞에서 살펴본 PushEvent와 showNotification 등을 사용하면 된다. 간단히 다시 정리하면 다음과 같다.
   - `서버`에서 푸시 메시지를 `푸시 서비스`에게 보내면, 그 다음 `푸시 서비스`가 `클라이언트`의 서비스워커에게 푸시 메시지를 전달하고, 서비스워커는 백그라운드에서 `PushEvent`를 감지한 후 `showNotification()` 메서드를 통해 브라우저에 알림을 표시한다.
+
+```tsx
+// service-worker.js
+// 서버에서 보내온 푸시 메시지 data가 event 객체에 담겨온다.
+// 아래 코드에서는 서버에서 보내온 푸시 메시지 데이터 {title, body}로 해당 브라우저에 알림 생성한다
+
+self.addEventListener('push', event => {
+  const { title, body } = event.data.json()
+  const options = {
+    body,
+    icon: './image/favicon-32x32.png',
+    badge: './image/favicon-16x16.png',
+  }
+
+  event.waitUntil(self.registration.showNotification(title, options))
+})
+```
 
 > **참고자료**
 >
