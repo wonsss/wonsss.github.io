@@ -14,7 +14,6 @@ draft: false
   - 알림을 구독한 후에는 웹 사이트가 닫혀 있는 백그라운드에서도 작동하여 알림을 수신할 수 있다.
   - 대부분의 기기, OS, 브라우저에서 웹 푸시 알림 기술을 허용한다.
   - web-push는 HTTPS에서만 사용 가능하다(개발용인 localhost도 가능)
-
     ![웹 푸시 구독 예시](../image/web-push-subscribe.gif)
 
 ### Web Push의 브라우저 호환성
@@ -95,7 +94,7 @@ draft: false
 
 ### VAPID Key란?
 
-- 브라우저에 내장된 Web Push API는 일관성을 유지하고 안전한 푸시 메시지 전송을 위해 `VAPID(Volutary Application Server Identification)` 인증 방식을 지원하기 시작했다.
+- 브라우저에 내장된 Web Push API는 일관성을 유지하고 안전한 푸시 메시지 전송을 위해 `VAPID(Voluntary Application Server Identification)` 인증 방식을 지원하기 시작했다.
 - VAPID는 `공개키 암호화` 방식의 키 쌍(공개키와 비공개키)으로 검증한다.
   - `서버`에서 `푸시 서비스`에게 푸시 알림 요청을 보낼 때, 일련의 정보가 담긴 JWT를 `VAPID 비공개키`로 서명(암호화)한 후 함께 전달한다.
   - `푸시 서비스` 는 `VAPID 공개키`를 사용하여 서버의 푸시 알림 요청에 대한 유효성을 검증한다.
@@ -177,7 +176,7 @@ npx web-push generate-vapid-keys
 - [https://developer.mozilla.org/en-US/docs/Web/API/Notification/permission](https://developer.mozilla.org/en-US/docs/Web/API/Notification/permission)
 - 알림 권한 상태는 **`Notification.permission` 을 통해 확인할 수 있으며, 다음과 같이 세 가지 중에 하나이다.**
   - `default` : 알림 권한을 요청하며 사용자에게 팝업 메시지를 표시
-  - `denined` : 사용자가 거부한 상태
+  - `denied` : 사용자가 거부한 상태
   - `granted` : 사용자가 허가한 상태
 
 ```tsx
@@ -222,6 +221,8 @@ const subscribe = () => {
     - `tag`: 동일한 태그를 가진 알림은 덮어씌워져 한 번만 전달됨
     - `renotify`: tag 옵션을 지정하더라도 renotify 옵션을 true로 지정하면, 알림(소리, 진동)을 다시 보냄
     - `vibrate`: 알림 진동 커스텀
+  - 참고로 위와 같은 옵션을 이용한 다양한 web push 데모를 아래 웹 사이트에서 실행해 볼 수 있다.
+    - <https://web-push-book.gauntface.com/demos/notification-examples/>
 
 ```tsx
 // ServiceWorkerRegistration.showNotification() 예시
@@ -278,7 +279,7 @@ function showNotification() {
 
 - [https://developer.mozilla.org/en-US/docs/Web/API/PushSubscription](https://developer.mozilla.org/en-US/docs/Web/API/PushSubscription)
 - `endpoint`
-  - endpopint는 푸시 서버를 가리키는 커스텀 URL의 형식을 지닌다. 이것은 푸시 서비스에 구독된 특정 서비스 워커 인스턴스로 푸시 메시지를 보낼 때 사용된다. 따라서 타인이 endpoint를 가로 채서 푸시 기능을 남용하지 않도록 endpoint를 숨기는 것이 좋다.
+  - endpoint는 푸시 서버를 가리키는 커스텀 URL의 형식을 지닌다. 이것은 푸시 서비스에 구독된 특정 서비스 워커 인스턴스로 푸시 메시지를 보낼 때 사용된다. 따라서 타인이 endpoint를 가로 채서 푸시 기능을 남용하지 않도록 endpoint를 숨기는 것이 좋다.
 - `unsubscribe()`
   - 푸시 서비스에게 해당 브라우저의 구독 취소를 요청하는 메서드이다.
 
@@ -503,5 +504,5 @@ self.addEventListener('push', event => {
 > - <https://www.w3.org/TR/push-api/>
 > - <https://notifications.spec.whatwg.org/>
 > - <https://www.rfc-editor.org/rfc/rfc8292>
-> - MDN
+> - <https://developer.mozilla.org/ko/docs/Web/Progressive_web_apps/Re-engageable_Notifications_Push>
 > - SNS 앱 예제로 배우는 프로그레시브 웹 앱
