@@ -1,7 +1,7 @@
 ---
 title: 자바스크립트는 싱글 스레드인데 어떻게 비동기 작업이 가능한가
 date: 2022-08-30 17:08:63
-category: pwa
+category: javascript
 thumbnail: { thumbnailSrc }
 draft: false
 ---
@@ -20,7 +20,7 @@ draft: false
 
 ## 이벤트 루프의 작동원리 더 자세히 살펴보기
 
-![event loop](../image/event%20loop.gif)
+![event loop](../image/event-loop.gif)
 
 - 이벤트 루프는 `콜 스택`과 각 `큐`(마이크로태스크 큐, 애니메이션 프레임, 매크로태스크 큐)를 감시하고 있다가 `콜 스택`이 비었을 경우 정해진 우선순위에 따라 `큐`에서 하나씩 꺼내 `콜 스택`에 추가해주는 역할을 한다.
   - 1. `콜 스택`의 작업을 모두 처리한다.
