@@ -40,6 +40,9 @@ draft: false
 
   - `categories` , `screenshots`
     - 카테고리나 스크린샷은 스토어(chrome_web_store, play, itunes, microsoft-inbox and microsoft-store)에서 사용될 수 있다.
+    - 카테고리는 다음 링크를 참고하여 표준 카테고리 목록 중 선택하여 사용하는 것이 좋다.
+      - <https://github.com/w3c/manifest/wiki/Categories>
+      - <https://w3c.github.io/manifest-app-info/#categories-member>
   - 모바일 스플래시 화면
     - 크롬은 매니페스트 속성의 `name` , `background_color` , `icons` 을 조합하여 스플래시 화면을 자동으로 생성한다.
 
@@ -55,12 +58,21 @@ draft: false
   "dir": "ltr",
   "display": "standalone",
   "orientation": "any",
-  "categories": ["self-improvement", "sns", "routine"],
-  "screenshots": [],
+  "categories": ["lifestyle", "productivity", "social"],
+  "screenshots": [
+    {
+      "src": "image/screenshot-0.png",
+      "sizes": "1276x1836",
+      "type": "image/png",
+      "platform": "narrow",
+      "label": "스모디 앱의 홈스크린"
+    },
+  ],
   "icons": [
     {
       "src": "image/favicon.ico",
-      "type": "image/x-icon"
+      "type": "image/x-icon",
+      "sizes": "48x48"
     },
     {
       "src": "image/android-chrome-192x192.png",

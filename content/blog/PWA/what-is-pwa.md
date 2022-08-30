@@ -93,6 +93,23 @@ draft: false
 
 iOS16 preview 링크 : [https://www.apple.com/ios/ios-16-preview/features/](https://www.apple.com/ios/ios-16-preview/features/)
 
+## 7. PWA 관련 포스팅
+
+- 이번에 우아한테크코스 팀 프로젝트에서 스모디(<https://www.smody.co.kr>)를 개발하면서 학습하고 적용한 PWA 관련 내용을 차례로 포스팅하려고 한다. <https://www.pwabuilder.com/> 에서 스모디의 PWA 점수를 측정한 결과, 220점으로 측정되었다. 해당 웹 사이트에서 중간 중간 PWA 점수를 측정하면서, 미비한 부분을 채워나가면 PWA 개발에 도움이 될 것 같다.
+
+![pwa-report](../image/pwa-report.png)
+
+### 7-1. PWA 포스팅 목차
+
+- [프로그레시브 웹 앱이란?](https://wonsss.github.io/PWA/what-is-pwa/)
+- [설치 가능한 웹 앱을 구성하기 위한 Manifest 설정하기](https://wonsss.github.io/PWA/web-app-manifest/)
+- [PWA의 InApp 설치 버튼 만들기(BeforeInstallPromptEvent)](https://wonsss.github.io/PWA/before-install-prompt/)
+- [PWA의 핵심, 서비스 워커란?](https://wonsss.github.io/PWA/service-worker/)
+- [서비스워커와 클라이언트 간 통신 방법](https://wonsss.github.io/PWA/communicate-with-serviceworker/)
+- [Web Share API로 ‘다른 앱으로 공유’ 기능 추가](https://wonsss.github.io/PWA/web-share-api/)
+- [오프라인 환경에서 웹 페이지 사용(캐시 스토리지, IndexedDB)](https://wonsss.github.io/PWA/offline-support/)
+- [Web Push를 통하여 백그라운드에서도 사용자에게 알림 보내기(Push API, Notifications API, ServiceWorker, FCM)](https://wonsss.github.io/PWA/web-push-notification/)
+
 > 참고
 >
 > - MDN
