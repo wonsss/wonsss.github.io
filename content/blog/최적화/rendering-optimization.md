@@ -38,5 +38,3 @@ draft: false
     ![after](../image/p14.png)
 
 ## Frame Drop이 일어나지 않아야 한다
-
-- 체크사항

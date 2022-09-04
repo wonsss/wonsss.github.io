@@ -3,7 +3,7 @@ title: 페이지별 리소스 분리(Code Splitting, Tree Shaking)
 date: 2022-09-03 02:09:90
 category: 최적화
 thumbnail: { thumbnailSrc }
-draft: false
+draft: true
 ---
 
 ### Code Splitting
