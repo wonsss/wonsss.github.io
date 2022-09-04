@@ -82,4 +82,13 @@ body.dark {
   td {
     border-bottom: 1px solid #eee;
   }
+
+  /* Inline code */
+  :not(pre) > code[class*='language-'] {
+    padding: 0.1em 0.6em;
+    border-radius: 0.2em;
+    white-space: normal;
+    background: $dark-inline-dimmed-color;
+    color: $dark-inline-text-color;
+  }
 }

@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 
 import * as Dom from '../../utils/dom'
 import { THEME } from '../../constants'
+import './index.scss'
 
 const src = 'https://utteranc.es/client.js'
 const branch = 'master'
