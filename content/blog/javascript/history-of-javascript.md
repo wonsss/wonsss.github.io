@@ -21,15 +21,15 @@ draft: false
 
 `Eich`는 자신이 좋아하는 일을 할 수 있는 기회를 포착하고 함께 하였다.
 
-그 당시에는 가능한 한 빨리 시제품을 제작해야 한다는 압박감이 컸다. 당시 `Java` 언어인 `오크` 가 인기를 끌기 시작했다. `Sun Microsystems`는 이를 강력히 추진하고 있었고, `Netscape`는 `Java`를 브라우저에서 사용할 수 있게 하려고 `Sun Microsystems`와 거래를 체결하려고 했다. 그런데 결국 `Netscape`는 `Java`라는 대안이 있는데 왜 완전히 새로운 언어인 `Mocha`(`JavaScript`의 초기 이름)를 만들었을까? 당시에는 `Java`가 `Mocha`의 타겟 사용자(스크립터, 아마추어, 디자이너)에게 적합하지 않다고 생각했다. Java는 필요한 기능에 비해 너무 컸다. 그래서 `Java`를 크고 전문적인 컴포넌트 작성 역할에 사용하도록 하는 것이 아이디어였다. 반면 `Mocha`는 작은 스크립트 작업에 사용되었다. 즉, `Mocha`는 Windows 플랫폼의 C/C++와 Visual Basic의 관계와 유사한 방식으로 Java의 스크립트 도우미 역할을 했다.
+그 당시에는 가능한 빨리 시제품을 제작해야 한다는 압박감이 컸다. 당시 `Java` 언어인 `오크` 가 인기를 끌기 시작했다. `Sun Microsystems`는 이를 강력히 추진하고 있었고, `Netscape`는 `Java`를 브라우저에서 사용할 수 있게 하려고 `Sun Microsystems`와 거래를 체결하려고 했다. 그런데 결국 `Netscape`는 `Java`라는 대안이 있는데 왜 완전히 새로운 언어인 `Mocha`(`JavaScript`의 초기 이름)를 만들었을까? 당시에는 `Java`가 `Mocha`의 타겟 사용자(스크립터, 아마추어, 디자이너)에게 적합하지 않다고 생각했다. `Java`는 필요한 기능에 비해 너무 컸다. 그래서 `Java`를 크고 전문적인 컴포넌트 작성 역할에 사용하도록 하는 것이 아이디어였다. 반면 `Mocha`는 작은 스크립트 작업에 사용되었다. 즉, `Mocha`는 Windows 플랫폼의 C/C++와 Visual Basic의 관계와 유사한 방식으로 `Java`의 스크립트 도우미 역할을 했다.
 
-이러한 과정에서, `Netscape`의 엔지니어들은 Java에 대해 자세히 연구하기 시작했다. 이들은 자체 `Java` 가상 머신 개발에 착수하였다. 그러나 이 가상머신은 `Sun`과 버그 호환성을 완벽하게 달성할 수 없다는 이유로 빠르게 중단되었다.
+이러한 과정에서, `Netscape`의 엔지니어들은 `Java`에 대해 자세히 연구하기 시작했다. 이들은 자체 `Java` 가상 머신 개발에 착수하였다. 그러나 이 가상머신은 `Sun`과 버그 호환성을 완벽하게 달성할 수 없다는 이유로 빠르게 중단되었다.
 
 가능한 빨리 새 언어를 선택해야 한다는 내부 압력이 컸다. Python, Tcl, `Scheme` 자체는 모두 가능한 후보였다. `Eich`는 빠르게 움직여야 했다. 그는 대안들과 비교하여 두 가지 이점을 갖고 있었다. 바로 적절한 기능 세트를 선택할 수 있는 자유와 결정을 내린 사람들과 직접 연결될 수 있는 것 말이다. 안타깝게도, 그는 시간이 없었다. 많은 중요한 결정들이 내려져야 했고 그러한 결정을 내릴 수 있는 시간이 매우 적었다. `JavaScript`(전 `Mocha`)는 이런 맥락에서 태어났다. 몇 주 만에 작동하는 시제품을 사용할 수 있었고, `Netscape`에 통합되었다.
 
-브라우저의 `Scheme`이 되기로 했던 것이, 전혀 다른 것으로 변경됐다. `Sun`과의 거래를 성사시켜야 하고 `Mocha`를 Java의 스크립트 파트너로 만들어야 한다는 압박이 `Eich`을 움직였다. `Java`와 같은 구문이 필요했고, 익숙한 공통 숙어의 의미론도 채택되었다. 그래서 `Mocha`는 `Scheme`과 전혀 같지 않았다. 역동적인 Java처럼 보였지만, 그 밑에는 전혀 다른 야수가 있었다. `Java` 외모를 가진 `Scheme`와 `Self`의 미숙아였다.
+브라우저의 `Scheme`이 되기로 했던 것이, 전혀 다른 것으로 변경됐다. `Sun`과의 거래를 성사시켜야 하고 `Mocha`를 `Java`의 스크립트 파트너로 만들어야 한다는 압박이 `Eich`을 움직였다. `Java`와 같은 구문이 필요했고, 익숙한 공통 숙어의 의미론도 채택되었다. 그래서 `Mocha`는 `Scheme`과 전혀 같지 않았다. 겉보기에는 역동적인 `Java`처럼 보였지만, 그 밑에는 전혀 다른 야수가 있었다. `Mocha`는 `Java` 외모를 가진 `Scheme`과 `Self`의 미숙아였다.
 
-모카의 원형은 1995년 5월에 `Netscape`에 통합되었다. 얼마 지나지 않아 `LiveScript`로 이름이 변경되었다. 그 당시 `Live` 라는 말은 마케팅 관점에서 편리했다. 1995년 12월 `Netscape`와 `Sun`은 계약을 체결했다. `LiveScript`(전 `Mocha`)는 `JavaScript`로 이름이 바뀌어 브라우저의 작은 클라이언트 측 업무를 담당하는 언어로 표시되었다. 반면 Java는 풍부한 웹 컴포넌트를 개발하기 위한 더 크고 전문적인 도구로 승격됐다.
+`Mocha`의 프로토타입은 1995년 5월에 `Netscape`에 통합되었다. 얼마 지나지 않아 `LiveScript`로 이름이 변경되었다. 그 당시 `Live` 라는 말은 마케팅 관점에서 편리했다. 1995년 12월 `Netscape`와 `Sun`은 계약을 체결했다. `LiveScript`(전 `Mocha`)는 `JavaScript`로 이름이 바뀌어 브라우저의 작은 클라이언트 측 업무를 담당하는 언어로 표시되었다. 반면 `Java`는 풍부한 웹 컴포넌트를 개발하기 위한 더 크고 전문적인 도구로 승격됐다.
 
 이러한 `JavaScript`의 첫 번째 버전은 오늘날 이 언어가 가지고 있는 많은 특징을 가지고 있었다. 특히 이 첫 번째 버전에는 object-model과 function 기능이 이미 포함되어 있었다.
 
@@ -37,7 +37,7 @@ draft: false
 
 `Sun`과 `Netscape`가 `LiveScript`(전 `Mocha`)의 이름을 `JavaScript`로 변경하는 계약을 체결했을 때, 큰 의문이 제기되었다. 대체 어떻게 구현하는가? 사실 `Netscape`는 당시에 빠르게 인기를 얻고 있는 브라우저였지만, `Internet Explorer` 또한 `Microsoft`에 의해 개발되고 있었다. 처음부터 `JavaScript`는 사용자 경험에서 상당한 차이를 만들었고, 경쟁 브라우저들은 `JavaScript`를 따라갈 수밖에 없었다. 그 시점에는(그리고 오랫동안) 웹 표준이 강하지 않았다. 그래서 `Microsoft`는 `JScript`라고 불리는 자체 버전의 `JavaScript`를 구현했다. “`Java`”를 이름에 붙이지 않도록 함으로써 상표권 문제를 피했다. 그러나 `JScript`는 이름뿐만이 아니었다. 특히 구현상 약간의 차이(특정 DOM 기능에 관한)는 앞으로도 느낄 수 있을 파장을 일으켰다. `JavaScript` 전쟁은 단순히 이름을 넘어 많은 부분에서 벌어졌고, 많은 기이한 점들은 이러한 전쟁의 상처로 남았다. `JScript`의 첫 번째 버전은 1996년 8월에 출시된 `Internet Explorer 3.0`에 포함되었다.
 
-`Netscape`의 `JavaScript` 구현체도 이름이 붙여졌다. `Netscape Navigator 2.0`과 함께 출시된 버전은 `Mocha`로 알려져 있다. 1996년 가을, `Eich`는 급하게 만들면서 발생한 기술적 부채를 갚기 위해 `Mocha`를 더 깔끔한 버전으로 구현하였다. Netscape의 `JavaScript` 엔진의 이 새로운 버전은 `SpiderMonkey`라고 불렸다. `SpiderMonkey`는 `Netscape Navigator`의 후손인 `Firefox`에 여전히 내장된 `JavaScript` 엔진의 이름이다.
+`Netscape`의 `JavaScript` 구현체도 이름이 붙여졌다. `Netscape Navigator 2.0`과 함께 출시된 버전은 `Mocha`로 알려져 있다. 1996년 가을, `Eich`는 급하게 만들면서 발생한 기술적 부채를 갚기 위해 `Mocha`를 더 깔끔한 버전으로 구현하였다. `Netscape`의 `JavaScript` 엔진의 이 새로운 버전은 `SpiderMonkey`라고 불렸다. `SpiderMonkey`는 `Netscape Navigator`의 후손인 `Firefox`에 여전히 내장된 `JavaScript` 엔진의 이름이다.
 
 수년간 `JScript`와 `SpiderMonkey`는 최고의 `JavaScript` 엔진이었다. 양쪽에서 구현되는 기능(항상 호환성이 있는 것은 아니지만)은 향후 웹의 장래를 정의하게 된다.
 
@@ -102,7 +102,7 @@ a.forEach(function(e) {
 
 ### Prototype 기반 객체 모델
 
-`Prototype` 기반 객체 모델은 `JavaScript`에 의해 대중화되었지만, 처음 도입한 것은 `Self` 언어이다. `Eich`는 이 모델에 대한 강한 선호도가 있었다. `Prototype` 기반 객체 모델은 `Java` 또는 C++와 같은 `Simula` 기반 언어에 대한 전통적 접근방식을 모델링할 수 있을 만큼 강력하다. 사실, `JavaScript`의 최신 버전에서 구현된 `Class`는 `Prototype` 시스템 위에 있는 문법적 설탕에 불과하다.
+`Prototype` 기반 객체 모델은 `JavaScript`에 의해 대중화되었지만, 처음 도입한 것은 `Self` 언어이다. `Eich`는 이 모델에 대한 강한 선호도가 있었다. `Prototype` 기반 객체 모델은 `Java` 또는 C++과 같은 `Simula` 기반 언어에 대한 전통적 접근방식을 모델링할 수 있을 만큼 강력하다. 사실, `JavaScript`의 최신 버전에서 구현된 `Class`는 `Prototype` 시스템 위에 있는 문법적 설탕에 불과하다.
 
 `JavaScript`의 `Prototype`에 영감을 준 언어인 `Self`의 디자인 목표 중 하나는 `Simula` 스타일의 객체들이 지닌 문제를 피하는 것이었다. 특히, `Class`와 인스턴스 사이의 이분법을 `Simula`의 접근법에 내재한 많은 문제의 원인으로 간주했다. `Class`가 객체의 인스턴스에 원형(archetype)을 제공하는데, 코드가 진화하고 커짐에 따라 이러한 기본 `Class`를 예기치 않은 새로운 요구사항에 조화하도록 하는 것이 점점 더 어려워진다는 주장이 제기되었다. 인스턴스를 새로운 객체를 구성할 수 있는 원형으로 만들면 이러한 한계가 사라질 수 있다. 따라서 `Prototype`의 개념은 자체 행동을 제공함으로써 새 인스턴스의 간격을 메꾸는 것이었다. `Prototype`이 새로운 객체에 부적합하다고 간주 경우, 다른 모든 하위 인스턴스에 영향을 주지 않고 간단히 복제 및 수정될 수 있다. 이것은 `Class` 기반 접근(i.e. base Class 수정)에서는 불가하다.
 
@@ -229,11 +229,11 @@ ECMA와 `JavaScript`용 ISO 표준(ISO/IEC 16262) 간의 불일치를 수정하�
 
 `JavaScript`는 그 어느 때보다 많이 사용되었지만, 여전히 주로 클라이언트 측 언어였다. 많은 새로운 기능들은 클라이언트 철창에서 탈출하는 시점을 앞당기고 있었다.
 
-Netscape Navigator 6은 2000년 11월에 출시되었으며 이전 버전에서 크게 변경되었다. `ECMAScript 3`을 지원했다. 거의 1년 반 후에, Netscape Navigator의 코드 베이스에 근거하는 군더더기 없는 브라우저인 Firefox가 출시되었고, 역시 `ECMAScript 3`를 잘 지원했다. 이러한 브라우저는 Internet Explorer와 함께 `JavaScript`의 성장을 계속 추진했다.
+`Netscape Navigator 6`은 2000년 11월에 출시되었으며 이전 버전에서 크게 변경되었다. `ECMAScript 3`을 지원했다. 거의 1년 반 후에, `Netscape Navigator`의 코드 베이스에 근거하는 군더더기 없는 브라우저인 `Firefox`가 출시되었고, 역시 `ECMAScript 3`를 잘 지원했다. 이러한 브라우저는 `Internet Explorer`와 함께 `JavaScript`의 성장을 계속 추진했다.
 
 ### AJAX의 탄생
 
-AJAX(Asynchronous `JavaScript` and XML)는 `ECMAScript 3`에서 탄생한 기술이다. 표준에는 포함되지 않았지만, `Microsoft`는 Internet Explorer 5 브라우저용 `JavaScript`에 대한 특정 확장을 구현했다. 그 중 하나가 `XMLHttpRequest` 기능(XMLHTTP ActiveX control 형식)이다. 이 기능을 통해 브라우저는 서버에 대해 비동기 HTTP 요청을 수행할 수 있으며, 따라서 페이지를 즉시 업데이트할 수 있었다. AJAX라는 용어는 몇 년이 지나서야 작명되어 붙여졌지만, 기술은 그 당시부터 있었다.
+AJAX(Asynchronous `JavaScript` and XML)는 `ECMAScript 3`에서 탄생한 기술이다. 표준에는 포함되지 않았지만, `Microsoft`는 `Internet Explorer 5` 브라우저용 `JavaScript`에 대한 특정 확장을 구현했다. 그 중 하나가 `XMLHttpRequest` 기능(XMLHTTP ActiveX control 형식)이다. 이 기능을 통해 브라우저는 서버에 대해 비동기 HTTP 요청을 수행할 수 있으며, 따라서 페이지를 즉시 업데이트할 수 있었다. AJAX라는 용어는 몇 년이 지나서야 작명되어 붙여졌지만, 기술은 그 당시부터 있었다.
 
 `XMLHttpRequest` 는 성공을 거두었고 수년 후 별도의 표준(WHATWG 및 W3C 그룹)으로 통합되었다.
 
@@ -247,7 +247,7 @@ AJAX(Asynchronous `JavaScript` and XML)는 `ECMAScript 3`에서 탄생한 기술
 
 `Internet Explorer 5`는 구글의 현재 버전도 렌더링할 수 있었다. 그러나 `Internet Explorer 5`와 다른 브라우저 간에 특정 기능의 구현에서 많은 차이가 있었다. 이러한 차이점들은 수년간 웹을 괴롭혔고, Internet Explorer 사용자들을 위해 특별한 케이스를 구현해야 했던 웹 개발자들에게 오랫동안 좌절의 원인이 되었다.
 
-실제로 `Internet Explorer 5와 6`에서 `XMLHttpRequest` 객체는 ActiveX에 의존했다. 다른 브라우저에서는 native(기본) 객체로 구현했던 것과는 다르게 말이다.
+실제로 `Internet Explorer 5와 6`에서 `XMLHttpRequest` 객체는 ActiveX에 의존했다. 다른 브라우저에서는 네이티브 객체로 구현했던 것과는 다르게 말이다.
 
 ```jsx
 var xhr = new ActiveXObject('Microsoft.XMLHTTP')
@@ -259,7 +259,7 @@ var xhr = new ActiveXObject('Microsoft.XMLHTTP')
 
 불행히도, 그다음 해는 `JavaScript` 개발에 좋지 않았다. `ECMAScript 4`에 대한 작업이 시작되자마자 위원회에서 큰 차이가 나타나기 시작했다. 대규모 애플리케이션 개발을 위한 강력한 언어가 되기 위해서는 `JavaScript`에 기능이 필요하다고 생각하는 사람들이 있었다. 이 그룹은 범위와 변경 사항이 큰 많은 기능을 제안했다. 다른 이들은 이것이 `JavaScript`에 적합한 과정이 아니라고 생각하기도 했다. 합의가 결여되었고 일부 제안된 기능의 복잡성 탓에 `ECMAScript 4`의 출시는 점점 더 멀어졌다.
 
-`ECMAScript 4`에 대한 작업은 1999년에 버전 3이 출시되자마자 시작되었다. Netscape에서는 많은 흥미로운 기능들이 내부적으로 논의되었다. 그러나 이러한 구현에 관한 관심이 감소하여 2003년에 `ECMAScript`의 새 버전에 대한 작업이 중단되었다. 중간 보고서가 발표되었으며, Adobe(`ActionScript`) 및 Microsoft``(`JScript.NET`) 와 같은 일부 구현자는 그것을 그들의 엔진의 기반으로 사용했다. 2005년에는 AJAX와 XMLHttpRequest의 파급력이 새 `JavaScript` 버전에 대한 흥미를 일으켰고, `TC-39`는 작업을 재개했다. 세월이 흐르면서 기능들은 점점 더 커졌다. 개발이 한창일 때 `ECMAScript 4`에는 다음과 같은 기능이 있었다.
+`ECMAScript 4`에 대한 작업은 1999년에 버전 3이 출시되자마자 시작되었다. `Netscape`에서는 많은 흥미로운 기능들이 내부적으로 논의되었다. 그러나 이러한 구현에 관한 관심이 감소하여 2003년에 `ECMAScript`의 새 버전에 대한 작업이 중단되었다. 중간 보고서가 발표되었으며, Adobe(`ActionScript`) 및 `Microsoft`(`JScript.NET`)와 같은 일부 구현자는 그것을 그들의 엔진의 기반으로 사용했다. 2005년에는 AJAX와 XMLHttpRequest의 파급력이 새 `JavaScript` 버전에 대한 흥미를 일으켰고, `TC-39`는 작업을 재개했다. 세월이 흐르면서 기능들은 점점 더 커졌다. 개발이 한창일 때 `ECMAScript 4`에는 다음과 같은 기능이 있었다.
 
 - Classes
 - Interfaces
@@ -302,8 +302,8 @@ var xhr = new ActiveXObject('Microsoft.XMLHTTP')
 
 1. 모든 당사자의 완전한 협업을 통해 `ES3.1`에 초점을 맞추고 내년 초까지 상호 운용 가능한 두 가지 구현을 목표로 한다.
 2. `ES3.1` 이후의 다음 단계에 대해 공동 작업을 한다. `ES3.1`은 구문 확장을 포함하지만 ES4보다 의미적 및 구문적 혁신 모두에서 더 현대적일 것이다.
-3. 몇 `ES4` 제안(packages, namespaces, early binding)은 웹에 불건전하다고 간주되며, 영원히 논의되지 않고 있다. 이 결론은 Harmony의 핵심이다.
-4. `ES4`의 다른 목표와 아이디어는 위원회의 합의를 유지하기 위해 대체되고 있다. 이들 개념에는 제안된 `ES3.1` 확장과 결합한 기존 ES3 개념에 기초한 `Class` 개념이 포함된다.
+3. 몇 `ES4` 제안(packages, namespaces, early binding)은 웹에 불건전하다고 간주되며, 영원히 논의되지 않고 있다. 이 결론은 `Harmony`의 핵심이다.
+4. `ES4`의 다른 목표와 아이디어는 위원회의 합의를 유지하기 위해 대체되고 있다. 이들 개념에는 제안된 `ES3.1` 확장과 결합한 기존 `ES3` 개념에 기초한 `Class` 개념이 포함된다.
 
 `ECMAScript 4`는 모두 8년 가까이 개발되어 최종적으로 폐기되었다. 관련된 사람들에게 힘든 교훈이 되었다.
 
@@ -532,7 +532,7 @@ async function apiDoSomethingMoreComplex(withThis) {
 
 ### WebAssembly
 
-`WebAssembly`에 대해 들어본 적이 없다면, 이 [아티클](https://auth0.com/blog/7-things-you-should-know-about-web-assembly/)을 읽어보기 바란다. `ECMAScript 5` 출시 이후 촉발된 라이브러리, 프레임워크 및 일반 개발의 폭발적 증가로 인해 `JavaScript`는 다른 언어의 흥미로운 타겟이 되었다. 큰 코드베이스의 경우 상호 운영성이 핵심이다. 게임을 예로 들어보자. 게임 개발용 공용어는 여전히 C++이며, 그것은 많은 아키텍처에서 호환된다. Windows 또는 콘솔 게임을 브라우저로 옮기는 것은 매우 어려운 작업으로 여겨졌다. 그러나 현재 JIT `JavaScript` 가상 머신의 놀라운 성능이 이를 가능하게 했다. 이렇게 하여, `LLVM-to-`JavaScript`` 컴파일러인 `Emscripten`이 탄생했다.
+`WebAssembly`에 대해 들어본 적이 없다면, 이 [아티클](https://auth0.com/blog/7-things-you-should-know-about-web-assembly/)을 읽어보기 바란다. `ECMAScript 5` 출시 이후 촉발된 라이브러리, 프레임워크 및 일반 개발의 폭발적 증가로 인해 `JavaScript`는 다른 언어의 흥미로운 타겟이 되었다. 큰 코드베이스의 경우 상호 운영성이 핵심이다. 게임을 예로 들어보자. 게임 개발용 공용어는 여전히 C++이며, 그것은 많은 아키텍처에서 호환된다. Windows 또는 콘솔 게임을 브라우저로 옮기는 것은 매우 어려운 작업으로 여겨졌다. 그러나 현재 JIT `JavaScript` 가상 머신의 놀라운 성능이 이를 가능하게 했다. 이렇게 하여, `LLVM-to-JavaScript` 컴파일러인 `Emscripten`이 탄생했다.
 
 Mozila는 이를 보고 `JavaScript`를 컴파일러에 적합한 대상으로 만들기 시작했다. `Asm.js`가 탄생했다. `Asm.js`는 컴파일러의 타깃으로 이상적인 `JavaScript`의 엄격한 subset이다. `JavaScript` 가상 머신은 이러한 subset을 인지하고 현재 일반적인 `JavaScript` 코드에서 가능한 것보다 더 나은 코드를 만들기 위해 최적화될 수 있다. 브라우저는 서서히 앱을 컴파일하기 위한 완전히 새로운 것이 되고 있으며, 그 중심에는 `JavaScript`가 있다.
 
