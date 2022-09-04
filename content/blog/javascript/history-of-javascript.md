@@ -148,7 +148,7 @@ JavaScript의 첫 번째 공개 릴리스는 1995년 출시된 Netscape Navigato
 
 다행히도 1년 후, 1996년에 출시된 Netscape Navigator 3.0은 큰 변화를 가져오고 있었다.
 
-<video controls=""><source type="video/mp4" src="https://cdn.auth0.com/blog/js-history/netscape3.mp4"/></video>
+<video style="width: 100%;" controls=""><source type="video/mp4" src="https://cdn.auth0.com/blog/js-history/netscape3.mp4"/></video>
 
 ```jsx
 alert('Hello world!')
@@ -177,7 +177,7 @@ a.say()
 // alert 창이 "Hello World!" "1" "hello" 순으로 표시
 ```
 
-<video controls=""><source type="video/mp4" src="https://cdn.auth0.com/blog/js-history/netscape3.mp4"></video>
+<video style="width: 100%;" controls=""><source type="video/mp4" src="https://cdn.auth0.com/blog/js-history/netscape3.mp4"></video>
 
 이 에러(는 당시 어떤 문제가 있었는지 알려준다. 인터프리터가 `Prototype` 프로퍼티를 특별한 방법으로 다루고 있음을 추측할 수 있다. 그래서 그 객체를 기본 `Object` 로 대체한다.
 
@@ -203,7 +203,7 @@ JavaScript의 표준 작업은 1996년 11월에 시작되었다. 이 표준의 �
 
 첫 번째 `ECMAScript 표준은 Netscape Navigator 4와 함께 출시된 JavaScript 버전을 기반으로 하며, 중요한 기능(정규 표현, JSON, 예외 및 내장 객체에 대한 중요한 메서드 등과 같은)을 여전히 놓치고 있었다. 하지만 브라우저에서는 훨씬 더 잘 작동하고 있었다. JavaScript는 점점 더 좋아지고 있었다. 버전 1은 1997년 6월에 출시되었다.
 
-<video controls=""><source type="video/mp4" src="https://cdn.auth0.com/blog/js-history/netscape4.mp4"></video>
+<video style="width: 100%;" controls=""><source type="video/mp4" src="https://cdn.auth0.com/blog/js-history/netscape4.mp4"></video>
 
 위 동영상에서 `Prototype` 및 기능에 대한 간단한 테스트가 올바르게 작동하는지 확인할 수 있다. Netscape 4에서는 많은 직업이 진행되었고, JavaScript는 이로부터 많은 이점을 얻었다. 위 예시에서 보다시피 현재 브라우저와 동일하게 작동한다. 이것은 표준으로서 첫 번째 릴리즈의 훌륭한 상태이다.
 
