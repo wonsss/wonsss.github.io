@@ -11,7 +11,7 @@ draft: false
 
 `JavaScript`는 오늘날 가장 중요한 언어 중 하나이다. 웹의 등장은 `JavaScript`의 위치를 전혀 생각치도 못했던 곳으로 데려갔다. 자바스크립트가 짧은 역사 동안 어떻게 발전했는지 살펴보고, 어디로 향할 것인지 볼 것이다.
 
-## 모든 것은 90년대에 시작되었다
+## 모든 것은 90년대에 시작되었다 (1995)
 
 `JavaScript`는 1995년 5월부터 12월까지 6개월 만에 개발되었다. `Netscape`는 초기 웹에서 강한 영향력을 가지고 있었다. `Netscape`는 90년대 초에 `Mosaic` 개발에 참여했던 사람들에 의해 설립되었고, 웹을 더 확장할 수 있는 다양한 방법을 찾는 데 필요한 자유를 얻었다. 이러한 과정에서 `JavaScript`가 탄생하였다.
 
@@ -140,7 +140,7 @@ Car.prototype = new Vehicle()
 
 그러나 이것은 `JavaScript` 역사의 시작에 불과했다. 성급하게 빨랐던 개발은 몇 가지 설계 실수를 초래했다. 하지만 동적 웹을 위한 언어를 갖는 것의 이점은 미룰 수 없었고, 역사가 되었다.
 
-## Memory Lane: Netscape Navigator 2.0 및 3.0의 개요
+## Netscape Navigator 2.0(1995) 및 3.0(1996)의 개요
 
 `JavaScript`의 첫 번째 공개 릴리즈는 1995년 출시된 `Netscape Navigator 2.0`에 통합되었다. virtualization과 abandonware 웹사이트들의 경이로운 기능 덕분에, 오늘날 이러한 순간이 부흥할 수 있었다.
 
@@ -189,7 +189,7 @@ hello.prototype = new Object()
 
 정규 표현식, JSON 및 예외와 같은 기능은 여전히 사용할 수 없었다. `JavaScript`는 그 후 몇 년 동안 엄청나게 발전했다.
 
-## ECMA Script: 표준으로서의 `JavaScript`
+## ECMA Script: 표준으로서의 JavaScript (1996)
 
 공개 이후 `JavaScript`의 첫 번째 변화는 ECMA 표준화의 형태로 이루어졌다. `ECMA`는 정보 및 통신 시스템의 표준화만을 목적으로 1961년에 결성된 산업 협회이다.
 
@@ -199,7 +199,7 @@ hello.prototype = new Object()
 
 상표상의 이유로, ECMA 위원회는 `JavaScript`를 이름으로 사용할 수 없었다. 제시된 대안 역시 많은 사람이 좋아하지 않았기 때문에, 약간의 논의 끝에 표준으로 기술된 언어를 `ECMAScript`라고 부르기로 했다. 현재 `JavaScript`는 `ECMAScript`의 상업적 이름일 뿐이다.
 
-## ECMAScript 1 & 2: 표준화로 가는 길
+## ECMAScript 1(1997) & 2(1998): 표준화로 가는 길
 
 첫 번째 `ECMAScript` 표준은 `Netscape Navigator 4`와 함께 출시된 `JavaScript` 버전을 기반으로 하며, 중요한 기능(정규 표현, JSON, 예외 및 내장 객체에 대한 중요한 메서드 등과 같은)을 여전히 놓치고 있었다. 하지만 브라우저에서는 훨씬 더 잘 작동하고 있었다. `JavaScript`는 점점 더 좋아지고 있었다. 버전 1은 1997년 6월에 출시되었다.
 
@@ -207,11 +207,11 @@ hello.prototype = new Object()
 
 위 동영상에서 `Prototype` 및 기능에 대한 간단한 테스트가 올바르게 작동하는지 확인할 수 있다. Netscape 4에서는 많은 직업이 진행되었고, `JavaScript`는 이로부터 많은 이점을 얻었다. 위 예시에서 보다시피 현재 브라우저와 동일하게 작동한다. 이것은 표준으로서 첫 번째 릴리즈의 훌륭한 상태이다.
 
-ECMA와 `JavaScript`용 ISO 표준(ISO/IEC 16262) 간의 불일치를 수정하기 위해, 두 번째 버전의 표준 `ECMAScript 2`가 출시되었다. 따라서 언어에 대한 변경은 없었다. 그것은 1998년 6월에 릴리즈되었다.
+ECMA와 `JavaScript`용 ISO 표준(ISO/IEC 16262) 간의 불일치를 수정하기 위해, 두 번째 버전의 표준 `ECMAScript 2`가 출시되었다. 언어에 대한 변경은 없었고, 1998년 6월에 릴리즈되었다.
 
 이 버전의 `JavaScript`에서 흥미로운 점은 컴파일 시 검출되지 않은 오류는 인터프리터의 변덕에 맡겨진다는 것이다. 이는 exception이 아직 언어의 일부가 아니었기 때문이다.
 
-## ECMAScript 3: 첫 번째 큰 변화
+## ECMAScript 3: 첫 번째 큰 변화 (1999)
 
 `ECMAScript 2` 이후에도 작업이 계속되었고 언어의 첫 번째 큰 변화가 빛을 보게 되었다. 이 버전에는 다음 기능이 포함되었다.
 
@@ -255,7 +255,7 @@ var xhr = new ActiveXObject('Microsoft.XMLHTTP')
 
 틀림없이, 그 아이디어를 먼저 내놓은 것은 `Internet Explorer 5` 였다. 버전 7이 되어서야 `Microsoft`는 표준과 합의를 보다 면밀히 따르기 시작했다. 일부 오래된 기업 사이트에서는 `Internet Explorer` 가 올바르게 실행되기 위해 이전 버전이 여전히 필요하다.
 
-## `ECMAScript 3.1 및 4: 고군분투의 해
+## ECMAScript 3.1 및 4: 고군분투의 해 (2000~2008)
 
 불행히도, 그다음 해는 `JavaScript` 개발에 좋지 않았다. `ECMAScript 4`에 대한 작업이 시작되자마자 위원회에서 큰 차이가 나타나기 시작했다. 대규모 애플리케이션 개발을 위한 강력한 언어가 되기 위해서는 `JavaScript`에 기능이 필요하다고 생각하는 사람들이 있었다. 이 그룹은 범위와 변경 사항이 큰 많은 기능을 제안했다. 다른 이들은 이것이 `JavaScript`에 적합한 과정이 아니라고 생각하기도 했다. 합의가 결여되었고 일부 제안된 기능의 복잡성 탓에 `ECMAScript 4`의 출시는 점점 더 멀어졌다.
 
@@ -380,7 +380,7 @@ sales.item.(@type == "oranges").@quantity = 4;
 
 다른 데이터 형식(ex, JSON)이 `JavaScript` 커뮤니티에서 더 폭넓게 수용되고 있으므로 자연스레 사라졌다.
 
-## ECMAScript 5: `JavaScript`의 부활
+## ECMAScript 5: JavaScript의 부활 (2009~2011)
 
 `ECMAScript 4`에서의 오랜 어려움 끝에, 2008년부터 커뮤니티는 `ECMAScript 3.1`에 초점을 맞췄고 `ECMAScript 4`는 폐기되었다. 2009년에 `ECMAScript 3.1`이 완성되어 모든 이해관계자에 의해 승인되었다. `ECMAScript 4`는 `ECMAScript`의 특정 변형으로 이미 인식되었기 때문에, 위원회는 혼란을 피하고자 `ECMAScript 3.1`을 `ECMAScript 5`로 개명하기로 했다.
 
@@ -405,7 +405,7 @@ sales.item.(@type == "oranges").@quantity = 4;
 
 `ECMAScript 5`는 2011년에 `ECMAScript 5.1`의 형태로 또 다른 반복을 보았다. 이 릴리즈에서는 표준에서 애매한 점을 명확히 했지만 새로운 기능은 제공하지 않았다. 새로운 기능은 모두 `ECMAScript`의 다음 큰 릴리즈로 예정되어 있다.
 
-## `ECMAScript 6 (2015) & 7 (2016) : 범용 언어
+## ECMAScript 6(2015) & 7(2016) : 범용 언어
 
 `ECMAScript Harmony` 제안은 향후 `JavaScript`의 개선을 위한 중심 허브가 되었다. `ECMAScript 4`의 많은 아이디어들이 영원히 사라지긴 했지만, 몇 아이디어들은 새로운 마인드셋과 함께 다시 나타났다. `ECMAScript 6`는 나중에 `ECMAScript 2015`로 이름이 변경되며 큰 변화를 가져올 예정이었다. 구문 변경이 필요한 대부분의 모든 변경은 이 버전으로 되돌려졌다. 그러나 이번에 위원회는 통합을 이루며 2015년에 `ECMAScript 6`가 마침내 출시되었다. 많은 브라우저 벤더들이 이미 그 기능을 구현하기 위해 노력하고 있었지만, 큰 변경 때문에 시간이 걸렸다. 오늘날에도, 모든 브라우저가 `ECMAScript 2015`를 완전히 커버하고 있는 것은 아니다(하지만 거의 다 커버해 가고 있다).
 
