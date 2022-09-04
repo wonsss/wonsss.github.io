@@ -6,8 +6,8 @@ thumbnail: { thumbnailSrc }
 draft: false
 ---
 
-> - Auth0에서 Sebastian Peyrott의 <A brief history of Javascript> 아티클(2017.1.16. 게시)을 읽고 흥미가 생겨 학습 목적으로 번역해보았습니다.
-> - 원글: <https://auth0.com/blog/a-brief-history-of-javascript>](<https://auth0.com/blog/a-brief-history-of-javascrip>
+> - Auth0에서 Sebastian Peyrott의 `A brief history of Javascript` 아티클(2017.1.16. 게시)을 읽고 흥미가 생겨 학습 목적으로 번역해보았습니다.
+> - 원글: [https://auth0.com/blog/a-brief-history-of-javascript](https://auth0.com/blog/a-brief-history-of-javascript)
 
 JavaScript는 오늘날 가장 중요한 언어 중 하나이다. 웹의 등장은 JavaScript가 전혀 생각지도 못했던 곳으로 옮겨갔다.
 
@@ -542,12 +542,12 @@ Mozila는 이를 보고 JavaScript를 컴파일러에 적합한 대상으로 만
 
 현재 개발 버전인 Chrome, Firefox, Microsoft Edge는 `WebAssembly` 사양 초안을 지원하며 데모 앱을 실행할 수 있다.
 
-[https://`webassembly`.org/](https://`webassembly`.org/)
+[`WebAssembly`](https://webassembly.org/)
 
 ## 결론
 
 JavaScript의 역사는 길고 험난했다. 그것은 “웹을 위한 `Scheme`”으로 제안되었다. 초기에는 Java와 같은 구문을 장착했다. 그것의 첫 시제품은 몇 주만에 개발되었다. 마케팅의 위기를 겪었고 2년도 되지 않아 세 개의 이름(`Mocha`, `LiveScript`, JavaScript)을 얻었다. 그리고 나서 그것은 표준화되었고 피부병처럼 들리는 이름(`ECMAScript`)을 얻었다. 세 번의 성공적인 릴리즈 이후, 네 번째 릴리즈는 거의 8년 동안 개발의 지옥을 헤매었다. 그 후, AJAX라는 단일 기능의 성공에 의해서, 해당 커뮤니티는 활동을 다시 하며 개발을 재개했다. 버전 4는 폐기되고 버전 3.1로 알려진 소규모 개정판은 버전 5로 이름이 변경됐다. 버전 6은 여러 해동안 개발되었고, 이번에는 성공했음에도 불구하고 위원회는 이름을 2015로 변경하기로 결정했다. 이 개정안은 규모가 컸고 시행에도 많은 시간이 걸렸다. 그러나 마침내 JavaScript에는 새로운 활력이 불러넣어졌다. 여전히 커뮤니티가 활발하다. Node.js, V8, 다른 프로젝트들은 JavaScript를 이전에 생각하지 못했던 곳으로 데려가고 있다. `Asm.js`, `WebAssembly`는 그것을 더 앞으로 데려 가려고 한다. 다른 스테이지의 활성화된 제안들은 모두 JavaScript의 미래를 더욱 발게 만들고 있다. 길고 장애물이 많은 여정이었으나, JavaScript는 여전히 가장 성공적인 언어 중 하나이다. 이는 그 자체로 입증된다. 언제나 JavaScript에 베팅하자.
 
-- 원글 작성자 : **Sebastian Peyrott**
-- 원글 링크 : [https://auth0.com/blog/a-brief-history-of-javascript](https://auth0.com/blog/a-brief-history-of-javascript)
-- 원글 게시일 : 2017년 1월 16일
+> - 원글 작성자 : **Sebastian Peyrott**
+> - 원글 링크 : [https://auth0.com/blog/a-brief-history-of-javascript](https://auth0.com/blog/a-brief-history-of-javascript)
+> - 원글 게시일 : 2017년 1월 16일
