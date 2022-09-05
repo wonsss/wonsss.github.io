@@ -105,6 +105,20 @@ draft: false
 
     ![png에서 webp로 변환에 따른 파일 용량 변화](../image/p8.jpg)
 
+### picture 태그를 사용하여 webp 미지원 브라우저에 fallback 제공
+
+- picture 태그는 여러 이미지 리소스를 상황에 맞게 유연하게 지정할 수 있는 방법이다.
+- `<picture>` 태그 내부에 `<source>`와 `<img>` 태그를 넣는다.
+- `<source>` 태그는 기본 제공될 이미지를 지정하고, 브라우저가 해당 이미지를 지원하지 않으면, fallback으로서 `<img>` 태그에 지정한 이미지가 제공된다.
+- 예시: webp 기본 제공 후 미지원 브라우저에서는 jpeg 제공
+
+  ```jsx
+  <picture>
+    <source type="image/webp" srcSet={heroImageWebp} />
+    <img className={styles.heroImage} src={heroImageJpeg} alt="hero image" />
+  </picture>
+  ```
+
 ### 이미지 크기 적절하게 설정하기
 
 > [https://web.dev/serve-images-with-correct-dimensions/](https://web.dev/serve-images-with-correct-dimensions/)

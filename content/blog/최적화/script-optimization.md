@@ -1,5 +1,5 @@
 ---
-title: 요청 크기 줄이기
+title: 스크립트 파일 등 요청 크기 줄이기
 date: 2022-09-03 02:09:14
 category: 최적화
 thumbnail: { thumbnailSrc }
@@ -126,7 +126,8 @@ module.exports = {
 
  optimization: {
      minimize: true,
-     minimizer: [new OptimizeCSSAssetsPlugin()]
+     minimizer: [new CssMinimizerWebpackPlugin()]
+     // 웹팩 5 버전 이후부터는 OptimizeCSSAssetsPlugin 대신 CssMinimizerWebpackPlugin 사용이 권장됨
  }
 }
 ```

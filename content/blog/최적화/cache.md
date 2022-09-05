@@ -81,7 +81,7 @@ export const cache = (cacheKey: string, fetcher: Function) => {
 // gifApiService.ts
 import { cache } from '../cache'
 
-const gifs: GifsResult = await cache(`search-${keyword}`, () =>
+const gifs: GifsResult = await cache(`search-${keyword}-${page}`, () =>
   gf.search(keyword, searchOptions)
 )
 ```
