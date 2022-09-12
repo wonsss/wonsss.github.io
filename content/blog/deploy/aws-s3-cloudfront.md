@@ -140,9 +140,9 @@ CloudFront는 엣지 로케이션 덕분에 전 세계 네트워크를 통해 �
         -   새 OAI 생성 후, 버킷 정책 업데이트 체크
         -   Redirect HTTP to HTTPS 체크
 
-        ![](../image/aws-6.png)
+            ![](../image/aws-6.png)
 
-        ![](../image/aws-7.png)
+            ![](../image/aws-7.png)
 
     -   배포 완료
 
