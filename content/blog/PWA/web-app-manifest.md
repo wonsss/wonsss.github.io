@@ -36,7 +36,7 @@ draft: false
 
     -   모바일에서 웹 앱 아이콘을 꾹 누르거나, PC에서 웹 앱 아이콘을 우클릭 했을 때, 표시되는 앱 내 기능 바로가기를 설정한다.
 
-        ![앱 내 기능 바로가기](../image/shortcuts.png)
+            ![앱 내 기능 바로가기](../image/shortcuts.png)
 
     -   `categories` , `screenshots`
         -   카테고리나 스크린샷은 스토어(chrome_web_store, play, itunes, microsoft-inbox and microsoft-store)에서 사용될 수 있다.
@@ -161,13 +161,13 @@ draft: false
 
     -   스플래시 이미지는 기기의 화면 크기와 정확히 일치해야 한다는 조건이 있으므로, media 속성의 미디어 쿼리를 설정한다.
 
-        ```jsx
-        <link
-            rel="apple-touch-startup-image"
-            media="screen and (device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"
-            href="image/android-chrome-512x512.png"
-        />
-        ```
+            ```jsx
+            <link
+                rel="apple-touch-startup-image"
+                media="screen and (device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"
+                href="image/android-chrome-512x512.png"
+            />
+            ```
 
 -   웹 앱 매니페스트의 색상 테마를 지원하지 않는 브라우저에도 색상 테마를 지원하기 위해 다음과 같은 메타 태그를 추가한다.
 
@@ -181,12 +181,14 @@ draft: false
     -   black : 검정색 상단바에 흰색 아이콘
     -   black-translucent : 웹페이지의 배경 색상의 상단바와 흰색 아이콘
 
-        ```jsx
-        <meta
-            name="apple-mobile-web-app-status-bar-style"
-            content="black-translucent"
-        />
-        ```
+            ```jsx
+            <meta
+                name="apple-mobile-web-app-status-bar-style"
+                content="black-translucent"
+            />
+            ```
+
+            <https://developer.apple.com/library/archive/documentation/AppleApplications/Reference/SafariHTMLRef/Articles/MetaTags.html>
 
 ## 3. Tool
 
