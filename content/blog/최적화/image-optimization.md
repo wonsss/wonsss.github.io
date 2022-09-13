@@ -52,7 +52,7 @@ ffmpeg -i find.gif -vf "crop=trunc(iw/2)*2:trunc(ih/2)*2" -b:v 0 -crf 25 -f mp4 
 
 -   before & after
 
-          ![before-gif](../image/p6.jpg)
+              ![before-gif](../image/p6.jpg)
 
 -   비디오 넣기(자동재생, 무음, 무한반복)
 
@@ -63,7 +63,7 @@ import freeMp4 from '../../assets/images/free.mp4'
 </video>
 ```
 
-### 이미지 압축(WebP로 직접 변환)
+### 이미지를 WebP 확장자로 변환
 
 > [https://web.dev/serve-images-webp/](https://web.dev/serve-images-webp/)
 
@@ -161,3 +161,19 @@ declare module '*.webp'
 -   이미지 크기 조절 결과
 
     -   이미지 크기가 절반인 1640x1094로 줄어들며 용량도 절반 가량인 107kb로 축소되었다.
+
+### 이미지 압축(jpg, png)
+
+-   jpg
+
+```bash
+brew install jpegoptim
+find . -name "*.jpg" -exec jpegoptim -m80 -o -p --strip-all {} \;
+```
+
+-   png
+
+```bash
+brew install optipng
+find . -name "*.png" -exec optipng -o7 {} \;
+```
