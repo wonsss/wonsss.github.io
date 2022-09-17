@@ -38,7 +38,7 @@ export default App
 
 프로젝트에서 사용하고 있는 icon만 가져오려면 기존에 설치한 react-icons 패키지 대신 @react-icons/all-files 패키지를 설치하고, import할 때 해당 아이콘 한 개씩 명시해서 가져온다.
 
--   before
+- before
 
     ```javascript
     import { AiOutlineInfo, AiOutlineClose } from 'react-icons/ai'
@@ -46,7 +46,7 @@ export default App
 
     ![react-icons-before](../image/react-icons-before.png)
 
--   after
+- after
 
     ```javascript
     import { AiOutlineInfo } from '@react-icons/all-files/ai/AiOutlineInfo'

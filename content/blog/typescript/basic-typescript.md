@@ -8,8 +8,8 @@ draft: false
 
 ## 왜 타입스크립트를 사용하는가
 
--   `정적 언어`인 자바스크립트는 실행시점인 `런 타임`에 타입이 결정되고 오류도 그 때 발견된다.
--   반면, `동적 언어`인 자바나 타입스크립트는 `컴파일 타임`에 타입이 결정되고 오류도 그 때 발견된다.
+- `정적 언어`인 자바스크립트는 실행시점인 `런 타임`에 타입이 결정되고 오류도 그 때 발견된다.
+- 반면, `동적 언어`인 자바나 타입스크립트는 `컴파일 타임`에 타입이 결정되고 오류도 그 때 발견된다.
 
 [TS Playground - An online editor for exploring TypeScript and JavaScript](https://www.typescriptlang.org/play?#code/BAMwrgdgxgLglgewgAgIYBN0AoJgLYCMAXMrngEYCmATgDSn4BMJZV1AlEazcgN4BQyIcihIAzggA2lAHSSEAcxz4C9Mo3YBuQcOqUYYaijIEA1Ov4BffvwD0ttJixa7DjNgIv3WVcg3b7R2wAZloAFloAVhdA7wAiAAtKSXk4+jiAdwRqSXQ4rSA)
 
@@ -413,9 +413,9 @@ const a5 = new Benz('black')
 
 ## 제네릭
 
--   generic: 일반적인, 총칭적인, 상표등록이 되어 있지 않은
--   선언할 때는 타입 매개변수만 적어주고 생성 시점에 사용 타입을 결정하는 것이다
--   제네릭을 활용하여 하나의 인터페이스만 만들고 여러 개의 객체들을 만들 수 있다.
+- generic: 일반적인, 총칭적인, 상표등록이 되어 있지 않은
+- 선언할 때는 타입 매개변수만 적어주고 생성 시점에 사용 타입을 결정하는 것이다
+- 제네릭을 활용하여 하나의 인터페이스만 만들고 여러 개의 객체들을 만들 수 있다.
 
 [TS Playground - An online editor for exploring TypeScript and JavaScript](https://www.typescriptlang.org/play?#code/PTAEgJBwO0cA1XUGVbApTaQAwuFDx0gTzsDg1gBnsBhDgM52iCAE4C2jgPxOAHNaILsDgjIOiA7Q4AgTgC6OiA1A4JVjKqgIuOhADTWBUCcAaq0kDBNYBdxwCdNAOgBQAMwCuAOwDGAFwCWAezWgA5gFMtAZR0AvEwB4AKgD4AFAEMATu4BcoewG0AXQBKHzUVAFsAIxN3UABvBVAk0HczFXdDD3c5ABsTNSMtAAsAbgUAXwUFDQMAZy1QLIBGUABeUD8mgBoAJi6AZgDquoasnraOgCJXSa7JyNnJjUmhhRBQQA9xwAZFwAzlqUASodZAHEHQQBwJwBJGwFrOzi41sAvASA6BQB01rlFAG9HQUUAMhsANcc3dgciARACct1HegBv20BYf6AXBrAC0zIIEoNAeFAgAjx+QKHRqLQxJSuDQmUAAWT0kR0eQcjniiWSalc4RMPnq7hxRjKyVAAAc2UTQhFou5Ock9NzdAYfPYypVhmp6qBwk0vGSKVTyQArEzaGntBJchlMnyTWo9JqzOlJXk6fmgJoABkdXUtoDFErUPn1XOSNRyem8oEmqQAJhbvT69CpuZLQAScrUTC7KrKavKGuEeiryZS7Kz2braQbGczA6bzc6udbbQ6nS63foPYGjHo9KGKlV1qBsbj8YTiQBVBOxL1JQ0lvMFEVJVymAVRGIyqo4vHuAlE0AAYQ8hfpxZZWjZk5dvv9+8PHPb3ZXa+JACEWwBrHdWvklsLz4WX1MKlRDnyDmIJjiMdjRmLpGlnO17XKMpvwaDQPB8LdYj1EDA0icIAHdZlAE8AyDExQxguUFUiR8fHvPQnz1KsS36R1oLKZR1G0BtQFqIo9EwgA5YsHFAEwAA88TUYNaniNCJyMcoXGDVwtFcKUQnYg92WfFI0gyUA5IUuQx0XBQOK43imWcX8YiCMojJ44tnAQ9xLLudjOJs0yyKoyzQHWVgISAA)
 
@@ -614,49 +614,49 @@ type T4 = NonNullable<T3> // void | string
 
 # 타입스크립트 올바르게 이해하기
 
--   타입스크립트 목표 : 타입스크립트로 타이핑을 잘하면, 런타임 전에 미리 알수 있는 오류도 있다.
+- 타입스크립트 목표 : 타입스크립트로 타이핑을 잘하면, 런타임 전에 미리 알수 있는 오류도 있다.
 
 ## 1. 작성자와 사용자
 
 ### 타입 시스템
 
--   컴파일러에게 사용하는 타입을 명시적으로 지정하는 시스템
--   컴파일러가 자동으로 타입을 추론하는 시스템
+- 컴파일러에게 사용하는 타입을 명시적으로 지정하는 시스템
+- 컴파일러가 자동으로 타입을 추론하는 시스템
 
 ### 타입스크립트의 타입 시스템
 
--   타입을 명시적으로 지정할 수 있다.
--   타입을 명시적으로 지정하지 않으면, 타입스크립트 컴파일러가 자동으로 타입을 추론한다
--   타입이란 해당 변수가 할 수 있는 일을 결정한다.
--   타입스크립트의 추론에만 의존하면, any로 추론될 수 있다.
-    -   `noImplicitAny` 옵션을 켜면
-        -   타입을 명시적으로 지정하지 않은 경우 타입스크립트가 추론 중 `any` 라고 판단하게 되면, 컴파일 에러를 발생시켜 명시적으로 지정하도록 유도한다.
-    -   `strictNullChecks` 옵션을 켜면
-        -   모든 타입에 자동으로 포함되어 있는 `null` 과 `undefined` 를 제거한다.
-    -   `noImplicitReturns` 옵션을 켜면
-        -   함수 내에서 모든 코드가 값을 리턴하지 않으면 컴파일 에러를 발생시킨다.
-        -   모든 코드에서 리턴을 직접해야 한다.
+- 타입을 명시적으로 지정할 수 있다.
+- 타입을 명시적으로 지정하지 않으면, 타입스크립트 컴파일러가 자동으로 타입을 추론한다
+- 타입이란 해당 변수가 할 수 있는 일을 결정한다.
+- 타입스크립트의 추론에만 의존하면, any로 추론될 수 있다.
+  - `noImplicitAny` 옵션을 켜면
+    - 타입을 명시적으로 지정하지 않은 경우 타입스크립트가 추론 중 `any` 라고 판단하게 되면, 컴파일 에러를 발생시켜 명시적으로 지정하도록 유도한다.
+  - `strictNullChecks` 옵션을 켜면
+    - 모든 타입에 자동으로 포함되어 있는 `null` 과 `undefined` 를 제거한다.
+  - `noImplicitReturns` 옵션을 켜면
+    - 함수 내에서 모든 코드가 값을 리턴하지 않으면 컴파일 에러를 발생시킨다.
+    - 모든 코드에서 리턴을 직접해야 한다.
 
 ## 2. interface와 type alias
 
--   structural type system - 구조가 같으면 같은 타입이다.
--   nominal type system - 구조가 같아도 이름이 다르면, 다른 타입이다.
+- structural type system - 구조가 같으면 같은 타입이다.
+- nominal type system - 구조가 같아도 이름이 다르면, 다른 타입이다.
 
 ## 3. 서브 타입과 슈퍼 타입
 
--   `strictFunctionTypes` 옵션을 켜면
-    -   함수의 매개변수 타입만 같거나 슈퍼타입이 아니면, 에러를 통해 경고한다.
--   any 대신 unknown
+- `strictFunctionTypes` 옵션을 켜면
+  - 함수의 매개변수 타입만 같거나 슈퍼타입이 아니면, 에러를 통해 경고한다.
+- any 대신 unknown
 
 ## 4. 타입 추론 이해하기
 
--   **Contextual Typing - 위치에 따라 추론이 다르다**
+- **Contextual Typing - 위치에 따라 추론이 다르다**
 
 ## 5. Type Guard로 안전함을 파악하기
 
 ### **_1. typeof 타입 가드_**
 
--   **_보통 Primitive 타입일 경우_**
+- **_보통 Primitive 타입일 경우_**
 
 ```tsx
 function getNumber(value: number | string): number {
@@ -704,7 +704,7 @@ function getWhellOrMotor(machine: Car | Boat): number {
 }
 ```
 
--   Error 객체 구분에 많이 쓰인다.
+- Error 객체 구분에 많이 쓰인다.
 
     ```tsx
     class NegativeNumberError extends Error {}
@@ -728,7 +728,7 @@ function getWhellOrMotor(machine: Car | Boat): number {
 
 ### 3. in operator 타입가드
 
--   object의 프로퍼티 유무로 처리하는 경우
+- object의 프로퍼티 유무로 처리하는 경우
 
 ```tsx
 interface Admin {
@@ -753,7 +753,7 @@ function redirect(user: Admin | User) {
 
 ### 4. literal 타입 가드
 
--   object의 프로퍼티가 같고, 타입이 다른 경우
+- object의 프로퍼티가 같고, 타입이 다른 경우
 
 ```tsx
 interface IMachine {
@@ -781,33 +781,33 @@ function getWhellOrMotor(machine: Car | Boat): number {
 
 ## 6. Class를 안전하게 만들기
 
--   Class 프로퍼티의 타입을 명시적으로 지정해야 한다
--   `strictPropertyInitialization` 옵션을 켜면
+- Class 프로퍼티의 타입을 명시적으로 지정해야 한다
+- `strictPropertyInitialization` 옵션을 켜면
 
-    -   Class 의 Property 가 생성자 혹은 선언에서 값이 지정되지 않으면, 컴파일 에러를 발생시켜 주의를 준다.
+  - Class 의 Property 가 생성자 혹은 선언에서 값이 지정되지 않으면, 컴파일 에러를 발생시켜 주의를 준다.
 
-        -   Class Property가 선언에서 초기화
+    - Class Property가 선언에서 초기화
 
-            ```tsx
-            class Square3 {
-                area: number = 0
-                sideLength: number = 0
+        ```tsx
+        class Square3 {
+            area: number = 0
+            sideLength: number = 0
+        }
+        ```
+
+    - Class Property가 생성자에서 초기화
+
+        ```tsx
+        class Square4 {
+            area: number
+            sideLength: number
+
+            constructor(sideLength: number) {
+                this.sideLength = sideLength
+                this.area = sideLength ** 2
             }
-            ```
-
-        -   Class Property가 생성자에서 초기화
-
-            ```tsx
-            class Square4 {
-                area: number
-                sideLength: number
-
-                constructor(sideLength: number) {
-                    this.sideLength = sideLength
-                    this.area = sideLength ** 2
-                }
-            }
-            ```
+        }
+        ```
 
 # 실전 타입스크립트 코드 작성하기
 
@@ -885,5 +885,5 @@ type NonNullabled = NonNullable<string | number | null | undefined>
 
 > 참고
 >
-> -   [코딩앙마의 타입스크립트 강의(유튜브)](https://youtu.be/5oGAkQsGWkc)
-> -   [이웅재님의 우아한 타입스크립트 세미나(유튜브)](https://youtu.be/ViS8DLd6o-E)
+> - [코딩앙마의 타입스크립트 강의(유튜브)](https://youtu.be/5oGAkQsGWkc)
+> - [이웅재님의 우아한 타입스크립트 세미나(유튜브)](https://youtu.be/ViS8DLd6o-E)
