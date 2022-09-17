@@ -29,37 +29,38 @@ draft: false
     - 단독 함수 실행에 관한 규칙으로 나머지 규칙에 해당하지 않을 경우 적용되는 this의 기본 규칙이다.
     - non-strict mode인 경우, 전역 객체가 기본 바인딩 대상이다.
 
-    ```jsx
-    function foo() {
-        console.log(this.a) // this는 전역 객체를 참조한다.
-    }
+        ```jsx
+        function foo() {
+            console.log(this.a) // this는 전역 객체를 참조한다.
+        }
 
-    var a = 2
+        var a = 2
 
-    foo() // 2
-    ```
+        foo() // 2
+        ```
 
     - strict mode인 경우, 전역 객체가 기본 바인딩 대상에서 제외된다. undefined로 바인딩된다.
 
 2. 암시적 바인딩
 
     - 호출부에 콘텍스트 객체가 있는지, 객체의 소유/포함 여부를 확인한다.
+
         - 호출부는 obj 콘텍스트로 foo()를 참조하므로 obj 객체는 함수 호출 시점에 함수의 레퍼런스를 ‘소유’하거나 ‘포함’한다고 볼 수 있다.
 
-    ```jsx
-    function bar() {
-        console.log(this.a)
-        // foo() 호출 시 this는 obj이니 this.a는 obj.a가  된다.
-    }
+        ```jsx
+        function bar() {
+            console.log(this.a)
+            // foo() 호출 시 this는 obj이니 this.a는 obj.a가  된다.
+        }
 
-    const obj = {
-        a: 2,
-        foo: bar,
-    }
+        const obj = {
+            a: 2,
+            foo: bar,
+        }
 
-    obj.foo() // 호출부에 콘텍스트 객체(obj)가 있다.
-    // 결과 : 2
-    ```
+        obj.foo() // 호출부에 콘텍스트 객체(obj)가 있다.
+        // 결과 : 2
+        ```
 
     - 암시적 소실
 
@@ -111,44 +112,6 @@ draft: false
 
 3. 명시적 바인딩
 
-    - `call()`과 `apply()` 메서드를 사용하여 명시적 바인딩한다.
-
-        - 두 메서드는 바인딩 할 객체를 `첫 번째 인자`로 받아, 함수 호출 시 이 객체를 this로 지정한다.
-        - call 메서드는 함수를 즉시 실행하는 명령이다.
-        - apply 메서드는 call 메서드와 기능적으로 완전히 동일하나, 두 번째 인자를 배열로 받는다는 점이 다르다.
-        - call/apply 활용
-
-            - 유사배열객체에 배열 메서드를 적용
-
-                ```jsx
-                Array.prototype.push.call(obj, 'd') // 객체에 배열 push 메서드를 이용해 요소 추가
-
-                const nodeArr = Array.prototype.slice.call(nodeList) // 유사배열객체를 배열로 전환
-                ```
-
-            - 생성자 내부에서 다른 생성자를 호출
-
-                - 생성자 내부에서 다른 생성자와 공통된 내용이 있으면 call/ apply를 사용해 다른 생성자를 호출하여 간단히 반복을 줄일 수 있다.
-
-                ```jsx
-                function Person(name) {
-                    this.name = name
-                }
-
-                function Student(name, school) {
-                    Person.call(this, name)
-                    this.school = school
-                }
-                ```
-
-            - 여러 인수를 묶어 하나의 배열로 전달하고 싶을 때 - apply 활용
-
-                ```jsx
-                const max = Math.max.apply(null, numbers) // this는 null로 자리만 채움
-
-                const max = Math.max(...numbers) // 참고로 ES6부터는 spread 연산자 활용하여 더 쉽게
-                ```
-
     ```jsx
     function foo() {
         console.log(this.a)
@@ -160,6 +123,12 @@ draft: false
 
     foo.call(obj) // 2
     ```
+
+    - `call()`과 `apply()` 메서드를 사용하여 명시적 바인딩한다.
+
+        - 두 메서드는 바인딩 할 객체를 `첫 번째 인자`로 받아, 함수 호출 시 이 객체를 this로 지정한다.
+        - call 메서드는 함수를 즉시 실행하는 명령이다.
+        - apply 메서드는 call 메서드와 기능적으로 완전히 동일하나, 두 번째 인자를 배열로 받는다는 점이 다르다.
 
     - 그러나 명시적으로 바인딩 해도 this 바인딩이 도중에 소실되거나 프레임워크가 임의로 덮어써 버리는 문제는 해결할 수 없다.
     - 하드 바인딩
@@ -292,15 +261,15 @@ draft: false
 
     -   call, apply, bind 메서드에 첫 번째 인자로 null 또는 undefined를 넘기면 this 바인딩이 무시되고 기본 바인딩 규칙이 적용된다.
 
-                    ```jsx
-                    function foo() {
-                        console.log(this.a)
-                    }
+            ```jsx
+            function foo() {
+                console.log(this.a)
+            }
 
-                    var a = 2
+            var a = 2
 
-                    foo.call(null) // 2
-                    ```
+            foo.call(null) // 2
+            ```
 
     -   그런데 왜?
         -   함수 호출 시 인자를 전달(커링)하려고 하는데, 첫 번째 인자로 this 바인딩을 지정해야 해서 형식상 null 정도의 값을 자리 끼우는 용으로 둔다.
@@ -308,24 +277,24 @@ draft: false
 
         -   this 바인딩을 신경 쓰지 않고 싶으면 내용이 하나도 없으며 전혀 위임되지 않은 객체(`Object.create(null)`)를 만들어 사용한다. 이는 Object.prototype으로 위임하지 않으므로 `{}` 보다 더 텅 빈 객체이다.
 
-                        ```jsx
-                        function foo(a, b) {
-                            console.log('a:', a, ', b:', b)
-                        }
+                  ```jsx
+                  function foo(a, b) {
+                      console.log('a:', a, ', b:', b)
+                  }
 
-                        // 빈 객체를 만든다.
-                        // ø는 option + o 를 통해 입력 가능하다.
-                        const ø = Object.create(null)
+                  // 빈 객체를 만든다.
+                  // ø는 option + o 를 통해 입력 가능하다.
+                  const ø = Object.create(null)
 
-                        // 인자들을 배열 형태로 쭉 펼친다
-                        foo.apply(ø, [2, 3]) // a: 2 , b: 3
-                        // ES6부터는 spread 연산자를 통해 위 코드처럼 apply를 사용하지 않고도 인자를 배열 형태로 펼칠 수 있다.
-                        foo(...[2, 3]) // a: 2 , b: 3
+                  // 인자들을 배열 형태로 쭉 펼친다
+                  foo.apply(ø, [2, 3]) // a: 2 , b: 3
+                  // ES6부터는 spread 연산자를 통해 위 코드처럼 apply를 사용하지 않고도 인자를 배열 형태로 펼칠 수 있다.
+                  foo(...[2, 3]) // a: 2 , b: 3
 
-                        // 'bind()'로 커링한다
-                        const bar = foo.bind(ø, 2)
-                        bar(3) // a: 2 , b: 3
-                        ```
+                  // 'bind()'로 커링한다
+                  const bar = foo.bind(ø, 2)
+                  bar(3) // a: 2 , b: 3
+                  ```
 
 -   어휘적(렉시컬) this(화살표 함수)
 
@@ -334,29 +303,62 @@ draft: false
         -   화살표 함수는 호출될 당시 this를 무조건 어휘적으로 포착한다.
     -   화살표 함수의 기본 기능 또는 아이디와 비슷한 패턴으로 `self=this` 가 있었다. 둘 중 한 가지만 선택해서 사용한다.
 
-                        ```jsx
-                        // self=this 버전
-                        function foo() {
-                         const self = this; // 호출될 당시에 this를 어휘적으로 포착한다.
-                         setTimeout(function() {
-                           console.log(self.a);
-                         }, 100);
-                        }
+            ```jsx
+            // self=this 버전
+            function foo() {
+                const self = this; // 호출될 당시에 this를 어휘적으로 포착한다.
+                setTimeout(function() {
+                console.log(self.a);
+                }, 100);
+            }
 
-                        // 화살표 함수 버전
-                        function foo() {
-                         setTimeout(() => {
-                           // 호출될 당시에 this를 어휘적으로 포착한다.
-                           console.log(this.a);
-                         }, 100);
-                        }
+            // 화살표 함수 버전
+            function foo() {
+                setTimeout(() => {
+                // 호출될 당시에 this를 어휘적으로 포착한다.
+                console.log(this.a);
+                }, 100);
+            }
 
-                        const obj = {
-                         a: 2
-                        };
+            const obj = {
+                a: 2
+            };
 
-                        foo.call(obj); // 2
-                        ```
+            foo.call(obj); // 2
+            ```
+
+-   call/apply 활용
+
+    -   유사배열객체에 배열 메서드를 적용
+
+            ```jsx
+            Array.prototype.push.call(obj, 'd') // 객체에 배열 push 메서드를 이용해 요소 추가
+
+            const nodeArr = Array.prototype.slice.call(nodeList) // 유사배열객체를 배열로 전환
+            ```
+
+    -   생성자 내부에서 다른 생성자를 호출
+
+        -   생성자 내부에서 다른 생성자와 공통된 내용이 있으면 call/ apply를 사용해 다른 생성자를 호출하여 간단히 반복을 줄일 수 있다.
+
+            ```jsx
+            function Person(name) {
+                this.name = name
+            }
+
+            function Student(name, school) {
+                Person.call(this, name)
+                this.school = school
+            }
+            ```
+
+    -   여러 인수를 묶어 하나의 배열로 전달하고 싶을 때 - apply 활용
+
+            ```jsx
+            const max = Math.max.apply(null, numbers) // this는 null로 자리만 채움
+
+            const max = Math.max(...numbers) // 참고로 ES6부터는 spread 연산자 활용하여 더 쉽게
+            ```
 
 ## 객체
 
@@ -365,18 +367,18 @@ draft: false
 
     -   대부분 리터럴 형식으로 객체를 생성한다.
 
-                    ```jsx
-                    // 리터럴 형식
-                    const myObj = {
-                        name: 'marco',
-                        age: 100,
-                    }
+            ```jsx
+            // 리터럴 형식
+            const myObj = {
+                name: 'marco',
+                age: 100,
+            }
 
-                    // 생성자 형식
-                    const myObj = new Object()
-                    myObj.name = 'marco'
-                    myObj.age = 100
-                    ```
+            // 생성자 형식
+            const myObj = new Object()
+            myObj.name = 'marco'
+            myObj.age = 100
+            ```
 
 -   자바스크립트의 객체
     -   자바스크립트에는 타입으로 null, undefined, boolean, number, string, object, symbol 7개가 있다.
@@ -396,22 +398,22 @@ draft: false
     -   ES5부터 모든 프로퍼티는 프로퍼티 서술자로 표현된다.
     -   `Object.getOwnPropertyDescriptor()`
 
-                        ```jsx
-                        const myObject = {
-                         a: 1
-                        }
+            ```jsx
+            const myObject = {
+                a: 1
+            }
 
-                        Object.getOwnPropertyDescriptor(myObject, "a");
+            Object.getOwnPropertyDescriptor(myObject, "a");
 
-                        // {value: 1, writable: true, enumerable: true, configurable: true}
-                        ```
+            // {value: 1, writable: true, enumerable: true, configurable: true}
+            ```
 
     -   `Object.defineProperty()`
 
-                        ```jsx
-                        Object.defineProperty(myObject, "b", {value: 2, writable: false, enumerable: true, configurable: true})
-                        // {a: 1, b: 1}
-                        ```
+            ```jsx
+            Object.defineProperty(myObject, "b", {value: 2, writable: false, enumerable: true, configurable: true})
+            // {a: 1, b: 1}
+            ```
 
     -   속성
         -   writable
@@ -442,22 +444,22 @@ draft: false
     -   접근 서술자에서 프로퍼티의 value와 writable 속성은 무시되며, 대신 configurable, enumerable, get, set 속성이 중요하다.
     -   게터와 세터를 한쪽만 선언하면 예상외의 결과가 나올 수 있으므로 항상 둘 다 선언하는 것이 좋다.
 
-                    ```jsx
-                    const myObject = {
-                        get a() {
-                            return 2
-                        },
-                    }
-                    myObject.a // 2
+            ```jsx
+            const myObject = {
+                get a() {
+                    return 2
+                },
+            }
+            myObject.a // 2
 
-                    Object.defineProperty(myObject, 'b', {
-                        get: function() {
-                            return this.a * 2
-                        },
-                        enumerable: true,
-                    })
-                    myObject.b // 4
-                    ```
+            Object.defineProperty(myObject, 'b', {
+                get: function() {
+                    return this.a * 2
+                },
+                enumerable: true,
+            })
+            myObject.b // 4
+            ```
 
 -   존재 확인
     -   `in 연산자`는 어떤 프로퍼티가 해당 객체에 존재하는지 아니면 이 객체의 [[Prototype]] 연쇄를 따라갔을 때 상위 단계에 존재하는지 확인한다.
@@ -473,16 +475,16 @@ draft: false
     -   `for..in 루프` 는 실제로 열거 가능한 프로퍼티만 순회하고 그 값을 얻으려면 일일이 프로퍼티에 접근해야 하므로 일찌감치 순회를 끝내는 데 쓰인다.
     -   `for..of 루프` 는 순회할 원소의 iterator object(명세상 @@iterator라는 기본 내부 함수 존재)가 있어야 한다. 순회당 한 번씩 이 iterator object의 next() 메서드를 호출하여 연속적으로 반환 값을 순회한다.
 
-                    ```jsx
-                    const arr = [1, 2, 3]
+            ```jsx
+            const arr = [1, 2, 3]
 
-                    // Symbol.iterator 심볼로 객체 내부 프로퍼티인 @@iterator에 접근할 수 있다
-                    const it = arr[Symbol.iterator]() // iterator object를 반환한다
-                    it.next() // {value: 1, done: false}
-                    it.next() // {value: 1, done: false}
-                    it.next() // {value: 1, done: false}
-                    it.next() // {value: 1, done: false}
-                    ```
+            // Symbol.iterator 심볼로 객체 내부 프로퍼티인 @@iterator에 접근할 수 있다
+            const it = arr[Symbol.iterator]() // iterator object를 반환한다
+            it.next() // {value: 1, done: false}
+            it.next() // {value: 1, done: false}
+            it.next() // {value: 1, done: false}
+            it.next() // {value: 1, done: false}
+            ```
 
 ## 클래스와 객체의 혼합
 
@@ -511,15 +513,15 @@ draft: false
 
     -   객체 프로퍼티 참조 시 [[Get]] 이 호출되는데, [[Get]]은 기본적으로 객체 자체에 해당 프로퍼티가 존재하는지 찾아보고 존재하면 그 프로퍼티를 사용한다. 하지만 [[Get]]은 주어진 프로퍼티를 객체에서 찾지 못하면 곧바로 [[Prototype]] 링크를 따라가서 찾는다. 일치하는 프로퍼티명이 나올 때까지 아니면 [[Prototype]] 연쇄가 끝날 때까지 같은 과정이 계속된다. 연쇄 끝(Object.prototype)에 이르러서도 프로퍼티가 발견되지 않으면 [[Get]]은 결괏값으로 undefined를 반환한다.
 
-                    ```jsx
-                    const obj1 = {
-                        a: 2,
-                    }
+            ```jsx
+            const obj1 = {
+                a: 2,
+            }
 
-                    const obj2 = Object.create(obj1)
+            const obj2 = Object.create(obj1)
 
-                    obj2.a // 2
-                    ```
+            obj2.a // 2
+            ```
 
 -   자바스크립트는 클래스라는 추상화된 패턴이나 설계가 전혀 없이, 객체만 있다. 즉, 클래스 없이 곧바로 객체를 생성할 수 있다. 객체는 자신의 작동을 손수 정의한다.
 -   자바스크립트는 클래스의 상속과 달리 복사 과정이 없고, 그저 공용 객체에서 [[Prototype]] 으로 연결된 객체가 생성됨으로써 객체들이 서로 끈끈하게 연결되어 있다.
@@ -527,23 +529,23 @@ draft: false
 
     -   이 프로퍼티는 인스턴스가 자신의 생성자 함수가 무엇인지를 알고자 할 때 필요한 수단이다.
 
-                    ```jsx
-                    function Foo() {}
+            ```jsx
+            function Foo() {}
 
-                    Foo.prototype.constructor === Foo // true
+            Foo.prototype.constructor === Foo // true
 
-                    const a = new Foo()
+            const a = new Foo()
 
-                    a.__proto__ === Foo.prototype // true
+            a.__proto__ === Foo.prototype // true
 
-                    // a에는 constructor 프로퍼티가 없으므로 프로토타입 연쇄를 따라 올라간다.
-                    a.constructor === a.__proto__.constructor // true
-                    a.__proto__.constructor === Foo.prototype.constructor // true
+            // a에는 constructor 프로퍼티가 없으므로 프로토타입 연쇄를 따라 올라간다.
+            a.constructor === a.__proto__.constructor // true
+            a.__proto__.constructor === Foo.prototype.constructor // true
 
-                    // FFoo.prototype 객체에는 기본적으로 공용 프로퍼티인 constructor가 세팅되는데,
-                    // 이는 객체 생성과 관련된 함수(Foo)를 다시 참조하기 위한 레퍼런스다.
-                    Foo.prototype.constructor === Foo // true
-                    ```
+            // FFoo.prototype 객체에는 기본적으로 공용 프로퍼티인 constructor가 세팅되는데,
+            // 이는 객체 생성과 관련된 함수(Foo)를 다시 참조하기 위한 레퍼런스다.
+            Foo.prototype.constructor === Foo // true
+            ```
 
     -   Foo.prototype 객체에는 기본적으로 공용 프로퍼티인 constructor가 세팅되는데, 이는 객체 생성과 관련된 함수(Foo)를 다시 참조하기 위한 레퍼런스다.
         -   또한, 생성자 호출(new Foo())로 생성한 객체(a)도 constructor 프로퍼티를 통해 ‘자신을 생성한 함수(Foo)’를 ‘임의로’ 가리킬 수 있다.
@@ -568,10 +570,10 @@ draft: false
         -   2개의 객체 간의 연결 관계는 확인할 수 없다.
         -   괜스레 클래스와 뭔가 관련이 있는 것 같은 착각을 줄 수 있어 사용하지 않는 편이다.
 
-                        ```jsx
-                        일반객체 instanceof 함수
-                        a instanceof Foo // true
-                        ```
+                  ```jsx
+                  일반객체 instanceof 함수
+                  a instanceof Foo // true
+                  ```
 
 -   `isPrototypeOf()`
 
@@ -597,9 +599,9 @@ draft: false
 
     -   Object.create()를 통해 새로운 객체(bar)를 생성하고, 주어진 객체(foo)를 새로 생성한 객체(bar)에 연결할 수 있다. 이처럼 이것만으로도 복잡하게 하지 않고도 객체를 연결할 수 있다. 두 객체를 연결하는 데 클래스가 필수인 게 아니다. 객체의 위임 연결만 신경 쓰면 되는데, Object.create()가 클래스 뭉치 없이도 처리할 수 있다.
 
-                    ```jsx
-                    const bar = Object.create(foo)
-                    ```
+            ```jsx
+            const bar = Object.create(foo)
+            ```
 
 -   프로토타입처럼, 어떤 객체를 다른 객체와 연결하면 어떤 이점이 있는가? 왜 이러한 연결망을 구축하려고 한 걸까?
     -   프로토타입 체계는 한 객체가 다른 객체를 참조하기 위한 내부 링크다. 자바스크립트의 무한한 가능성을 이끌어 낼 가장 중요한 핵심 기능이자 실제적인 체계는 전적으로 ‘객체를 다른 객체와 연결하는 것’에서 비롯된다.
