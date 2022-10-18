@@ -30,13 +30,13 @@ draft: false
         - 타입스크립트가 타입을 추론하도록 두는 것이 코드를 줄일 수 있는 방법이기도 하다.
 - 자바스크립트가 제공하는 암묵적 변환 때문에 문제의 원인을 추적하기 어렵다. 따라서 타입을 변환할 때는 명시적으로 해야 한다.
 - 에러
-  - 런타임
-    - 자바스크립트는 런타임에 예외를 던지거나 암묵적 형변환을 수행한다.
-  - 컴파일 타임
-    - 타입스크립트는 컴파일 타임에 SyntaxError와 TypeError를 모두 검출한다.
-      - IDE에서 코딩 시 실시간으로 이런 종류의 에러가 바로 표시된다. 타입스크립트처럼 점진적 컴파일을 지원하는 언어는 코드의 일부만 고쳤을 때에는 전체 프로그램을 다시 컴파일할 필요 없으므로 빨리 재컴파일된다.
-    - 타입스크립트가 컴파일 타임에 검출할 수 없는 `런타임` 예외도 많다.
-      - 예시 : 스택 오버플로, 네트워크 연결 끊김, 잘못된 사용자 입력 등
+  1. 런타임
+     - 자바스크립트는 런타임에 예외를 던지거나 암묵적 형변환을 수행한다.
+  2. 컴파일 타임
+     - 타입스크립트는 컴파일 타임에 SyntaxError와 TypeError를 모두 검출한다.
+       - IDE에서 코딩 시 실시간으로 이런 종류의 에러가 바로 표시된다. 타입스크립트처럼 점진적 컴파일을 지원하는 언어는 코드의 일부만 고쳤을 때에는 전체 프로그램을 다시 컴파일할 필요 없으므로 빨리 재컴파일된다.
+  - 타입스크립트가 컴파일 타임에 검출할 수 없는 `런타임` 예외도 많다.
+    - 예시 : 스택 오버플로, 네트워크 연결 끊김, 잘못된 사용자 입력 등
   - 결론
     - 바닐라 자바스크립트에서는 런타임 에러로 발생했을 많을 에러를 타입스크립트가 컴파일 타임에 검출할 수 있다.
 
@@ -53,47 +53,47 @@ draft: false
 - 루트 디렉터리에 tsconfig.json이라는 파일이 존재해야 한다. 이 파일은 타입스크립트 프로젝트에서 어떤 파일을 컴파일하고, 어떤 자바스크립트 버전으로 방출하는지 등을 정의한다.
 - `tsc --init` 명령을 이용해 자동 설정할 수 있다.
 - 옵션
-  - `include`
-    - TSC가 타입스크립트 파일을 찾을 디렉터리
-  - `lib`
-    - TSC가 코드 실행 환경에서 이용할 수 있다고 가정하는 API(ex, ES5의 bind, Object.assign, DOM의 document.querySelector)
-      - 브라우저용 타입스크립트를 작성하기 위해 “dom”을 lib에 추가한다.
-  - `module`
-    - TSC가 코드를 컴파일할 대상 모듈 시스템(CommonJS, SystemJS, ES2015 등)
-    - 타입스크립트는 esnext 모듈 모드에서만 동적 임포트를 지원한다.
-      - {”module”: “esnext”}
-  - `outDir`
-    - 생성된 자바스크립트 코드를 출력할 디렉터리
-  - `strict`
-    - 유효하지 않은 코드를 확인할 때 가능한 엄격하게 검사
-      - `noImplicitAny` , `strictBindCallApply`, `strictFunctionTypes`
-  - `target`
-    - TSC가 코드를 컴파일할 자바스크립트 버전(ES3, ES5, ES2015, ES2016 등)
-  - `noImplicitAny`
-    - 암묵적인 any가 나타났을 때 예외를 일으킬 수 있다.
-  - `strictNullChecks`
-    - false로 설정하면, 이 때의 null은 never를 제외한 모든 타입의 하위 타입이다. 즉, 모든 타입은 null이 될 수 있으므로 모든 값이 null인지 아닌지를 먼저 확인해야 타입이 무엇인지 단정할 수 있는데, false로 설정하면 이 과정을 생략하게 된다.
-      - 그러나 예상치 않은 상황에서 값이 null이라면 런타임에 치명적인 널 포인터 예외가 발생한다. 컴파일 타임에 가능한 많은 버그를 검출하는 것이 목표라면 타입 시스템에서 null을 확인할 수 있어야 한다.
-  - `preserveConstEnums`
-    - const enum의 런타임 코드 생성을 활성화하려면 preserveConstEnums 설정을 true로 바꾼다.
-  - `strictBindCallApply`
-    - call, apply, bind를 안전하게 사용하려면 이 플래그를 활성화해야 한다.
-  - `noImplicitThis`
-    - 이 플래그를 true로 하면, 함수에서 항상 this 타입을 명시적으로 설정하도록 강제한다.
-      - 단, 클래스와 객체의 함수에는 this 지정을 강제하진 않는다.
-  - `strictFunctionTypes`
-    - 호환성으로 인해, 타입스크립트 함수의 매개변수와 this 타입은 기본적으로 공변이다. 더 안전한 공변을 사용하려면 이 플래그를 true로 설정해야 한다.
-  - `noImplicitReturns`
-    - 이 플래그를 활성화하면 함수 코드의 모든 경로에서 값을 반환하는지 확인할 수 있다. 추론되도록 하여 명시적 반환문을 되도록 적게 쓰는 사람도 있고, 타입 안전성을 향상시키고 타입 검사기가 더 많은 버그를 잡을 수 있다는 이유에서 반환문을 추가하는 사람도 있다
-  - `keyofStringsOnly`
-    - 타입스크립트의 keyof는 기본적으로 number | string | symbol 타입의 값을 반환한다.
-    - 올바른 동작이지만, 이 때문에 타입스크립트에게 특정 키가 string이고 number나 symbol이 아니라는 사실을 증명해야 하는 귀찮은 상황에 놓일 수 있다.
-    - 따라서 타입스크립트가 string 키만 지원하던 예전처럼 동작하길 원한다면 이 플래그를 활성화한다.
-  - `esModuleInterop`
-    - 이 옵션을 켜면 **Commonjs**방식으로 내보낸 모듈을 es모듈 방식의 **import**로 가져올 수 있게 해준다.
-  - `typeRoots`
-    - 기본적으로 node_modules/@types 디렉터리에서 서드 파티 타입 선언을 찾으며, 대부분은 이 동작을 바꿀 필요가 없다.
-    - 하지만 이 기본 동작을 오버라이드할 필요가 있다면, `typeRoots`에 타입 선언을 검색할 디렉터리들을 배열로 설정하면 된다.
+  1. `include`
+     - TSC가 타입스크립트 파일을 찾을 디렉터리
+  2. `lib`
+     - TSC가 코드 실행 환경에서 이용할 수 있다고 가정하는 API(ex, ES5의 bind, Object.assign, DOM의 document.querySelector)
+     - 브라우저용 타입스크립트를 작성하기 위해 “dom”을 lib에 추가한다.
+  3. `module`
+     - TSC가 코드를 컴파일할 대상 모듈 시스템(CommonJS, SystemJS, ES2015 등)
+     - 타입스크립트는 esnext 모듈 모드에서만 동적 임포트를 지원한다.
+       - {”module”: “esnext”}
+  4. `outDir`
+     - 생성된 자바스크립트 코드를 출력할 디렉터리
+  5. `strict`
+     - 유효하지 않은 코드를 확인할 때 가능한 엄격하게 검사
+     - `noImplicitAny` , `strictBindCallApply`, `strictFunctionTypes` 등
+  6. `target`
+     - TSC가 코드를 컴파일할 자바스크립트 버전(ES3, ES5, ES2015, ES2016 등)
+  7. `noImplicitAny`
+     - 암묵적인 any가 나타났을 때 예외를 일으킬 수 있다.
+  8. `strictNullChecks`
+     - false로 설정하면, 이 때의 null은 never를 제외한 모든 타입의 하위 타입이다. 즉, 모든 타입은 null이 될 수 있으므로 모든 값이 null인지 아닌지를 먼저 확인해야 타입이 무엇인지 단정할 수 있는데, false로 설정하면 이 과정을 생략하게 된다.
+       - 그러나 예상치 않은 상황에서 값이 null이라면 런타임에 치명적인 널 포인터 예외가 발생한다. 컴파일 타임에 가능한 많은 버그를 검출하는 것이 목표라면 타입 시스템에서 null을 확인할 수 있어야 한다.
+  9. `preserveConstEnums`
+     - const enum의 런타임 코드 생성을 활성화하려면 preserveConstEnums 설정을 true로 바꾼다.
+  10. `strictBindCallApply`
+      - call, apply, bind를 안전하게 사용하려면 이 플래그를 활성화해야 한다.
+  11. `noImplicitThis`
+      - 이 플래그를 true로 하면, 함수에서 항상 this 타입을 명시적으로 설정하도록 강제한다.
+        - 단, 클래스와 객체의 함수에는 this 지정을 강제하진 않는다.
+  12. `strictFunctionTypes`
+      - 호환성으로 인해, 타입스크립트 함수의 매개변수와 this 타입은 기본적으로 공변이다. 더 안전한 공변을 사용하려면 이 플래그를 true로 설정해야 한다.
+  13. `noImplicitReturns`
+      - 이 플래그를 활성화하면 함수 코드의 모든 경로에서 값을 반환하는지 확인할 수 있다. 추론되도록 하여 명시적 반환문을 되도록 적게 쓰는 사람도 있고, 타입 안전성을 향상시키고 타입 검사기가 더 많은 버그를 잡을 수 있다는 이유에서 반환문을 추가하는 사람도 있다
+  14. `keyofStringsOnly`
+      - 타입스크립트의 keyof는 기본적으로 number | string | symbol 타입의 값을 반환한다.
+      - 올바른 동작이지만, 이 때문에 타입스크립트에게 특정 키가 string이고 number나 symbol이 아니라는 사실을 증명해야 하는 귀찮은 상황에 놓일 수 있다.
+      - 따라서 타입스크립트가 string 키만 지원하던 예전처럼 동작하길 원한다면 이 플래그를 활성화한다.
+  15. `esModuleInterop`
+      - 이 옵션을 켜면 **Commonjs**방식으로 내보낸 모듈을 es모듈 방식의 **import**로 가져올 수 있게 해준다.
+  16. `typeRoots`
+      - 기본적으로 node_modules/@types 디렉터리에서 서드 파티 타입 선언을 찾으며, 대부분은 이 동작을 바꿀 필요가 없다.
+      - 하지만 이 기본 동작을 오버라이드할 필요가 있다면, `typeRoots`에 타입 선언을 검색할 디렉터리들을 배열로 설정하면 된다.
 
         ```tsx
         // /node_modules/@types 뿐만 아니라 typings 디렉터리에서도 타입 선언을 찾도록 설정 예시
@@ -103,8 +103,8 @@ draft: false
         ]
         ```
 
-  - `types`
-    - 타입스크립트가 어떤 패키지에서 타입을 검색할지 더 세밀하게 설정할 수 있다.
+  17. `types`
+      - 타입스크립트가 어떤 패키지에서 타입을 검색할지 더 세밀하게 설정할 수 있다.
 
         ```tsx
         // 리액트를 제외한 모든 서드 파티 타입 선언을 무시하는 설정
@@ -334,24 +334,26 @@ draft: false
     // 두 개의 number를 인수로 받아 한 개의 number를 반환하는 함수를 표현했다.
     ```
 
-- 단축형 호출 시그니처
+1. 단축형 호출 시그니처
 
     ```tsx
     type Log = (message: string, userId?: string) => void
     ```
 
-- 전체 호출 시그니처
+2. 전체 호출 시그니처
 
     ```tsx
     type Log = {(message: string, userId?: string) : void}
     ```
 
-  - 기능적으로 단축형과 동일하나 조금 더 복잡한 문법이므로, 오버로드된 함수와 같이 꼭 필요할 때만 전체 호출 시그니처를 사용한다.
-- 오버로드된 함수
-  - 오버로드된 함수란, 호출 시그니처가 여러 개인 함수를 의미한다.
-  - 자바스크립트는 동적 언어이므로 어떤 함수를 호출하는 방법이 여러 가지다.  또한, 인수 입력 타입에 따라 반환 타입이 달라지기도 한다.
-    - 타입스크립트는 이러한 동적 특징을 오버로드된 함수 선언으로 제공하고, 입력 타입에 따라 달라지는 함수의 출력 타입은 정적 타입 시스템으로 각각 제공한다.
-  - 오버로드된 함수 시그니처를 이용하면 표현력 높은 API를 설계할 수 있다.
+   - 기능적으로 단축형과 동일하나 조금 더 복잡한 문법이므로, 오버로드된 함수와 같이 꼭 필요할 때만 전체 호출 시그니처를 사용한다.
+
+3. 오버로드된 함수
+
+   - 오버로드된 함수란, 호출 시그니처가 여러 개인 함수를 의미한다.
+   - 자바스크립트는 동적 언어이므로 어떤 함수를 호출하는 방법이 여러 가지다.  또한, 인수 입력 타입에 따라 반환 타입이 달라지기도 한다.
+       - 타입스크립트는 이러한 동적 특징을 오버로드된 함수 선언으로 제공하고, 입력 타입에 따라 달라지는 함수의 출력 타입은 정적 타입 시스템으로 각각 제공한다.
+   - 오버로드된 함수 시그니처를 이용하면 표현력 높은 API를 설계할 수 있다.
 
     ```tsx
     type Reserve = {
@@ -374,8 +376,8 @@ draft: false
     }
     ```
 
-  - 오버로드 시그니처는 구체적(타입을 좁게)으로 유지하면, 함수를 구현하는 데 도움을 준다.
-  - 오버로드는 브라우저 DOM API에서 유용하게 활용된다.
+   - 오버로드 시그니처는 구체적(타입을 좁게)으로 유지하면, 함수를 구현하는 데 도움을 준다.
+   - 오버로드는 브라우저 DOM API에서 유용하게 활용된다.
 
     ```tsx
     type CreateElement = {
@@ -387,8 +389,8 @@ draft: false
     let createElement: CreateElement = (tag: string): HTMLElement => {}
     ```
 
-  - 함수의 프로퍼티를 만드는 데도 사용할 수 있다.
-    - 아래의 warnUser는 호출할 수 있는 함수인 동시에 boolean 속성인 wasCalled도 가지고 있다.
+   - 함수의 프로퍼티를 만드는 데도 사용할 수 있다.
+     - 아래의 warnUser는 호출할 수 있는 함수인 동시에 boolean 속성인 wasCalled도 가지고 있다.
 
     ```tsx
     type WarnUser = {
@@ -466,9 +468,9 @@ draft: false
 
   - 위 예에서는 Filter `Type Alias를 사용할 때` 타입을 명시적으로 한정함으로써 T의 범위를 Filter의 `Type Alias`로 한정한다.
   - 제네릭을 사용할 때란, 케이스마다 다음과 같은 시점을 의미한다.
-    - 함수에서는 함수를 호출할 때
-    - 클래스라면 클래스를 인스턴스화 할 때
-    - TypeAlias와 인터페이스에서는 이들을 사용하거나 구현할 때
+    1. 함수에서는 함수를 호출할 때
+    2. 클래스라면 클래스를 인스턴스화 할 때
+    3. TypeAlias와 인터페이스에서는 이들을 사용하거나 구현할 때
 - 제네릭 선언 위치(재정리)
   - 함수를 호출할 때 T를 구체 타입으로 한정하는 경우
 
@@ -879,15 +881,15 @@ draft: false
     ```
 
   - mapped Type을 활용한 타입스크립트의 내장 타입
-    - Record<Keys, Values>
+    - `Record<Keys, Values>`
       - Keys 타입의 키와 Values 타입의 값을 갖는 객체
-    - Partial<Object>
+    - `Partial<Object>`
       - Object의 모든 필드를 선택형으로 표시
-    - Required<Object>
+    - `Required<Object>`
       - Object의 모든 필드를 필수형으로 표시
-    - Readonly<Object>
+    - `Readonly<Object>`
       - Object의 모든 필드를 읽기 전용으로 표시
-    - Pick<Object, Keys>
+    - `Pick<Object, Keys>`
       - 주어진 Keys에 대응하는 Object의 서브타입을 반환
 
 - 컴패니언 객체 패턴
@@ -908,7 +910,7 @@ draft: false
     
     let a = tuple(1,true) // [number, boolean]
     
-    // 원래 tuple [1,true] 는 (number | boolena)[] 으로 추론됐음
+    // 원래 tuple [1,true] 는 (number | boolean)[] 으로 추론됐음
     ```
 
 - 사용자 정의 타입 안전 장치
@@ -1191,15 +1193,15 @@ type A = IsString<string> // true
   - CommonJS나 AMD 코드 모듈을 이용할 때는 ES2015 모듈을 사용할 때처럼 단순히 이름으로 임포트할 수 있다.
   - 디폴트 익스포트가 필요하면 와일드카드 임포트를 사용해야 한다.
 
-        ```tsx
-        import * as fs from 'fs
-        ```
+    ```tsx
+    import * as fs from 'fs
+    ```
 
   - `esModuleInterop` 플래그를 true로 설정하면 와일드카드 없이 다음처럼 더 자연스럽게 연동할 수 있다.
 
-        ```tsx
-        import fs from 'fs'
-        ```
+    ```tsx
+    import fs from 'fs'
+    ```
 
 ### 모듈 모드 vs 스크립트 모드
 
