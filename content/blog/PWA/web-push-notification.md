@@ -14,7 +14,8 @@ draft: false
   - 알림을 구독한 후에는 웹 사이트가 닫혀 있는 백그라운드에서도 작동하여 알림을 수신할 수 있다.
   - 대부분의 기기, OS, 브라우저에서 웹 푸시 알림 기술을 허용한다.
   - web-push는 HTTPS에서만 사용 가능하다(개발용인 localhost도 가능)
-![웹 푸시 구독 예시](../image/web-push-subscribe.gif)
+  
+    ![웹 푸시 구독 예시](../image/web-push-subscribe.gif)
 
 ### 1-1. Web Push의 브라우저 호환성
 
