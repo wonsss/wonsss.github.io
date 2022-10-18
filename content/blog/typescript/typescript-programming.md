@@ -78,7 +78,7 @@ draft: false
     - const enum의 런타임 코드 생성을 활성화하려면 preserveConstEnums 설정을 true로 바꾼다.
   - `strictBindCallApply`
     - call, apply, bind를 안전하게 사용하려면 이 플래그를 활성화해야 한다.
-  - `noImplictThis`
+  - `noImplicitThis`
     - 이 플래그를 true로 하면, 함수에서 항상 this 타입을 명시적으로 설정하도록 강제한다.
       - 단, 클래스와 객체의 함수에는 this 지정을 강제하진 않는다.
   - `strictFunctionTypes`
@@ -165,7 +165,7 @@ draft: false
          [carName: string]: string
         } =  {
          'bmw': 'Marco',
-         'benz': 'Jonh',
+         'benz': 'John',
         ```
 
 - Type Alias(타입 별칭)
@@ -310,7 +310,7 @@ draft: false
     getNextYear(); // 런타임 에러 Uncaught TypeError: this.getFullYear is not a function
     ```
 
-  - 타입스크립트에 정보를 제공한 덕분에, 런타임 에러 대신 컴파일 타임에 경고한다. (noImplictThis 추천)
+  - 타입스크립트에 정보를 제공한 덕분에, 런타임 에러 대신 컴파일 타임에 경고한다. (noImplicitThis 추천)
 
     ```tsx
     // 컴파일 타임 때 미리 에러 잡음(good)
@@ -384,7 +384,7 @@ draft: false
      (tag: string): HTMLElement
     }
     
-    let createElement: CreateElement = (tag: string): HTMLElment => {}
+    let createElement: CreateElement = (tag: string): HTMLElement => {}
     ```
 
   - 함수의 프로퍼티를 만드는 데도 사용할 수 있다.
@@ -559,13 +559,13 @@ draft: false
     - 또한 함수에서 매개변수를 받지 않도록 선언했으므로, arguments 객체를 사용한 함수를 호출하면 타입스크립트 입장에서는 인자를 받을 수 없다면서 TypeError를 발생시킨다.
   - 따라서 arguments 객체 대신 `rest parameters` 를 사용하는 것이 좋다. 왜냐하면  `rest parameters` 를 사용하면 가변 인자를 받으면 타입 안전성을 갖춘 함수가 되기 때문이다.
 
-        ```tsx
-        function sum(...numbers: number[]): number {
-            return Array.from(numbers).reduce((total, n) => total + n, 0);
-        }
-        
-        console.log(sum(1,2,3))
-        ```
+    ```tsx
+    function sum(...numbers: number[]): number {
+        return Array.from(numbers).reduce((total, n) => total + n, 0);
+    }
+    
+    console.log(sum(1,2,3))
+    ```
 
 - [Quiz] reserve 함수에 명시적 시작 날짜 없이 목적지만 인수로 받는 세 번째 호출 시그니처를 추가한다.
 
@@ -751,7 +751,6 @@ draft: false
     2. 공변(covariance)
         - `<:T` 를 원함 (나보다 더 큰 집합(슈퍼 타입)인 T를 원한다)
             - 타입스크립트에서 모든 복합타입의 멤버(객체, 클래스, 배열, 함수, 반환 타입)는 공변이다.
-            - gkatndp
     3. 반변(contravariance)
         - `>:T` 를 원함 (나보다 더 작은 집합(서브 타입)인 T를 원한다)
             - 함수 매개변수 타입만 예외적으로 반변이다.
@@ -851,19 +850,19 @@ draft: false
 - mapped type
   - mapped type은 타입스크립트의 고유한 언어 기능이며, 고유 문법이 있다.
 
-        ```tsx
-        type MyMappedType = {
-         [key in UnionType]: ValueType
-        };
-        ```
+    ```tsx
+    type MyMappedType = {
+        [key in UnionType]: ValueType
+    };
+    ```
 
   - Record 타입을 구현하는데 , mapped type이 사용됐다.
 
-        ```tsx
-        type Record<K extends keyof any, T> = {
-         [P in K]: T
-        }
-        ```
+    ```tsx
+    type Record<K extends keyof any, T> = {
+        [P in K]: T
+    }
+    ```
 
     ```tsx
     type Weekday = "MON" | "TUE" | "WED" | "THU" | "FRI";
@@ -886,7 +885,7 @@ draft: false
       - Object의 모든 필드를 선택형으로 표시
     - Required<Object>
       - Object의 모든 필드를 필수형으로 표시
-    - Readonly<Obect>
+    - Readonly<Object>
       - Object의 모든 필드를 읽기 전용으로 표시
     - Pick<Object, Keys>
       - 주어진 Keys에 대응하는 Object의 서브타입을 반환
@@ -938,7 +937,7 @@ type A = IsString<string> // true
 - 분배적 조건부
   - 조건부 타입을 사용하면 타입스크립트는 `유니온 타입` 을 `조건부의 절` 들로 분배한다. 조건부 타입을 가져가다가 유니온의 각 요소로 분배한다.
     - 이를 이용해 다양한 공통 연산을 안전하게 표현할 수 있다.
-  - 아래와 같이 조건부 타입(extedns)에 `분배 법칙`이 작동함을 기억하고 적용!
+  - 아래와 같이 조건부 타입(extends)에 `분배 법칙`이 작동함을 기억하고 적용!
 
     ```tsx
     (string | number) extends T ? A : B
@@ -1061,7 +1060,7 @@ type A = IsString<string> // true
 - 어떤 라이브러리(ex, axios)는 타입 선언 파일(d.ts)과 함께 제공된다.  따로 타입을 설치할 필요가 없어 간편하다.
   - 라이브러리의 package.json에 types나 typings 필드를 통해 타입스크립트에게 타입 선언 파일의 경로를 알려준다.
 - 어떤 라이브러리(ex, Lodash)는 타입 선언 파일을 자체적으로 가지고 있지 않다.
-  - lodash만 설치하고 ts파일에서 lodash를 import하면 `Could not find a declartion file for module 'lodash'` 라는 에러가 발생한다.
+  - lodash만 설치하고 ts파일에서 lodash를 import하면 `Could not find a declaration file for module 'lodash'` 라는 에러가 발생한다.
     - lodash 라이브러리의 package.json에는 타입 선언 파일의 경로를 알려주는 types나 typings 필드가 없다.
   - 따라서 타입 선언을 다른 곳에서 찾아서 npm을 통해 추가 설치해야 한다.
 
@@ -1113,7 +1112,7 @@ type A = IsString<string> // true
 
         ```tsx
         // 최상위 수준의 type.ts(스크립트 모드) 파일에 정의
-        // 타입 선언 파일에 선언된 최상위 수준 값 에는 declare 키워드를 사용(delcare let, declare function, declare class)해야 하지만, 
+        // 타입 선언 파일에 선언된 최상위 수준 값 에는 declare 키워드를 사용(declare let, declare function, declare class)해야 하지만, 
         // 최상위 수준 타입 alias와 인터페이스 에는 사용하지 않아도 된다. 
         type ToArray<T> = T extends unknown[] ? T : T[]
         ```
@@ -1160,13 +1159,13 @@ type A = IsString<string> // true
 - 타입 선언은 `스크립트 모드의 .ts` 나 `d.ts` 파일 안에 위치해야 한다.
   - 관례상, 대응하는 `.js` 파일이 있으면, `.d.ts` 확장자를 사용한다.
   - 그렇지 않으면 `.ts` 를 사용한다.
-- 타입 선언 파일에 선언된 최상위 수준 `값` 에는 declare 키워드를 사용(delcare let, declare function, declare class)해야 하지만, 최상위 수준 `타입 alias`와 `인터페이스` 에는 사용하지 않아도 된다.
+- 타입 선언 파일에 선언된 최상위 수준 `값` 에는 declare 키워드를 사용(declare let, declare function, declare class)해야 하지만, 최상위 수준 `타입 alias`와 `인터페이스` 에는 사용하지 않아도 된다.
 
 ## 모듈
 
 - 자바스크립트 모듈의 역사
   - 처음 1995년에 모듈 시스템이 전혀 지원되지 않았다. 모듈이 없어서 모든 것을 전역 네임스페이스에 정의했고, 이 때문에 변수명이 금세 고갈되고 충돌되어 프로그램을 확장하기 어려웠다.
-  - 이 문제를 해결하기 위해, 객체를 이용하거나 즉시 실행 함수를 전역 widnow에 할당하여 응용 프로그램의 다른 모듈에서 사용하는 식으로 모듈을 흉내냈다. 그러나 이처럼 자바스크립트를 로딩하고 실행하는 동안 브라우저의 UI는 블록되어 점점 느려졌다.
+  - 이 문제를 해결하기 위해, 객체를 이용하거나 즉시 실행 함수를 전역 window에 할당하여 응용 프로그램의 다른 모듈에서 사용하는 식으로 모듈을 흉내냈다. 그러나 이처럼 자바스크립트를 로딩하고 실행하는 동안 브라우저의 UI는 블록되어 점점 느려졌다.
   - 이 문제를 해결하기 위해, 첫 출시 후 거의 10년이 지나서, 자바스크립트 모듈을 게으르고(lazy) 비동기적으로 로딩하는 방식이 고안됐다. 다음과 같은 세 가지 의미를 지닌다.
     - 모듈은 잘 캡슐화되어야 한다. 그렇지 않으면 의존성을 확보하는 과정에서 페이지가 망가진다.
     - 모듈 간의 의존성은 명시적이어야 한다. 그렇지 않으면 한 모듈에 어떤 모듈이 필요하며 어떤 순서로 로딩해야 하는지 알 수 없기 때문이다.
@@ -1236,9 +1235,9 @@ type A = IsString<string> // true
     - 이렇게 모듈이 아니면, 식별자명 정의 시 헷갈리고 알맞은 순서로 파일을 추가해야 하는 것도 힘들다.
   - 모듈로 처리하려면 아무것도 내보내지 않는 모듈로 변경하는 다음 행을 추가해야 한다.
 
-        ```tsx
-        export {};
-        ```
+    ```tsx
+    export {};
+    ```
 
 - export와 import를 사용한 후 tsc 컴파일을 하게 되면
 
@@ -1305,7 +1304,7 @@ type A = IsString<string> // true
 ### 서드 파티 자바스크립트 사용
 
 - Definitely Typed에서 타입 선언을 제공하지 않는 자바스크립트
-  - 타입을 사용하지 않는 임포트 윗줄에 // @ts-gnore 지시어를 추가하여 해당 임포트를 화이트리스트 처리한다. 해당 모듈과 그 안의 모든 콘텐츠 타입은 any가 된다.
+  - 타입을 사용하지 않는 임포트 윗줄에 // @ts-ignore 지시어를 추가하여 해당 임포트를 화이트리스트 처리한다. 해당 모듈과 그 안의 모든 콘텐츠 타입은 any가 된다.
   - 빈 타입 선언 파일을 하나 만들어서 화이트리스트를 처리할 모듈을 적어놓는다. 새로운 타입 선언을 만들고 여기에 앰비언트 타입 선언을 추가한다.
     - 하지만 타입 선언을 채우지 않으면, 여전히 익스포트의 타입은 any이므로 안전성 면에서는 차이가 없다.
     - 또는 안전성을 위해 타입 선언을 채우면, 타입스크립트는 정확한 타입을 알 수 있다.
@@ -1417,7 +1416,7 @@ if (result instanceof InvalidDateFormatError) {
   - 소스 코드를 최상위 src/ 디렉터리에 저장하고, 컴파일 결과 역시 최상위 dist/ 디렉터리에 저장하는 것이 권장된다.
 - TSC 컴파일 시, 다음과 같은 부산물이 생성된다.
   - .js
-    - `{”emitDecalrationOnly”: false}`
+    - `{"emitDeclarationOnly": false}`
     - 변환된 자바스크립트는 NodeJS나 크롬 같은 자바스크립트 플랫폼에서 실행할 수 있다.
   - .js.map
     - `{”sourceMap”: true}`
