@@ -15,11 +15,17 @@ image sprite는 여러 이미지를 하나로 합친 이미지를 의미한다.
 
 이 방법은 네이버 웹사이트에서 네트워크 요청을 살펴보다가 수 십개의 작은 메뉴 버튼 등이 하나의 이미지로 합쳐져 있고 sprite라는 이름을 가지고 있는 것을 보고 힌트를 얻게 됐다.
 
+![naver의 image sprite](../image/naver-sprite-image.png)
+
 구현은 여러 개의 개별 이미지를 사용하는 대신 하나로 합쳐진 단일 이미지를 사용하고, 해당 이미지를 css를 통해 표시할 부분을 지정하면 된다.
 
 그러나 여러 이미지를 직접 하나의 이미지로 합치고, css로 이미지 각각의 background-position, width, height를 지정하는 것은 매우 번거로운 일이다.
 
-이러한 작업은 <https://css.spritegen.com/> 와 같은 CSS Image Sprites 자동 생성 사이트를 통해 쉽게 처리할 수 있다.
+이러한 작업은 아래와 같은 CSS Image Sprites 자동 생성 사이트를 통해 쉽게 처리할 수 있다.
+
+<https://css.spritegen.com/>
+
+<http://www.spritecow.com/>
 
 합치고자 하는 이미지들을 업로드하면 자동으로 image sprite와 css를 만들어준다. 참고로 업로드하는 이미지의 파일명은 한글이 아니라 영문 및 숫자여야 css에도 이미지명이 기재되었다.
 
