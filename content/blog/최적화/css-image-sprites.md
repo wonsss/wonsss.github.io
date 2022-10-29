@@ -56,3 +56,5 @@ image sprite는 여러 이미지를 하나로 합친 이미지를 의미한다.
 [[참고] CSS로 이미지 스프라이트 구현하기](https://developer.mozilla.org/ko/docs/Web/CSS/CSS_Images/Implementing_image_sprites_in_CSS)
 
 [[참고] mdn - zoom](https://developer.mozilla.org/en-US/docs/Web/CSS/zoom)
+
+[[참고] stackoverflow - How can I scale an image in a CSS sprite](https://stackoverflow.com/a/16080995)
