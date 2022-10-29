@@ -70,11 +70,10 @@ draft: false
     ```json
     // 구독정보
     {
-        "endpoint": "https://fcm.googleapis.com/fcm/send/eM_5INpg~~",
-        "expirationTime": null,
+        "endpoint": "https://fcm.googleapis.com/fcm/send/eM_5INpg...",
         "keys": {
-        "p256dh": "BG8J42gZ5ILUZ8XM1p-dHxJhJI4yg2Wlut~~",
-        "auth": "9qoctardEyiiwN~~"
+            "p256dh": "BG8J42gZ5ILUZ8XM1p-dHxJhJI4yg2Wlut...",
+            "auth": "9qoctardEyiiwN..."
         }
     }
     ```
