@@ -269,7 +269,7 @@ data URI의 경우 성능상 좋진않지만, 네트워크 요청의 수가 줄�
 
 Asset Modules에 대한 내용은 이전에 작성한 아래의 포스팅을 참고한다.
 
-[참고 - webpack5의 Asset Modules](https://wonsss.github.io/webpack/webpack5-asset-modules/)
+[[참고] webpack5의 Asset Modules](https://wonsss.github.io/webpack/webpack5-asset-modules/)
 
 #### 3-1-2) svg 불러오기
 
@@ -471,7 +471,7 @@ dotenv.config({ path: path.join(__dirname, '../.env') });
 [dotenv](https://www.npmjs.com/package/dotenv) 라이브러리는 환경 변수를 파일에 저장할 수 있도록 해준다.
 이 라이브러리는 경로로 지정한 `.env` 파일로부터 환경 변수를 읽어 `process.env`에 설정한다.
 
-[참고 - dotenv로 환경 변수 관리하기](https://www.daleseo.com/js-dotenv/)
+[[참고] dotenv로 환경 변수 관리하기](https://www.daleseo.com/js-dotenv/)
 
 #### 4-2-2) DefinePlugin
 
@@ -479,7 +479,7 @@ dotenv.config({ path: path.join(__dirname, '../.env') });
 
 `EnvironmentPlugin`을 사용하면 환경 변수를 전역에 주입할 수 있다. 반면, `DefinePlugin`은 환경 변수 뿐만 아니라 일반 전역 변수 주입도 가능하므로 범용성을 고려하여 `DefinePlugin`을 사용하였다.
 
-[참고 - 웹팩(Webpack) DefinePlugin, EnvironmentPlugin 사용법](https://www.daleseo.com/webpack-plugins-define-environment/)
+[[참고] 웹팩(Webpack) DefinePlugin, EnvironmentPlugin 사용법](https://www.daleseo.com/webpack-plugins-define-environment/)
 
 ### 4-3. devtool
 
@@ -498,7 +498,7 @@ devtool: 'eval-cheap-module-source-map',
 
 - 소스맵 적용한 경우
 ![소스맵 적용된 코드](../image/sourceMap.png)
-[참고 - webpack Devtool](https://webpack.kr/configuration/devtool/)
+[[참고] webpack - Devtool](https://webpack.kr/configuration/devtool/)
 
 ### 4-4. babel-loader
 
@@ -878,11 +878,9 @@ core-js@3에서 변화한 점은 core-js의 github 문서를 통해 확인할 �
 
 [[참고] corejs - What changed in core-js@3?](https://github.com/zloirock/core-js/blob/master/docs/2019-03-19-core-js-3-babel-and-a-look-into-the-future.md#what-changed-in-core-js3)
 
-[[참고] 자바스크립트 코드가 가져야할 책임감 (2)]](<https://yceffort.kr/2021/11/responsibility-of-javascript-code-2>)
-
 폴리필을 적용한 결과물이 타겟 브라우저에서 작동하는지 여부는 크로스 브라우징 테스트 서비스를 이용하여 확인할 수 있다.
 [BrowserStack](https://www.browserstack.com/) 등의 일부 무료 서비스를 통해 확인한 결과, 이전에 작동되지 않던 iOS 12의 safari에서도 팀 프로젝트 smody 사이트가 동작함을 확인하였다.(사실 타겟 브라우저는 iOS 13.4 이상이었으나, iOS 13과 iOS12가 지원하는 문법 기능에는 큰 차이가 없었나 보다)
 
 ![크로스 브라우징 테스트 결과](../image/browserstack.png)
   
-웹팩 설정 끝.
+웹팩 설정 끝😊.
