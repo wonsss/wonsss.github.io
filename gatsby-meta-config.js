@@ -9,7 +9,7 @@ module.exports = {
         github: `wonsss`, // Your GitHub account
         medium: ``, // Your Medium account
         facebook: ``, // Your Facebook account
-        linkedin: ``, // Your LinkedIn account
+        linkedin: `wonseok-jang-61a455255`, // Your LinkedIn account
         instagram: ``, // Your Instagram account
     },
     icon: `content/assets/logo.png`, // Add your favicon
@@ -27,6 +27,6 @@ module.exports = {
     share: {
         facebookAppId: '', // Add facebookAppId for using facebook share feature v3.2
     },
-    ga: '0', // Add your google analytics tranking ID
+    ga: 'G-S31WXL68LE', // Add your google analytics tranking ID
     ad: '', // Add your google adsense publisherId `ca-pub-xxxxxxxxxx`
 }
