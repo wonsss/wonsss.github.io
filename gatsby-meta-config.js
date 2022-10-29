@@ -11,6 +11,7 @@ module.exports = {
         facebook: ``, // Your Facebook account
         linkedin: `wonseok-jang-61a455255`, // Your LinkedIn account
         instagram: ``, // Your Instagram account
+        velog: `jangws`,
     },
     icon: `content/assets/logo.png`, // Add your favicon
     keywords: [`blog`, `javascript`, `frontend`, `typescript`, `react`],
