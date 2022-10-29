@@ -9,7 +9,7 @@ module.exports = {
         github: `wonsss`, // Your GitHub account
         medium: ``, // Your Medium account
         facebook: ``, // Your Facebook account
-        linkedin: `wonseok-jang-61a455255`, // Your LinkedIn account
+        linkedin: ``, // Your LinkedIn account
         instagram: ``, // Your Instagram account
         velog: `jangws`,
     },
