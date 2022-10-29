@@ -1,5 +1,5 @@
 ---
-title: 배포 및 HTTPS 설정(EC2, Nginx, certbot)
+title: 배포 및 HTTPS 설정(EC2, Nginx, certbot, dns 방식)
 date: 2022-09-12 17:09:89
 category: deploy
 thumbnail: { thumbnailSrc }
