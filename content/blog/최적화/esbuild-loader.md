@@ -1,7 +1,7 @@
 ---
 title: EsBuild-loader를 통해 웹팩 프로덕션 빌드 타임 절감
 date: 2022-09-06 03:09:49
-category: 최적화
+category: webpack
 thumbnail: { thumbnailSrc }
 draft: false
 ---

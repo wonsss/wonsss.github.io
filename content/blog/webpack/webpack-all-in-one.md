@@ -1,5 +1,5 @@
 ---
-title: Smody 팀 프로젝트에서 Webpack 설정 전체 정리(빌드 속도 개선, 결과물 최적화, 트랜스파일링, 폴리필 등을 중심으로)
+title: 프로젝트의 Webpack, Babel 설정 A to Z 정리(빌드 속도 개선, 폴리필 등)
 date: 2022-10-29 12:10:38
 category: webpack
 thumbnail: { thumbnailSrc }
