@@ -141,11 +141,11 @@ CloudFront는 엣지 로케이션 덕분에 전 세계 네트워크를 통해 �
     - 새 OAI 생성 후, 버킷 정책 업데이트 체크
     - Redirect HTTP to HTTPS 체크
 
-            ![](../image/aws-6.png)
+![](../image/aws-6.png)
 
-            ![](../image/aws-7.png)
+![](../image/aws-7.png)
 
-  - 배포 완료
+- 배포 완료
 
 - CloudFront에서 `일반` 탭에서 `설정` 섹션의 편집 버튼 누르고
 
@@ -157,7 +157,7 @@ CloudFront는 엣지 로케이션 덕분에 전 세계 네트워크를 통해 �
 
 - index외 다른 route path 응답 페이지 경로를 index.html로 설정한다.
   - 예를 들어 /search 페이지 새로고침 시 403 에러가 발생하는데, 에러 응답 페이지를 index로 설정하여 200 응답이 되도록 하는 것이다.
-        ![](../image/aws-9.png)
+![](../image/aws-9.png)
 
 ## [참고내용] Web Server와 WAS의 차이
 

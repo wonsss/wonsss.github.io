@@ -1,12 +1,12 @@
 ---
-title: 오프라인 환경에서 웹 페이지 사용(캐시 스토리지, IndexedDB)
+title: 오프라인 환경에서 웹 페이지 사용(Cache Storage, IndexedDB)
 date: 2022-08-28 03:08:37
 category: pwa
 thumbnail: { thumbnailSrc }
 draft: false
 ---
 
-## 1. 캐시 스토리지 API
+## 1. Cache Storage API
 
 - `캐시 스토리지`는 브라우저에 리소스를 직접 저장하고 관리할 수 있는 공간이며, 서비스 워커가 제공하는 기능이다. 도메인은 여러 개의 이름이 지정된 `Cache` 객체를 가질 수 있으며 그 객체들은 `ServiceWorker` 가 완전히 제어한다.
 - 네트워크 리소스나 파일 기반의 콘텐츠가 필수적일 때 사용하면 좋다(폰트, 이미지 등 정적 자원). 웹 페이지를 구성하기 위한 가장 기본적이며 정적인 구성 요소인 App Shell을 캐싱한다.

@@ -1,5 +1,5 @@
 ---
-title: 성능 최적화를 위해 이미지 크기 줄이기
+title: 웹 성능 최적화를 위해 이미지 크기 줄이기
 date: 2022-09-03 02:09:53
 category: 최적화
 thumbnail: { thumbnailSrc }
@@ -52,7 +52,7 @@ ffmpeg -i find.gif -vf "crop=trunc(iw/2)*2:trunc(ih/2)*2" -b:v 0 -crf 25 -f mp4 
 
 - before & after
 
-              ![before-gif](../image/p6.jpg)
+![before-gif](../image/p6.jpg)
 
 - 비디오 넣기(자동재생, 무음, 무한반복)
 

@@ -1,5 +1,5 @@
 ---
-title: 웹 서버에서 html, js 등을 압축함으로써 성능 최적화(nginx, gzip)
+title: gzip으로 리소스 압축(웹서버 또는 Webpack 방법)
 date: 2022-09-13 19:09:89
 category: 최적화
 thumbnail: { thumbnailSrc }
@@ -101,10 +101,10 @@ http {
 - before & after
 
   - gzip 압축 전
-        ![gzip 전](../image/gzip-before.png)
+![gzip 전](../image/gzip-before.png)
 
   - gzip 압축 후
-        ![gzip 후](../image/gzip-after.png)
+![gzip 후](../image/gzip-after.png)
 
 ## Webpack에서 미리 압축하기
 

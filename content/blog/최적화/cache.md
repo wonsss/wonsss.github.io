@@ -6,7 +6,7 @@ thumbnail: { thumbnailSrc }
 draft: false
 ---
 
-## CloudFront 캐시 설정 (설정값, 해당 값을 설정한 이유 포함)
+## CloudFront 캐시 설정
 
 > [https://docs.aws.amazon.com/ko_kr/AmazonCloudFront/latest/DeveloperGuide/Expiration.html](https://docs.aws.amazon.com/ko_kr/AmazonCloudFront/latest/DeveloperGuide/Expiration.html)
 
@@ -47,11 +47,9 @@ draft: false
 - 캐시 정책
 
   - S3에서 특정 파일 각각 메타테이터로 캐시 설정
-    - ex) bundle.js, index.html 일주일(`604800`)
-    ![S3 설정](../image/p11.jpg)
+  ![S3 설정](../image/p11.jpg)
   - CloudFront 에서 나머지 파일(이미지 등 정적 파일) 캐시 설정
-    - ex) 1년(31536000)
-    ![CloudFront 설정](../image/p12.jpg)
+  ![CloudFront 설정](../image/p12.jpg)
 
 ## API 호출 응답값을 클라이언트에서 캐싱
 
