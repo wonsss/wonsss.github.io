@@ -2,11 +2,56 @@
 title: 프로젝트의 Webpack, Babel 설정 A to Z 정리(빌드 속도 개선, 폴리필 등)
 date: 2022-10-29 12:10:38
 category: webpack
-thumbnail: { thumbnailSrc }
+thumbnail: { ../image/webpack-1.png }
 draft: false
 ---
 
 [Smody 프로젝트](https://www.smody.co.kr)의 빌드 환경을 직접 구축한 과정을 정리하였다. 모듈 번들러로 웹팩을 사용하였고, 고민한 여러 로더들에 대한 비교와 편리한 플러그인 옵션 등에 대해 설명한다.
+
+# 목차
+
+[1. 모듈 번들러, 그리고 웹팩이란?](#1-모듈-번들러-그리고-웹팩이란) <br/>
+[2. dev, prod 모드에 따른 웹팩 설정 분리](#2-dev-prod-모드에-따른-웹팩-설정-분리) <br/>
+[3. webpack.common.js](#3-webpackcommonjs) <br/>
+[3-1. entry, output](#3-1-entry-output) <br/>
+[3-1-1) entry](#3-1-1-entry) <br/>
+[3-1-2) output.publicPath](#3-1-2-outputpublicpath) <br/>
+[3-1-3) output.path](#3-1-3-outputpath) <br/>
+[3-1-4) output.filename](#3-1-4-outputfilename)<br/>
+[3-1-5) output.clean](#3-1-5-outputclean)<br/>
+[3-2. resolve](#3-2-resolve)<br/>
+[3-3. rules - assets 처리](#3-3-rules---assets-처리)<br/>
+[3-3-1) 이미지 불러오기](#3-3-1-이미지-불러오기)<br/>
+[3-3-2) svg 불러오기](#3-3-2-svg-불러오기)<br/>
+[3-4. plugins](#3-4-plugins)<br/>
+[3-4-1) HTMLWebpackPlugin](#3-4-1-htmlwebpackplugin)<br/>
+[3-4-2) CopyWebpackPlugin](#3-4-2-copywebpackplugin)<br/>
+[3-4-3) ProgressPlugin](#3-4-3-progressplugin)<br/>
+[3-5. devServer](#3-5-devserver)<br/>
+[3-5-1) historyApiFallBack](#3-5-1-historyapifallback)<br/>
+[4. webpack.dev.js](#4-webpackdevjs)<br/>
+[4-1. mode](#4-1-mode)<br/>
+[4-2. 환경변수 주입](#4-2-환경변수-주입)<br/>
+[4-2-1) dotenv 라이브러리](#4-2-1-dotenv-라이브러리)<br/>
+[4-2-2) DefinePlugin](#4-2-2-defineplugin)<br/>
+[4-3. devtool](#4-2-2-defineplugin)<br/>
+[4-4. babel-loader](#4-4-babel-loader)<br/>
+[4-4-1) esbuild-loader나 ts-loader 대신에 babel-loader를 선택한 이유](#4-4-1-esbuild-loader나-ts-loader-대신에-babel-loader를-선택한-이유)<br/>
+[4-4-2) babel 설정 포맷](#4-4-2-babel-설정-포맷)<br/>
+[4-4-3) presets](#4-4-3-presets)<br/>
+[4-4-4) 빌드 속도 개선](#4-4-4-빌드-속도-개선)<br/>
+[5. webpack.prod.js](#5-webpackprodjs)<br/>
+[5-1. 타입체킹](#5-1-타입체킹)<br/>
+[5-2. babel-plugin-styled-components](#5-2-babel-plugin-styled-components)<br/>
+[5-2-1) displayName](#5-2-1-displayname)<br/>
+[5-2-2) minify](#5-2-2-minify)<br/>
+[5-2-3) transpileTemplateLiterals](#5-2-3-transpiletemplateliterals)<br/>
+[5-2-4) pure](#5-2-4-pure)<br/>
+[5-3. 폴리필](#5-3-폴리필)<br/>
+[5-3-1) 폴리필이란](#5-3-1-폴리필이란)<br/>
+[5-3-2) @babel/preset-env로 폴리필 적용](#5-3-2-babelpreset-env로-폴리필-적용)<br/>
+[5-3-3) browserslist](#5-3-3-browserslist)<br/>
+[5-3-4) @babel/preset-env의 폴리필 적용 옵션](#5-3-4-code-classlanguage-textbabelpreset-envcode의-폴리필-적용-옵션)<br/>
 
 ## 1. 모듈 번들러, 그리고 웹팩이란?
 
@@ -224,7 +269,7 @@ hash 옵션에는 hash, chunkHash, contentHash가 존재한다.
 
 [[참고] webpack - resolve](https://webpack.kr/configuration/resolve/)
 
-### 3-1. modules의 rules - assets 처리
+### 3-3. rules - assets 처리
 
 ```jsx
  module: {
@@ -244,7 +289,7 @@ hash 옵션에는 hash, chunkHash, contentHash가 존재한다.
   },
 ```
 
-#### 3-1-1) 이미지 불러오기
+#### 3-3-1) 이미지 불러오기
 
 ```jsx
 {
@@ -271,7 +316,7 @@ Asset Modules에 대한 내용은 이전에 작성한 아래의 포스팅을 참
 
 [[참고] webpack5의 Asset Modules](https://wonsss.github.io/webpack/webpack5-asset-modules/)
 
-#### 3-1-2) svg 불러오기
+#### 3-3-2) svg 불러오기
 
 ```jsx
 {
@@ -295,7 +340,7 @@ const index = () => {
 }
 ```
 
-### 3-2. plugins
+### 3-4. plugins
 
 플러그인은 웹팩의 기본적인 동작에 추가적인 기능을 제공한다. 로더는 파일을 해석하고 변환하는 과정에 관여하는 데 반해, 플러그인은 해당 결과물의 형태를 바꾸는 역할을 한다.
 
@@ -315,7 +360,7 @@ const index = () => {
   ],
 ```
 
-#### 3-2-1) HTMLWebpackPlugin
+#### 3-4-1) HTMLWebpackPlugin
 
 ```jsx
 new HtmlWebpackPlugin({
@@ -327,7 +372,7 @@ new HtmlWebpackPlugin({
 
 [[참고] - HTML 자동 주입 플러그인](https://yamoo9.gitbook.io/webpack/webpack/webpack-plugins/automatic-injection-to-html-document)
 
-#### 3-2-2) CopyWebpackPlugin
+#### 3-4-2) CopyWebpackPlugin
 
 ```jsx
   new CopyWebpackPlugin({
@@ -343,11 +388,11 @@ new HtmlWebpackPlugin({
 
 본 프로젝트에서는 PWA 관련 manifest, serviceWorker 등의 파일을 빌드 디렉터리에 주입하기 위해 사용하였다.
 
-#### 3-2-3) ProgressPlugin
+#### 3-4-3) ProgressPlugin
 
 [ProgressPlugin](https://webpack.kr/plugins/progress-plugin)은 단지 편의 기능으로서 웹팩 컴파일 진행 상황을 보기 위해 사용하였다.
 
-### 3-3. devServer
+### 3-5. devServer
 
 ```jsx
 devServer: {
@@ -362,7 +407,7 @@ devServer: {
 
 `package.json`에서 npm 스크립트 `start` 명령으로 'webpack serve'를 추가하고, 웹팩 설정에 위와 같은 `devServer` 옵션을 추가한다.
 
-#### 3-3-1) historyApiFallBack
+#### 3-5-1) historyApiFallBack
 
 devServer 옵션 중 historyApiFallBack 옵션은 react 사용 시 중요하다.
 
