@@ -1,5 +1,5 @@
 ---
-title: Web Push를 통하여 백그라운드에서도 사용자에게 알림 보내기(Push API, Notifications API, ServiceWorker, FCM)
+title: Web Push를 통한 구독 및 백그라운드 알림 발송 기능 구현(Push API, Notifications API, ServiceWorker, FCM)
 date: 2022-08-30 00:08:38
 category: pwa
 thumbnail: { thumbnailSrc }
