@@ -10,44 +10,51 @@ draft: false
 
 # 목차
 
-[1. 모듈 번들러, 그리고 웹팩이란?](#1-모듈-번들러-그리고-웹팩이란) <br/>
-[2. dev, prod 모드에 따른 웹팩 설정 분리](#2-dev-prod-모드에-따른-웹팩-설정-분리) <br/>
-[3. webpack.common.js](#3-webpackcommonjs) <br/>
-[3-1. entry, output](#3-1-entry-output) <br/>
+#### [1. 모듈 번들러, 그리고 웹팩이란?](#1-모듈-번들러-그리고-웹팩이란) <br/>
+
+#### [2. dev, prod 모드에 따른 웹팩 설정 분리](#2-dev-prod-모드에-따른-웹팩-설정-분리) <br/>
+
+#### [3. webpack.common.js](#3-webpackcommonjs) <br/>
+
+**[3-1. entry, output](#3-1-entry-output)** <br/>
 [3-1-1) entry](#3-1-1-entry) <br/>
 [3-1-2) output.publicPath](#3-1-2-outputpublicpath) <br/>
 [3-1-3) output.path](#3-1-3-outputpath) <br/>
 [3-1-4) output.filename](#3-1-4-outputfilename)<br/>
 [3-1-5) output.clean](#3-1-5-outputclean)<br/>
-[3-2. resolve](#3-2-resolve)<br/>
-[3-3. rules - assets 처리](#3-3-rules---assets-처리)<br/>
+**[3-2. resolve](#3-2-resolve)**<br/>
+**[3-3. rules - assets 처리](#3-3-rules---assets-처리)**<br/>
 [3-3-1) 이미지 불러오기](#3-3-1-이미지-불러오기)<br/>
 [3-3-2) svg 불러오기](#3-3-2-svg-불러오기)<br/>
-[3-4. plugins](#3-4-plugins)<br/>
+**[3-4. plugins](#3-4-plugins)**<br/>
 [3-4-1) HTMLWebpackPlugin](#3-4-1-htmlwebpackplugin)<br/>
 [3-4-2) CopyWebpackPlugin](#3-4-2-copywebpackplugin)<br/>
 [3-4-3) ProgressPlugin](#3-4-3-progressplugin)<br/>
-[3-5. devServer](#3-5-devserver)<br/>
+**[3-5. devServer](#3-5-devserver)**<br/>
 [3-5-1) historyApiFallBack](#3-5-1-historyapifallback)<br/>
-[4. webpack.dev.js](#4-webpackdevjs)<br/>
-[4-1. mode](#4-1-mode)<br/>
-[4-2. 환경변수 주입](#4-2-환경변수-주입)<br/>
+
+#### [4. webpack.dev.js](#4-webpackdevjs)<br/>
+
+**[4-1. mode](#4-1-mode)**<br/>
+**[4-2. 환경변수 주입](#4-2-환경변수-주입)**<br/>
 [4-2-1) dotenv 라이브러리](#4-2-1-dotenv-라이브러리)<br/>
 [4-2-2) DefinePlugin](#4-2-2-defineplugin)<br/>
-[4-3. devtool](#4-2-2-defineplugin)<br/>
-[4-4. babel-loader](#4-4-babel-loader)<br/>
+**[4-3. devtool](#4-2-2-defineplugin)**<br/>
+**[4-4. babel-loader](#4-4-babel-loader)**<br/>
 [4-4-1) esbuild-loader나 ts-loader 대신에 babel-loader를 선택한 이유](#4-4-1-esbuild-loader나-ts-loader-대신에-babel-loader를-선택한-이유)<br/>
 [4-4-2) babel 설정 포맷](#4-4-2-babel-설정-포맷)<br/>
 [4-4-3) presets](#4-4-3-presets)<br/>
 [4-4-4) 빌드 속도 개선](#4-4-4-빌드-속도-개선)<br/>
-[5. webpack.prod.js](#5-webpackprodjs)<br/>
-[5-1. 타입체킹](#5-1-타입체킹)<br/>
-[5-2. babel-plugin-styled-components](#5-2-babel-plugin-styled-components)<br/>
+
+#### [5. webpack.prod.js](#5-webpackprodjs)<br/>
+
+**[5-1. 타입체킹](#5-1-타입체킹)**<br/>
+**[5-2. babel-plugin-styled-components](#5-2-babel-plugin-styled-components)**<br/>
 [5-2-1) displayName](#5-2-1-displayname)<br/>
 [5-2-2) minify](#5-2-2-minify)<br/>
 [5-2-3) transpileTemplateLiterals](#5-2-3-transpiletemplateliterals)<br/>
 [5-2-4) pure](#5-2-4-pure)<br/>
-[5-3. 폴리필](#5-3-폴리필)<br/>
+**[5-3. 폴리필](#5-3-폴리필)**<br/>
 [5-3-1) 폴리필이란](#5-3-1-폴리필이란)<br/>
 [5-3-2) @babel/preset-env로 폴리필 적용](#5-3-2-babelpreset-env로-폴리필-적용)<br/>
 [5-3-3) browserslist](#5-3-3-browserslist)<br/>
