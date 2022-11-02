@@ -2,7 +2,7 @@
 title: 프로젝트의 Webpack, Babel 설정 A to Z 정리(빌드 속도 개선, 폴리필 등)
 date: 2022-10-29 12:10:38
 category: webpack
-thumbnail: { ../image/webpack-1.png }
+thumbnail: '../image/webpack-1.png'
 draft: false
 ---
 
