@@ -1,7 +1,7 @@
 ---
-title: web-performance-all-in-one
+title: 웹 성능 최적화 A to Z 정리[Smody 프로젝트]
 date: 2022-11-02 17:11:42
-category: Smody 서비스의 웹 성능 최적화 A to Z 정리
+category: 최적화
 thumbnail: { thumbnailSrc }
 draft: false
 ---
@@ -21,9 +21,13 @@ Lighthouse를 통해 성능을 측정하면 LCP와 CLS를 측정할 수 있다. 
 
 ## 1-2. 성능 측정 결과
 
-Lighthouse를 통하여 스모디 서비스의 성능을 측정하였다. Lighthouse에서 성능 점수가 70점으로서, 불안정한 네트워크 환경이나 오래된 기기의 경우 성능에 문제가 있지 않을까 싶다. 이미지가 많은 Feed 페이지 등은 성능이 더 좋지 않았다.
+Lighthouse를 통하여 스모디 서비스의 성능을 측정하였다. Lighthouse에서 성능 점수가 70점으로서, 불안정한 네트워크 환경이나 오래된 기기의 경우 성능에 문제가 있지 않을까 싶다. 앞으로 설명할 다양한 웹 성능 최적화 방법을 적용한 결과, 데스크탑 기준으로 99점(이미지가 많은 페이지도 90점 상회)까지 올라갔다.
 
+- 성능 개선 전
 ![성능 개선 전](../image/perf-before.png)
+
+- 성능 개선 후
+![성능 개선 후](../image/perf-after.png)
 
 # 2. 요청 크기 줄이기
 
