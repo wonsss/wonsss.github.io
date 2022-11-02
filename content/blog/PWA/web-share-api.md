@@ -22,12 +22,12 @@ draft: false
 
 ### 1-2. `navigator.share()`
 
-- [https://developer.mozilla.org/en-US/docs/Web/API/Navigator/share](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/share)
+[https://developer.mozilla.org/en-US/docs/Web/API/Navigator/share](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/share)
+
 - navigator.share(data)와 같이 사용한다.
-  - 매개변수 data 객체의 속성으로는 `url`, `text`, `title`, `files` 가 가능하다.
-    - `files` 는 공유할 파일을 나타내는 객체의 배열이다.
-      - [https://developer.mozilla.org/en-US/docs/Web/API/File](https://developer.mozilla.org/en-US/docs/Web/API/File)
-      - 일반적으로 pdf, 오디오(mp3, flac…), 이미지(jpeg, png, gif…), 텍스트(html, txt, csv…), 동영상(mp4, mpeg…) 등의 파일을 공유할 수 있다.
+- 매개변수 data 객체의 속성으로는 `url`, `text`, `title`, `files` 가 가능하다.
+  - `files` 는 공유할 파일을 나타내는 객체의 배열이다. 일반적으로 pdf, 오디오(mp3, flac…), 이미지(jpeg, png, gif…), 텍스트(html, txt, csv…), 동영상(mp4, mpeg…) 등의 파일을 공유할 수 있다.
+  - [https://developer.mozilla.org/en-US/docs/Web/API/File](https://developer.mozilla.org/en-US/docs/Web/API/File)
 
 ## 2. URL 공유
 
