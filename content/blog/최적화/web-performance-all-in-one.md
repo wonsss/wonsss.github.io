@@ -12,9 +12,9 @@ draft: false
 
 [Web Vitals](https://web.dev/vitals/)에서 권장하는 아래와 같은 성능 측정 지표를 따르려 한다.
 
-- LCP(**[Largest Contentful Paint, 최대 콘텐츠풀 페인트)](https://web.dev/lcp/)**: `로딩` 성능을 측정합니다. 우수한 사용자 경험을 제공하려면 페이지가 처음으로 로딩된 후 `2.5초` 이내에 LCP가 발생해야 한다.
-- FID(**[First Input Delay, 최초 입력 지연)](https://web.dev/fid/)**: `상호 작용`을 측정합니다. 우수한 사용자 경험을 제공하려면 페이지의 FID가 `100밀리초` 이하여야 한다.
-- CLS(**[Cumulative Layout Shift, 누적 레이아웃 시프트)](https://web.dev/cls/)**: `시각적 안정성`을 측정합니다. 우수한 사용자 경험을 제공하려면 페이지에서 `0.1` 이하의 CLS를 유지해야 한다.
+- LCP([Largest Contentful Paint, 최대 콘텐츠풀 페인트)](https://web.dev/lcp/): `로딩` 성능을 측정한다. 우수한 사용자 경험을 제공하려면 페이지가 처음으로 로딩된 후 `2.5초` 이내에 LCP가 발생해야 한다.
+- FID([First Input Delay, 최초 입력 지연)](https://web.dev/fid/): `상호 작용`을 측정한다. 우수한 사용자 경험을 제공하려면 페이지의 FID가 `100밀리초` 이하여야 한다.
+- CLS([Cumulative Layout Shift, 누적 레이아웃 시프트)](https://web.dev/cls/): `시각적 안정성`을 측정한다. 우수한 사용자 경험을 제공하려면 페이지에서 `0.1` 이하의 CLS를 유지해야 한다.
   - 단, 버튼을 누른 이벤트에 의해 레이아웃이 변경되는 예시처럼 사용자가 화면의 변화를 예측할 수 있는 상황이라면 성능 측정의 대상으로 포함되지 않는다.
 
 Lighthouse를 통해 성능을 측정하면 LCP와 CLS를 측정할 수 있다. FID의 경우 Lighthouse로 측정이 불가능하지만, 대신 대체할 수 있는 TBT(Total Blocking Time)가 Lighthouse에서 제공된다. 따라서 해당 지표들은 Lighthouse를 통해 측정하기로 결정했다. TBT의 경우 Lighthouse에서 빠름의 기준이 되는 200ms 이하로 유지하는 것을 목표로 했다.
@@ -41,7 +41,7 @@ js나 html에 대하여 기본적인 최적화는 webpack에서 production 모�
 gzip으로 압축하는 방법은 Webpack에서 미리 압축하는 방법과 Nginx와 같은 웹서버에서 압축하는 방법이 있었다. Webpack 빌드 타임도 개선하기 위해 웹서버에서 압축하는 방법을 택하였다.
 2가지 방법 모두 이전에 작성한 글에 기록했으니 참고 바란다.
 
-[gzip으로 리소스 압축(웹서버 또는 Webpack 방법) | Marco](gzip-compression.md)
+[📒gzip으로 리소스 압축(웹서버 또는 Webpack 방법) | Marco](https://wonsss.github.io/%EC%B5%9C%EC%A0%81%ED%99%94/gzip-compression/)
 
 ## 2-2. 이미지 압축, 변환, 적절한 사이즈 설정
 
@@ -50,7 +50,7 @@ gzip으로 압축하는 방법은 Webpack에서 미리 압축하는 방법과 Ng
 
 해당 방법 또한 이전에 작성한 글을 참고한다.
 
-[웹 성능 최적화를 위해 이미지 크기 줄이기 | Marco](image-optimization.md)
+[📒웹 성능 최적화를 위해 이미지 크기 줄이기 | Marco](https://wonsss.github.io/%EC%B5%9C%EC%A0%81%ED%99%94/image-optimization/)
 
 # 3. 필요한 것만 요청하기
 
@@ -60,7 +60,7 @@ gzip으로 압축하는 방법은 Webpack에서 미리 압축하는 방법과 Ng
 
 해당 방법 또한 이전에 작성한 글을 참고한다.
 
-[페이지별 리소스 분리(Code Splitting, Tree Shaking)](code-splitting-tree-shaking.md)
+[📒페이지별 리소스 분리(Code Splitting, Tree Shaking)](code-splitting-tree-shaking.md)
 
 # 4. 같은 것은 매번 새로 요청하지 않기
 
@@ -71,7 +71,7 @@ Http 캐시를 적용하려면, 웹서버에서 보내주는 정적 리소스 �
 
 이전에 작성한 글은 다음과 같다.
 
-[프론트엔드 nginx 웹 서버에서 http2 및 캐시 적용 방법 | Marco](http2-cache.md)
+[📒프론트엔드 nginx 웹 서버에서 http2 및 캐시 적용 방법 | Marco](https://wonsss.github.io/%EC%B5%9C%EC%A0%81%ED%99%94/http2-cache/)
 
 ## 4-2. 서비스워커와 Cache Storage API를 통한 캐싱
 
@@ -92,9 +92,9 @@ Cache Storage API 캐시를 채울 때, 브라우저는 먼저 HTTP 캐시에서
 
 서비스워커와 Cache Storage API의 자세한 내용과 프로젝트에 적용했던 자세한 기록은 이전에 작성한 다음 글들을 참고한다.
 
-[PWA의 핵심, 서비스 워커란? | Marco](../PWA/service-worker.md)
+[📒PWA의 핵심, 서비스 워커란? | Marco](https://wonsss.github.io/PWA/service-worker/)
 
-[오프라인 환경에서 웹 페이지 사용(Cache Storage, IndexedDB) | Marco](../PWA/offline-support.md)
+[📒오프라인 환경에서 웹 페이지 사용(Cache Storage, IndexedDB) | Marco](https://wonsss.github.io/PWA/offline-support/)
 
 # 5. 최소한의 변경만 일으키기
 
@@ -102,7 +102,7 @@ Cache Storage API 캐시를 채울 때, 브라우저는 먼저 HTTP 캐시에서
 
 이전에 작성한 글은 다음과 같다.
 
-[렌더링 최적화 | Marco](rendering-optimization.md)
+[📒렌더링 최적화 | Marco](https://wonsss.github.io/%EC%B5%9C%EC%A0%81%ED%99%94/rendering-optimization/)
 
 # 6. Http/2
 
@@ -110,4 +110,4 @@ Cache Storage API 캐시를 채울 때, 브라우저는 먼저 HTTP 캐시에서
 
 이전에 작성한 글은 다음과 같다.
 
-[프론트엔드 nginx 웹 서버에서 http2 및 캐시 적용 방법 | Marco](http2-cache.md)
+[📒프론트엔드 nginx 웹 서버에서 http2 및 캐시 적용 방법 | Marco](https://wonsss.github.io/%EC%B5%9C%EC%A0%81%ED%99%94/http2-cache/)
