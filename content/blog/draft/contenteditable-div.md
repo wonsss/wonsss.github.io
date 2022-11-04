@@ -1,5 +1,5 @@
 ---
-title: @ 멘션 알림 기능 구현(contenteditable 속성, MutationObserver API)
+title: '@' 멘션 알림 기능 구현(contenteditable 속성, MutationObserver API)
 date: 2022-10-30 05:10:66
 category: draft
 thumbnail: { thumbnailSrc }
