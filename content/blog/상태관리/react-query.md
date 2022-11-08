@@ -1,5 +1,5 @@
 ---
-title: React Query 톺아보기)
+title: React Query 톺아보기
 date: 2022-09-12 17:09:05
 category: 상태관리
 thumbnail: { thumbnailSrc }
