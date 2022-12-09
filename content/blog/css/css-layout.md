@@ -253,8 +253,8 @@ footer {
 
 ## Reference
 
-[CSS position - MDN]([https://developer.mozilla.org/ko/docs/Web/CSS/position](https://developer.mozilla.org/ko/docs/Web/CSS/position))
+[CSS position - MDN](https://developer.mozilla.org/ko/docs/Web/CSS/position)
 
-[CSS Flexbox 완전 정리 - 드림코딩]([https://youtu.be/7neASrWEFEM](https://youtu.be/7neASrWEFEM))
+[CSS Flexbox 완전 정리 - 드림코딩](https://youtu.be/7neASrWEFEM)
 
-[CSS Grid 완전 정리 - 드림 코딩]([https://youtu.be/nxi1EXmPHRs](https://youtu.be/nxi1EXmPHRs))
+[CSS Grid 완전 정리 - 드림 코딩](https://youtu.be/nxi1EXmPHRs)

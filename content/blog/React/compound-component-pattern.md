@@ -127,6 +127,6 @@ export function FlyOut(props) {
 
 ## Reference
 
-- [5 Advanced React Patterns - Alexis Regnaud]([https://javascript.plainenglish.io/5-advanced-react-patterns-a6b7624267a6](https://javascript.plainenglish.io/5-advanced-react-patterns-a6b7624267a6))
-- [React Component Patterns - dev.to]([https://dev.to/alexi_be3/react-component-patterns-49ho#compound-components](https://dev.to/alexi_be3/react-component-patterns-49ho#compound-components))
-- [Compound 패턴 - patterns.dev]([https://patterns-dev-kr.github.io/design-patterns/compound-pattern/](https://patterns-dev-kr.github.io/design-patterns/compound-pattern/))
+- [5 Advanced React Patterns - Alexis Regnaud](https://javascript.plainenglish.io/5-advanced-react-patterns-a6b7624267a6)
+- [React Component Patterns - dev.to](https://dev.to/alexi_be3/react-component-patterns-49ho#compound-components)
+- [Compound 패턴 - patterns.dev](https://patterns-dev-kr.github.io/design-patterns/compound-pattern/)
