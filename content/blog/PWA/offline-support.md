@@ -186,24 +186,24 @@ request.onupgradeneeded = event => {
   - 객체 저장소는 데이터베이스연결객체의 `createObjectStore` 메소드를 통해 새로 생성한다.
   - 두 번째 인자 자리에는 `기본키` 옵션으로서, `keyPath` 와 `authIncrement` 라는 2가지가 존재한다.
 
-    - 내부키
+- 내부키
 
-      - `keyPath` 옵션을 통해 사용되는 기본키는 내부키(in-line-key)라고 불린다.
-      - 실제 저장되는 데이터 내부의 특정 값을 기본으로 사용한다.
+  - `keyPath` 옵션을 통해 사용되는 기본키는 내부키(in-line-key)라고 불린다.
+  - 실제 저장되는 데이터 내부의 특정 값을 기본으로 사용한다.
 
-        ```jsx
-        db.createObjectStore(객체저장소 이름, {keyPath : 'id'});
-        // 데이터 내부의 프로퍼티 중 key가 'id'인 값을 기본키로 사용한다.
-        ```
+    ```jsx
+    db.createObjectStore(객체저장소 이름, {keyPath : 'id'});
+    // 데이터 내부의 프로퍼티 중 key가 'id'인 값을 기본키로 사용한다.
+    ```
 
-    - 외부키
+- 외부키
 
-      - `autoIncrement` 옵션을 통해 데이터와 상관없이 자동 증가되는 기본키 값은 외부키(out-of-line key)라고 불린다.
-      - 데이터와 관계없는 별도의 키를 새로 생성한다.
+  - `autoIncrement` 옵션을 통해 데이터와 상관없이 자동 증가되는 기본키 값은 외부키(out-of-line key)라고 불린다.
+  - 데이터와 관계없는 별도의 키를 새로 생성한다.
 
-        ```jsx
-        db.createObjectStore(객체저장소 이름, {autoIncrement: true});
-        ```
+    ```jsx
+    db.createObjectStore(객체저장소 이름, {autoIncrement: true});
+    ```
 
 ### 2-4. 색인 추가하기
 
@@ -237,14 +237,10 @@ request.onupgradeneeded = event => {
 ### 2-5. 트랜잭션
 
 - 트랜잭션 모드
-  - `versionChange`
-    - 버전 변경(객체 저장소 생성, 삭제, 색인 추가 등), onungraedneeded 이벤트 발생 전 자동 생성되는 트랜잭션이므로, 직접 생성할 수는 없다.
-  - `readonly`
-    - 읽기 전용(데이터 조회)
-  - `readwrite`
-    - 읽기 및 쓰기(데이터 조회, 추가, 삭제 수정)
+  - `versionChange` : 버전 변경(객체 저장소 생성, 삭제, 색인 추가 등), onungraedneeded 이벤트 발생 전 자동 생성되는 트랜잭션이므로, 직접 생성할 수는 없다.
+  - `readonly` : 읽기 전용(데이터 조회)
+  - `readwrite` : 읽기 및 쓰기(데이터 조회, 추가, 삭제 수정)
 - **`IDBDatabase.transaction()`**
-
   - [https://developer.mozilla.org/en-US/docs/Web/API/IDBDatabase/transaction](https://developer.mozilla.org/en-US/docs/Web/API/IDBDatabase/transaction)
   - transaction() 메서드는 첫 번째 인자 자리에 사용하고자 하는 객체 저장소의 범위를 받고, 두 번째 인자로 모드를 받아서, 새 트랜잭션을 생성한다.
 
@@ -274,16 +270,20 @@ request.onupgradeneeded = event => {
   - [https://developer.mozilla.org/en-US/docs/Web/API/IDBObjectStore/openCursor](https://developer.mozilla.org/en-US/docs/Web/API/IDBObjectStore/openCursor)
   - 커서는 순회하며 결과 데이터를 가리킬 수 있는 요소이다. 커서를 통해 여러 데이터에 쉽게 접근할 수 있다. 조회뿐만 아니라 수정, 삭제 등의 작업도 바로 처리할 수 있다.
   - 커서는 openCursor() 메서드로 열 수 있다. 커서가 성공적으로 열리면, 커서 객체에 접근할 수 있고 cursor.value 속성을 통해 커서가 가리키는 데이터를 참조할 수 있다.
-    - 첫 번째 인자는 조회할 데이터의 조건을 받는다.
-      - lowerBound(값) : 지정된 값 이상의 값을 검색
-      - upperBound(값) : 지정된 값 이하의 값을 검색
-      - bound(값1, 값2) : 값1과 값2 사이의 범위에 해당하는 값만 검색
-      - only(값): 값과 정확히 일치하는 값만 검색
-    - 두 번재 인자는 커서의 이동방향을 받는다.
-      - next: 앞에서 뒤로 이동
-      - prev: 뒤에서 앞으로 이동
-      - nextunique: 앞에서 뒤로 이동하되 동일한 값은 한 번만
-      - prevunique: 뒤에서 앞으로 이동하되 동일한 값은 한 번만ㅎ
+
+  ```plain
+  - 첫 번째 인자는 조회할 데이터의 조건을 받는다.
+    - lowerBound(값) : 지정된 값 이상의 값을 검색
+    - upperBound(값) : 지정된 값 이하의 값을 검색
+    - bound(값1, 값2) : 값1과 값2 사이의 범위에 해당하는 값만 검색
+    - only(값): 값과 정확히 일치하는 값만 검색
+  - 두 번재 인자는 커서의 이동방향을 받는다.
+    - next: 앞에서 뒤로 이동
+    - prev: 뒤에서 앞으로 이동
+    - nextunique: 앞에서 뒤로 이동하되 동일한 값은 한 번만
+    - prevunique: 뒤에서 앞으로 이동하되 동일한 값은 한 번만
+  ```
+
   - 다음 데이터를 참조하려면 커서의 continue() 메서드를 사용한다. 이동에 성공하면 요청 객체의 성공 이벤트가 다시 발생한다. 커서가 마지막에 도달하면 커서의 값이 null이 된다.
   - 데이터 수정 시, 커서의 update() 메서드를 사용한다. (커서를 통한 데이터 수정은 객체 저장소가 내부키를 사용하는 경우에만 가능하다)
   - 데이터 삭제 시, 커서의 delete() 메서드를 사용한다.
