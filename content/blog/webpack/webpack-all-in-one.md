@@ -310,7 +310,7 @@ hash 옵션에는 hash, chunkHash, contentHash가 존재한다.
 
 이미지를 불러오는 방법은 크게 두 가지 종류가 있다.
 
-- 파일을 output 디렉터리에 파일을 emit하고 URL로 불러오는 방식(`asset/resource` 타입)
+- output 디렉터리에 파일을 emit하고 URL로 불러오는 방식(`asset/resource` 타입)
 - data URI을 inline으로 사용하는 방식(`asset/inline` 타입)
 
 data URI의 경우 성능상 좋진않지만, 네트워크 요청의 수가 줄어든다는 장점이 있다. 대개 URL로 불러오는 방식을 사용하나, 크기가 작은 이미지의 경우 data URI을 사용하는 것도 좋은 선택일 수 있다.
@@ -349,7 +349,7 @@ const index = () => {
 
 ### 3-4. plugins
 
-플러그인은 웹팩의 기본적인 동작에 추가적인 기능을 제공한다. 로더는 파일을 해석하고 변환하는 과정에 관여하는 데 반해, 플러그인은 해당 결과물의 형태를 바꾸는 역할을 한다.
+플러그인은 웹팩의 기본적인 동작에 추가적인 기능을 제공한다.
 
 ```jsx
   plugins: [
@@ -420,9 +420,9 @@ devServer 옵션 중 historyApiFallBack 옵션은 react 사용 시 중요하다.
 
 React Router DOM은 내부적으로 HTML5의 HistoryAPI를 사용하고 있어 새로고침하거나 미지정 경로로 이동하면 404 응답이 나오게 된다.
 
-이러한 문제를 해결하기 위해 historyApiFallBack 옵션을 true로 설정하면, 새로고침하거나 미지정 경로로 이동한 경우 404 응답 대신 index.html을 제공한다.
+이러한 문제를 해결하기 위해 historyApiFallBack 옵션을 true로 설정하면, 새로고침하거나 미지정 경로로 이동한 경우 404 응답 대신 index.html이 제공된다.
 
-옵션 적용 결과를 예를 들자면, <http://localhost:3000/> 대한 GET 및 <http://localhost:3000/profile>에 대한 GET은 모두 <http://localhost:3000/>로 fallback하여 index.html을 서빙하고 react-router는 /profile 라우팅을 처리하게 된다.
+예를 들어, historyApiFallBack 옵션을 true로 설정 시 <http://localhost:3000/>과 <http://localhost:3000/profile>에 대한 GET은 모두 <http://localhost:3000/>로 fallback하여 index.html을 서빙하고, react-router가 `/profile` 경로에 대한 라우팅을 처리한다.
 
 historyApiFallBack 옵션이 활성화된 devSever가 실행되면 콘솔에 다음과 같이 표시된다.
 
@@ -529,7 +529,7 @@ dotenv.config({ path: path.join(__dirname, '../.env') });
 
 웹팩의 `DefinePlugin`은 모든 자바스크립트 코드에서 접근이 가능한 전역 변수를 선언하기 위해서 사용되는 플러그인이다.
 
-`EnvironmentPlugin`을 사용하면 환경 변수를 전역에 주입할 수 있다. 반면, `DefinePlugin`은 환경 변수 뿐만 아니라 일반 전역 변수 주입도 가능하므로 범용성을 고려하여 `DefinePlugin`을 사용하였다.
+참고로 `EnvironmentPlugin`을 사용해도 환경 변수를 전역에 주입할 수 있다. `DefinePlugin`은 환경 변수뿐만 아니라 일반 전역 변수 주입도 가능하다.
 
 [[참고] 웹팩(Webpack) DefinePlugin, EnvironmentPlugin 사용법](https://www.daleseo.com/webpack-plugins-define-environment/)
 
@@ -559,10 +559,10 @@ devtool: 'eval-cheap-module-source-map',
 로더는 모듈을 입력받아 원하는 형태로 변환하여 새로운 모듈을 출력한다.
 `babel-loader`, `ts-loader`, `esbuild-loader`와 같은 로더를 통해  ES6, 리액트, 타입스크립트에 대한 트랜스파일링을 기본적으로 할 수 있다.
 
-비슷한 기능을 하는 `babel-loader`, `ts-loader`, `esbuild-loader`들을 사용하면서 비교한 결과, 다음과 같은 결론에 도달하여 `babel-loader`를 사용하기로 결정하였다.
+비슷한 기능을 하는 `babel-loader`, `ts-loader`, `esbuild-loader`들을 사용하면서 비교한 결과, 다음과 같은 이유에 의해  `babel-loader`를 사용하기로 결정하였다.
 
 - [babel-loader](https://github.com/babel/babel-loader)
-  - 가능: 트랜스파일링(babel7 버전 이후에는 typescript도 가능), 폴리필, 캐시
+  - 가능: 트랜스파일링(babel7 버전 이후에는 ts에 대한 트랜스파일링도 가능), 폴리필, 캐시
   - 불가: 타입체킹(그러나 tsc --noEmit이나 ForkTsCheckerWebpackPlugin을 통해 가능)
   - 특징: 폴리필이 가능하고, 캐시 활용 및 최적화 적용 시 속도도 빠름
 - [ts-loader](https://github.com/TypeStrong/ts-loader)
@@ -572,11 +572,11 @@ devtool: 'eval-cheap-module-source-map',
 - [esbuild-loader](https://github.com/privatenumber/esbuild-loader)
   - 가능: 트랜스파일링
   - 불가: 폴리필, 타입체킹(그러나 tsc --noEmit이나 ForkTsCheckerWebpackPlugin을 통해 가능)
-  - 특징: 기본적으로 빠른 빌드 속도, 자체적인 minification 지원하므로 플러그인 줄일 수 있음, 그러나 esbuild에서 지원하는 문법에 한계가 있어 목표 브라우저에서도 작동하는지 검증이 필요함
+  - 특징: 기본적으로 빠른 빌드 속도, 자체적인 minification 기능을 지원하므로 관련 플러그인 사용을 줄일 수 있음, 그러나 esbuild에서 지원하는 문법에 한계가 있어 타겟 브라우저에서도 잘 작동하는지 조금 더 검증이 필요함
 
 처음에는 babel-loader를 사용하다가 빌드 속도를 개선하기 위해 esbuild-loader를 사용하였다. 당시에 빌드시간이 30초에서 8초로 감소하는 큰 효과가 있었다.
 
-그러나 폴리필 적용 및 번들링 품질 등의 이슈를 해결하기 위해 babel-loader를 다시 사용하기로 결정했다. 빌드 속도는 최적화 옵션 및 캐시 시스템을 적용함으로써, babel-loader로도 rebuild 시 2초 미만의 빌드 속도가 나오는 더 나은 효과를 얻었다. 또한, babel-loader에서는 styled-component에 대한 `babel-plugin-styled-components` 플러그인이 있어서 styled-component 관련 압축이 가능해지고 디버깅이 용이해졌다.
+그러나 폴리필 적용 및 번들링 품질 등의 이슈를 해결하기 위해 babel-loader를 다시 사용하기로 결정했다. 빌드 속도는 최적화 옵션 및 캐시 시스템을 적용함으로써, babel-loader로도 rebuild 시 2초 미만의 빌드 속도가 나오는 더 나은 효과를 얻었다. 또한, babel-loader에서는 styled-component에 대한 `babel-plugin-styled-components` 플러그인이 있어서 styled-component 코드에 대한 압축이 가능해지고 관련 디버깅이 용이해졌다.
 
 이제 개발 환경에서 babel-loader 적용 옵션을 살펴보자.
 
@@ -614,9 +614,9 @@ module: {
 
 #### 4-4-2) babel 설정 포맷
 
-project-wide 설정을 하는 방법 2가지는 `babel.config.json`을 루트 디렉터리에 위치하는 방법과 웹팩의 바벨로더 설정 중 options에 바벨 설정 파일을 명시적으로 하는 방법이다.
+project-wide 설정을 하는 방법으로는 `babel.config.json`을 루트 디렉터리에 위치하는 방법과 웹팩의 바벨로더 설정 중 options에 바벨 설정 파일을 명시적으로 하는 방법 등이 있다.
 
-development와 production 모드별로 바벨 설정을 다르게 주기 위해, 두 번째 방법인 웹팩의 바벨로더 설정 중 options에 바벨 설정 파일을 명시적으로 하는 방법을 선택하였다.
+development와 production 모드별로 바벨 설정을 다르게 주기 위해, 후자인 웹팩의 바벨로더 설정 중 options에 바벨 설정 파일을 명시적으로 하는 방법을 선택하였다.
 
 [[참고] Babel Project-wide configuration](https://babeljs.io/docs/en/config-files#project-wide-configuration)
 
@@ -630,9 +630,11 @@ presets: [
 ],
 ```
 
-`@babel/preset-env`는 ES6를 트랜스파일링하기 위해 사용한다. 화살표 함수는 ES6 문법인데, 대부분의 브라우저가 ES6를 지원하나 그렇지 않은 브라우저도 있으므로 ES5로 트랜스파일링 해줄 필요가 있다.
+- '@babel/preset-env'
 
-그런데 웹팩에 target 설정도 다음과 같이 해주어야, 화살표 함수 등을 preset-env가 트랜스파일링을 해줄 수 있다.
+`@babel/preset-env`는 ES6를 트랜스파일링하기 위해 사용한다. 예를 들어 자주 사용하는 화살표 함수 구문은 ES6 문법이다. 대부분의 브라우저가 ES6를 지원하지만 간혹 그렇지 않은 브라우저도 있으므로 ES5로 트랜스파일링 해줄 필요가 있으므로 해당 preset을 사용한다.
+
+그리고 다음과 같이 target 설정도 함으로써 트랜스파일링된다.
 
 ```jsx
 target: ['web', 'es5'],
@@ -640,10 +642,14 @@ target: ['web', 'es5'],
 
 [[참고] StackOverFlow - JavaScript - babel-preset-env not transpiling arrow functions for IE11](https://stackoverflow.com/questions/52821427/javascript-babel-preset-env-not-transpiling-arrow-functions-for-ie11)
 
-`@babel/preset-react`는 React를 트랜스파일링하기 위해 사용한다.
-그러나 해당 플러그인에 옵션을 설정하지 않으면 `Uncaught ReferenceError: React is not defined` 에러가 발생한다. 왜냐하면 이 플러그인 프리셋에 기본으로 속해있는 플러그인 중 [@babel/plugin-transform-react-jsx](https://babeljs.io/docs/en/babel-plugin-transform-react-jsx)이 jsx파일을 React.createElement 형태로 바꿔주어 `import React from 'react'` 코드가 필요하기 때문이다. 이를 자동으로 해결하기 위해, 옵션에 `{ runtime: 'automatic' }`을 추가한다.
+- ['@babel/preset-react', { runtime: 'automatic' }]
+
+`@babel/preset-react`는 리액트 JSX 등을 트랜스파일링하기 위해 사용한다.
+해당 플러그인에 `{ runtime: 'automatic' }` 옵션을 설정하지 않으면 `Uncaught ReferenceError: React is not defined` 에러가 발생할 수 있음을 참고한다. 왜냐하면 이 플러그인 프리셋에 기본으로 속해있는 플러그인 중 [@babel/plugin-transform-react-jsx](https://babeljs.io/docs/en/babel-plugin-transform-react-jsx)이 JSX를 React.createElement 형태로 바꿔주고 있어서, React에 대한 import가 필요한데 `import React from 'react'`와 같은 코드를 누락했기 때문이다. React import를 자동으로 해주기 위해, 옵션에`{ runtime: 'automatic' }`을 추가한다.
 
 [[참고] StackOverFlow - Uncaught ReferenceError: React is not defined](https://stackoverflow.com/questions/32070303/uncaught-referenceerror-react-is-not-defined/)
+
+- `@babel/preset-typescript`
 
 `@babel/preset-typescript`는 TypeScript를 트랜스파일링하기 위해 사용한다.
 
@@ -671,25 +677,30 @@ target: ['web', 'es5'],
     },
 ```
 
+- 웹팩의 캐시
+
 웹팩에서 `cache`의 타입을 `filesystem`으로 설정하면 캐시를 사용할 수 있게 된다.
-웹팩 캐시의 기본 디렉터리는 `node_modules/.cache/webpack`이다.
+
+참고로 웹팩 캐시의 기본 디렉터리는 `node_modules/.cache/webpack`이다.
 
 [[참고] webpack - Cache](https://webpack.kr/configuration/cache/)
 
-그리고 바벨로더에서 `options: {cacheCompression: false , cacheDirectory: true},`을 적용함으로써 활성화할 수 있다.
+- 바벨로더의 캐시
 
-`cacheCompression`의 기본값은 true인데 이를 통해 바벨은 결과물을 Gzip으로 압축하여 변환한다. false로 설정하면 수천 개의 파일을 트랜스파일할 때 이점이 있다.
+바벨로더에서는 `options: {cacheCompression: false , cacheDirectory: true},`을 적용함으로써 캐시를 활성화할 수 있다.
+
+`cacheCompression`의 기본값은 true인데 이를 통해 바벨은 결과물을 Gzip으로 압축하여 변환한다. 캐시 압축을 하고 싶지 않다면 false로 설정하면 되고, 수천 개의 파일을 트랜스파일할 때 이점이 있다고 한다.
 
 `cacheDirectory`의 기본값은 false인데, true로 설정하면 로더의 결과물을 캐시하게 된다.
 바벨로더의 캐시 디렉터리는 `node_modules/.cache/babel-loader`이다.
 
 [[참고] babel - options](https://github.com/babel/babel-loader#options)
 
-이와 같이 캐시를 적용한 후 rebuild를 하면, 매번 비싼 바벨 재컴파일 과정을 할 필요 없이 먼저 캐시로부터 읽으려고 시도하게 된다. 코드에 큰 변화가 없는 rebuild의 경우 빌드시간이 1초 정도로 매우 빨라진다.
+이와 같이 캐시를 적용한 후 rebuild를 하면, 매번 비싼 바벨 재컴파일 과정을 할 필요 없이 먼저 캐시로부터 읽으려고 시도하게 된다. 코드에 큰 변화가 없는 rebuild의 경우 빌드시간이 1초밖에 되지 않을 정도로 매우 빠르다.
 
 ## 5. webpack.prod.js
 
-이제 production 모드의 웹팩 설정을 살펴보자.
+마지막으로 production 모드의 웹팩 설정을 살펴보자.
 
 ```jsx
 // webpack.prod.js
@@ -758,7 +769,7 @@ module.exports = smp.wrap(
 );
 ```
 
-앞서 살펴본 development 모드와 달리, devtool을 껐고, 폴리필을 추가하였으며, 압축 최적화를 하였고, 타입체크를 추가하였다.
+자세히 살펴보기 전에 production 설정을 요약하자면, 앞서 살펴본 development 모드와 달리, devtool을 껐고, 폴리필을 추가하였으며, 압축 최적화를 하였고, 타입체크를 추가하였다.
 
 ### 5-1. 타입체킹
 
@@ -766,11 +777,11 @@ babel-loader에는 ts-loader와 달리 자체적인 타입체킹 기능이 없�
 
 tsconfig.json에서 noEmitOnError 옵션도 활성화함으로써, 타입체킹에 실패하면 빌드가 되지 않도록 하였다.
 
-development에서는 vscode의 tsserver를 통해 코드 수정 시점의 타입체킹을 볼 수 있으며, 빠른 빌드를 통한 개발 속도 향상을 위해 웹팩 실행 시 타입체킹을 추가하지 않았다.
+앞에서 살펴본 development 설정에서는 타입체킹을 하지 않았는데, 그 이유는 빠른 빌드를 통한 개발 속도 향상 때문이기도 하며 코드 수정 시점의 타입체킹은 vscode의 tsserver를 통해 확인할 수 있기 때문이다.
 
-그러나 코드 품질을 위해 production에서 최종 빌드할 때는 전체적인 타입체킹을 할 필요가 있다고 판단하여, `ForkTsCheckerWebpackPlugin`을 웹팩 플러그인에 추가하였다.
+그러나 최종 빌드할 때인 production에서는 코드 품질을 위해  전체적인 타입체킹을 할 필요가 있다고 판단하여, `ForkTsCheckerWebpackPlugin`을 웹팩 플러그인에 추가하였다.
 
-또한 scripts에 `tsc && webpack`과 같이 타입체킹을 하는 방법도 있으나, `ForkTsCheckerWebpackPlugin`을 사용할 때보다 웹팩 실행 시간이 전체적으로 느려진다는 점을 확인하여 tsc는 사용하지 않았다.
+참고로 타입체킹 방법으로 `ForkTsCheckerWebpackPlugin` 외에도 scripts에 `tsc && webpack`을 추가하는 방법도 있으나, `ForkTsCheckerWebpackPlugin`을 사용할 때보다 웹팩 실행 시간이 전체적으로 느려진다는 점을 확인하여 tsc는 사용하지 않았다.
 
 ### 5-2. babel-plugin-styled-components
 
@@ -813,6 +824,7 @@ plugins: [
 하지만 `babel-plugin-styled-components` 플러그인은 간결하다는 장점이 있어서 이를 선택하였다.
 
 ```jsx
+// 플러그인별 템플릿 리터럴 문법을 트랜스파일한 코드 비교
 // babel-plugin-transform-es2015-template-literals
 var _templateObject = _taggedTemplateLiteral(['width: 100%;'], ['width: 100%;'])
 function _taggedTemplateLiteral(strings, raw) {
@@ -860,7 +872,7 @@ babel-loader에서 `@babel/preset-env`를 사용하면 ES6를 ES5로 `트랜스�
 ],
 ```
 
-이전에 esbuild-loader를 사용할 때 es2020을 target으로 트랜스파일링하였는데, 그 결과 smody 프로젝트의 웹사이트는 safari 13, ie 11, chrome 79에서부터 에러가 발생하여 전체사이트 로드를 실패하였다. 해당 브라우저 버전 이하에서는 es2020을 지원하지 않았기 때문이다. 또한 esbuild-loader는 폴리필이 불가하므로, babel-loader를 사용하여 트랜스파일링할 수 없는 새 기능에 폴리필을 하고자 했다.
+이전에 esbuild-loader를 사용할 때 es2020을 target으로 트랜스파일링하였는데, 그 결과 smody 프로젝트의 웹사이트는 safari 13, ie 11, chrome 79에서부터 에러가 발생하여 전체사이트 로드가 실패하였다. 해당 브라우저 버전 이하에서는 es2020을 지원하지 않았기 때문이다. 또한 esbuild-loader는 폴리필이 불가하므로, babel-loader를 사용하여 트랜스파일링할 수 없는 새 기능에 폴리필을 하고자 했다.
 
 `@babel/preset-env`을 통해 폴리필을 적용한다.
 
@@ -872,6 +884,7 @@ babel-loader에서 `@babel/preset-env`를 사용하면 ES6를 ES5로 `트랜스�
 `.browserslistrc` 파일 내에 다음과 같이 타겟 리스트 목록을 위한 쿼리를 적는다.
 
 ```json
+// .browserslistrc
 >= 0.5% in KR
 ```
 
@@ -903,34 +916,50 @@ samsung 17.0
 
 `useBuiltIns`와 `corejs` 옵션을 설정함으로써 폴리필을 적용할 수 있다.
 
-`useBuiltIns` 옵션은 어떤 방식으로 폴리필을 사용할지 설정한다. 기본값은 false 였기 때문에, 해당 옵션을 설정하지 않았을 때 폴리필이 동작하지 않았다. useBuiltIns 옵션에는 false 이외에 `usage`, `entry` 가 있는데, 이들을 설정하면 폴리필 패키지인 core-js를 사용하여 폴리필이 동작한다.
+`useBuiltIns` 옵션은 어떤 방식으로 폴리필을 사용할지 설정한다. 기본값은 false 이기 때문에, 해당 옵션을 설정하지 않으면 폴리필이 동작하지 않았다.
 
-`entry` 옵션은 타겟 브라우저에서 필요한 폴리필을 모두 포함시킨다. 이 옵션을 사용할 때 entry point에 core-js를 직접 import한다. 해당 옵션을 통해 빌드하면 core-js를 직접 import했던 코드가, 타겟 브라우저에 필요한 특정 core-js 모듈만 import하도록 변경된다.
+- false
+
+useBuiltIns 옵션에는 `false` 이외에 `usage`와 `entry` 가 있는데, 이들을 설정하면 폴리필 패키지인 core-js를 사용하여 폴리필이 동작한다.
+
+- entry
+
+`entry` 옵션은 타겟 브라우저에서 필요한 폴리필을 모두 포함시킨다. 이 옵션을 사용하면 entry point에 core-js를 직접 import해야 한다.
 
 ```jsx
-// entry 옵션 사용 시, entry point인 index.tsx에 추가
+// entry 옵션 사용 시, entry point인 index.tsx에 import 추가
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 ```
 
-위 코드가 폴리필 entry 옵션을 통해 빌드된 결과는 다음과 같다.
+entry 옵션을 통해 폴리필이 추가되어 빌드된 결과는 다음과 같다.
+
 ![폴리필-entry 옵션](../image/polyfill-entry.png)
 
-`usage` 옵션은 타겟 브라우저에서 지원되지 않으며 해당 프로젝트 코드에서 사용하는 기능에 대해서만 폴리필이 추가되도록 한다. 타겟 브라우저에서 지원되지 않는 기능을 모두 폴리필로 추가할 필요는 없다고 판단하여, 본 프로젝트에서는 usage 옵션을 사용했다.
+- usage
+
+`usage` 옵션은 타겟 브라우저에서 지원되지 않으며 해당 프로젝트 코드에서 사용하는 기능에 관련된 폴리필만 추가한다.
+
+usage 옵션을 통해 폴리필이 추가되어 빌드된 결과는 다음과 같다.
 
 ![폴리필-usage 옵션](../image/polyfill.png)
+
+본 프로젝트에서는 타겟 브라우저에서 지원되지 않는 기능을 모두 폴리필로 추가할 필요는 없다고 판단하여 `usage` 옵션을 사용했다.
 
 [[참고] StackOverFlow - Confused about useBuiltIns option of @babel/preset-env (using Browserslist Integration)](https://stackoverflow.com/questions/52625979/confused-about-usebuiltins-option-of-babel-preset-env-using-browserslist-integ)
 
 [[참고] babel - useBuiltIns](https://babeljs.io/docs/en/babel-preset-env#usebuiltins)
 
+- corejs
+
 `corejs` 옵션은 버전을 의미하며 기본값은 2이다. 버전 2는 업데이트가 중단되었으므로 버전 3을 사용했다.
 
-core-js@3에서 변화한 점은 core-js의 github 문서를 통해 확인할 수 있다.
+core-js@3의 변경 부분은 아래의 core-js의 github 문서를 통해 확인할 수 있다.
 
 [[참고] corejs - What changed in core-js@3?](https://github.com/zloirock/core-js/blob/master/docs/2019-03-19-core-js-3-babel-and-a-look-into-the-future.md#what-changed-in-core-js3)
 
 폴리필을 적용한 결과물이 타겟 브라우저에서 작동하는지 여부는 크로스 브라우징 테스트 서비스를 이용하여 확인할 수 있다.
+
 [BrowserStack](https://www.browserstack.com/) 등의 일부 무료 서비스를 통해 확인한 결과, 이전에 작동되지 않던 iOS 12의 safari에서도 팀 프로젝트 smody 사이트가 동작함을 확인하였다.(사실 타겟 브라우저는 iOS 13.4 이상이었으나, iOS 13과 iOS12가 지원하는 문법 기능에는 큰 차이가 없었나 보다)
 
 ![크로스 브라우징 테스트 결과](../image/browserstack.png)
