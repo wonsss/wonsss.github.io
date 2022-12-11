@@ -208,16 +208,16 @@ interface IntersectionObserverCallback {
 callback에 useIntersectRef 훅이 InfiniteScroll로부터 전달받은 onIntersect 함수를 전달하며, IntersectionObserverEntry 인스턴스의 배열인 entries에 대해 각각 onIntersect하도록 지정한다. 관찰 요소의 가시성에 변화가 생기면 IntersectionObserver는 callback을 실행한다.
 
 ```typescript
-  const callback = useCallback<IntersectionObserverCallback>(
-    (entries, observer) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          onIntersect(entry, observer);
-        }
-      });
-    },
-    [onIntersect],
-  );
+const callback = useCallback<IntersectionObserverCallback>(
+(entries, observer) => {
+    entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+        onIntersect(entry, observer);
+    }
+    });
+},
+[onIntersect],
+);
 ```
 
 관찰할 대상(Target)이 등록되거나 가시성(Visibility, 보이는지 보이지 않는지)에 변화가 생기면 관찰자는 콜백(Callback)을 실행합니다.
@@ -230,10 +230,10 @@ isIntersecting이 true이면 관찰 요소가 루트 요소(option을 통해 알
 InfiniteScroll 컴포넌트에서 onIntersect 함수 코드는 다음과 같았다. 데이터가 더 있으면(hasMore) 더 fetch하고(loadMore), 이후 대상 요소의 관찰을 중지한다(observer.unobserve(entry.target)).
 
 ```typescript
-  const onIntersect: OnIntersect = (entry, observer) => {
-    if (hasMore) {
-      loadMore();
-    }
-    observer.unobserve(entry.target);
-  };
+const onIntersect: OnIntersect = (entry, observer) => {
+if (hasMore) {
+    loadMore();
+}
+observer.unobserve(entry.target);
+};
 ```
