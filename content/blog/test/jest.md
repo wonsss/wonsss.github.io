@@ -8,27 +8,33 @@ draft: false
 
 ## 1. 무엇을 테스트하고, 이를 위해 어떤 라이브러리가 필요할까
 
-서버와 네트워크 통신 결과로 렌더된 리액트 페이지를 테스트하려고 한다.
+서버와 네트워크 통신 결과로 렌더된 리액트 페이지에서 상호작용을 테스트하려고 한다.
+
 GET 요청의 결과 응답값으로 리액트 컴포넌트가 의도한대로 변경되었는지 Render 테스트한다.
+
 POST, PUT, DELETE 같은 요청의 결과 응답값 등으로 리액트 컴포넌트가 의도한대로 변경되었는지 Mutation 테스트한다.
 
 - React Query (테스트를 위한 것은 아님)
+
 스모디 프로젝트에서는 React에서 서버와 네트워크 통신을 쉽게 다루게 해주는 라이브러리인 [React Query](https://wonsss.github.io/etc/react-query/)를 사용하고 있는데, 테스트 시 이와 관련한 설정이 필요하다.
 
 - MSW
+
 이를 테스트하기 위해, 네트워크 통신을 흉내내는 것을 돕는 도구인 `MSW`(Mock Service Worker)를 사용한다. MSW는 네트워크 호출을 차단한 후, 새로 정의한 핸들러에 따른 가짜 네트워크 응답을 반환한다.
 
 - Jest
+
 코드가 제대로 동작하는지 확인하는 test case를 만드는 테스팅 프레임워크인 `Jest`를 사용한다. 프레임워크라고 불리는 것처럼, Jest는 여러 테스팅 라이브러리의 기능(Test Runner, Test Matcher, Test Mock 등)을 통합하여 제공하기 때문에 이전에 비해 편리하다고 한다.
 
 - React Testing Library(길다..줄여서 RTL)
+
 `RTL`은 마치 최종 사용자가 사용하는 것처럼 리액트 컴포넌트를 테스트하기 위한 테스팅 라이브러리이다. [React 공식문서](https://reactjs.org/docs/test-utils.html#overview)에서 사용을 권장하는 라이브리러이다.
 RTL을 통해 실제 화면에 무엇이 보이고 어떤 이벤트가 발생했을 때 화면에 원하는 변화가 생겼는지 등을 확인할 수 있다. 즉, 사용자의 관점에서 테스트할 수 있도록 DOM 위주의 렌더링 결과에 집중하는 테스팅 라이브러리라고 말할 수 있다.
 
 React Testing Library builds on top of DOM Testing Library by adding APIs for working with React components.
 RTL은 `DOM Testing Library` 기반 위에서 React 컴포넌트를 작업하기 위한 API들이 추가함으로써 빌드한다.
 
-React의 컴포넌트를 렌더링하고 테스트하기 위해서는 RTL과 Jest를 함께 사용해야 한다. Jest는 자체적인 test runner와 test util을 제공지만, 이외에 React 컴포넌트 test util을 사용하려면 RTL도 필요하기 때문이다. 즉, RTL은 test runner나 framework가 아니다. RTL은 Jest와 함께 사용하길 선호하나, 반드시 Jest에만 사용할 수 있는 것은 아니고 어떤 테스팅 프레임워크와도 함께 작동한다고 한다.
+React의 컴포넌트를 렌더링하고 테스트하기 위해서는 RTL과 Jest를 함께 사용해야 한다. Jest는 자체적인 test runner와 test util을 제공하지만, 이외에 React 컴포넌트 test util을 사용하려면 RTL도 필요하기 때문이다. 즉, RTL은 test runner 또는 framework가 아니다. RTL은 Jest와 함께 사용하길 선호하나, 반드시 Jest에만 사용할 수 있는 것은 아니고 어떤 테스팅 프레임워크와도 함께 작동한다고 한다.
 
 ### 1-1. 설치
 
