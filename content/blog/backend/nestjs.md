@@ -1,12 +1,11 @@
 ---
-title: NestJS로 API 만들기
+title: NestJS로 API 만들기(맛보기)
 date: 2023-06-18 17:06:00
 category: backend
 thumbnail: { thumbnailSrc }
 draft: false
 ---
 
-# NestJS로 API 만들기
 
 ## 0. Introduction
 
