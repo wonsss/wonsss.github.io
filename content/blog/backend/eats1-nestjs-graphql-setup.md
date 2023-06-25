@@ -342,7 +342,7 @@ export class RestaurantsResolver {
 }
 ```
 
-### 2.4. ****InputTypes and ArgumentTypes****
+### 2.4. InputTypes and ArgumentTypes
 
 - `@InputType`은 graphQL에 argument로 전달할 수 있는 특수한 유형의 객체이다. Mutation이 객체를 argument로 받고 싶은 경우 사용한다. InputType을 사용하면 다음과 같이 요청해야 한다.
 

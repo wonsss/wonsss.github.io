@@ -12,7 +12,7 @@ draft: false
 
 - TypeORM을 쓰면 SQL문을 쓰는 대신에 타입스크립트 코드를 써서 데이터베이스와 상호작용을 할 수 있다.
   - <https://typeorm.io/#/>
-- 이 강의에서는 PostrgreSQL을 사용한다. TypeORM을 설치하기 전에 PostgreSQL을 설치한다.
+- 이 강의에서는 PostgreSQL을 사용한다. TypeORM을 설치하기 전에 PostgreSQL을 설치한다.
   - <https://postgresapp.com/>
 - MacOS라면 PostgreSQL의 GUI인 Postico도 설치하는 것을 권장한다. Postico 앱을 실행하면 구매 버튼이 있지만, 구매하지 않아도 무료로 평생 사용 가능하니 구입은 선택사항이다.
   - <https://eggerapps.at/postico2/>
@@ -101,7 +101,7 @@ TypeOrmModule.forRoot({
 })
 ```
 
-### 3.4. ****ConfigService****
+### 3.4. ConfigService
 
 - 응용 프로그램은 종종 다른 환경에서 실행되는데, 환경에 따라 다른 환경 설정을 사용해야 한다.
 - 환경 변수 파일(.env)을 Node.js에서 이용하는 가장 흔한 방법은 `dotenv` 패키지를 사용하는 것이다. 이것을 사용할 수도 있지만, NestJS에서는 NestJS의 설정 방법을 이용해본다.
@@ -118,7 +118,7 @@ ConfigModule.forRoot({ isGlobal: true }),
 npm i --save @nestjs/config 
 ```
 
-### 3.5. ****ConfigService 설정(cross-env)****
+### 3.5. ConfigService 설정(cross-env)
 
 - cross-env
   - <https://www.npmjs.com/package/cross-env>
@@ -185,7 +185,7 @@ ConfigModule.forRoot({
     }),
     ```
 
-### 3.6. ****ConfigService 유효성 검사(Joi)****
+### 3.6. ConfigService 유효성 검사(Joi)
 
 - joi
   - <https://joi.dev>

@@ -430,7 +430,7 @@ export class UpdateCatDto extends PartialType(
 ) {}
 ```
 
-### ****Modules and Dependency Injection****
+### Modules and Dependency Injection
 
 movies module을 새로 만들고, app module로부터 movies module을 분리할 수 있다.
 
@@ -467,7 +467,7 @@ import { MoviesService } from './movies.service';
 export class MoviesModule {}
 ```
 
-### ****Express on NestJS****
+### Express on NestJS
 
 NestJS는 Express 프레임워크 위에서 돌아간다. 그러나 Fastify 라이브러리 위에서 돌아가도록 전환할 수 있다. Fastify는 성능 향상 장점이 있다.
 
