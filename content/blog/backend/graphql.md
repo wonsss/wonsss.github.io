@@ -1,5 +1,5 @@
 ---
-title: GraphQL로 영화 API 만들기(맛보기)
+title: GraphQL로 영화 API 만들기
 date: 2023-06-24 18:06:23
 category: backend
 thumbnail: { thumbnailSrc }
