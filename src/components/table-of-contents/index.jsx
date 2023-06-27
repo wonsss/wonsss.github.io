@@ -1,7 +1,7 @@
 import React from 'react'
+import './index.scss'
 
 export const TableOfContents = ({ content }) => {
-  console.log(content)
   return (
     <div
       className="table-of-content"

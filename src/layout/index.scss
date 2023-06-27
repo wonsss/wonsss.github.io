@@ -8,4 +8,35 @@ body {
   -webkit-text-size-adjust: antialiased;
   -moz-osx-font-smoothing: grayscale;
   transition: background-color 0.3s, color 0.3s;
+
+  /* 스크롤 바 전체 */
+  ::-webkit-scrollbar {
+    width: 10px; /* 수평 스크롤 바의 너비 */
+  }
+}
+
+body.dark {
+  /* 스크롤 바 트랙 */
+  ::-webkit-scrollbar-track {
+    background-color: $dark-background-color; /* 스크롤 트랙 배경색 */
+  }
+
+  /* 스크롤 바 쓰기 영역 */
+  ::-webkit-scrollbar-thumb {
+    background-color: $dark-category-background-color; /* 스크롤 바 쓰기 영역 배경색 */
+    border-radius: 5px; /* 스크롤 바 쓰기 영역의 둥근 모서리 */
+  }
+}
+
+body.light {
+  /* 스크롤 바 트랙 */
+  ::-webkit-scrollbar-track {
+    background-color: $light-background-color; /* 스크롤 트랙 배경색 */
+  }
+
+  /* 스크롤 바 쓰기 영역 */
+  ::-webkit-scrollbar-thumb {
+    background-color: $light-category-background-color; /* 스크롤 바 쓰기 영역 배경색 */
+    border-radius: 5px; /* 스크롤 바 쓰기 영역의 둥근 모서리 */
+  }
 }

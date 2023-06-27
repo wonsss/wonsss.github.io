@@ -3,6 +3,8 @@ import { graphql } from 'gatsby'
 
 import * as Elements from '../components/elements'
 import { Layout } from '../layout'
+import { Container } from '../components/container'
+import { Content } from '../components/content'
 import { Head } from '../components/head'
 import { PostTitle } from '../components/post-title'
 import { PostDate } from '../components/post-date'
@@ -30,32 +32,35 @@ export default ({ data, pageContext, location }) => {
   const { title, comment, siteUrl, author, sponsor } = metaData
   const { disqusShortName, utterances } = comment
   const { title: postTitle, date } = post.frontmatter
-  console.log(data)
 
   return (
     <Layout location={location} title={title}>
-      <Head title={postTitle} description={post.excerpt} />
-      <PostTitle title={postTitle} />
-      <PostDate date={date} />
-      <PostContainer html={post.html} />
-      <SocialShare title={postTitle} author={author} />
-      {!!sponsor.buyMeACoffeeId && (
-        <SponsorButton sponsorId={sponsor.buyMeACoffeeId} />
-      )}
-      <Elements.Hr />
-      <Bio />
-      <PostNavigator pageContext={pageContext} />
-      {!!disqusShortName && (
-        <Disqus
-          post={post}
-          shortName={disqusShortName}
-          siteUrl={siteUrl}
-          slug={pageContext.slug}
-        />
-      )}
-      {!!utterances && <Utterances repo={utterances} />}
+      <Container>
+        <Content>
+          <Head title={postTitle} description={post.excerpt} />
+          <PostTitle title={postTitle} />
+          <PostDate date={date} />
+          <PostContainer html={post.html} />
+          <SocialShare title={postTitle} author={author} />
+          {!!sponsor.buyMeACoffeeId && (
+            <SponsorButton sponsorId={sponsor.buyMeACoffeeId} />
+          )}
+          <Elements.Hr />
+          <Bio />
+          <PostNavigator pageContext={pageContext} />
+          {!!disqusShortName && (
+            <Disqus
+              post={post}
+              shortName={disqusShortName}
+              siteUrl={siteUrl}
+              slug={pageContext.slug}
+            />
+          )}
+          {!!utterances && <Utterances repo={utterances} />}
+        </Content>
 
-      <TableOfContents content={post.tableOfContents} />
+        <TableOfContents content={post.tableOfContents} />
+      </Container>
     </Layout>
   )
 }

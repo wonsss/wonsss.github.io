@@ -1,2 +1,32 @@
+@import '../../styles/variables.scss';
+@import '../../styles/light-theme.scss';
+@import '../../styles/dark-theme.scss';
+
 .table-of-content {
+  top: 15px;
+  flex-grow: 0;
+  max-width: 300px;
+  max-height: calc(100vh - 30px);
+  position: sticky;
+  overflow: auto;
+  margin-top: 40px;
+  padding-right: 30px;
+
+  ul {
+    margin-left: 5px;
+    font-weight: bold;
+
+    ul {
+      font-weight: normal;
+      margin-bottom: 20px;
+
+      li {
+        margin-bottom: 5px;
+      }
+    }
+  }
+
+  li::marker {
+    content: none;
+  }
 }
