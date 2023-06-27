@@ -1,5 +1,5 @@
 ---
-title: [백엔드 클론코딩 1] - NestJS, GraphQL API, TypeORM, PostgreSQL, joi 등 개념
+title: 백엔드 클론코딩 1 - NestJS, GraphQL API, TypeORM, PostgreSQL, joi 등 개념
 date: 2023-06-25 04:06:05
 category: backend
 thumbnail: { thumbnailSrc }
