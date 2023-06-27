@@ -182,17 +182,6 @@ const resolvers = {
 
 Resolver 함수에는 parent(root or source), args, context, info 의 네 가지 인수가 순서대로 전달된다.
 
-| ARGUMENT | DESCRIPTION |
-| --- | --- |
-| parent | The return value of the resolver for this field's parent (i.e., the previous resolver in the <https://www.apollographql.com/docs/apollo-server/data/resolvers/#resolver-chains>).
-For resolvers of top-level fields with no parent (such as fields of Query), this value is obtained from the rootValue function passed to <https://www.apollographql.com/docs/apollo-server/api/apollo-server/#constructor>. |
-| args | An object that contains all GraphQL arguments provided for this field.
-For example, when executing query{ user(id: "4") }, the args object passed to the user resolver is { "id": "4" }. |
-| contextValue | An object shared across all resolvers that are executing for a particular operation. Use this to share per-operation state, including authentication information, dataloader instances, and anything else to track across resolvers.
-See <https://www.apollographql.com/docs/apollo-server/data/resolvers/#the-contextvalue-argumenthttps://www.apollographql.com/docs/apollo-server/data/resolvers/#the-contextvalue-argumenthttps://www.apollographql.com/docs/apollo-server/data/resolvers/#the-contextvalue-argument> for more information. |
-| info | Contains information about the operation's execution state, including the field name, the path to the field from the root, and more.
-Its core fields are listed in the <https://github.com/graphql/graphql-js/blob/f851eba93167b04d6be1373ff27927b16352e202/src/type/definition.ts#L891-L902>. Apollo Server extends it with a <https://www.apollographql.com/docs/apollo-server/performance/caching/#in-your-resolvers-dynamichttps://www.apollographql.com/docs/apollo-server/performance/caching/#in-your-resolvers-dynamic>. |
-
 <https://www.apollographql.com/docs/apollo-server/data/resolvers/#resolver-arguments>
 
 ### Type Resolvers
