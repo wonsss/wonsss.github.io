@@ -16,23 +16,44 @@
   position: sticky;
   overflow: auto;
   margin-top: 40px;
-  padding-right: 30px;
+  padding-right: 10px;
+  width: 100%;
+  font-size: 14px;
+
+  a {
+    display: inline-block;
+    padding: 3px 10px;
+    box-sizing: border-box;
+  }
 
   ul {
-    margin-left: 5px;
-    font-weight: bold;
+    margin-left: 0;
 
     ul {
-      font-weight: normal;
-      margin-bottom: 20px;
+      margin-left: 10px;
 
       li {
-        margin-bottom: 5px;
       }
     }
   }
 
-  li::marker {
+  ::marker {
     content: none;
+  }
+}
+
+.dark {
+  .table-of-content {
+    a {
+      color: #cecece;
+    }
+  }
+}
+
+.light {
+  .table-of-content {
+    a {
+      color: #3e3e3e;
+    }
   }
 }

@@ -1,0 +1,21 @@
+@import '../styles/variables.scss';
+@import '../styles/light-theme.scss';
+@import '../styles/dark-theme.scss';
+
+.light {
+  .toc-active {
+    color: $light-active-color !important;
+  }
+  .toc-header-active {
+    color: $light-active-color !important;
+  }
+}
+
+.dark {
+  .toc-active {
+    color: $dark-active-color !important;
+  }
+  .toc-header-active {
+    color: $dark-active-color !important;
+  }
+}
