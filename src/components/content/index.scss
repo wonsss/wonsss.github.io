@@ -2,3 +2,10 @@
   max-width: calc(100% * 3 / 4);
   flex-basis: calc(100% * 3 / 4);
 }
+
+@media (max-width: 1024px) {
+  .content {
+    max-width: 100%;
+    flex-basis: 100%;
+  }
+}

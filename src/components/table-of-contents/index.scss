@@ -2,6 +2,12 @@
 @import '../../styles/light-theme.scss';
 @import '../../styles/dark-theme.scss';
 
+@media (max-width: 1024px) {
+  .table-of-content {
+    display: none;
+  }
+}
+
 .table-of-content {
   top: 15px;
   flex-grow: 0;
