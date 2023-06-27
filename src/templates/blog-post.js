@@ -8,6 +8,7 @@ import { PostTitle } from '../components/post-title'
 import { PostDate } from '../components/post-date'
 import { PostContainer } from '../components/post-container'
 import { SocialShare } from '../components/social-share'
+import { TableOfContents } from '../components/table-of-contents'
 import { SponsorButton } from '../components/sponsor-button'
 import { Bio } from '../components/bio'
 import { PostNavigator } from '../components/post-navigator'
@@ -29,6 +30,7 @@ export default ({ data, pageContext, location }) => {
   const { title, comment, siteUrl, author, sponsor } = metaData
   const { disqusShortName, utterances } = comment
   const { title: postTitle, date } = post.frontmatter
+  console.log(data)
 
   return (
     <Layout location={location} title={title}>
@@ -52,6 +54,8 @@ export default ({ data, pageContext, location }) => {
         />
       )}
       {!!utterances && <Utterances repo={utterances} />}
+
+      <TableOfContents content={post.tableOfContents} />
     </Layout>
   )
 }
@@ -80,6 +84,7 @@ export const pageQuery = graphql`
         title
         date(formatString: "MMMM DD, YYYY")
       }
+      tableOfContents
     }
   }
 `

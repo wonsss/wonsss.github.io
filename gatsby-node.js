@@ -10,7 +10,9 @@ exports.createPages = ({ graphql, actions }) => {
     `
       {
         allMarkdownRemark(
-          filter: { frontmatter: { category: { ne: null }, draft: { eq: false } } }
+          filter: {
+            frontmatter: { category: { ne: null }, draft: { eq: false } }
+          }
           sort: { fields: [frontmatter___date], order: DESC }
           limit: 1000
         ) {
@@ -23,6 +25,7 @@ exports.createPages = ({ graphql, actions }) => {
                 title
                 category
               }
+              tableOfContents
             }
             previous {
               fields {
@@ -50,8 +53,8 @@ exports.createPages = ({ graphql, actions }) => {
     }
 
     // Create blog posts pages.
-    const posts = result.data.allMarkdownRemark.edges;
-    posts.forEach((post) => {
+    const posts = result.data.allMarkdownRemark.edges
+    posts.forEach(post => {
       createPage({
         path: post.node.fields.slug,
         component: blogPostTemplate,
