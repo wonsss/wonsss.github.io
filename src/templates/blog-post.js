@@ -1,4 +1,6 @@
-import React, { useEffect } from 'react'
+import './index.scss'
+
+import React, { useEffect, useRef } from 'react'
 import { graphql } from 'gatsby'
 
 import * as Elements from '../components/elements'
@@ -17,9 +19,14 @@ import { PostNavigator } from '../components/post-navigator'
 import { Disqus } from '../components/disqus'
 import { Utterances } from '../components/utterances'
 import * as ScrollManager from '../utils/scroll'
+import { useScrollEvent } from '../hooks/useScrollEvent'
+import * as EventManager from '../utils/event-manager'
+import * as Dom from '../utils/dom'
 
 import '../styles/code.scss'
 import 'katex/dist/katex.min.css'
+
+const OFFSET = 10
 
 export default ({ data, pageContext, location }) => {
   useEffect(() => {
@@ -32,6 +39,46 @@ export default ({ data, pageContext, location }) => {
   const { title, comment, siteUrl, author, sponsor } = metaData
   const { disqusShortName, utterances } = comment
   const { title: postTitle, date } = post.frontmatter
+  const slug = pageContext.slug
+
+  const headerElements = useRef()
+  useEffect(() => {
+    function getHeaderElements() {
+      const headerElements = Dom.getElements('h1, h2, h3, h4, h5')
+      return Array.from(headerElements)
+    }
+
+    headerElements.current = getHeaderElements()
+  }, [])
+
+  // TableOfContents
+  const onScroll = () => {
+    const currentoffsetY = window.pageYOffset
+    const tocLinkElements = Dom.getElements(`a[href*="${encodeURI(slug)}"]`)
+
+    console.log(tocLinkElements)
+
+    for (const [index, headerElement] of headerElements.current.entries()) {
+      const { top } = headerElement.getBoundingClientRect()
+      const elementTop = top + currentoffsetY
+
+      if (!tocLinkElements[index - 1]) {
+        continue
+      }
+
+      if (currentoffsetY >= elementTop - OFFSET) {
+        headerElement.classList.add('toc-header-active')
+        tocLinkElements[index - 1].classList.add('toc-active')
+      } else {
+        headerElement.classList.remove('toc-header-active')
+        tocLinkElements[index - 1].classList.remove('toc-active')
+      }
+    }
+  }
+
+  useScrollEvent(() => {
+    return EventManager.toFit(onScroll, {})()
+  })
 
   return (
     <Layout location={location} title={title}>
