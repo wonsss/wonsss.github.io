@@ -19,6 +19,8 @@ import { SponsorButton } from '../components/sponsor-button'
 import { Bio } from '../components/bio'
 import { PostNavigator } from '../components/post-navigator'
 import { Disqus } from '../components/disqus'
+import { Search } from '../components/search'
+
 import { Utterances } from '../components/utterances'
 import * as ScrollManager from '../utils/scroll'
 import { useScrollEvent } from '../hooks/useScrollEvent'
@@ -37,6 +39,8 @@ export default ({ data, pageContext, location }) => {
   }, [])
 
   const post = data.markdownRemark
+  const posts = data.allMarkdownRemark.edges
+
   const metaData = data.site.siteMetadata
   const { title, comment, siteUrl, author, sponsor } = metaData
   const { disqusShortName, utterances } = comment
@@ -92,6 +96,8 @@ export default ({ data, pageContext, location }) => {
     <Layout location={location} title={title}>
       <Container>
         <Content>
+          <Search posts={posts} />
+
           <Head title={postTitle} description={post.excerpt} />
           <PostTitle title={postTitle} />
           <PostDate date={date} />
@@ -147,6 +153,28 @@ export const pageQuery = graphql`
         date(formatString: "MMMM DD, YYYY")
       }
       tableOfContents
+    }
+    allMarkdownRemark(
+      sort: { fields: [frontmatter___date], order: DESC }
+      filter: { frontmatter: { category: { ne: null }, draft: { eq: false } } }
+    ) {
+      edges {
+        node {
+          excerpt(pruneLength: 200, truncate: true)
+          fields {
+            slug
+          }
+          frontmatter {
+            date(formatString: "MMMM DD, YYYY")
+            title
+            category
+            draft
+          }
+          headings {
+            value
+          }
+        }
+      }
     }
   }
 `
