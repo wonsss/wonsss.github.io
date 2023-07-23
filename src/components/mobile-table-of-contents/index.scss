@@ -13,25 +13,10 @@
     &:first-child {
       margin: 0;
     }
+    list-style-type: none;
   }
 
   ::marker {
     content: none;
-  }
-}
-
-.dark {
-  .mobile-table-of-content {
-    a {
-      color: #cecece;
-    }
-  }
-}
-
-.light {
-  .mobile-table-of-content {
-    a {
-      color: #3e3e3e;
-    }
   }
 }
