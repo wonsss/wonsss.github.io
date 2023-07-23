@@ -1,0 +1,33 @@
+@import '../../styles/variables.scss';
+@import '../../styles/light-theme.scss';
+@import '../../styles/dark-theme.scss';
+
+.mobile-table-of-content {
+  display: block;
+
+  ul {
+    &:first-child {
+      margin: 0;
+    }
+  }
+
+  ::marker {
+    content: none;
+  }
+}
+
+.dark {
+  .mobile-table-of-content {
+    a {
+      color: #cecece;
+    }
+  }
+}
+
+.light {
+  .mobile-table-of-content {
+    a {
+      color: #3e3e3e;
+    }
+  }
+}

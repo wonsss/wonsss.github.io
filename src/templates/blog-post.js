@@ -13,6 +13,7 @@ import { PostDate } from '../components/post-date'
 import { PostContainer } from '../components/post-container'
 import { SocialShare } from '../components/social-share'
 import { TableOfContents } from '../components/table-of-contents'
+import { MobileTableOfContents } from '../components/mobile-table-of-contents'
 import { SponsorButton } from '../components/sponsor-button'
 import { Bio } from '../components/bio'
 import { PostNavigator } from '../components/post-navigator'
@@ -56,8 +57,6 @@ export default ({ data, pageContext, location }) => {
     const currentoffsetY = window.pageYOffset
     const tocLinkElements = Dom.getElements(`a[href*="${encodeURI(slug)}"]`)
 
-    console.log(tocLinkElements)
-
     for (const [index, headerElement] of headerElements.current.entries()) {
       const { top } = headerElement.getBoundingClientRect()
       const elementTop = top + currentoffsetY
@@ -80,6 +79,14 @@ export default ({ data, pageContext, location }) => {
     return EventManager.toFit(onScroll, {})()
   })
 
+  useEffect(() => {
+    const mobileTableOfContent = Dom.getElement('.mobile-table-of-content')
+
+    if (mobileTableOfContent && window.innerWidth > 1024) {
+      mobileTableOfContent.remove()
+    }
+  }, [])
+
   return (
     <Layout location={location} title={title}>
       <Container>
@@ -87,6 +94,7 @@ export default ({ data, pageContext, location }) => {
           <Head title={postTitle} description={post.excerpt} />
           <PostTitle title={postTitle} />
           <PostDate date={date} />
+          <MobileTableOfContents content={post.tableOfContents} />
           <PostContainer html={post.html} />
           <SocialShare title={postTitle} author={author} />
           {!!sponsor.buyMeACoffeeId && (
