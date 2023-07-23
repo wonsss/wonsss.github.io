@@ -14,6 +14,7 @@ import { PostContainer } from '../components/post-container'
 import { SocialShare } from '../components/social-share'
 import { TableOfContents } from '../components/table-of-contents'
 import { MobileTableOfContents } from '../components/mobile-table-of-contents'
+import { FloatingButton } from '../components/floating-button'
 import { SponsorButton } from '../components/sponsor-button'
 import { Bio } from '../components/bio'
 import { PostNavigator } from '../components/post-navigator'
@@ -113,6 +114,7 @@ export default ({ data, pageContext, location }) => {
           )}
           {!!utterances && <Utterances repo={utterances} />}
         </Content>
+        <FloatingButton />
 
         <TableOfContents content={post.tableOfContents} />
       </Container>
