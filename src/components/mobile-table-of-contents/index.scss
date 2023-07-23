@@ -5,6 +5,10 @@
 .mobile-table-of-content {
   display: block;
 
+  @media (min-width: 1025px) {
+    display: none;
+  }
+
   ul {
     &:first-child {
       margin: 0;
