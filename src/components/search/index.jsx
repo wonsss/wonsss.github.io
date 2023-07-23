@@ -12,8 +12,10 @@ export const Search = ({ posts }) => {
     }
     const result = posts.filter(post => {
       const headings = post.node.headings.map(({ value }) => value).join(',')
+      const category = post.node.frontmatter.category
+      const excerpt = post.node.excerpt
       const { title } = post.node.frontmatter
-      const target = title + headings
+      const target = title + headings + category + excerpt
 
       return target.toLowerCase().includes(query.toLowerCase())
     })
