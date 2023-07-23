@@ -37,7 +37,7 @@ export const Search = ({ posts }) => {
         <ul className="search-ul">
           {result.map(({ node }) => {
             return (
-              <a href={node.fields.slug}>
+              <a key={node.fields.slug} href={node.fields.slug}>
                 <li key={node.fields.slug}>
                   <div className="category">{node.frontmatter.category}</div>
                   {node.frontmatter.title}
