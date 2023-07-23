@@ -2,9 +2,8 @@
 
 .search-wrapper {
   display: flex;
-
-  margin-bottom: 10px;
   flex-direction: column;
+  margin-top: -10px;
 }
 
 .search {
@@ -12,7 +11,7 @@
 }
 
 .search-ul {
-  margin: 20px;
+  margin: 10px 20px 10px 20px;
 }
 .category {
   display: inline-block;
