@@ -430,8 +430,6 @@ export class User extends CoreEntity {
 }
 ```
 
-![스크린샷 2023-07-09 오후 8.46.06.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/7a70fb6a-5fdd-44d0-9d5b-3888d1ec9dfa/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2023-07-09_%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE_8.46.06.png)
-
 ## 5.8. 로그인
 
 1. 해당 이메일의 유저를 찾는다.
@@ -668,8 +666,6 @@ useClass: process.env.NODE_ENV === 'development' ? DevelopmentConfigService : Pr
   - 주입한 provider의 인스턴스
   - useValue 구문은 상수 값을 주입하거나 외부 라이브러리를 Nest 컨테이너에 넣거나 실제 구현을 모의 객체로 교체하는 데 유용하다.
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/bef2b3aa-168b-470d-aa51-c9e6b5de244c/Untitled.png)
-
 ## 6.6. NestJS의 미들웨어
 
 - implements와 extends는 다르다. implements는 class가 interface처럼 동작해야 한다는 것을 의미한다.
@@ -790,8 +786,6 @@ export function jwtMiddleware(req: Request, res: Response, next: NextFunction) {
   - 3. 반환한 payload를 이용해서 유저를 찾는다.
   - 4. 유저를 찾았다면 찾은 유저의 정보를 req에 다시 넣어 다음 미들웨어에 전달한다.
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/8195eb61-6411-4c33-a212-5019941c1b59/Untitled.png)
-
 ## 6.8. GraphQL Context
 
 - Context
@@ -819,8 +813,6 @@ me(@Context() context) {
   }
 }
 ```
-
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/babbb913-737b-49b5-b043-5b43ec2fc016/Untitled.png)
 
 ## 6.9 AuthGuard
 
