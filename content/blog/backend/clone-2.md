@@ -978,7 +978,7 @@ update()
 
 엔티티를 부분적으로 업데이트합니다. 엔티티는 주어진 조건으로 찾을 수 있습니다. save 메소드와 달리 캐스케이드, 관계 및 기타 작업이 포함되지 않은 기본 작업을 실행합니다. 빠르고 효율적인 UPDATE 쿼리를 실행합니다. 데이터베이스에 엔터티가 있는지 확인하지 않습니다.
 
-ex) this.usersRepository.update(id, { email, password })
+ex. this.usersRepository.update(id, { email, password })
 
 update()메서드 반환값: UpdateResult
 
@@ -1061,3 +1061,131 @@ mutation {
 - DB에 저장된 프로필 확인하기
 
 Postico 앱을 열고, 해당 Database에 연결한 후 user table에서 확인
+
+# 7. 이메일 Verification
+
+## Verification Entity
+
+### One-to-one relations (1:1관계)
+
+<https://typeorm.io/#/one-to-one-relations>
+
+일대일 관계는 A가 B의 인스턴스를 하나만 포함하고 B가 A의 인스턴스를 하나만 포함하는 관계입니다. 예를 들어 사용자 및 프로필 엔터티를 보면, 사용자는 하나의 프로필만 가질 수 있으며, 프로필은 하나의 사용자만 가질 수 있습니다.
+
+프로필에 `@OneToOne` 을 추가하고 대상 관계 유형을 프로필로 지정했습니다.
+
+또한 relation의 한쪽에만 설정해야 하는 `@JoinColumn()` 을 추가했습니다. (`@JoinColumn()`은 필수로 지정해야 함)
+
+`@JoinColumn()`을 설정한 쪽의 테이블에는 해당되는 엔터티 테이블에 대한 relation id와 foreign keys가 포함됩니다.
+
+`@JoinColumn()` 은 관계의 한 쪽, 즉 데이터베이스 테이블에 foreign key가 있어야 하는 쪽에만 설정해야 합니다.
+
+```tsx
+@OneToOne(() => Profile)
+@JoinColumn() 
+profile: Profile;
+
+// 위와 같이 설정시 데이터베이스에는 profile에 대한 foreign key가 생김
+// profileId | int(11) | FOREIGN KEY
+```
+
+### Table 추가하기
+
+- 새 entity 클래스를 export 하고
+
+```tsx
+import { Field, InputType, ObjectType } from '@nestjs/graphql';
+import { CoreEntity } from 'src/common/entities/core.entity';
+import { Column, Entity, JoinColumn, OneToOne } from 'typeorm';
+import { User } from './user.entity';
+
+@InputType({ isAbstract: true })
+@ObjectType()
+@Entity()
+export class Verification extends CoreEntity {
+  @Column()
+  @Field((type) => String)
+  code: string;
+
+  @OneToOne((type) => User)
+  @JoinColumn() // Verification으로부터 User에 접근하길 원한다는 의미
+  user: User;
+}
+```
+
+- TypeOrmModule.forRoot 에서 entities 목록에 export된 entity 클래스를 import하여 넣습니다.
+
+```tsx
+// app.module.ts
+TypeOrmModule.forRoot({
+  entities: [User, Verification],
+}),
+```
+
+- graphQL
+
+```tsx
+mutation {
+  verifyEmail(input: {code: "93e31d53-a0ed-45f0-898a-4d342e1209ea"}) {
+    ok
+    error
+  }
+}
+```
+
+## 이메일 인증 기능 관련 메모
+
+- @Column({ select: false })
+  - QueryBuilder나 find 실행자(find메서드들)를 통해 해당 엔티티를 가져올 때 해당 column을 항상 선택되어질지 여부를 나타냅니다. 기본값은 "true"입니다.
+  - false로 지정하게 되면 해당 column을 DB로부터 찾아오지 않습니다.
+  - <https://typeorm.delightful.studio/interfaces/_decorator_options_columnoptions_.columnoptions.html>
+- Mailgun
+  - 개발자를 위한 트랜잭션 이메일 API 서비스
+  - <https://www.mailgun.com>
+- Receive SMS Online
+  - 온라인으로 즉시 SMS 수신
+  - <https://receive-smss.com/>
+- NestJS Mailer
+  - Nodemailer 라이브러리를 사용하는 Nest.js 프레임워크(node.js)용 메일러 모듈
+  - <https://nest-modules.github.io/mailer>
+  - <https://github.com/nest-modules/mailer>
+- Dynamic module use case
+  - <https://docs.nestjs.com/fundamentals/dynamic-modules#dynamic-module-use-case>
+  - MAILGUN_API_KEY
+  - MAILGUN_DOMAIN_NAME
+  - MAINGUN_FROM_EMAIL
+- cURL (Client URL)
+  - URL로 데이터를 전송하기 위한 커맨드 라인 툴 및 라이브러리
+  - curl은 데이터를 전송하기 위해 명령줄이나 스크립트에서 사용됩니다.
+  - curl은 다양한 통신 프로토콜을 이용하여 데이터를 전송하기 위한 라이브러리와 명령 줄 도구를 제공하는 컴퓨터 소프트웨어 프로젝트이다.
+- GOT
+  - Node.js를 위한 인간 친화적이고 강력한 HTTP request 라이브러리
+      - + got 12버전 이상 사용시, 모듈을 import해올 때 오류가 발생하시는 분들은 12버전보다 아래인 11.8.3버전으로 설치해보세요
+    - npm i got@11.8.3
+  - <https://www.npmjs.com/package/got>
+- Form-Data
+  - 읽을 수 있는 "multipart/form-data" 스트림을 생성하는 라이브러리입니다. 다른 웹 애플리케이션에 form을 submit하고, 파일을 업로드하는 데 사용할 수 있습니다.
+  - <https://www.npmjs.com/package/form-data>
+  - npm i form-data
+  - 이 예제에서는 문자열, 버퍼 및 파일 스트림을 포함하는 3개의 field가 있는 form을 구성합니다.
+
+    ```tsx
+    var FormData = require('form-data');
+    
+    var fs = require('fs');
+    
+    var form = new FormData();
+    
+    form.append('my_field', 'my value');
+    
+    form.append('my_buffer', new Buffer(10));
+    
+    form.append('my_file', fs.createReadStream('/foo/bar.jpg'));
+    ```
+
+- Mailgun Doc
+  - <https://documentation.mailgun.com/en/latest/quickstart-sending.html#how-to-start-sending-email>
+- Buffer란?
+  - Node.js 에서 제공하는 Binary의 데이터를 담을 수 있는 객체
+- Binary 데이터란?
+  - 01001010과 같은 이진수 시스템으로 표현되는 데이터
