@@ -3,7 +3,7 @@ title: ReactQuery의 select 옵션을 사용하여 클라이언트에서 서버 
 date: 2022-12-10 04:12:42
 category: react
 thumbnail: { thumbnailSrc }
-draft: false
+draft: true
 ---
 
 서버에서 데이터를 원하지 않는 속성의 이름 혹은 원하지 않는 객체 형식(nested object)으로 주는 경우가 있다. 서버와 클라이언트는 분리된 영역으로 간주하여, 클라이언트에서는 해당 데이터를 클라이언트 코드의 입장에 맞추어 가공해서 사용하는 것이 좋다. 이런 경우에 React Query를 이용하여 서버에서 받은 데이터를 가공하여 제공하는 방법을 살펴보자.

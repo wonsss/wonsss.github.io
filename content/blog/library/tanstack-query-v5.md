@@ -1,5 +1,5 @@
 ---
-title: TanStack Query v5에서 변경사항
+title: React Query v5에서 변경사항
 date: 2023-03-16 02:03:57
 category: library
 thumbnail: { thumbnailSrc }
