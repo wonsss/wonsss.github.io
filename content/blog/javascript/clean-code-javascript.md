@@ -8,7 +8,7 @@ draft: false
 
 # 1. 변수 다루기
 
-![](./clean-code-javascript/clean-code-javascript/meme-var.jpg)
+![](./clean-code-javascript/meme-var.jpg)
 
 ## 자바스크립트 특성 파악하기
 
@@ -177,7 +177,7 @@ const sum = function() {
 
 # 2. 타입 검사 방법
 
-![](./clean-code-javascript/typeof%20meme.jpg)
+![](./clean-code-javascript/meme-typeof.jpg)
 
 ## typeof
 
@@ -186,23 +186,25 @@ const sum = function() {
 - 자바스크립트에서 타입을 크게 구분해보면, `Primitive(원시값)` 와 `Reference(참조값)` 으로 나눠진다.
 - 원시값은 typeof로 잘 검사할 수 있으나, 참조값은 typeof로 구분하기 어렵다. 따라서 typeof가 만능이 아니다.
 - 자바스크립트는 동적으로 변하는 언어이기 때문에, 타입도 동적이다. 동적으로 변하는 타입을 검사하기 어려우므로 주의해야 한다.
-![](./clean-code-javascript/type.png)
+
+  ![](./clean-code-javascript/type.png)
 
 - typeof는 Wrapper 객체로 된 원시값들의 타입을 원시값 타입으로 표시하지 못한다.
-![](./clean-code-javascript/type2.jpeg)
+
+  ![](./clean-code-javascript/type2.jpeg)
 
 - typeof는 function과 class 모두 function으로 표시한다. (class는 function에 대한 문법적 설탕..?)
 - 또한, array, object, null을 모두 object 표시한다. null의 타입이 object로 표시되는 것은 자바스크립트에서도 인정한 오류이다.
-![](./clean-code-javascript/type3.jpeg)
+  ![](./clean-code-javascript/type3.jpeg)
 
 ## instanceof
 
 - `instanceof` 연산자는 `typeof` 연산자와 비슷하다. `instanceof` 연산자는 객체의 프로토타입 체인을 검사하는 연산자이다.
   - 해당 인스턴스가 어떤 객체의 인스턴스인지 여부를 확인할 수 있다.
-![](./clean-code-javascript/type4.jpeg)
+  ![](./clean-code-javascript/type4.jpeg)
 
 - 모든 인스턴스는 본질적으로 객체의 인스턴스이다. 자바스크립트에서 함수, 배열, 데이트 객체 같은 경우에는 프로토타입 체인을 타기 때문에 최상위에는 `Object` 가 있다.
-![](./clean-code-javascript/type5.jpeg)
+  ![](./clean-code-javascript/type5.jpeg)
 
 - 이런 특성 때문에 타입 검사를 하는 것이 더욱 어렵다. 이러한 타입 검사에 어려움이 있어서 또 하나 제공되는 기능이 있다.
 
@@ -218,7 +220,7 @@ const sum = function() {
 
 # 3. undefined와 null 비교
 
-![](./clean-code-javascript/undefined%20null.png)
+![](./clean-code-javascript/undefinednull.png)
 
 - undefined와 null을 사용할 때 여러 경우에서 헷갈린다.
 - MDN에서는 각각에 대해 다음과 같이 정의한다.
@@ -517,7 +519,7 @@ function getFunc(someArg1, someArg3) {
 
 ## 삼항연산자를 사용할 때 명확한 기준에 의한 일관성이 있어야 한다
 
-### 1. 삼항연산자를 중첩해서 많이 쓰면 가독성이 떨어진다. 분기조건이 많다면 차라리 switch 문을 쓰는 것이 나을 수 있다
+1. 삼항연산자를 중첩해서 많이 쓰면 가독성이 떨어진다. 분기조건이 많다면 차라리 switch 문을 쓰는 것이 나을 수 있다
 
 ```jsx
 // 삼항연산자 사용 bad case
@@ -559,13 +561,13 @@ function example() {
 }
 ```
 
-### 2. 삼항연산자를 중첩해 쓴다면 우선순위를 명확히 알 수 있도록 소괄호 감싸기
+2. 삼항연산자를 중첩해 쓴다면 우선순위를 명확히 알 수 있도록 소괄호 감싸기
 
 ```jsx
 const example = condition1 ? (a === 0 ? 'zero' : 'positive') : 'negative';
 ```
 
-### 3. 삼항연산자 사용을 통해 null 값이 나올 수 있는 상황에 대응할 수 있다
+3. 삼항연산자 사용을 통해 null 값이 나올 수 있는 상황에 대응할 수 있다
 
 ```jsx
 const welcomeMessage = isLogin => {
@@ -574,7 +576,7 @@ const welcomeMessage = isLogin => {
 };
 ```
 
-### 4. 삼항연산자에 값이 반환되지 않는(void) 함수를 사용하는 것은 억지 숏코딩에 불과할 수 있다. 차라리 if문 사용하는 편이 낫다
+4. 삼항연산자에 값이 반환되지 않는(void) 함수를 사용하는 것은 억지 숏코딩에 불과할 수 있다. 차라리 if문 사용하는 편이 낫다
 
 ```jsx
 // 삼항연산자 사용 bad case
@@ -593,7 +595,7 @@ function alertMessage(isAdult) {
 }
 ```
 
-### 5. 삼항연산자는 삼항연산자를 통해 값을 만들고 그 값을 변수로 담아낼 때 사용하는 것이 적절하다
+5. 삼항연산자는 삼항연산자를 통해 값을 만들고 그 값을 변수로 담아낼 때 사용하는 것이 적절하다
 
 ```jsx
 // 삼항연산자 사용 Good Case1
@@ -611,7 +613,7 @@ function alertMessage(isAdult) {
 }
 ```
 
-### 6. 삼항연산자는 삼항연산자가 반환하는 값을 바로 return할 때 사용하는 것이 적절한다
+6. 삼항연산자는 삼항연산자가 반환하는 값을 바로 return할 때 사용하는 것이 적절한다
 
 ```jsx
 // 삼항연산자 사용 Good Case2
@@ -621,7 +623,7 @@ function alertMessage(isAdult) {
 }
 ```
 
-### 7. 삼항연산자는 참 값 또는 거짓 값 반환만 필요한 경우에는 사용이 적절하지 않다.(대신 truthy falsy 사용)
+7. 삼항연산자는 참 값 또는 거짓 값 반환만 필요한 경우에는 사용이 적절하지 않다.(대신 truthy falsy 사용)
 
 # 8. truthy-falsy와 단축평가 다루기
 
