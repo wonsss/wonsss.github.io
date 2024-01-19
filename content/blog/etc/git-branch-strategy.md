@@ -6,14 +6,14 @@ thumbnail: { thumbnailSrc }
 draft: false
 ---
 
-- <mark class="hltr-pink">main 브랜치</mark>는 사용자에게 배포된 코드를 위한 브랜치이다.
-- 기능을 개발하는 중에 <mark class="hltr-pink">main 브랜치</mark>만 있다면?
+- main 브랜치는 사용자에게 배포된 코드를 위한 브랜치이다.
+- 기능을 개발하는 중에 main 브랜치만 있다면?
   - 기능이 완성되기 전까지 main 브랜치의 소스코드는 불완전한 상태로 존재한다.
   - 협업 시 여러 기능이 동시에 커밋되어 커밋 히스토리가 복잡하게 섞일 수 있다.
   - 문제가 발생했을 때 원하는 시점으로 롤백하기도 어렵다.
 - 브랜치 기능을 사용한다면?
   - 다른 브랜치에 영향을 받지 않는 독립적인 환경에서 기능을 개발하거나 버그를 수정할 수 있다.
-  - <mark class="hltr-red">여러 기능</mark>을 <mark class="hltr-cyan">여러 사람</mark>이 <mark class="hltr-green">병렬적</mark> 으로 개발할 수 있게 된다.
+  - 여러 기능을 여러 사람이 병렬적 으로 개발할 수 있게 된다.
 - 명확한 기준을 갖고 브랜치를 일관되게 관리해야 한다. "Git 브랜치 전략"!
   - Git Flow, Github Flow, Trunk-based Development 등의 모범사례를 참고한다.
 
@@ -22,25 +22,25 @@ draft: false
 ![git flow](./git-branch-strategy/git%20flow.png)
 
 - Vincent Driessen의 [A successful Git branching model](https://nvie.com/posts/a-successful-git-branching-model/)2010년 블로그 글에서 소개
-- 브랜치는 크게 <mark class="hltr-red">main</mark>, <mark class="hltr-cyan">develop</mark> 으로 나눈다. 이 둘은 계속 유지된다.
-- <mark class="hltr-green">feature</mark>, <mark class="hltr-orange">release</mark>, <mark class="hltr-pink">hotfix</mark> 브랜치는 필요할 때마다 생성되고 역할을 다하면 삭제된다.
+- 브랜치는 크게 main, develop 으로 나눈다. 이 둘은 계속 유지된다.
+- feature, release, hotfix 브랜치는 필요할 때마다 생성되고 역할을 다하면 삭제된다.
 
-- <mark class="hltr-red">main</mark> 브랜치
+- main 브랜치
   - 출시 가능한 프로덕션 코드를 모아두는 브랜치
   - 버전 태그(1.0, 1.1 등)를 달아서 배포한다.
-- <mark class="hltr-cyan">develop</mark> 브랜치
+- develop 브랜치
   - 다음 버전 개발을 위한 코드를 모아두는 브랜치
   - 개발이 완료되면 Main 브랜치로 병합된다.
-- <mark class="hltr-green">feature</mark> 브랜치
+- feature 브랜치
   - 하나의 기능을 개발하기 위한 브랜치
   - develop 브랜치에서 생성되고 구현 완료 후 develop 브랜치에 병합한다.
   - 네이밍: feature/{branch-name}
-- <mark class="hltr-orange">release</mark> 브랜치
+- release 브랜치
   - 배포 전 QA를 진행하는 브랜치
   - develop 브랜치에서 생성되고 QA에 통과하면 main 브랜치에 병합한다.
   - 수정사항이 있다면 main과 develop 브랜치에 병합한다.
   - 네이밍: release-{version}
-- <mark class="hltr-pink">hotfix</mark> 브랜치
+- hotfix 브랜치
   - 배포 후 버그가 확인돼 긴급 수정이 필요할 때 생성하여 사용하는 브랜치
   - main에서 생성하고 수정 후 main과 develop 브랜치에 병합한다.
   - 네이밍: hotfix-{version}
@@ -60,7 +60,7 @@ draft: false
 
 ![github flow](./git-branch-strategy/github%20flow.png)
 
-- <mark class="hltr-red">main</mark>과 <mark class="hltr-cyan">feature</mark> 브랜치가 존재한다.
+- main과 feature 브랜치가 존재한다.
   - 기능 구현, 버그 수정 등 변경 사항은 모두 main 브랜치에 바로 병합된다.
   - release 브래치가 제거되었기 때문에, main 브랜치에 병합하기 전에 PR을 통한 코드리뷰로 꼼꼼히 확인하고 배포 전 라이브 서버에서 테스트를 해야 한다. 병합 후 배포가 자동으로 이루어진다(CI/CD 프로세스 전제).
 - 장점
@@ -77,10 +77,10 @@ draft: false
 
 ![trunk-based development](./git-branch-strategy/trunk-based%20development.png)
 
-- <mark class="hltr-red">trunk(=main)</mark>와 <mark class="hltr-cyan">feature</mark> 브랜치가 존재한다.
+- trunk(=main)와 feature 브랜치가 존재한다.
   - trunk 브랜치는 mainline으로서 github flow 브랜치 전략에서 main 브랜치와 같은 의미이다.
   - feature 브랜치는 수명이 짧아야 한다(short-lived feature branches). 이 덕분에 mainline 으로 변경사항을 바로 추가할 수 있다.
-- <mark class="hltr-orange">사전 준비 필요</mark>
+- 사전 준비 필요
   1. 프로덕션에 코드를 빠르게 전달(Quick rhythm to deliver code to production)
   2. 변경 사항은 작게(Small Changes)
   3. 하루에 최소 한 번은 feature 브랜치들을 trunk 브랜치에 병합(Merge branches to the trunk at least once a day)
