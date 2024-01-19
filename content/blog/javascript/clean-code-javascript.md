@@ -790,7 +790,7 @@ function getActiveUserName(user, isLogin) {
 
 # 9. Else if와 Else를 피하고 Early Return하자
 
-![](./clean-code-javascript/early%20return.jpeg)
+![](./clean-code-javascript/early-return.jpeg)
 
 ## 1) else if 피하기
 
@@ -1215,7 +1215,7 @@ if (!A && !B) {
 
 # 14. JavaScript의 배열은 객체다
 
-![](./clean-code-javascript/arrays-are-objects%20(1).jpg)
+![](./clean-code-javascript/arrays-are-objects.jpg)
 
 ```jsx
 const arr = [1, 2, 3];
