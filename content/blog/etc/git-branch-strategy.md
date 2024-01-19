@@ -19,7 +19,7 @@ draft: false
 
 ## Git Flow 전략
 
-![git flow](./git%20flow.png)
+![git flow](./git-branch-strategy/git%20flow.png)
 
 - Vincent Driessen의 [A successful Git branching model](https://nvie.com/posts/a-successful-git-branching-model/)2010년 블로그 글에서 소개
 - 브랜치는 크게 <mark class="hltr-red">main</mark>, <mark class="hltr-cyan">develop</mark> 으로 나눈다. 이 둘은 계속 유지된다.
@@ -58,7 +58,7 @@ draft: false
 
 ## Github Flow 전략
 
-![github flow](./github%20flow.png)
+![github flow](./git-branch-strategy/github%20flow.png)
 
 - <mark class="hltr-red">main</mark>과 <mark class="hltr-cyan">feature</mark> 브랜치가 존재한다.
   - 기능 구현, 버그 수정 등 변경 사항은 모두 main 브랜치에 바로 병합된다.
@@ -75,7 +75,7 @@ draft: false
 
 ## Trunk-Based Development 전략
 
-![trunk-based development](./trunk-based%20development.png)
+![trunk-based development](./git-branch-strategy/trunk-based%20development.png)
 
 - <mark class="hltr-red">trunk(=main)</mark>와 <mark class="hltr-cyan">feature</mark> 브랜치가 존재한다.
   - trunk 브랜치는 mainline으로서 github flow 브랜치 전략에서 main 브랜치와 같은 의미이다.
