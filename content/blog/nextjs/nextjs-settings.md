@@ -6,6 +6,8 @@ thumbnail: { thumbnailSrc }
 draft: false
 ---
 
+react, react-dom, NextJS, typescript, eslint, prettier, styled-components 를 사용하는 개발 환경을 create-next-app 사용하지 않고 직접 설정해보자.
+
 ## 라이브러리 설치
 
 ```bash
@@ -177,5 +179,7 @@ MyDocument.getInitialProps = async (ctx: DocumentContext) => {
     "prettier:fix": "prettier '**/*' --write"
   },
 ```
+
+<https://github.com/wonsss/next-app> 에서 위와 같은 방법으로 개발환경 설정을 진행했다.
 
 > 참고 자료 : 모던 리액트 딥다이브 - 김용찬 -
