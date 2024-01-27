@@ -13,7 +13,7 @@ node -p 'process.arch'
 ```
 
 1. 터미널에서 `arch -x86_64 zsh` 입력하여 터미널 아키텍처 버전 변경
-2. 프로젝트에서 사용하려는 노드 버전 제거 후 재설치 `nvm uninstall 14 && nvm install 14`
+2. 프로젝트에서 사용하려는 노드 버전 제거 후 재설치 `nvm uninstall 14.21.3 && nvm install 14.21.3`
 3. `node -p 'process.arch'` 로 다시 확인하면 x64 출력됨
 4. 패키지 재설치 `rm -rf node_modules && npm install`
 
