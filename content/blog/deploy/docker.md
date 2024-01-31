@@ -99,13 +99,12 @@ CMD < "serve", "-s", "build" >
  docker inspect <IMAGE:TAG>
  ```
 
-- 아키텍처가 amd64 외에 다른 것으로 돼 있다면 해당 이미지는 Cloud Run 환경에서 실행할 수 없다. 만약 Cloud Run 환경에서 실행하고 싶다면, 이미지 빌드 시 다음과 같은 명령어를 사용해야 한다. <https://docs.docker.com/build/building/multi-platform/>
+- 아키텍처가 amd64 외에 다른 것으로 돼 있다면 해당 이미지는 Cloud Run 환경에서 실행할 수 없고, 멀티플랫폼 빌드를 위해 다음과 같은 명령어를 사용해야 한다.
+  - 참고: <https://docs.docker.com/build/building/multi-platform/>
 
  ```
  docker buildx build --platform linux/amd64 -t <IMAGE:TAG> .
  ```
-
-- <https://stackoverflow.com/questions/55662222/container-failed-to-start-failed-to-start-and-then-listen-on-the-port-defined-b>
 
 - 3000번 port로 이미지 열기
   - `docker run -p <host port number>:<container port number> <IMAGE:TAG>` : 호스트 시스템 지정한 포트로 유입되는 트래픽을 도커 컨테이너 지정 포트로 전달
