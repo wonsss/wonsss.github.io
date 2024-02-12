@@ -8,9 +8,16 @@ draft: false
 
 ## 공변성과 반공변성이란
 
--   집합 관계로서 공변성, 반공변성, 이변성, 무공변성 요약 - <mark class="hltr-red">공변성(Covariance)</mark>: A ⊂ B일 때 `T<A>` ⊂ `T<B>`인 경우 - <mark class="hltr-green">반공변성(Contravariance)</mark>: A ⊂ B일 때 `T<A>` ⊃ `T<B>` 인 경우 - <mark class="hltr-pink">이변성(Bivariance)</mark>: A ⊂ B일 때 `T<A>` ⊂ `T<B>`도 되고  `T<A>` ⊃ `T<B>`도 되는 경우 - <mark class="hltr-grey">무공변성(Invariance)</mark>: A ⊂ B더라도 `T<A>` ⊂ `T<B>`도 안 되고 `T<A>` ⊃ `T<B>`도 안 되는 경우
--   <mark class="hltr-red">공변성</mark>: A ⊂ B일 때 `T<A>` ⊂ `T<B>`인 경우 - A가 B의 서브타입일 때, `T<A>` 가 `T<B>` 의 서브타입이 된다면, <mark class="hltr-red">T</mark>를 <mark class="hltr-red">공변적</mark>이라고 부른다. - 조금 더 풀어 설명하자면, A타입이 B타입에 포함될 때, A타입이 인자로 전달된 제네릭 타입(`T<A>`)이 B타입이 인자로 전달된 제네릭 타입(`T<B>`)에 포함되는 것을 <mark class="hltr-red">공변성</mark>이라 한다.
--   <mark class="hltr-green">반공변성</mark>: A ⊂ B일 때 `T<A>` ⊃ `T<B>` 인 경우 - 반면, 제네릭 타입이 그 반대의 포함 관계가 되는 것은 <mark class="hltr-green">반공변성</mark>이라 한다.
+-   집합 관계로서 공변성, 반공변성, 이변성, 무공변성 정리
+    -   <mark class="hltr-red">공변성(Covariance)</mark>: A ⊂ B일 때 `T<A>` ⊂ `T<B>`인 경우
+    -   <mark class="hltr-green">반공변성(Contravariance)</mark>: A ⊂ B일 때 `T<A>` ⊃ `T<B>` 인 경우
+    -   <mark class="hltr-pink">이변성(Bivariance)</mark>: A ⊂ B일 때 `T<A>` ⊂ `T<B>`도 되고  `T<A>` ⊃ `T<B>`도 되는 경우
+    -   <mark class="hltr-grey">무공변성(Invariance)</mark>: A ⊂ B더라도 `T<A>` ⊂ `T<B>`도 안 되고 `T<A>` ⊃ `T<B>`도 안 되는 경우
+-   <mark class="hltr-red">공변성</mark>: A ⊂ B일 때 `T<A>` ⊂ `T<B>`인 경우
+    -   A가 B의 서브타입일 때, `T<A>` 가 `T<B>` 의 서브타입이 된다면, <mark class="hltr-red">T</mark>를 <mark class="hltr-red">공변적</mark>이라고 부른다.
+    -   조금 더 풀어 설명하자면, A타입이 B타입에 포함될 때, A타입이 인자로 전달된 제네릭 타입(`T<A>`)이 B타입이 인자로 전달된 제네릭 타입(`T<B>`)에 포함되는 것을 <mark class="hltr-red">공변성</mark>이라 한다.
+-   <mark class="hltr-green">반공변성</mark>: A ⊂ B일 때 `T<A>` ⊃ `T<B>` 인 경우
+    -   반면, 제네릭 타입이 그 반대의 포함 관계가 되는 것은 <mark class="hltr-green">반공변성</mark>이라 한다.
 
 > 서브타입과 슈퍼타입
 >
@@ -33,16 +40,17 @@ stringArray = stringOrNumberArray // Type Error, Type '(string | number)[]' is n
 // 즉, stringArray(:Array<Subtype>) ⊂ stringOrNumberArray(:Array<Supertype>)
 ```
 
--   기본적으로 타입스크립트의 모든 복합타입 멤버는 <mark class="hltr-red">공변성</mark> 을 갖고 있다.
+-   기본적으로 타입스크립트의 모든 복합타입 멤버는 <mark class="hltr-red">공변성</mark>을 갖고 있다.
 
 ## <mark class="hltr-yellow">함수 매개변수 타입</mark>은 기본적으로 <mark class="hltr-pink">이변성</mark>
 
--   유일하게 <mark class="hltr-yellow">함수 매개변수 타입</mark>만 <mark class="hltr-green">반공변성</mark>도 갖고 있어 <mark class="hltr-red">공변성</mark>과 <mark class="hltr-green">반공변성</mark>이 모두 있는 <mark class="hltr-pink">이변성</mark>이다.
+유일하게 <mark class="hltr-yellow">함수 매개변수 타입</mark>만 <mark class="hltr-green">반공변성</mark>도 갖고 있어 <mark class="hltr-red">공변성</mark>과 <mark class="hltr-green">반공변성</mark>이 모두 있는 <mark class="hltr-pink">이변성</mark>이다.
 
 ### 함수의 매개변수 타입에 <mark class="hltr-green">반공변성</mark> 특성도 있는 이유
 
--   슈퍼타입과 서브타입을 함수의 매개변수 타입으로 전달해서 생긴 각각의 <mark class="hltr-orange">함수 호출 시그니처</mark>의 개수는 슈퍼타입이 서브타입보다 많다. 그리고 <mark class="hltr-orange">함수 호출 시그니처</mark>의 개수가 많을수록(오버로드) 그 타입은 더 좁아진다. 오버로드된 <mark class="hltr-orange">함수 호출 시그니처</mark>는 함수 타입들의 intersection이기 때문에 타입이 더 좁아진다.
--   따라서, 함수의 매개변수 타입은 서브타입으로 생긴 함수 호출 시그니처가 슈퍼타입으로 생긴 함수 호출 시그니처를 포함하는 <mark class="hltr-green">반공변성</mark>이 형성된다. - <mark class="hltr-green">반공변성</mark>: A ⊂ B일 때 `T<A>` ⊃ `T<B>` 인 경우
+슈퍼타입과 서브타입을 함수의 매개변수 타입으로 전달해서 생긴 각각의 <mark class="hltr-orange">함수 호출 시그니처</mark>의 개수는 슈퍼타입이 서브타입보다 많다. 그리고 <mark class="hltr-orange">함수 호출 시그니처</mark>의 개수가 많을수록(오버로드) 그 타입은 더 좁아진다. 오버로드된 <mark class="hltr-orange">함수 호출 시그니처</mark>는 함수 타입들의 intersection이기 때문에 타입이 더 좁아진다.
+
+따라서, 함수의 매개변수 타입은 서브타입으로 생긴 함수 호출 시그니처가 슈퍼타입으로 생긴 함수 호출 시그니처를 포함하는 <mark class="hltr-green">반공변성</mark>이 형성된다.
 
 ```tsx
 type Supertype = string | number
@@ -91,8 +99,8 @@ cloneAnimal(c, trainDog);
 
 왜 이러한지 이해하기 위해, 두 가지 질문을 고민해보자.
 
--   1. `Dog[]`는 `Animal[]`의 서브타입인가?
--   2. 타입스크립트에서 `Dog[]`은 `Animal[]`의 서브타입이어야 하는가?
+-   1 `Dog[]`는 `Animal[]`의 서브타입인가?
+-   2 타입스크립트에서 `Dog[]`은 `Animal[]`의 서브타입이어야 하는가?
 
 두 번째 질문은 분석하기 더 쉽다. 만약 해당 질문에 답변이 거짓이라면 어떠한가?
 
@@ -123,9 +131,9 @@ checkIfAnimalsAreAwake(myPets);
 
 ## strictFunctionTypes check
 
--   타입스크립트에서 [strictFunctionTypes](https://www.typescriptlang.org/tsconfig#strictFunctionTypes) 설정이 꺼져있는 기본 모드에서는 이러한 함수 매개변수의 <mark class="hltr-pink">이변성</mark>을 다음 예제코드에서와 같이 확인할 수 있다.
+타입스크립트에서 [strictFunctionTypes](https://www.typescriptlang.org/tsconfig#strictFunctionTypes) 설정이 꺼져있는 기본 모드에서는 이러한 함수 매개변수의 <mark class="hltr-pink">이변성</mark>을 다음 예제코드에서와 같이 확인할 수 있다.
 
-    [typescript playground example](https://www.typescriptlang.org/play?strict=false&strictFunctionTypes=false#code/GYVwdgxgLglg9mABMMAKAHgLkQZygJxjAHMBKRAbwChFEIEc4AbAUwDom5jUAiACRZNOAGkQ9EAakTo2UOABk4Adxb4AwgEMcLVKVIBuKgF8aVKAE8ADi0QBlAkWIB5fADkQAWwBGqgGLgIRABeRFQwHGw8QhJEAB9EME8ffHIggD5EADc4GAATQ0QqAHoixABVcI1gGy0cGGIwDxYwKEQYHERLfBZM5qgWXKpWVtBIbHto5zckvwDg5DBDKlGIVABGAAYDIA)
+[typescript playground example](https://www.typescriptlang.org/play?strict=false&strictFunctionTypes=false#code/GYVwdgxgLglg9mABMMAKAHgLkQZygJxjAHMBKRAbwChFEIEc4AbAUwDom5jUAiACRZNOAGkQ9EAakTo2UOABk4Adxb4AwgEMcLVKVIBuKgF8aVKAE8ADi0QBlAkWIB5fADkQAWwBGqgGLgIRABeRFQwHGw8QhJEAB9EME8ffHIggD5EADc4GAATQ0QqAHoixABVcI1gGy0cGGIwDxYwKEQYHERLfBZM5qgWXKpWVtBIbHto5zckvwDg5DBDKlGIVABGAAYDIA)
 
 ```ts
 // strictFunctionTypes: off
@@ -141,9 +149,10 @@ let func: StringOrNumberFunc = fn
 func(10)
 ```
 
--   타입스크립트 설정에서 [strictFunctionTypes](https://www.typescriptlang.org/tsconfig#strictFunctionTypes) 설정을 켜면 <mark class="hltr-red">공변성</mark>이 제거되고 <mark class="hltr-green">반공변성</mark>만 남는다. - 그리고 이전 예제처럼 타입선언을 했을 때 이제는 타입에러가 검출되어 불안전한 할당을 방지할 수 있게 된다.
+타입스크립트 설정에서 [strictFunctionTypes](https://www.typescriptlang.org/tsconfig#strictFunctionTypes) 설정을 켜면 <mark class="hltr-red">공변성</mark>이 제거되고 <mark class="hltr-green">반공변성</mark>만 남는다.
+그리고 이전 예제처럼 타입선언을 했을 때 이제는 타입에러가 검출되어 불안전한 할당을 방지할 수 있게 된다.
 
-    [typescript playground example](https://www.typescriptlang.org/play?strict=false#code/GYVwdgxgLglg9mABMMAKAHgLkQZygJxjAHMBKRAbwChFEIEc4AbAUwDom5jUAiACRZNOAGkQ9EAakTo2UOABk4Adxb4AwgEMcLVKVIBuKgF8aVKAE8ADi0QBlAkWIB5fADkQAWwBGqgGLgIRABeRFQwHGw8QhJEAB9EME8ffHIggD5EADc4GAATQ0QqAHoixABVcI1gGy0cGGIwDxYwKEQYHERLfBZM5qgWXKpWVtBIbHto5zckvwDg5DBDKlGIVABGAAYDIA)
+[typescript playground example](https://www.typescriptlang.org/play?strict=false#code/GYVwdgxgLglg9mABMMAKAHgLkQZygJxjAHMBKRAbwChFEIEc4AbAUwDom5jUAiACRZNOAGkQ9EAakTo2UOABk4Adxb4AwgEMcLVKVIBuKgF8aVKAE8ADi0QBlAkWIB5fADkQAWwBGqgGLgIRABeRFQwHGw8QhJEAB9EME8ffHIggD5EADc4GAATQ0QqAHoixABVcI1gGy0cGGIwDxYwKEQYHERLfBZM5qgWXKpWVtBIbHto5zckvwDg5DBDKlGIVABGAAYDIA)
 
 ```ts
 // strictFunctionTypes: on
@@ -157,10 +166,11 @@ type StringOrNumberFunc = (ns: string | number) => void
 let func: StringOrNumberFunc = fn // Type '(x: string) => void' is not assignable to type 'StringOrNumberFunc'. Types of parameters 'x' and 'ns' are incompatible. Type 'string | number' is not assignable to type 'string'. Type 'number' is not assignable to type 'string'.
 ```
 
--   하지만 `strictFunctionTypes` 설정이 켜져있어도, 함수 타입을 <mark class="hltr-purple">method 구문</mark><mark class="hltr-purple">(ex, get(): void;)</mark>으로 쓰면, 그 함수는 다시 <mark class="hltr-pink">이변성</mark>으로 작동한다.
--   아래 예제에서, 슈퍼타입의 함수 호출 시그니처에 서브타입의 함수 호출 시그니처를 할당한 것은, 논리적으로 따지면 <mark class="hltr-green">반공변성</mark>에 따라 타입에러가 존재해야 한다. 하지만 <mark class="hltr-purple">method 구문 함수</mark>는 strictFunctionTypes 설정을 켜더라도 타입스크립트 설계상 <mark class="hltr-pink">이변성</mark>이라서, 해당 타입에러가 감지되지 않는 문제가 있다.
+하지만 `strictFunctionTypes` 설정이 켜져있어도, 함수 타입을 <mark class="hltr-purple">method 구문</mark><mark class="hltr-purple">(ex, get(): void;)</mark>으로 쓰면, 그 함수는 다시 <mark class="hltr-pink">이변성</mark>으로 작동한다.
 
-    [typescript playground example](https://www.typescriptlang.org/play?strict=false#code/C4TwDgpgBAygrpATqSUC8UDOxEEsB2A5lAD5T5wC2ARhIgNwBQK081L6WOBhTz40ALIRgACwD2AE1yZRnAN6MoUAGZx8AYwAUADwBcsBHRYBKAwDdxuSUwC+TKIzWbgucfixxqAMXy6DbKZQisoa7pjiADYQAHSR4oRaAEQAEhCR8QA0UElQANRQOjHA4gAy4gDudADCAIaYEFomJnZKjAD07VAAqpGulLXA6SBQtR7qmLUq0PWYuIT4lBD4wNnUcMDk4puSIhAaQ5KMYfjYUJQGwmJSMnIYIarqGgaYXr7ZnVCAEUOAPsuAAwuAUPHABrjUEAFquADCHABxrgBzZwA7Q4AP2sAE02ADJnAAujUEAOIOAGD7ASCITCESjAD6dUEABquAT6bADqrUEAwTWAAXHsoAMHsArzWAAZ7AIyD6MADK2AF07AC5dUEBqMAN+2AABqoIAXCcANeOAF1XAD6jUEpgBOmmJQQAaq4ABycAM53nEQSSRQQA2tYAObrB4MAKU1QQAu4xyrYAB7sAOh1QGXkwUAkXiwAINRrABgtGqggClRy3GwA4E+LABHjKsY9kYlBizm0AEYAAwtIA)
+아래 예제에서, 슈퍼타입의 함수 호출 시그니처에 서브타입의 함수 호출 시그니처를 할당한 것은, 논리적으로 따지면 <mark class="hltr-green">반공변성</mark>에 따라 타입에러가 존재해야 한다. 하지만 <mark class="hltr-purple">method 구문 함수</mark>는 strictFunctionTypes 설정을 켜더라도 타입스크립트 설계상 <mark class="hltr-pink">이변성</mark>이라서, 해당 타입에러가 감지되지 않는 문제가 있다.
+
+[typescript playground example](https://www.typescriptlang.org/play?strict=false#code/C4TwDgpgBAygrpATqSUC8UDOxEEsB2A5lAD5T5wC2ARhIgNwBQK081L6WOBhTz40ALIRgACwD2AE1yZRnAN6MoUAGZx8AYwAUADwBcsBHRYBKAwDdxuSUwC+TKIzWbgucfixxqAMXy6DbKZQisoa7pjiADYQAHSR4oRaAEQAEhCR8QA0UElQANRQOjHA4gAy4gDudADCAIaYEFomJnZKjAD07VAAqpGulLXA6SBQtR7qmLUq0PWYuIT4lBD4wNnUcMDk4puSIhAaQ5KMYfjYUJQGwmJSMnIYIarqGgaYXr7ZnVCAEUOAPsuAAwuAUPHABrjUEAFquADCHABxrgBzZwA7Q4AP2sAE02ADJnAAujUEAOIOAGD7ASCITCESjAD6dUEABquAT6bADqrUEAwTWAAXHsoAMHsArzWAAZ7AIyD6MADK2AF07AC5dUEBqMAN+2AABqoIAXCcANeOAF1XAD6jUEpgBOmmJQQAaq4ABycAM53nEQSSRQQA2tYAObrB4MAKU1QQAu4xyrYAB7sAOh1QGXkwUAkXiwAINRrABgtGqggClRy3GwA4E+LABHjKsY9kYlBizm0AEYAAwtIA)
 
 ```ts
 type Supertype = string | number
@@ -181,14 +191,16 @@ const m: Methodish = {
 m.func(10)
 ```
 
--   따라서 특별히 이변성이 필요한 경우가 아니라면, 함수 타입을 <mark class="hltr-purple">method 구문</mark>이 아닌 <mark class="hltr-blue">function 구문</mark><mark class="hltr-blue">(ex, get: () ⇒ void;)</mark>으로 써서 <mark class="hltr-green">반공변성</mark>으로 동작하게 하는 것이 적절하다.
+따라서 특별히 이변성이 필요한 경우가 아니라면, 함수 타입을 <mark class="hltr-purple">method 구문</mark>이 아닌 <mark class="hltr-blue">function 구문</mark><mark class="hltr-blue">(ex, get: () ⇒ void;)</mark>으로 써서 <mark class="hltr-green">반공변성</mark>으로 동작하게 하는 것이 적절하다.
 
 ### strictFunctionTypes 설정을 켜도 <mark class="hltr-purple">method 구문으로 작성된 함수</mark>의 매개변수 타입이 이변성인 이유
 
--   타입스크립트에서 `strictFunctionTypes` 기능을 개발할 때, DOM의 일부를 포함하여 본질적으로 안전하지 않은 class 계층 구조를 많이 발견했다고 한다. - 만약, <mark class="hltr-purple">method 구문 함수</mark>에도 엄격한 검사를 적용했다면 상당히 많은 제네릭 타입이 <mark class="hltr-grey">무공변성</mark>이 되는 엄청난 브레이킹 체인지가 발생했을 것이다. 따라서 이처럼 <mark class="hltr-purple">method 구문 함수</mark>에서 <mark class="hltr-grey">무공변성</mark>이 되지 않도록, <mark class="hltr-pink">이변성</mark>이라는 약간의 불건전성을 용인한 것으로 보인다.
--   즉, <mark class="hltr-purple">method 구문 함수</mark>는 제네릭 클래스나 제네릭 인터페이스(예를 들어 `Array<T>`)의 <mark class="hltr-green"> 반공변적</mark>인 관계를 유지하게 하기 위해 strictFunctionTypes 검사 기능에서 의도적으로 배제됐다.
--   이로 인해, strictFunctionTypes 검사 기능은 <mark class="hltr-purple">method 구문</mark> 으로 작성된 함수에는 적용하지 않고 <mark class="hltr-blue">function 구문</mark>으로 작성된 함수에만 적용했다고 한다.
+타입스크립트에서 `strictFunctionTypes` 기능을 개발할 때, DOM의 일부를 포함하여 본질적으로 안전하지 않은 class 계층 구조를 많이 발견했다고 한다. - 만약, <mark class="hltr-purple">method 구문 함수</mark>에도 엄격한 검사를 적용했다면 상당히 많은 제네릭 타입이 <mark class="hltr-grey">무공변성</mark>이 되는 엄청난 브레이킹 체인지가 발생했을 것이다. 따라서 이처럼 <mark class="hltr-purple">method 구문 함수</mark>에서 <mark class="hltr-grey">무공변성</mark>이 되지 않도록, <mark class="hltr-pink">이변성</mark>이라는 약간의 불건전성을 용인한 것으로 보인다.
+
+즉, <mark class="hltr-purple">method 구문 함수</mark>는 제네릭 클래스나 제네릭 인터페이스(예를 들어 `Array<T>`)의 <mark class="hltr-green"> 반공변적</mark>인 관계를 유지하게 하기 위해 strictFunctionTypes 검사 기능에서 의도적으로 배제됐다.
+
+이로 인해, strictFunctionTypes 검사 기능은 <mark class="hltr-purple">method 구문</mark> 으로 작성된 함수에는 적용하지 않고 <mark class="hltr-blue">function 구문</mark>으로 작성된 함수에만 적용했다고 한다.
 
 > 참고: [Typescript PR: Strict function types #18654](https://github.com/microsoft/TypeScript/pull/18654)
 
--   그러나 method 구문 함수를 이변적으로 동작하도록 만들어야 할 일은 거의 없을 것이다. 따라서 <mark class="hltr-green">반공변적</mark>으로 동작할 수 있는 메서드의 타입 정의에도 <mark class="hltr-blue">function 구문 함수</mark> 작성 방식을 사용하는 것이 타입 안전성 측면에서 더 좋다.
+그러나 method 구문 함수를 이변적으로 동작하도록 만들어야 할 일은 거의 없을 것이다. 따라서 <mark class="hltr-green">반공변적</mark>으로 동작할 수 있는 메서드의 타입 정의에도 <mark class="hltr-blue">function 구문 함수</mark> 작성 방식을 사용하는 것이 타입 안전성 측면에서 더 좋다.
