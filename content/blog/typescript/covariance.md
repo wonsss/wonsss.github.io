@@ -204,3 +204,5 @@ m.func(10)
 > 참고: [Typescript PR: Strict function types #18654](https://github.com/microsoft/TypeScript/pull/18654)
 
 그러나 method 구문 함수를 이변적으로 동작하도록 만들어야 할 일은 거의 없을 것이다. 따라서 <mark class="hltr-green">반공변적</mark>으로 동작할 수 있는 메서드의 타입 정의에도 <mark class="hltr-blue">function 구문 함수</mark> 작성 방식을 사용하는 것이 타입 안전성 측면에서 더 좋다.
+
+이를 위해 function 구문 함수를 메서트 타입 정의 시 사용하도록 도와주는 ESLint의 [method-signature-style](https://github.com/typescript-eslint/typescript-eslint/blob/main/packages/eslint-plugin/docs/rules/method-signature-style.md) rule을 활성화하는 것도 좋은 방법이다.
