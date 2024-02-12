@@ -1,10 +1,10 @@
-import { useEffect } from 'react'
+import { useEffect } from "react"
 
 export function useScrollEvent(onScroll) {
-    useEffect(() => {
-        window.addEventListener(`scroll`, onScroll, { passive: false })
-        return () => {
-            window.removeEventListener(`scroll`, onScroll, { passive: false })
-        }
-    }, [])
+	useEffect(() => {
+		window.addEventListener(`scroll`, onScroll, { passive: false })
+		return () => {
+			window.removeEventListener(`scroll`, onScroll, { passive: false })
+		}
+	}, [])
 }

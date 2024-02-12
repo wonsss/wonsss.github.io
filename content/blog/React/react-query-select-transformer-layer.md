@@ -10,7 +10,7 @@ draft: true
 
 ## 트랜스포머 레이어
 
-- 서버에서 보내준 데이터(before)
+-   서버에서 보내준 데이터(before)
 
 ```json
 {
@@ -24,7 +24,7 @@ draft: true
 
 서버에서는 위의 예시처럼 보내줬다 하더라도 클라이언트에서는 아래와 같이 카멜케이스 및 컴포넌트가 요구하는 대로 수정하고 싶을 수 있다.
 
-- 클라이언트에서 사용하기 위해 변형한 데이터(after)
+-   클라이언트에서 사용하기 위해 변형한 데이터(after)
 
 ```json
 {
@@ -50,31 +50,31 @@ useQuery의 경우, 다음과 같이 select 옵션을 사용함으로써 서버�
 
 ```tsx
 type ProductFromServer = {
-    item_no: number;
-    item_name: string;
-    image_url: string;
-    price: number;
-    available: boolean;
-};
+	item_no: number
+	item_name: string
+	image_url: string
+	price: number
+	available: boolean
+}
 
 type Product = {
-    id: number;
-    name: string;
-    imageUrl: string;
-    price: number;
-    isAvailable: boolean;
-};
+	id: number
+	name: string
+	imageUrl: string
+	price: number
+	isAvailable: boolean
+}
 
 function transformProductArray(products: ProductFromServer[]): Product[] {
-  const transformProduct = (product: ProductFromServer) => ({
-    id: product.item_no,
-    name: product.item_name,
-    imageUrl: product.image_url,
-    price: product.price,
-    isAvailable: product.available,
-  });
+	const transformProduct = (product: ProductFromServer) => ({
+		id: product.item_no,
+		name: product.item_name,
+		imageUrl: product.image_url,
+		price: product.price,
+		isAvailable: product.available,
+	})
 
-  return products.map((product) => transformProduct(product));
+	return products.map(product => transformProduct(product))
 }
 ```
 
@@ -82,10 +82,10 @@ useQuery의 select 옵션에 위에서 작성한 transformProductArray 함수를
 
 ```tsx
 const useQueryProducts = () => {
-  return useQuery(["products"], getProducts, {
-    select: (data) => transformProductArray(data),
-  });
-};
+	return useQuery(["products"], getProducts, {
+		select: data => transformProductArray(data),
+	})
+}
 ```
 
 ### useInfiniteQuery
@@ -96,15 +96,17 @@ useInfiniteQuery의 경우, select 옵션을 사용하여 데이터를 재구성
 
 ```tsx
 const useInfiniteQueryProducts = () => {
-  return useInfiniteQuery(
-    ['products'],
-    ({ pageParam }) => getProducts({ cursorId: pageParam }),
-    {
-      select: (data) => ({
-        pages: data.pages.map((products) => transformProductArray(products)),
-        pageParams: data.pageParams,
-      }),
-    },
-  );
+	return useInfiniteQuery(
+		["products"],
+		({ pageParam }) => getProducts({ cursorId: pageParam }),
+		{
+			select: data => ({
+				pages: data.pages.map(products =>
+					transformProductArray(products)
+				),
+				pageParams: data.pageParams,
+			}),
+		}
+	)
 }
 ```

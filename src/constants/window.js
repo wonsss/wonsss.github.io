@@ -1,1 +1,1 @@
-export const SCROLL_Y = 'y'
+export const SCROLL_Y = "y"

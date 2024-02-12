@@ -6,8 +6,8 @@ thumbnail: { thumbnailSrc }
 draft: false
 ---
 
-> - Auth0에 게시된 Sebastian Peyrott의 `A brief history of Javascript` 아티클(2017.1.16. 게시)을 읽고 흥미가 생겨 학습 목적으로 번역해보았습니다.
->   - 출처: [https://auth0.com/blog/a-brief-history-of-javascript](https://auth0.com/blog/a-brief-history-of-javascript)
+> -   Auth0에 게시된 Sebastian Peyrott의 `A brief history of Javascript` 아티클(2017.1.16. 게시)을 읽고 흥미가 생겨 학습 목적으로 번역해보았습니다.
+>     -   출처: [https://auth0.com/blog/a-brief-history-of-javascript](https://auth0.com/blog/a-brief-history-of-javascript)
 
 `JavaScript`는 오늘날 가장 중요한 언어 중 하나이다. 웹의 등장은 `JavaScript`의 위치를 전혀 생각치도 못했던 곳으로 데려갔다. `JavaScript`가 짧은 역사 동안 어떻게 발전했는지 그리고 어디로 향할 것인지 살펴 볼 것이다.
 
@@ -68,12 +68,12 @@ public class Sample {
 (modern) `JavaScript`의 예시
 
 ```jsx
-console.log('Hello world')
+console.log("Hello world")
 try {
-    const silo = new MissileSilo('silo.weapons.mil')
-    silo.launchMissile(process.argv[0])
+	const silo = new MissileSilo("silo.weapons.mil")
+	silo.launchMissile(process.argv[0])
 } catch (e) {
-    console.log('Unexpected exception' + e)
+	console.log("Unexpected exception" + e)
 }
 ```
 
@@ -83,10 +83,10 @@ try {
 
 ```jsx
 var myFunction = function() {
-    console.log('hello')
+	console.log("hello")
 }
 otherFunction(myFunction)
-myFunction.property = '1'
+myFunction.property = "1"
 ```
 
 함수를 일급 객체로 만들면 특정 함수형 프로그래밍 패턴이 가능하다. 예를 들어 이후 버전의 `JavaScript`는 특정 기능 패턴을 사용한다.
@@ -94,7 +94,7 @@ myFunction.property = '1'
 ```jsx
 var a = [1, 2, 3]
 a.forEach(function(e) {
-    console.log(e)
+	console.log(e)
 })
 ```
 
@@ -108,15 +108,15 @@ a.forEach(function(e) {
 
 ```jsx
 function Vehicle(maxSpeed) {
-    this.maxSpeed = maxSpeed
+	this.maxSpeed = maxSpeed
 }
 
 Vehicle.prototype.maxSpeed = function() {
-    return this.maxSpeed
+	return this.maxSpeed
 }
 
 function Car(maxSpeed) {
-    Vehicle.call(this, maxSpeed)
+	Vehicle.call(this, maxSpeed)
 }
 
 Car.prototype = new Vehicle()
@@ -151,10 +151,10 @@ Car.prototype = new Vehicle()
 <video style="width: 100%;" controls=""><source type="video/mp4" src="https://cdn.auth0.com/blog/js-history/netscape3.mp4"/></video>
 
 ```jsx
-alert('Hello world!')
+alert("Hello world!")
 
 function says() {
-    alert('hello')
+	alert("hello")
 }
 
 function hello() {}
@@ -165,7 +165,7 @@ function hello() {}
 hello.prototype.say = says
 
 function test() {
-    this.value = 1
+	this.value = 1
 }
 
 test.prototype = new hello()
@@ -215,13 +215,13 @@ ECMA와 `JavaScript`용 ISO 표준(ISO/IEC 16262)간의 불일치를 수정하�
 
 `ECMAScript 2` 이후에도 작업이 계속되었고 언어의 첫 번째 큰 변화가 빛을 보게 되었다. 이 버전에는 다음 기능이 포함되었다.
 
-- 정규 표현
-- do-while
-- 예외 및 try/catch
-- string과 array를 위한 내장 함수
-- 숫자 출력 형식
-- `in` 과 `instanceof` 연산자
-- 훨씬 뛰어난 에러 핸들린
+-   정규 표현
+-   do-while
+-   예외 및 try/catch
+-   string과 array를 위한 내장 함수
+-   숫자 출력 형식
+-   `in` 과 `instanceof` 연산자
+-   훨씬 뛰어난 에러 핸들린
 
 `ECMAScript 3`은 1999년 12월에 출시되었다.
 
@@ -249,7 +249,7 @@ ECMA와 `JavaScript`용 ISO 표준(ISO/IEC 16262)간의 불일치를 수정하�
 실제로 `Internet Explorer 5와 6`에서 `XMLHttpRequest` 객체는 `ActiveX`에 의존했다. 다른 브라우저에서는 네이티브 객체로 구현했던 것과는 다르게 말이다.
 
 ```jsx
-var xhr = new ActiveXObject('Microsoft.XMLHTTP')
+var xhr = new ActiveXObject("Microsoft.XMLHTTP")
 ```
 
 틀림없이, 그 아이디어를 먼저 내놓은 것은 `Internet Explorer 5` 였다. `Internet Explorer 7`이 되어서야 `Microsoft`는 표준과 합의를 더욱 상세히 따르기 시작했다. 일부 오래된 기업 사이트에서는 `Internet Explorer`를 올바르게 실행하기 위해 이전 버전이 여전히 필요한 실정이다.
@@ -260,26 +260,26 @@ var xhr = new ActiveXObject('Microsoft.XMLHTTP')
 
 `ECMAScript 4`에 대한 작업은 1999년에 버전 3이 출시되자마자 시작되었다. `Netscape`에서는 흥미로운 많은 기능들이 내부적으로 논의되었다. 그러나 이러한 구현에 관한 관심이 감소하여 2003년에 `ECMAScript`의 새 버전에 대한 작업이 중단되었다. 중간 보고서가 발표되었으며, `Adobe`(`ActionScript`) 및 `Microsoft`(`JScript.NET`)와 같은 일부 구현자는 그것을 그들의 엔진의 기반으로 사용했다. 2005년에는 `AJAX`와 `XMLHttpRequest`의 파급력이 새 `JavaScript` 버전에 대한 흥미를 일으켰고, `TC-39`는 작업을 재개했다. 세월이 흐르면서 기능들은 점점 더 커졌다. 개발이 한창일 때 `ECMAScript 4`에는 다음과 같은 기능이 있었다.
 
-- Classes
-- Interfaces
-- Namespaces
-- Packages
-- Optional type annotations
-- Optional static type checking
-- Structural types
-- Type definitions
-- Multi methods
-- Parameterized types
-- Proper tail calls
-- Iterators
-- Generators
-- Introspection
-- Type discriminating exception handlers
-- Constant bindings
-- Proper block scoping
-- Destructuring
-- Succinct function expressions
-- Array comprehensions
+-   Classes
+-   Interfaces
+-   Namespaces
+-   Packages
+-   Optional type annotations
+-   Optional static type checking
+-   Structural types
+-   Type definitions
+-   Multi methods
+-   Parameterized types
+-   Proper tail calls
+-   Iterators
+-   Generators
+-   Introspection
+-   Type discriminating exception handlers
+-   Constant bindings
+-   Proper block scoping
+-   Destructuring
+-   Succinct function expressions
+-   Array comprehensions
 
 `ECMAScript 4` 초안에는 이 새로운 버전이 대규모 프로그래밍을 목적으로 기술되었다. `ECMAScript 6(2015)`에 이미 익숙하다면, `ECMAScript 4`의 많은 기능이 `ECMAScript 6`에 다시 도입된 것임을 알 수 있다.
 
@@ -387,18 +387,18 @@ sales.item.(@type == "oranges").@quantity = 4;
 
 `ECMAScript 5`는 `ECMAScript 3`으로부터 다소 가벼운 업데이트이며 다음과 같은 내용을 포함하고 있다.
 
-- Getter/setters
-- 배열과 객체 리터럴에서 Trailing commas
-- 프로퍼티 이름으로서 예약어
-- 신규 `Object` 메서드 (`create`, `defineProperty`, `keys`, `seal`, `freeze`, `getOwnPropertyNames`, etc.)
-- 신규 `Array` 메서드 (`isArray`, `indexOf`, `every`, `some`, `map`, `filter`, `reduce`, etc.)
-- `String.prototype.trim` 과 프로퍼티 접근자
-- 신규 `Date` 메서드 (`toISOString`, `now`, `toJSON`)
-- `bind` 함수
-- JSON
-- 불변 전역 객체 (`undefined`, `NaN`, `Infinity`)
-- Strict mode
-- 다른 사소한 변화(`parseInt`  관련 등)
+-   Getter/setters
+-   배열과 객체 리터럴에서 Trailing commas
+-   프로퍼티 이름으로서 예약어
+-   신규 `Object` 메서드 (`create`, `defineProperty`, `keys`, `seal`, `freeze`, `getOwnPropertyNames`, etc.)
+-   신규 `Array` 메서드 (`isArray`, `indexOf`, `every`, `some`, `map`, `filter`, `reduce`, etc.)
+-   `String.prototype.trim` 과 프로퍼티 접근자
+-   신규 `Date` 메서드 (`toISOString`, `now`, `toJSON`)
+-   `bind` 함수
+-   JSON
+-   불변 전역 객체 (`undefined`, `NaN`, `Infinity`)
+-   Strict mode
+-   다른 사소한 변화(`parseInt`  관련 등)
 
 구문적으로 변경이 필요한 변화는 없었다. Getters와 Setters는 당시 다양한 브라우저에서 이미 비공식적으로 지원되고 있었다. 새로운 `Object` 메서드는 프로그래머에게 특정 불변성을 확실히 적용할 수 있는 더 많은 도구(`Object.seal`,`Object.freeze`,`Object.create`)를 제공함으로써 “대규모 프로그래밍”을 개선하였다. Strict mode도 오류 발생원인을 많이 방지하여 이 영역에서 강력한 도구가 되었다. `Array` 의 추가 메서드들은 특정 함수적 패턴(`map`, `reduce`, `filter`, `every`, `some`) 을 개선했다. 또다른 큰 변화는 `JSON` 이다. JSON은 `JavaScript`에서 영감을 받은 데이터 포맷으로서 현재 `JSON.stringify` 그리고 `JSON.parse` 를 통해 기본적으로 지원되고 있다. 다른 변경사항은 실제 경험을 바탕으로 몇 가지 부분에서 약간의 개선된 것이다. `ECMAScript 5`는 소규모 스크립트 및 대규모 프로젝트 모두에서 `JavaScript`가 더욱 사용하기에 좋은 언어가 되도록 돕는 약간의 개선사항이다. 그래도, 폐기된 `ECMAScript 4`에는 좋은 아이디어가 많았으므로, `ECMAScript Harmony` 제안을 통해 돌아올 것이다.
 
@@ -416,25 +416,25 @@ sales.item.(@type == "oranges").@quantity = 4;
 
 새 기능에 대한 간략한 요약은 다음과 같다.
 
-- Let (lexical) 과 const (unrebindable) 바인딩
-- 화살표 함수 (짧은 익명 함수), lexical this (enclosing scope this)
-- Classes (Prototype 위에 있는 문법적 설탕)
-- Object literal 개선사항(computed keys, shorter method definitions, etc.)
-- Template strings
-- Promises
-- Generators, iterables, iterators, for..of
-- 함수의 기본값 매개변수, 나머지 연산자
-- Spread 구문
-- Destructuring
-- Module syntax
-- New collections (Set, Map, WeakSet, WeakMap)
-- Proxies, Reflection
-- Symbols
-- Typed arrays
-- subclassing built-ins에 대한 지원
-- Guaranteed tail-call optimization
-- 단순화된 Unicode 지원
-- 2진 literal과 8진 literal
+-   Let (lexical) 과 const (unrebindable) 바인딩
+-   화살표 함수 (짧은 익명 함수), lexical this (enclosing scope this)
+-   Classes (Prototype 위에 있는 문법적 설탕)
+-   Object literal 개선사항(computed keys, shorter method definitions, etc.)
+-   Template strings
+-   Promises
+-   Generators, iterables, iterators, for..of
+-   함수의 기본값 매개변수, 나머지 연산자
+-   Spread 구문
+-   Destructuring
+-   Module syntax
+-   New collections (Set, Map, WeakSet, WeakMap)
+-   Proxies, Reflection
+-   Symbols
+-   Typed arrays
+-   subclassing built-ins에 대한 지원
+-   Guaranteed tail-call optimization
+-   단순화된 Unicode 지원
+-   2진 literal과 8진 literal
 
 Class, let, const, promise, generator, iterator, module 등 이러한 기능은 모두 `JavaScript`를 더 많은 개발자에게 제공하고 대규모 프로그래밍을 지원하기 위한 것이다.
 
@@ -444,9 +444,9 @@ Class, let, const, promise, generator, iterator, module 등 이러한 기능은 
 
 2016년에 출시된 버전은 다소 작았으나, 다음과 같은 내용을 포함한다.
 
-- 거듭제곱 연산자 (\*\*)
-- `Array.prototype.includes`
-- 몇 가지 사소한 수정사항(generator는 new와 함께 사용될 수 없다 등)
+-   거듭제곱 연산자 (\*\*)
+-   `Array.prototype.includes`
+-   몇 가지 사소한 수정사항(generator는 new와 함께 사용될 수 없다 등)
 
 ## 미래와 그 너머: ECMAScript 2017 이후
 
@@ -454,38 +454,38 @@ Class, let, const, promise, generator, iterator, module 등 이러한 기능은 
 
 ```jsx
 function apiDoSomethingMoreComplex(withThis) {
-    const urlA = '...'
-    const urlB = '...'
+	const urlA = "..."
+	const urlB = "..."
 
-    httpLib
-        .request(urlA, withThis)
-        .then(result => {
-            const parsed = parseResult(result)
-            return new Promise((resolve, reject) => {
-                database.update(updateStatement, parsed).then(
-                    () => {
-                        resolve(parsed)
-                    },
-                    error => {
-                        reject(error)
-                    }
-                )
-            })
-        })
-        .then(result => {
-            return httpLib.request(urlB, result)
-        })
-        .then(result => {
-            return worker.processData(result)
-        })
-        .then(
-            result => {
-                logger.info(`apiDoSomethingMoreComplex success (${result})`)
-            },
-            error => {
-                logger.error(error)
-            }
-        )
+	httpLib
+		.request(urlA, withThis)
+		.then(result => {
+			const parsed = parseResult(result)
+			return new Promise((resolve, reject) => {
+				database.update(updateStatement, parsed).then(
+					() => {
+						resolve(parsed)
+					},
+					error => {
+						reject(error)
+					}
+				)
+			})
+		})
+		.then(result => {
+			return httpLib.request(urlB, result)
+		})
+		.then(result => {
+			return worker.processData(result)
+		})
+		.then(
+			result => {
+				logger.info(`apiDoSomethingMoreComplex success (${result})`)
+			},
+			error => {
+				logger.error(error)
+			}
+		)
 }
 ```
 
@@ -493,39 +493,39 @@ function apiDoSomethingMoreComplex(withThis) {
 
 ```jsx
 async function apiDoSomethingMoreComplex(withThis) {
-    const urlA = '...'
-    const urlB = '...'
+	const urlA = "..."
+	const urlB = "..."
 
-    try {
-        let result = await httpLib.request(urlA, withThis)
-        const parsed = parseResult(result)
-        await database.update(updateStatement, parsed)
-        result = await httpLib.request(urlB, parsed)
-        result = await worker.processData(result)
-        logger.info(`apiDoSomethingMoreComplex success (${result})`)
-    } catch (e) {
-        logger.error(e)
-    }
+	try {
+		let result = await httpLib.request(urlA, withThis)
+		const parsed = parseResult(result)
+		await database.update(updateStatement, parsed)
+		result = await httpLib.request(urlB, parsed)
+		result = await worker.processData(result)
+		logger.info(`apiDoSomethingMoreComplex success (${result})`)
+	} catch (e) {
+		logger.error(e)
+	}
 }
 ```
 
 다른 스테이지 4 제안의 범위는 작다.
 
-- `Object.values` , `Object.entries`
-- String padding
-- `Object.getOwnPropertyDescriptors`
-- Trailing commas if function parameters
+-   `Object.values` , `Object.entries`
+-   String padding
+-   `Object.getOwnPropertyDescriptors`
+-   Trailing commas if function parameters
 
 이 제안들은 모두 2017년에 발표될 예정이지만, 위원회는 재량으로 이들을 뒤로 미루는 선택을 할 수도 있다. 하지만, `async/await` 만으로도 흥미로운 변화가 될 것이다.
 
 하지만 미래는 거기서 끝나지 않는다! 우리는 앞으로 무엇이 더 있을지 알기 위해 다른 제안들을 살펴볼 수 있다. 몇 가지 흥미로운 점들은 다음과 같다.
 
-- SIMD APIs
-- 비동기 반복(async/await + iteration)
-- Generator 화살표 함수
-- 64-bit 정수 연산
-- Realms (state separation/isolation)
-- Shared memory와 atomics
+-   SIMD APIs
+-   비동기 반복(async/await + iteration)
+-   Generator 화살표 함수
+-   64-bit 정수 연산
+-   Realms (state separation/isolation)
+-   Shared memory와 atomics
 
 `JavaScript`는 점점 범용 언어 같은 모습이 되어가고 있다. 하지만 `JavaScript`의 미래에는 큰 변화를 가져올 것이 하나 더 있다.
 
@@ -548,7 +548,7 @@ Mozila는 이를 보고 `JavaScript`를 컴파일러에 적합한 대상으로 �
 
 `JavaScript`의 역사는 길고 험난했다. 그것은 “웹을 위한 `Scheme`”으로 제안되었다. 초기에는 `Java`와 같은 구문을 장착했다. 그것의 첫 시제품은 몇 주 만에 개발되었다. 마케팅의 위기를 겪었고 2년도 되지 않아 세 개의 이름(`Mocha`, `LiveScript`, `JavaScript`)을 얻었다. 그리고 나서 그것은 표준화되었고 피부병처럼 들리는 이름(`ECMAScript`)을 얻었다. 세 번의 성공적인 릴리즈 이후, 네 번째 릴리즈는 거의 8년 동안 개발의 지옥을 헤매었다. 그 후, `AJAX`라는 단일 기능의 성공으로, 해당 커뮤니티는 활동을 다시 활발히 하며 개발을 재개했다. `ECMAScript 4`는 폐기되고 `ECMAScript 3.1`로 알려진 소규모 개정판은 `ECMAScript 5`로 이름이 변경됐다. `ECMAScript 6`은 여러 해 동안 개발되었고, 이번에는 성공했음에도 불구하고 위원회는 이름을 `ECMAScript 2015`로 변경하기로 했다. 이 개정안은 규모가 컸고 시행에도 많은 시간이 걸렸다. 그러나 마침내 `JavaScript`에는 새로운 활력이 불러 넣어졌다. 여전히 커뮤니티가 활발하다. Node.js, V8, 다른 프로젝트들은 `JavaScript`를 이전에 생각하지 못했던 곳으로 데려가고 있다. `Asm.js`, `WebAssembly`는 그것을 더 앞으로 데려가려고 한다. 다른 스테이지의 활성화된 제안들은 모두 `JavaScript`의 미래를 더욱 밝게 만들고 있다. 길고 장애물이 많은 여정이었으나, `JavaScript`는 여전히 가장 성공적인 언어 중 하나이다. 이는 그 자체로 입증된다. 언제나 `JavaScript`에 베팅하자.
 
-> - 출처
->   - 링크 : [https://auth0.com/blog/a-brief-history-of-javascript](https://auth0.com/blog/a-brief-history-of-javascript)
->   - 작성자 : Sebastian Peyrott
->   - 게시일 : 2017년 1월 16일
+> -   출처
+>     -   링크 : [https://auth0.com/blog/a-brief-history-of-javascript](https://auth0.com/blog/a-brief-history-of-javascript)
+>     -   작성자 : Sebastian Peyrott
+>     -   게시일 : 2017년 1월 16일

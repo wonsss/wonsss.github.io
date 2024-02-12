@@ -6,7 +6,6 @@ thumbnail: { thumbnailSrc }
 draft: false
 ---
 
-
 image sprite는 여러 이미지를 하나로 합친 이미지를 의미한다.
 
 웹페이지에 사용된 이미지가 많으면 웹브라우저는 해당 이미지의 수만큼 HTTP 요청을 해야 하므로 로딩이 길어질 수 있다.
@@ -35,15 +34,21 @@ image sprite는 여러 이미지를 하나로 합친 이미지를 의미한다.
 // css
 .a,
 .b,
-.c { display: inline-block; background: url('sprite.png') no-repeat; overflow: hidden;  width: 200px; height: 200px;}
+.c {
+	display: inline-block;
+	background: url("sprite.png") no-repeat;
+	overflow: hidden;
+	width: 200px;
+	height: 200px;
+}
 .a {
-    background-position: -0px -0px;
+	background-position: -0px -0px;
 }
 .b {
-    background-position: -200px -0px;
+	background-position: -200px -0px;
 }
 .c {
-    background-position: -400px -0px;
+	background-position: -400px -0px;
 }
 ```
 

@@ -8,8 +8,8 @@ draft: false
 
 ## 왜 타입스크립트를 사용하는가
 
-- `정적 언어`인 자바스크립트는 실행시점인 `런 타임`에 타입이 결정되고 오류도 그 때 발견된다.
-- 반면, `동적 언어`인 자바나 타입스크립트는 `컴파일 타임`에 타입이 결정되고 오류도 그 때 발견된다.
+-   `정적 언어`인 자바스크립트는 실행시점인 `런 타임`에 타입이 결정되고 오류도 그 때 발견된다.
+-   반면, `동적 언어`인 자바나 타입스크립트는 `컴파일 타임`에 타입이 결정되고 오류도 그 때 발견된다.
 
 [TS Playground - An online editor for exploring TypeScript and JavaScript](https://www.typescriptlang.org/play?#code/BAMwrgdgxgLglgewgAgIYBN0AoJgLYCMAXMrngEYCmATgDSn4BMJZV1AlEazcgN4BQyIcihIAzggA2lAHSSEAcxz4C9Mo3YBuQcOqUYYaijIEA1Ov4BffvwD0ttJixa7DjNgIv3WVcg3b7R2wAZloAFloAVhdA7wAiAAtKSXk4+jiAdwRqSXQ4rSA)
 
@@ -23,8 +23,8 @@ let isAdult: boolean = true
 let a: number[] = [1, 2, 3]
 let a2: Array<number> = [1, 2, 3]
 
-let week1: string[] = ['mon', 'tue']
-let week2: Array<string> = ['mon', 'tue']
+let week1: string[] = ["mon", "tue"]
+let week2: Array<string> = ["mon", "tue"]
 
 // week1.push(4) // Argument of type 'number' is not assignable to parameter of type 'string'.(2345)
 
@@ -32,7 +32,7 @@ let week2: Array<string> = ['mon', 'tue']
 
 let b: [string, number]
 
-b = ['z', 1] // 가능
+b = ["z", 1] // 가능
 // b = [1, 'z']; // 불가능
 
 b[0].toLocaleLowerCase()
@@ -40,36 +40,36 @@ b[0].toLocaleLowerCase()
 // void, never
 // void는 함수에서 아무 것도 반환하지 않을 때 사용한다.
 function sayHello(): void {
-    console.log('hello')
+	console.log("hello")
 }
 
 // never는 항상 에러를 반환하거나 영원히 끝나지 않는 함수의 타입으로 사용할 수 있다.
 function showError(): never {
-    throw new Error()
+	throw new Error()
 }
 
 function infLoop(): never {
-    while (true) {
-        // do something
-    }
+	while (true) {
+		// do something
+	}
 }
 
 // enum 은 비슷한 값들끼리 묶었다고 생각하면 된다.
 // enum에 값을 주지 않으면 자동으로 0부터 순서대로 1씩 증가한 값이 할당된다.
 enum Os {
-    Window = 3,
-    Ios,
-    Android,
+	Window = 3,
+	Ios,
+	Android,
 }
 
 console.log(Os[3]) // "Window"
-console.log(Os['Ios']) // 4
+console.log(Os["Ios"]) // 4
 
 // enum에는 숫자가 아닌 문자열도 입력할 수 있다. 다만, 단방향 매핑만 된다.
 enum Os2 {
-    Window = 'win',
-    Ios = 'ios',
-    Android = 'and',
+	Window = "win",
+	Ios = "ios",
+	Android = "and",
 }
 
 let myOs: Os2
@@ -90,8 +90,8 @@ let d: undefined = undefined
 let user: object
 
 user = {
-    name: 'xx',
-    age: 30,
+	name: "xx",
+	age: 30,
 }
 
 console.log(user.name) // Property 'name' does not exist on type 'object'.(2339)
@@ -99,22 +99,22 @@ console.log(user.name) // Property 'name' does not exist on type 'object'.(2339)
 
 // 프로퍼티를 정의해서 객체를 표현하고 싶을 때는 인터페이스를 사용한다.
 
-type Score = 'A' | 'B' | 'C' | 'F'
+type Score = "A" | "B" | "C" | "F"
 interface User {
-    name: string
-    age: number
-    gender?: string // 옵셔널
-    readonly birthYear: number
-    [grade: number]: Score // 문자열 인덱스 서명, 키 이름은 아무거나 가능
+	name: string
+	age: number
+	gender?: string // 옵셔널
+	readonly birthYear: number
+	[grade: number]: Score // 문자열 인덱스 서명, 키 이름은 아무거나 가능
 }
 
 let user2: User = {
-    name: 'xx',
-    age: 30,
-    birthYear: 2000,
-    1: 'A',
-    2: 'B',
-    3: 'E', // Type '"E"' is not assignable to type 'Score'.(2322)
+	name: "xx",
+	age: 30,
+	birthYear: 2000,
+	1: "A",
+	2: "B",
+	3: "E", // Type '"E"' is not assignable to type 'Score'.(2322)
 }
 
 user2.birthYear = 1990 // Cannot assign to 'birthYear' because it is a read-only property.(2540)
@@ -122,74 +122,74 @@ console.log(user2.age)
 
 // 인터페이스로 함수 정의하기
 interface Add {
-    (num1: number, num2: number): number
+	(num1: number, num2: number): number
 }
 
 const add: Add = function(x, y) {
-    return x + y
+	return x + y
 }
 
 interface IsAdult {
-    (age: number): boolean
+	(age: number): boolean
 }
 
 const a: IsAdult = age => {
-    return age > 19
+	return age > 19
 }
 
 // 인터페이스로 클래스 정의하기
 interface Car {
-    color: string
-    wheels: number
-    start(): void
+	color: string
+	wheels: number
+	start(): void
 }
 
 class Bmw implements Car {
-    color
-    wheels = 4
-    constructor(c: string) {
-        this.color = c
-    }
-    start() {
-        console.log('go...')
-    }
+	color
+	wheels = 4
+	constructor(c: string) {
+		this.color = c
+	}
+	start() {
+		console.log("go...")
+	}
 }
 
-const b = new Bmw('green')
+const b = new Bmw("green")
 console.log(b)
 b.start()
 
 // 인터페이스는 확장도 가능하다. extends
 interface Benz extends Car {
-    door: number
-    stop(): void
+	door: number
+	stop(): void
 }
 
 const benz: Benz = {
-    door: 5,
-    stop() {
-        console.log('stop')
-    },
-    color: 'black',
-    wheels: 4,
-    start() {
-        console.log('start')
-    },
+	door: 5,
+	stop() {
+		console.log("stop")
+	},
+	color: "black",
+	wheels: 4,
+	start() {
+		console.log("start")
+	},
 }
 
 // 여러 개를 확장할 수도 있다.
 interface Train {
-    color: string
-    wheels: number
-    start(): void
+	color: string
+	wheels: number
+	start(): void
 }
 
 interface Toy {
-    name: string
+	name: string
 }
 
 interface ToyTrain extends Train, Toy {
-    price: number
+	price: number
 }
 ```
 
@@ -200,60 +200,60 @@ interface ToyTrain extends Train, Toy {
 ```tsx
 // 함수
 function add(num1: number, num2: number): void {
-    console.log(num1, num2)
+	console.log(num1, num2)
 }
 
 // 선택적 매개변수는 필수 매개변수의 뒤 자리이다.
 function hello(name: string, age?: number): string {
-    if (age !== undefined) {
-        return `Hello, ${name}. You are ${age}`
-    }
-    return `Hello ${name}`
+	if (age !== undefined) {
+		return `Hello, ${name}. You are ${age}`
+	}
+	return `Hello ${name}`
 }
 
 // 나머지 매개변수 타입 작성법
 // ...나머지 매개변수는 전달받은 매개변수를 배열로 표현한다.
 function addAll(...nums: number[]) {
-    return nums.reduce((result, num) => result + num, 0)
+	return nums.reduce((result, num) => result + num, 0)
 }
 
 // this
 interface User {
-    name: string
+	name: string
 }
 
-const Sam: User = { name: 'Sam' }
+const Sam: User = { name: "Sam" }
 
-function showName(this: User, age: number, gender: 'm' | 'f') {
-    // this 타입 결정은 매개변수 제일 앞에서 한다
-    console.log(this.name, age, gender) // this의 타입을 결정해야 한다
+function showName(this: User, age: number, gender: "m" | "f") {
+	// this 타입 결정은 매개변수 제일 앞에서 한다
+	console.log(this.name, age, gender) // this의 타입을 결정해야 한다
 }
 
 const a = showName.bind(Sam)
-a(30, 'm')
+a(30, "m")
 
 // 함수 오버로드
 // 함수 오버로드는 전달받은 매개변수의 개수나 타입에 따라 다른 동작을 하게 하는 것을 의미한다.
 
 interface User {
-    name: string
-    age: number
+	name: string
+	age: number
 }
 
 function join(name: string, age: number): User // 오버로드
 function join(name: string, age: string): string // 오버로드
 function join(name: string, age: number | string): User | string {
-    if (typeof age === 'number') {
-        return {
-            name,
-            age,
-        }
-    }
-    return '나이는 숫자로 입력해주세요.'
+	if (typeof age === "number") {
+		return {
+			name,
+			age,
+		}
+	}
+	return "나이는 숫자로 입력해주세요."
 }
 
-const sam: User = join('sam', 30)
-const jane: string = join('Jane', '30')
+const sam: User = join("sam", 30)
+const jane: string = join("Jane", "30")
 ```
 
 ## 리터럴, 유니온/인터섹션 타입
@@ -262,68 +262,68 @@ const jane: string = join('Jane', '30')
 
 ```tsx
 // 리터럴 타입
-const userName1 = 'Bob' // const는 타입 자체가 리터럴 "Bob" 타입
-let userName2 = 'Tom'
+const userName1 = "Bob" // const는 타입 자체가 리터럴 "Bob" 타입
+let userName2 = "Tom"
 
-type Job = 'police' | 'developer' | 'teacher'
+type Job = "police" | "developer" | "teacher"
 
 interface User {
-    name: string
-    job: Job
+	name: string
+	job: Job
 }
 
 const user: User = {
-    name: 'Bob',
-    job: 'police',
+	name: "Bob",
+	job: "police",
 }
 
 interface HighSchoolStudent {
-    name: number | string
-    grade: 1 | 2 | 3
+	name: number | string
+	grade: 1 | 2 | 3
 }
 
 // 유니온 타입
 interface Car {
-    name: 'car'
-    color: string
-    start(): void
+	name: "car"
+	color: string
+	start(): void
 }
 
 interface Mobile {
-    name: 'moblie'
-    color: string
-    call(): void
+	name: "moblie"
+	color: string
+	call(): void
 }
 
 function getGift(gift: Car | Mobile) {
-    // 식별 가능한 유니온 타입
-    console.log(gift.color)
-    if (gift.name === 'car') {
-        gift.start()
-    } else {
-        gift.call()
-    }
+	// 식별 가능한 유니온 타입
+	console.log(gift.color)
+	if (gift.name === "car") {
+		gift.start()
+	} else {
+		gift.call()
+	}
 }
 
 // 인터섹션 타입
 // 여러 타입을 합치는 데 사용한다.
 interface Train {
-    name: string
-    start(): void
+	name: string
+	start(): void
 }
 
 interface Toy {
-    name: string
-    color: string
-    price: number
+	name: string
+	color: string
+	price: number
 }
 
 const toyCar: Toy & Train = {
-    // 모든 타입을 다 적어야 한다
-    name: '타요',
-    start() {},
-    color: 'blue',
-    price: 1000,
+	// 모든 타입을 다 적어야 한다
+	name: "타요",
+	start() {},
+	color: "blue",
+	price: 1000,
 }
 ```
 
@@ -333,145 +333,145 @@ const toyCar: Toy & Train = {
 
 ```tsx
 class Car {
-    // color: string; // TS 사용시 멤버변수는 미리 선언해줘야 한다.
-    constructor(public color: string) {
-        // 멤버변수 사용하지 않으려면 public, readolny 사용한다
-        this.color = color
-    }
-    start() {
-        console.log('start')
-    }
+	// color: string; // TS 사용시 멤버변수는 미리 선언해줘야 한다.
+	constructor(public color: string) {
+		// 멤버변수 사용하지 않으려면 public, readolny 사용한다
+		this.color = color
+	}
+	start() {
+		console.log("start")
+	}
 }
 
-const bmw = new Car('red')
+const bmw = new Car("red")
 
 // 접근 제한자 - public, private, protected
 // private 과 #은 동일하다.
 // 아무것도 안 적으면 public이다
 class Car2 {
-    private age: number = 1
-    protected name: string = 'car'
-    readonly wheels: number = 4
-    static energy = 'oil'
-    color: string
-    constructor(color: string) {
-        this.color = color
-    }
+	private age: number = 1
+	protected name: string = "car"
+	readonly wheels: number = 4
+	static energy = "oil"
+	color: string
+	constructor(color: string) {
+		this.color = color
+	}
 
-    start() {
-        console.log('start')
-        console.log(this.name)
-        console.log(this.age)
-    }
+	start() {
+		console.log("start")
+		console.log(this.name)
+		console.log(this.age)
+	}
 }
 
 class Bmw extends Car2 {
-    constructor(color: string) {
-        super(color)
-    }
-    showName() {
-        console.log(super.age) // private은 해당 클래스 내부에서만 사용할 수 있고 자식 클래스 내부에서부터 참조할 수 없다.
-        console.log(super.name)
-        console.log(super.wheels)
-        console.log(super.energy) // static으로 선언된 정적 멤버변수는 인스턴스가 아니라 클래스명으로 접근한다
-        console.log(Car2.energy)
-    }
+	constructor(color: string) {
+		super(color)
+	}
+	showName() {
+		console.log(super.age) // private은 해당 클래스 내부에서만 사용할 수 있고 자식 클래스 내부에서부터 참조할 수 없다.
+		console.log(super.name)
+		console.log(super.wheels)
+		console.log(super.energy) // static으로 선언된 정적 멤버변수는 인스턴스가 아니라 클래스명으로 접근한다
+		console.log(Car2.energy)
+	}
 }
 
-const z4 = new Bmw('black')
+const z4 = new Bmw("black")
 console.log(z4.name) // protected는 자식 클래스 내부에서 참조할 수 있으나 인스턴스에서는 참조할 수 없다.
 z4.wheels = 6 // readonly의 값은 인스턴스에서 수정할 수 없다.
 
 // 추상 클래스
 abstract class Car3 {
-    color: string
-    constructor(color: string) {
-        this.color = color
-    }
-    start() {
-        console.log('start')
-    }
+	color: string
+	constructor(color: string) {
+		this.color = color
+	}
+	start() {
+		console.log("start")
+	}
 
-    abstract doSomething(): void
+	abstract doSomething(): void
 }
 
-const car = new Car3('red') // 추상 클래스를 new로 바로 인스턴스를 만들 수는 없다
+const car = new Car3("red") // 추상 클래스를 new로 바로 인스턴스를 만들 수는 없다
 
 class Benz extends Car3 {
-    // 상속을 통해서만 사용 가능하다
-    constructor(color: string) {
-        super(color)
-    }
-    // 상속받은 추상 메서드는 상속받은 곳에서 구체적으로 정의해야 한다
-    doSomething() {
-        alert(3)
-    }
+	// 상속을 통해서만 사용 가능하다
+	constructor(color: string) {
+		super(color)
+	}
+	// 상속받은 추상 메서드는 상속받은 곳에서 구체적으로 정의해야 한다
+	doSomething() {
+		alert(3)
+	}
 }
 
-const a5 = new Benz('black')
+const a5 = new Benz("black")
 ```
 
 ## 제네릭
 
-- generic: 일반적인, 총칭적인, 상표등록이 되어 있지 않은
-- 선언할 때는 타입 매개변수만 적어주고 생성 시점에 사용 타입을 결정하는 것이다
-- 제네릭을 활용하여 하나의 인터페이스만 만들고 여러 개의 객체들을 만들 수 있다.
+-   generic: 일반적인, 총칭적인, 상표등록이 되어 있지 않은
+-   선언할 때는 타입 매개변수만 적어주고 생성 시점에 사용 타입을 결정하는 것이다
+-   제네릭을 활용하여 하나의 인터페이스만 만들고 여러 개의 객체들을 만들 수 있다.
 
 [TS Playground - An online editor for exploring TypeScript and JavaScript](https://www.typescriptlang.org/play?#code/PTAEgJBwO0cA1XUGVbApTaQAwuFDx0gTzsDg1gBnsBhDgM52iCAE4C2jgPxOAHNaILsDgjIOiA7Q4AgTgC6OiA1A4JVjKqgIuOhADTWBUCcAaq0kDBNYBdxwCdNAOgBQAMwCuAOwDGAFwCWAezWgA5gFMtAZR0AvEwB4AKgD4AFAEMATu4BcoewG0AXQBKHzUVAFsAIxN3UABvBVAk0HczFXdDD3c5ABsTNSMtAAsAbgUAXwUFDQMAZy1QLIBGUABeUD8mgBoAJi6AZgDquoasnraOgCJXSa7JyNnJjUmhhRBQQA9xwAZFwAzlqUASodZAHEHQQBwJwBJGwFrOzi41sAvASA6BQB01rlFAG9HQUUAMhsANcc3dgciARACct1HegBv20BYf6AXBrAC0zIIEoNAeFAgAjx+QKHRqLQxJSuDQmUAAWT0kR0eQcjniiWSalc4RMPnq7hxRjKyVAAAc2UTQhFou5Ock9NzdAYfPYypVhmp6qBwk0vGSKVTyQArEzaGntBJchlMnyTWo9JqzOlJXk6fmgJoABkdXUtoDFErUPn1XOSNRyem8oEmqQAJhbvT69CpuZLQAScrUTC7KrKavKGuEeiryZS7Kz2braQbGczA6bzc6udbbQ6nS63foPYGjHo9KGKlV1qBsbj8YTiQBVBOxL1JQ0lvMFEVJVymAVRGIyqo4vHuAlE0AAYQ8hfpxZZWjZk5dvv9+8PHPb3ZXa+JACEWwBrHdWvklsLz4WX1MKlRDnyDmIJjiMdjRmLpGlnO17XKMpvwaDQPB8LdYj1EDA0icIAHdZlAE8AyDExQxguUFUiR8fHvPQnz1KsS36R1oLKZR1G0BtQFqIo9EwgA5YsHFAEwAA88TUYNaniNCJyMcoXGDVwtFcKUQnYg92WfFI0gyUA5IUuQx0XBQOK43imWcX8YiCMojJ44tnAQ9xLLudjOJs0yyKoyzQHWVgISAA)
 
 ```tsx
 // 선언할 때는 타입 매개변수만 적어주고 생성 시점에 사용 타입을 결정하는 것이다.
 function getSize<T>(arr: T[]): number {
-    return arr.length
+	return arr.length
 }
 
 const arr1 = [1, 2, 3]
-const arr2 = ['a', 'b', 'c']
+const arr2 = ["a", "b", "c"]
 
 // 인터페이스에서 제네릭 사용
 // 제네릭을 활용하여 하나의 인터페이스만 만들고 여러 개의 객체들을 만들 수 있다.
 interface Mobile<T> {
-    name: string
-    price: number
-    option: T
+	name: string
+	price: number
+	option: T
 }
 
 const m1: Mobile<object> = {
-    name: 's21',
-    price: 1000,
-    option: {
-        color: 'red',
-        coupon: false,
-    },
+	name: "s21",
+	price: 1000,
+	option: {
+		color: "red",
+		coupon: false,
+	},
 }
 
 const m2: Mobile<string> = {
-    name: 's21',
-    price: 1000,
-    option: 'good',
+	name: "s21",
+	price: 1000,
+	option: "good",
 }
 
 //
 interface User {
-    name: string
-    age: number
+	name: string
+	age: number
 }
 
 interface Car {
-    name: string
-    color: string
+	name: string
+	color: string
 }
 
 interface Book {
-    price: number
+	price: number
 }
 
-const user: User = { name: 'a', age: 10 }
-const car: Car = { name: 'bmw', color: 'red' }
+const user: User = { name: "a", age: 10 }
+const car: Car = { name: "bmw", color: "red" }
 const book: Book = { price: 3000 }
 
 function showName<T extends { name: string }>(data: T): string {
-    return data.name
+	return data.name
 }
 
 showName(user)
@@ -487,23 +487,23 @@ showName(car)
 // keyof
 
 interface User {
-    id: number
-    name: string
-    age: number
-    gender: 'm' | 'f'
+	id: number
+	name: string
+	age: number
+	gender: "m" | "f"
 }
 
 type UserKey = keyof User // 'id' | 'name' | 'age' | 'gender'
 
-const uk: UserKey = 'age'
+const uk: UserKey = "age"
 
 // Partial<T>
 // 파셜은 프로퍼티를 모두 옵셔널로 바꿔준다.
 interface User2 {
-    id: number
-    name: string
-    age: number
-    gender: 'm' | 'f'
+	id: number
+	name: string
+	age: number
+	gender: "m" | "f"
 }
 
 // interface User2 {
@@ -514,33 +514,33 @@ interface User2 {
 // }
 
 let admin: Partial<User> = {
-    id: 1,
-    name: 'bob',
+	id: 1,
+	name: "bob",
 }
 
 // Required<T>
 // 리콰이얼드는 모든 프로퍼터리를 필수로 바꾼다.
 interface User3 {
-    id: number
-    name: string
-    age?: number // 옵셔널이었으나 아래에서 Required 적용시 필수로 변경됨
+	id: number
+	name: string
+	age?: number // 옵셔널이었으나 아래에서 Required 적용시 필수로 변경됨
 }
 
 let user3: Required<User3> = {
-    id: 1,
-    name: 'bob',
+	id: 1,
+	name: "bob",
 }
 
 // Readonly<T>
 interface User4 {
-    id: number
-    name: string
-    age?: number
+	id: number
+	name: string
+	age?: number
 }
 
 let user4: Readonly<User4> = {
-    id: 1,
-    name: 'bob',
+	id: 1,
+	name: "bob",
 }
 
 user4.id = 4 // 프로퍼티 값 변경 불가
@@ -553,51 +553,51 @@ user4.id = 4 // 프로퍼티 값 변경 불가
 //     "4": "A" | "B" | "C" | "D";
 // }
 
-type Grade = '1' | '2' | '3' | '4'
-type Score = 'A' | 'B' | 'C' | 'D' | 'F'
+type Grade = "1" | "2" | "3" | "4"
+type Score = "A" | "B" | "C" | "D" | "F"
 const score: Record<Grade, Score> = {
-    1: 'A',
-    2: 'C',
-    3: 'D',
-    4: 'F',
+	1: "A",
+	2: "C",
+	3: "D",
+	4: "F",
 }
 
 // 레코드 활용 예제
 
 interface User5 {
-    id: number
-    name: string
-    age: number
+	id: number
+	name: string
+	age: number
 }
 
 function isValid(user: User5) {
-    const result: Record<keyof User5, boolean> = {
-        id: user.id > 0,
-        name: user.name !== '',
-        age: user.age > 0,
-    }
-    return result
+	const result: Record<keyof User5, boolean> = {
+		id: user.id > 0,
+		name: user.name !== "",
+		age: user.age > 0,
+	}
+	return result
 }
 
 // Pick<T, K>
 // T에서 K 프로퍼티의 타입만 Pick해서 사용한다
 interface User6 {
-    id: number
-    name: string
-    age: number
-    gender: 'M' | 'W'
+	id: number
+	name: string
+	age: number
+	gender: "M" | "W"
 }
 
-const user6: Pick<User, 'id' | 'name'> = {
-    id: 0,
-    name: 'bob',
+const user6: Pick<User, "id" | "name"> = {
+	id: 0,
+	name: "bob",
 }
 
 // Omit<T,K>
 // 오밋은 특정 프로퍼티를 생략하여 사용할 수 있다.
-const user7: Omit<User, 'gender' | 'age'> = {
-    id: 0,
-    name: 'bob',
+const user7: Omit<User, "gender" | "age"> = {
+	id: 0,
+	name: "bob",
 }
 
 // Exclude<T1, T2>
@@ -614,59 +614,59 @@ type T4 = NonNullable<T3> // void | string
 
 # 타입스크립트 올바르게 이해하기
 
-- 타입스크립트 목표 : 타입스크립트로 타이핑을 잘하면, 런타임 전에 미리 알수 있는 오류도 있다.
+-   타입스크립트 목표 : 타입스크립트로 타이핑을 잘하면, 런타임 전에 미리 알수 있는 오류도 있다.
 
 ## 1. 작성자와 사용자
 
 ### 타입 시스템
 
-- 컴파일러에게 사용하는 타입을 명시적으로 지정하는 시스템
-- 컴파일러가 자동으로 타입을 추론하는 시스템
+-   컴파일러에게 사용하는 타입을 명시적으로 지정하는 시스템
+-   컴파일러가 자동으로 타입을 추론하는 시스템
 
 ### 타입스크립트의 타입 시스템
 
-- 타입을 명시적으로 지정할 수 있다.
-- 타입을 명시적으로 지정하지 않으면, 타입스크립트 컴파일러가 자동으로 타입을 추론한다
-- 타입이란 해당 변수가 할 수 있는 일을 결정한다.
-- 타입스크립트의 추론에만 의존하면, any로 추론될 수 있다.
-  - `noImplicitAny` 옵션을 켜면
-    - 타입을 명시적으로 지정하지 않은 경우 타입스크립트가 추론 중 `any` 라고 판단하게 되면, 컴파일 에러를 발생시켜 명시적으로 지정하도록 유도한다.
-  - `strictNullChecks` 옵션을 켜면
-    - 모든 타입에 자동으로 포함되어 있는 `null` 과 `undefined` 를 제거한다.
-  - `noImplicitReturns` 옵션을 켜면
-    - 함수 내에서 모든 코드가 값을 리턴하지 않으면 컴파일 에러를 발생시킨다.
-    - 모든 코드에서 리턴을 직접해야 한다.
+-   타입을 명시적으로 지정할 수 있다.
+-   타입을 명시적으로 지정하지 않으면, 타입스크립트 컴파일러가 자동으로 타입을 추론한다
+-   타입이란 해당 변수가 할 수 있는 일을 결정한다.
+-   타입스크립트의 추론에만 의존하면, any로 추론될 수 있다.
+    -   `noImplicitAny` 옵션을 켜면
+        -   타입을 명시적으로 지정하지 않은 경우 타입스크립트가 추론 중 `any` 라고 판단하게 되면, 컴파일 에러를 발생시켜 명시적으로 지정하도록 유도한다.
+    -   `strictNullChecks` 옵션을 켜면
+        -   모든 타입에 자동으로 포함되어 있는 `null` 과 `undefined` 를 제거한다.
+    -   `noImplicitReturns` 옵션을 켜면
+        -   함수 내에서 모든 코드가 값을 리턴하지 않으면 컴파일 에러를 발생시킨다.
+        -   모든 코드에서 리턴을 직접해야 한다.
 
 ## 2. interface와 type alias
 
-- structural type system - 구조가 같으면 같은 타입이다.
-- nominal type system - 구조가 같아도 이름이 다르면, 다른 타입이다.
+-   structural type system - 구조가 같으면 같은 타입이다.
+-   nominal type system - 구조가 같아도 이름이 다르면, 다른 타입이다.
 
 ## 3. 서브 타입과 슈퍼 타입
 
-- `strictFunctionTypes` 옵션을 켜면
-  - 함수의 매개변수 타입만 같거나 슈퍼타입이 아니면, 에러를 통해 경고한다.
-- any 대신 unknown
+-   `strictFunctionTypes` 옵션을 켜면
+    -   함수의 매개변수 타입만 같거나 슈퍼타입이 아니면, 에러를 통해 경고한다.
+-   any 대신 unknown
 
 ## 4. 타입 추론 이해하기
 
-- **Contextual Typing - 위치에 따라 추론이 다르다**
+-   **Contextual Typing - 위치에 따라 추론이 다르다**
 
 ## 5. Type Guard로 안전함을 파악하기
 
 ### **_1. typeof 타입 가드_**
 
-- **_보통 Primitive 타입일 경우_**
+-   **_보통 Primitive 타입일 경우_**
 
 ```tsx
 function getNumber(value: number | string): number {
-    value // number | string
-    if (typeof value === 'number') {
-        value // number
-        return value
-    }
-    value // string
-    return -1
+	value // number | string
+	if (typeof value === "number") {
+		value // number
+		return value
+	}
+	value // string
+	return -1
 }
 ```
 
@@ -674,140 +674,140 @@ function getNumber(value: number | string): number {
 
 ```tsx
 interface IMachine {
-    name: string
+	name: string
 }
 
 class Car implements IMachine {
-    name: string
-    wheel: number
-    constructor(name: string, wheel: number) {
-        this.name = name
-        this.wheel = wheel
-    }
+	name: string
+	wheel: number
+	constructor(name: string, wheel: number) {
+		this.name = name
+		this.wheel = wheel
+	}
 }
 
 class Boat implements IMachine {
-    name: string
-    motor: number
-    constructor(name: string, motor: number) {
-        this.name = name
-        this.motor = motor
-    }
+	name: string
+	motor: number
+	constructor(name: string, motor: number) {
+		this.name = name
+		this.motor = motor
+	}
 }
 
 function getWhellOrMotor(machine: Car | Boat): number {
-    if (machine instanceof Car) {
-        return machine.wheel // Car
-    } else {
-        return machine.motor // Boat
-    }
+	if (machine instanceof Car) {
+		return machine.wheel // Car
+	} else {
+		return machine.motor // Boat
+	}
 }
 ```
 
-- Error 객체 구분에 많이 쓰인다.
+-   Error 객체 구분에 많이 쓰인다.
 
     ```tsx
     class NegativeNumberError extends Error {}
 
     function getNumber(value: number): number | NegativeNumberError {
-        if (value < 0) return new NegativeNumberError()
+    	if (value < 0) return new NegativeNumberError()
 
-        return value
+    	return value
     }
 
     function main() {
-        const num = getNumber(-10)
+    	const num = getNumber(-10)
 
-        if (num instanceof NegativeNumberError) {
-            return
-        }
+    	if (num instanceof NegativeNumberError) {
+    		return
+    	}
 
-        num // number
+    	num // number
     }
     ```
 
 ### 3. in operator 타입가드
 
-- object의 프로퍼티 유무로 처리하는 경우
+-   object의 프로퍼티 유무로 처리하는 경우
 
 ```tsx
 interface Admin {
-    id: string
-    role: string
+	id: string
+	role: string
 }
 
 interface User {
-    id: string
-    email: string
+	id: string
+	email: string
 }
 
 function redirect(user: Admin | User) {
-    if ('role' in user) {
-        // = user가 Admin이면
-        console.log(user.role)
-    } else {
-        console.log(user.email)
-    }
+	if ("role" in user) {
+		// = user가 Admin이면
+		console.log(user.role)
+	} else {
+		console.log(user.email)
+	}
 }
 ```
 
 ### 4. literal 타입 가드
 
-- object의 프로퍼티가 같고, 타입이 다른 경우
+-   object의 프로퍼티가 같고, 타입이 다른 경우
 
 ```tsx
 interface IMachine {
-    type: string
+	type: string
 }
 
 class Car implements IMachine {
-    type!: 'CAR'
-    wheel!: number
+	type!: "CAR"
+	wheel!: number
 }
 
 class Boat implements IMachine {
-    type!: 'BOAT'
-    motor!: number
+	type!: "BOAT"
+	motor!: number
 }
 
 function getWhellOrMotor(machine: Car | Boat): number {
-    if (machine.type === 'CAR') {
-        return machine.wheel
-    } else {
-        return machine.motor
-    }
+	if (machine.type === "CAR") {
+		return machine.wheel
+	} else {
+		return machine.motor
+	}
 }
 ```
 
 ## 6. Class를 안전하게 만들기
 
-- Class 프로퍼티의 타입을 명시적으로 지정해야 한다
-- `strictPropertyInitialization` 옵션을 켜면
+-   Class 프로퍼티의 타입을 명시적으로 지정해야 한다
+-   `strictPropertyInitialization` 옵션을 켜면
 
-  - Class 의 Property 가 생성자 혹은 선언에서 값이 지정되지 않으면, 컴파일 에러를 발생시켜 주의를 준다.
+    -   Class 의 Property 가 생성자 혹은 선언에서 값이 지정되지 않으면, 컴파일 에러를 발생시켜 주의를 준다.
 
-    - Class Property가 선언에서 초기화
+        -   Class Property가 선언에서 초기화
 
-        ```tsx
-        class Square3 {
-            area: number = 0
-            sideLength: number = 0
-        }
-        ```
-
-    - Class Property가 생성자에서 초기화
-
-        ```tsx
-        class Square4 {
-            area: number
-            sideLength: number
-
-            constructor(sideLength: number) {
-                this.sideLength = sideLength
-                this.area = sideLength ** 2
+            ```tsx
+            class Square3 {
+            	area: number = 0
+            	sideLength: number = 0
             }
-        }
-        ```
+            ```
+
+        -   Class Property가 생성자에서 초기화
+
+            ```tsx
+            class Square4 {
+            	area: number
+            	sideLength: number
+
+            	constructor(sideLength: number) {
+            		this.sideLength = sideLength
+            		this.area = sideLength ** 2
+            	}
+            }
+            ```
 
 # 실전 타입스크립트 코드 작성하기
 
@@ -823,18 +823,18 @@ type StringsOrNumbers = ArrayFilter<string | number | string[] | number[]>
 
 ```tsx
 type Flatten<T> = T extends any[]
-    ? T[number]
-    : T extends object
-    ? T[keyof T]
-    : T
+	? T[number]
+	: T extends object
+	? T[keyof T]
+	: T
 
 const numbers = [1, 2, 3]
 type NumbersArrayFlattened = Flatten<typeof numbers>
 // number
 
 const person = {
-    name: 'Mark',
-    age: 38,
+	name: "Mark",
+	age: 38,
 }
 
 type SomeObjectFlattened = Flatten<typeof person>
@@ -849,7 +849,7 @@ type SomeBooleanFlattened = Flatten<typeof isMale>
 
 ```tsx
 type UnpackPromise<T> = T extends Promise<infer K>[] ? K : any
-const promises = [Promise.resolve('Mark'), Promise.resolve(38)]
+const promises = [Promise.resolve("Mark"), Promise.resolve(38)]
 
 type Expected = UnpackPromise<typeof promises> // string | number
 ```
@@ -866,10 +866,10 @@ type Excluded = Exclude<string | number, string> // number - diff
 type Extracted = Extract<string | number, string> // string - filter
 
 // Pick<T, Exclude<keyof T, K>>; (Mapped Type)
-type Picked = Pick<{ name: string; age: number }, 'name'>
+type Picked = Pick<{ name: string; age: number }, "name">
 
 // type Omit<T, K extends keyof any> = Pick<T, Exclude<keyof T, K>>;
-type Omited = Omit<{ name: string; age: number }, 'name'>
+type Omited = Omit<{ name: string; age: number }, "name">
 
 // type NonNullable<T> = T extends null | undefined ? never : T;
 type NonNullabled = NonNullable<string | number | null | undefined>
@@ -885,5 +885,5 @@ type NonNullabled = NonNullable<string | number | null | undefined>
 
 > 참고
 >
-> - [코딩앙마의 타입스크립트 강의(유튜브)](https://youtu.be/5oGAkQsGWkc)
-> - [이웅재님의 우아한 타입스크립트 세미나(유튜브)](https://youtu.be/ViS8DLd6o-E)
+> -   [코딩앙마의 타입스크립트 강의(유튜브)](https://youtu.be/5oGAkQsGWkc)
+> -   [이웅재님의 우아한 타입스크립트 세미나(유튜브)](https://youtu.be/ViS8DLd6o-E)

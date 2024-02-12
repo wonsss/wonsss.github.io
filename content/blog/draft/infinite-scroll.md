@@ -5,4 +5,3 @@ category: react
 thumbnail: { thumbnailSrc }
 draft: true
 ---
-

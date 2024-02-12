@@ -8,8 +8,8 @@ draft: false
 
 ## 1. [배포] EC2 인스턴스 접속
 
-- 해당 pem key 가 위치한 디렉토리로 이동한다.
-- pem key의 권한을 “나에게만 읽기 권한 있음”으로 변경한다.
+-   해당 pem key 가 위치한 디렉토리로 이동한다.
+-   pem key의 권한을 “나에게만 읽기 권한 있음”으로 변경한다.
 
     ```bash
     chmod 400 {pem파일명.pem}
@@ -70,7 +70,7 @@ npm -g install yarn
 > **Nginx란?**
 > Nginx(엔진 x라 읽는다)는 웹 서버 소프트웨어로, 가벼움과 높은 성능을 목표로 한다. 웹 서버, 리버스 프록시 및 메일 프록시 기능을 가진다. 스모디 팀 프로젝트에서는 Nginx를 통해 클라이언트로부터 요청을 받아 요청에 맞는 정적 파일을 응답해주는 `HTTP Web Server` 로 활용할 뿐만 아니라, 이번 글에서 설명할 `SSL` 기능을 지원한다.
 
-- 인스턴스에 접속되어 있다면, 이제 Nginx를 설치하고 실행해보자
+-   인스턴스에 접속되어 있다면, 이제 Nginx를 설치하고 실행해보자
 
 ### 3-1. ubuntu 폴더에 대한 권한 변경
 
@@ -109,7 +109,7 @@ sudo rm /etc/nginx/sites-enabled/default
 > `sites-available`: 가상 서버 환경들에 대한 설정 파일들이 위치하는 부분. 사용하지 않는 설정 파일도 있을 수 있다.
 > `sites-enabled`: site-available에 있는 가상 서버 파일들 중에서 활성화 하는 파일을 symlink로 연결해두는 폴더이다. 이곳에 있는 파일들을 읽어서 서버를 세팅한다. 즉, `sites-enabled` 디렉터리는 site-available 디렉터리에 있는 설정 파일 중에서 활성화하고 싶은 것을 `링크`로 관리하는 디렉터리이다.
 
-- 삭제하는 site-available/default 의 기본 내용은 다음과 같으므로, 향후 참고하여 작성한다
+-   삭제하는 site-available/default 의 기본 내용은 다음과 같으므로, 향후 참고하여 작성한다
 
 ```bash
 server {
@@ -145,7 +145,7 @@ server {
 
 ### 3-6. 설정파일을 symlink 연결하여 활성화
 
-- 방금 `sites-available` 에 작성한 파일을 `sites-enabled` 에 symlink를 생성해주어 Nginx에서 활성화한다.
+-   방금 `sites-available` 에 작성한 파일을 `sites-enabled` 에 symlink를 생성해주어 Nginx에서 활성화한다.
 
 ```bash
 sudo ln -s /etc/nginx/sites-available/smody.conf /etc/nginx/sites-enabled/smody.conf
@@ -165,7 +165,7 @@ sudo systemctl start nginx
 sudo systemctl status nginx
 ```
 
-- 참고 자료
+-   참고 자료
 
     [Nginx로 React를 배포하는 방법](https://codechacha.com/ko/deploy-react-with-nginx/)
 
@@ -215,33 +215,33 @@ sudo ln -s /snap/bin/certbot /usr/bin/certbot
 sudo certbot certonly --manual --preferred-challenges dns-01 --server https://acme-v02.api.letsencrypt.org/directory --agree-tos -m 2022smody@gmail.com -d *.smody.co.kr
 ```
 
-> - manual : 수동으로 과정 진행
-> - preferred-challenges : DNS 이용 인증서 발급방식 옵션(http방식 혹은 dns방식 중 하나를 골라야 하기 때문)
-> - dns-01 : DNS 이용 옵션 (http 방식의 경우는 http-01)
-> - server : Let's Encrypt의 ACME(자동화된 인증서 관리 환경) 서버 주소 입력
-> - agree-tos : ACME 서버의 가입자 동의서에 동의하겠다는 의사표시
-> - d : SSL 발급할 도메인명 입력
-> - m : 이메일 입력
+> -   manual : 수동으로 과정 진행
+> -   preferred-challenges : DNS 이용 인증서 발급방식 옵션(http방식 혹은 dns방식 중 하나를 골라야 하기 때문)
+> -   dns-01 : DNS 이용 옵션 (http 방식의 경우는 http-01)
+> -   server : Let's Encrypt의 ACME(자동화된 인증서 관리 환경) 서버 주소 입력
+> -   agree-tos : ACME 서버의 가입자 동의서에 동의하겠다는 의사표시
+> -   d : SSL 발급할 도메인명 입력
+> -   m : 이메일 입력
 
 > **DNS 방식**
 >
-> - 도메인이 연결된 DNS의 TXT레코드를 이용해 인증받는 방식으로 많은 장점을 가진 방법이지만 갱신 시 마다 DNS 정보 중 TXT 레코드를 새로 생성해야 하므로 이를 지원하는 DNS API가 없는 경우 자동 갱신이 어렵다는 단점이 있습니다.
-> - 와일드 카드 방식으로 인증서를 발급 가능.당연하게도 서버 관리자가 도메인 DNS를 관리/수정할 수 있어야 하며 인증서 갱신 시마다 DNS에서 TXT값을 변경해야 하므로 외부에서 TXT 레코드를 입력할 수 있도록 DNS가 API를 제공하는 경우만 갱신 과정을 자동으로 처리
-> - 이 방법은 위에서 소개한 방법 중에서 가장 까다로운 방법으로 에러 가능성이 높아 여러번 시도하다보면 최대 허용 시도를 초과해 당분간(1주일 정도) 인증이 불가능해지는 불상사가 종종 발생하더군요.
-> - 출처 : [최신 Let’s Encrypt SSL 인증서 발급 방법 4가지 정리](https://happist.com/573990/%EC%B5%9C%EC%8B%A0-lets-encrypt-ssl-%EC%9D%B8%EC%A6%9D%EC%84%9C-%EB%B0%9C%EA%B8%89-%EB%B0%A9%EB%B2%95-3%EA%B0%80%EC%A7%80-%EC%A0%95%EB%A6%AC#4_DNS_iyonghae_balgeub_badgi)
+> -   도메인이 연결된 DNS의 TXT레코드를 이용해 인증받는 방식으로 많은 장점을 가진 방법이지만 갱신 시 마다 DNS 정보 중 TXT 레코드를 새로 생성해야 하므로 이를 지원하는 DNS API가 없는 경우 자동 갱신이 어렵다는 단점이 있습니다.
+> -   와일드 카드 방식으로 인증서를 발급 가능.당연하게도 서버 관리자가 도메인 DNS를 관리/수정할 수 있어야 하며 인증서 갱신 시마다 DNS에서 TXT값을 변경해야 하므로 외부에서 TXT 레코드를 입력할 수 있도록 DNS가 API를 제공하는 경우만 갱신 과정을 자동으로 처리
+> -   이 방법은 위에서 소개한 방법 중에서 가장 까다로운 방법으로 에러 가능성이 높아 여러번 시도하다보면 최대 허용 시도를 초과해 당분간(1주일 정도) 인증이 불가능해지는 불상사가 종종 발생하더군요.
+> -   출처 : [최신 Let’s Encrypt SSL 인증서 발급 방법 4가지 정리](https://happist.com/573990/%EC%B5%9C%EC%8B%A0-lets-encrypt-ssl-%EC%9D%B8%EC%A6%9D%EC%84%9C-%EB%B0%9C%EA%B8%89-%EB%B0%A9%EB%B2%95-3%EA%B0%80%EC%A7%80-%EC%A0%95%EB%A6%AC#4_DNS_iyonghae_balgeub_badgi)
 
 > Webroot 방식
 >
-> - standalone 방식과 다르게 이미 로컬 서버가 가동중인 경우, 서버의 정지 없이 인증서를 발급받는 방식. 이 때 인증서를 받을 위치를 직접 지정해야 함에 유의
-> - (ex. `--webroot-path /var/www/html` or `--webroot-path /usr/share/nginx/html` )
-> - 그런데 해당 도메인이 본인의 도메인인지 확인해야 하므로 certbot에서 도메인 인증 단계가 필요하다. 따라서 certbot 서버는 도메인의 `${webroot-path}/.well-known/acme-challenge` 로 http 통신을 하여 결과를 확인한다. 그런데 가끔 `${webroot-path}/.well-known/acme-challenge` 자체가 접근 권한이 주어지지 않았거나 숨김 디렉토리로 되어있는 경우, 통신이 불가하므로 가능하면 /.well-known 이하의 경로에 접근 권한을 주는 것이 좋다
-> - 출처 : [https://eff-certbot.readthedocs.io/en/stable/using.html#webroot](https://eff-certbot.readthedocs.io/en/stable/using.html#webroot)
+> -   standalone 방식과 다르게 이미 로컬 서버가 가동중인 경우, 서버의 정지 없이 인증서를 발급받는 방식. 이 때 인증서를 받을 위치를 직접 지정해야 함에 유의
+> -   (ex. `--webroot-path /var/www/html` or `--webroot-path /usr/share/nginx/html` )
+> -   그런데 해당 도메인이 본인의 도메인인지 확인해야 하므로 certbot에서 도메인 인증 단계가 필요하다. 따라서 certbot 서버는 도메인의 `${webroot-path}/.well-known/acme-challenge` 로 http 통신을 하여 결과를 확인한다. 그런데 가끔 `${webroot-path}/.well-known/acme-challenge` 자체가 접근 권한이 주어지지 않았거나 숨김 디렉토리로 되어있는 경우, 통신이 불가하므로 가능하면 /.well-known 이하의 경로에 접근 권한을 주는 것이 좋다
+> -   출처 : [https://eff-certbot.readthedocs.io/en/stable/using.html#webroot](https://eff-certbot.readthedocs.io/en/stable/using.html#webroot)
 
 ### 6-2. DNS TXT 레코드와 값을 DNS 서버에 추가
 
-- 위 명령어 입력 후, 아래와 같은 DNS TXT 레코드(\_acme-challenge.도메인명)와 값(블록)을 DNS 서버에 추가한다. 브라우저로 가서 사용중인 도메인 서버 사이트에서 해당 TXT레코드와 값을 추가한 후, 다시 터미널로 돌아와서 Enter를 누른다.
+-   위 명령어 입력 후, 아래와 같은 DNS TXT 레코드(\_acme-challenge.도메인명)와 값(블록)을 DNS 서버에 추가한다. 브라우저로 가서 사용중인 도메인 서버 사이트에서 해당 TXT레코드와 값을 추가한 후, 다시 터미널로 돌아와서 Enter를 누른다.
 
-- Enter를 누르면, 인증서가 성공적으로 발급되었고, 인증서와 key가 pem 파일로 저장되었음을 확인할 수 있다.
+-   Enter를 누르면, 인증서가 성공적으로 발급되었고, 인증서와 key가 pem 파일로 저장되었음을 확인할 수 있다.
 
 ## 7. [Https] Nginx에 SSL 인증 적용
 
@@ -251,9 +251,9 @@ sudo certbot certonly --manual --preferred-challenges dns-01 --server https://ac
 
 > **Nginx란?**
 >
-> - Nginx(엔진 x라 읽는다)는 웹 서버 소프트웨어로, 가벼움과 높은 성능을 목표로 한다. 웹 서버, 리버스 프록시 및 메일 프록시 기능을 가진다. 스모디 팀 프로젝트에서는 Nginx를 통해 클라이언트로부터 요청을 받아 요청에 맞는 정적 파일을 응답해주는 `HTTP Web Server` 로 활용할 뿐만 아니라, 이번 글에서 설명할 `SSL` 기능을 지원한다.
+> -   Nginx(엔진 x라 읽는다)는 웹 서버 소프트웨어로, 가벼움과 높은 성능을 목표로 한다. 웹 서버, 리버스 프록시 및 메일 프록시 기능을 가진다. 스모디 팀 프로젝트에서는 Nginx를 통해 클라이언트로부터 요청을 받아 요청에 맞는 정적 파일을 응답해주는 `HTTP Web Server` 로 활용할 뿐만 아니라, 이번 글에서 설명할 `SSL` 기능을 지원한다.
 
-- 인스턴스에 접속되어 있다면, 이제 Nginx를 설치하고 실행해보자
+-   인스턴스에 접속되어 있다면, 이제 Nginx를 설치하고 실행해보자
 
 ### 7-2. ubuntu 폴더에 대한 권한 변경
 
@@ -320,7 +320,7 @@ server {
 
 ### 7-6. 설정파일을 symlink 연결하여 활성화
 
-- 방금 `sites-available` 에 작성한 파일을 `sites-enabled` 에 symlink를 생성해주어 Nginx에서 활성화한다.
+-   방금 `sites-available` 에 작성한 파일을 `sites-enabled` 에 symlink를 생성해주어 Nginx에서 활성화한다.
 
 ```bash
 sudo ln -s /etc/nginx/sites-available/smody.conf /etc/nginx/sites-enabled/smody.conf
@@ -340,7 +340,7 @@ sudo systemctl start nginx
 sudo systemctl status nginx
 ```
 
-- 참고 자료
+-   참고 자료
 
     [Nginx로 React를 배포하는 방법](https://codechacha.com/ko/deploy-react-with-nginx/)
 
@@ -389,7 +389,7 @@ server {
 
 ### 7-10. 설정파일을 symlink 연결하여 활성화
 
-- 방금 `sites-available` 에 작성한 파일을 `sites-enabled` 에 symlink를 생성해주어 Nginx에서 활성화한다.
+-   방금 `sites-available` 에 작성한 파일을 `sites-enabled` 에 symlink를 생성해주어 Nginx에서 활성화한다.
 
 ```bash
 sudo certbot certonly --webroot -w /var/www/html --agree-tos -m 2022smody@gmail.com -d admin.smody.co.kr
@@ -413,11 +413,11 @@ sudo systemctl start nginx
 sudo systemctl status nginx
 ```
 
-- 참고 자료
+-   참고 자료
 
 ### 7-13. 심볼릭 링크 연결 및 활성화(연결안한 경우)
 
-- 방금 수정한 파일을 심볼릭 링크 연결하여 활성화한다
+-   방금 수정한 파일을 심볼릭 링크 연결하여 활성화한다
 
     ```bash
     sudo ln -s /etc/nginx/sites-available/smody.conf /etc/nginx/sites-enabled/smody.conf
@@ -429,7 +429,7 @@ sudo systemctl status nginx
 sudo vi /etc/letsencrypt/options-ssl-nginx.conf
 ```
 
-- certbot 레포의 해당 코드 파일: [https://github.com/certbot/certbot/blob/master/certbot-nginx/certbot_nginx/\_internal/tls_configs/options-ssl-nginx.conf](https://github.com/certbot/certbot/blob/master/certbot-nginx/certbot_nginx/_internal/tls_configs/options-ssl-nginx.conf)
+-   certbot 레포의 해당 코드 파일: [https://github.com/certbot/certbot/blob/master/certbot-nginx/certbot_nginx/\_internal/tls_configs/options-ssl-nginx.conf](https://github.com/certbot/certbot/blob/master/certbot-nginx/certbot_nginx/_internal/tls_configs/options-ssl-nginx.conf)
 
     ```bash
     # This file contains important security parameters. If you modify this file
@@ -450,7 +450,7 @@ sudo vi /etc/letsencrypt/options-ssl-nginx.conf
 
 ### 7-15. 안전한 키 길이를 가진 Diffie Hellman 알고리즘 키 생성
 
-- dhparam은 [Mozilla SSL Configuration Generator](https://ssl-config.mozilla.org/)의 SSL 인증서 설정 시 권장되는 사항 중 하나로 암호화 복잡도를 높혀 보안을 강화할 수 있음
+-   dhparam은 [Mozilla SSL Configuration Generator](https://ssl-config.mozilla.org/)의 SSL 인증서 설정 시 권장되는 사항 중 하나로 암호화 복잡도를 높혀 보안을 강화할 수 있음
 
 ```bash
 sudo openssl dhparam -out /etc/letsencrypt/ssl-dhparams.pem 2048
@@ -458,13 +458,13 @@ sudo openssl dhparam -out /etc/letsencrypt/ssl-dhparams.pem 2048
 
 ### 7-16. 인증서 반영 후 Nginx 실행
 
-- Nginx 설정파일을 변경하였으므로 재시작 전 문법이 제대로 되어있는지 확인한다
+-   Nginx 설정파일을 변경하였으므로 재시작 전 문법이 제대로 되어있는지 확인한다
 
     ```bash
     sudo nginx -t
     ```
 
-- Nginx을 재시작한다
+-   Nginx을 재시작한다
 
     ```bash
     sudo nginx -s reload
@@ -474,8 +474,8 @@ sudo openssl dhparam -out /etc/letsencrypt/ssl-dhparams.pem 2048
 
     > -s 플래그는 signal을 준말로서 Nginx 서버에 신호를 보내어 특정 액션을 야기한다. 설정 가능한 액션으로는 위에서 적은 reload 외에 quit(서버 shutdown), stop(서버 즉시 중단), reopen(로그 파일 열기) 등이 있다.
 
-- 이제 기존의 http 도메인으로 접속해도 https로 접속된다.
-- 서버 상태를 확인할 수 있다. 끝
+-   이제 기존의 http 도메인으로 접속해도 https로 접속된다.
+-   서버 상태를 확인할 수 있다. 끝
 
     ```bash
     sudo service nginx status
@@ -483,12 +483,12 @@ sudo openssl dhparam -out /etc/letsencrypt/ssl-dhparams.pem 2048
 
 > 참고자료
 >
-> - [hufspnp.com 웹 배포 -1 (nginx & react & https & certbot)](https://heo-seongil.tistory.com/139)
-> - [Let's Encrypt 인증서 발급 및 갱신](https://csupreme19.github.io/system/security/2021/02/25/letsencrypt-renew.html)
-> - [[리눅스] apt, apt-get의 사용법 비교](https://coding-groot.tistory.com/90)
-> - [Let's Encrypt 와일드카드 인증서 발급하기](https://dinist.tistory.com/20)
-> - [Ubuntu의 apt-get 명령어 정리](https://blog.outsider.ne.kr/346)
-> - [[Nginx] Nginx 이해하기](https://icarus8050.tistory.com/57)
-> - [최신 Let's Encrypt SSL 인증서 발급 방법 4가지 정리 | 꿈꾸는섬](https://happist.com/573990/%EC%B5%9C%EC%8B%A0-lets-encrypt-ssl-%EC%9D%B8%EC%A6%9D%EC%84%9C-%EB%B0%9C%EA%B8%89-%EB%B0%A9%EB%B2%95-3%EA%B0%80%EC%A7%80-%EC%A0%95%EB%A6%AC#4_DNS_iyonghae_balgeub_badgi)
-> - [HTTPS 적용하기 (NGINX + Lets Encrypt)](https://yelimkim98.tistory.com/37)
-> - [도메인을 IP 주소에 연결하는 방법과 nslookup](https://medium.com/@bdv111/%EB%8F%84%EB%A9%94%EC%9D%B8%EC%9D%84-ip-%EC%A3%BC%EC%86%8C%EC%97%90-%EC%97%B0%EA%B2%B0%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95%EA%B3%BC-nslookup-9e70a32eec57)
+> -   [hufspnp.com 웹 배포 -1 (nginx & react & https & certbot)](https://heo-seongil.tistory.com/139)
+> -   [Let's Encrypt 인증서 발급 및 갱신](https://csupreme19.github.io/system/security/2021/02/25/letsencrypt-renew.html)
+> -   [[리눅스] apt, apt-get의 사용법 비교](https://coding-groot.tistory.com/90)
+> -   [Let's Encrypt 와일드카드 인증서 발급하기](https://dinist.tistory.com/20)
+> -   [Ubuntu의 apt-get 명령어 정리](https://blog.outsider.ne.kr/346)
+> -   [[Nginx] Nginx 이해하기](https://icarus8050.tistory.com/57)
+> -   [최신 Let's Encrypt SSL 인증서 발급 방법 4가지 정리 | 꿈꾸는섬](https://happist.com/573990/%EC%B5%9C%EC%8B%A0-lets-encrypt-ssl-%EC%9D%B8%EC%A6%9D%EC%84%9C-%EB%B0%9C%EA%B8%89-%EB%B0%A9%EB%B2%95-3%EA%B0%80%EC%A7%80-%EC%A0%95%EB%A6%AC#4_DNS_iyonghae_balgeub_badgi)
+> -   [HTTPS 적용하기 (NGINX + Lets Encrypt)](https://yelimkim98.tistory.com/37)
+> -   [도메인을 IP 주소에 연결하는 방법과 nslookup](https://medium.com/@bdv111/%EB%8F%84%EB%A9%94%EC%9D%B8%EC%9D%84-ip-%EC%A3%BC%EC%86%8C%EC%97%90-%EC%97%B0%EA%B2%B0%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95%EA%B3%BC-nslookup-9e70a32eec57)

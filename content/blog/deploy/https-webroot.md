@@ -22,8 +22,8 @@ SSL 인증서 발급 방법에는 dns, standalone, webroot 방식 등이 있다.
 
 ### letsencrypt가 파일을 업로드할 수 있도록 설정하기
 
-- Webroot 방식의 SSL 인증서 발급을 위한 Nginx 설정
-  - `sites-available` 폴더에 Webroot 방식의 SSL 인증서 발급을 위한 Nginx 설정을 한다.
+-   Webroot 방식의 SSL 인증서 발급을 위한 Nginx 설정
+    -   `sites-available` 폴더에 Webroot 방식의 SSL 인증서 발급을 위한 Nginx 설정을 한다.
 
 ```jsx
 sudo vi /etc/nginx/sites-available/smody.conf
@@ -46,7 +46,7 @@ server {
 }
 ```
 
-- 설정 후 nginx reload
+-   설정 후 nginx reload
 
 ```bash
 sudo nginx -s reload
@@ -54,23 +54,23 @@ sudo nginx -s reload
 
 ### webroot 방식으로 인증서 발급받기
 
-- certbot을 이용해 Let’s Encrypt 로부터 SSL 인증서를 발급받는다
-  - --webroot : webroot 방식으로 SSL 인증서를 발급 받겠다는 설정
-  - -m : 이메일 입력
-  - -w : webroor 방식의 인증을 위해 사용할 폴더 디렉토리 설정, ec2 인스턴스 내부에 존재하는 디렉토리여야 한다.
-  - -d : 인증서를 발급 받을 도메인 설정
+-   certbot을 이용해 Let’s Encrypt 로부터 SSL 인증서를 발급받는다
+    -   --webroot : webroot 방식으로 SSL 인증서를 발급 받겠다는 설정
+    -   -m : 이메일 입력
+    -   -w : webroor 방식의 인증을 위해 사용할 폴더 디렉토리 설정, ec2 인스턴스 내부에 존재하는 디렉토리여야 한다.
+    -   -d : 인증서를 발급 받을 도메인 설정
 
 ```bash
 sudo certbot certonly --webroot --agree-tos -m my@gmail.com -w /var/www/html -d www.smody.co.kr
 ```
 
-- 정상적으로 인증이 되었다면 `Certificate` 와 `Key` 가 .pem 파일 형태로 ec2 에 저장이 된다.
+-   정상적으로 인증이 되었다면 `Certificate` 와 `Key` 가 .pem 파일 형태로 ec2 에 저장이 된다.
 
 ![webroot pem](../image/webroot1.png)
 
 ## conf 수정
 
-- 인증서가 발급되었으니 위에서 smody.conf 내에 작성한 webroot 코드는 제거하고, 다음과 같은 코드를 작성한다.
+-   인증서가 발급되었으니 위에서 smody.conf 내에 작성한 webroot 코드는 제거하고, 다음과 같은 코드를 작성한다.
 
 ```bash
 server {
@@ -87,12 +87,12 @@ server {
         try_files $uri $uri/;
     }
 
-    listen 443 ssl http2; 
-    
-    ssl_certificate /etc/letsencrypt/live/www.smody.co.kr/fullchain.pem; 
-    ssl_certificate_key /etc/letsencrypt/live/www.smody.co.kr/privkey.pem; 
-    include /etc/letsencrypt/options-ssl-nginx.conf; 
-    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; 
+    listen 443 ssl http2;
+
+    ssl_certificate /etc/letsencrypt/live/www.smody.co.kr/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/www.smody.co.kr/privkey.pem;
+    include /etc/letsencrypt/options-ssl-nginx.conf;
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
 }
 
 server {
@@ -106,13 +106,13 @@ server {
 }
 ```
 
-- 설정 후 nginx 재시작
+-   설정 후 nginx 재시작
 
 ```bash
 sudo service nginx restart
 ```
 
-- 갱신된 인증서 적용 완료
+-   갱신된 인증서 적용 완료
 
 ![https 인증서](../image/webroot-result-https.png)
 

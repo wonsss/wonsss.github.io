@@ -8,19 +8,19 @@ draft: false
 
 ## 0. Introduction
 
-- GraphQL
-  - API를 위한 쿼리 언어
-  - GraphQL은 데이터를 효율적으로 요청하고 응답받을 수 있는 쿼리 언어이다. GraphQL은 타입 시스템을 기반으로 하며, 단일 엔드포인트로 다양한 데이터 소스에 접근할 수 있다. 이를 통해 개발자들은 유연하고 효율적인 API를 개발할 수 있다.
-  - <https://graphql.org>
-  - <https://github.com/graphql/graphql-spec>
-  - GraphQL 쿼리를 작성 예시 실행 가능한 사이트 <https://studio.apollographql.com/public/star-wars-swapi/variant/current/explorer>
-- Graphile
-  - Graphile은 GraphQL API를 자동으로 생성하기 위한 도구와 라이브러리의 집합이다. Graphile을 사용하면 데이터베이스 스키마로부터 GraphQL API를 생성할 수 있다.
-  - Graphile은 데이터베이스 스키마로부터 자동으로 GraphQL API를 생성하는 강력하고 유연한 도구이다. 이를 통해 개발자들은 빠르고 효율적으로 GraphQL 서버를 구축하고 데이터베이스와의 상호작용을 간단하게 관리할 수 있다.
-  - <https://www.graphile.org/>
-- Hasura
-  - Hasura는 기존 데이터베이스에서 즉각적으로 GraphQL API를 무료로 만들어준다.
-  - <https://hasura.io/>
+-   GraphQL
+    -   API를 위한 쿼리 언어
+    -   GraphQL은 데이터를 효율적으로 요청하고 응답받을 수 있는 쿼리 언어이다. GraphQL은 타입 시스템을 기반으로 하며, 단일 엔드포인트로 다양한 데이터 소스에 접근할 수 있다. 이를 통해 개발자들은 유연하고 효율적인 API를 개발할 수 있다.
+    -   <https://graphql.org>
+    -   <https://github.com/graphql/graphql-spec>
+    -   GraphQL 쿼리를 작성 예시 실행 가능한 사이트 <https://studio.apollographql.com/public/star-wars-swapi/variant/current/explorer>
+-   Graphile
+    -   Graphile은 GraphQL API를 자동으로 생성하기 위한 도구와 라이브러리의 집합이다. Graphile을 사용하면 데이터베이스 스키마로부터 GraphQL API를 생성할 수 있다.
+    -   Graphile은 데이터베이스 스키마로부터 자동으로 GraphQL API를 생성하는 강력하고 유연한 도구이다. 이를 통해 개발자들은 빠르고 효율적으로 GraphQL 서버를 구축하고 데이터베이스와의 상호작용을 간단하게 관리할 수 있다.
+    -   <https://www.graphile.org/>
+-   Hasura
+    -   Hasura는 기존 데이터베이스에서 즉각적으로 GraphQL API를 무료로 만들어준다.
+    -   <https://hasura.io/>
 
 ## 1. GraphQL이 해결하는 문제점
 
@@ -48,7 +48,7 @@ Apollo 서버는 Apollo 클라이언트를 포함한 모든 GraphQL 클라이언
 
 <https://www.apollographql.com/docs/apollo-server/getting-started/>
 
-- apollo-server와 graphql 설치
+-   apollo-server와 graphql 설치
 
 ```bash
 npm install apollo-server graphql
@@ -56,7 +56,7 @@ npm install apollo-server graphql
 
 ### Nodemon
 
-- Nodemon은 Node.js 개발 시 유용한 도구로, 파일 변경 감지를 통해 자동으로 서버를 재시작해주는 도구이다.
+-   Nodemon은 Node.js 개발 시 유용한 도구로, 파일 변경 감지를 통해 자동으로 서버를 재시작해주는 도구이다.
 
 ```jsx
 npm install nodemon -D
@@ -69,9 +69,9 @@ npm install nodemon -D
 
 ### graphQl 구문 하이라이팅 vscode 익스텐션
 
-- <https://marketplace.visualstudio.com/items?itemName=GraphQL.vscode-graphql>
+-   <https://marketplace.visualstudio.com/items?itemName=GraphQL.vscode-graphql>
 
-- require(CommonJS)대신 import(ES Module) 시스템 사용하려면 package.json에서 `“type”: “module”` 설정을 추가한다.
+-   require(CommonJS)대신 import(ES Module) 시스템 사용하려면 package.json에서 `“type”: “module”` 설정을 추가한다.
 
 ## 3. GraphQL 스키마 정의
 
@@ -81,43 +81,43 @@ npm install nodemon -D
 
 Query 타입은 GET 요청을 만드는 것과 같으며 필수이다.
 
-- 아폴로 서버를 실행하기 위해서는 반드시 최소 1개의 Query가 필요하다. type Query는 가장 기본적인 타입입니다. Query에 넣는 필드들은 request할 수 있는 것들이 된다.
+-   아폴로 서버를 실행하기 위해서는 반드시 최소 1개의 Query가 필요하다. type Query는 가장 기본적인 타입입니다. Query에 넣는 필드들은 request할 수 있는 것들이 된다.
 
 ### Mutation 타입
 
 Mutation 타입은 POST, PUT, DELETE 와 같이 서버 측 데이터를 수정할 수 있는 방법이다. 서버 측 데이터를 수정하는 모든 작업은 mutation을 통해 보내야 한다는 규칙을 설정하는 것이 유용하다.
 
 ```jsx
-import { ApolloServer, gql } from "apollo-server";
+import { ApolloServer, gql } from "apollo-server"
 
 // GET /api/tweets
 // GET /api/tweets/:id
 // POST /api/tweets
 
 const typeDefs = gql`
- type User {
-  id: ID
-  username: String
- }
- type Tweet {
-  id: ID
-  text: String
-  author: User
- }
- type Query {
-  allTweets: [Tweet]
-  tweet(id: ID): Tweet
- }
- type Mutation {
-  postTweet(text: String, userId: ID): Tweet
- }
-`;
+	type User {
+		id: ID
+		username: String
+	}
+	type Tweet {
+		id: ID
+		text: String
+		author: User
+	}
+	type Query {
+		allTweets: [Tweet]
+		tweet(id: ID): Tweet
+	}
+	type Mutation {
+		postTweet(text: String, userId: ID): Tweet
+	}
+`
 
-const server = new ApolloServer({ typeDefs });
+const server = new ApolloServer({ typeDefs })
 
 server.listen().then(({ url }) => {
- console.log(`Running on ${url}`);
-});
+	console.log(`Running on ${url}`)
+})
 ```
 
 ```jsx
@@ -131,9 +131,9 @@ mutation {
 
 ## 4. 타입
 
-- graphQL 쿼리 요청할 수 있는 샌드박스
-  - <https://studio.apollographql.com/sandbox/explorer>
-  - nodemon으로 <http://localhost:4000/> 서버 켜고 위 사이트에서 접속하여 쿼리 요청 테스트 가능
+-   graphQL 쿼리 요청할 수 있는 샌드박스
+    -   <https://studio.apollographql.com/sandbox/explorer>
+    -   nodemon으로 <http://localhost:4000/> 서버 켜고 위 사이트에서 접속하여 쿼리 요청 테스트 가능
 
 ### Scalar
 
@@ -151,7 +151,7 @@ Scalar 타입은 GraphQL 스키마에서 사용되는 기본 데이터 타입이
 
 타입에 !를 붙이면 Non-Nullable이다.
 
-Non-Nullalbe은 서버가 항상 이 필드에 대해 null이 아닌 값을 반환할 것으로 기대한다.  즉,  !가 붙지 않은 필드는 nullable field(null값을 가질 수 있는 필드)이다.
+Non-Nullalbe은 서버가 항상 이 필드에 대해 null이 아닌 값을 반환할 것으로 기대한다. 즉, !가 붙지 않은 필드는 nullable field(null값을 가질 수 있는 필드)이다.
 
 <https://graphql.org/learn/schema/#lists-and-non-null>
 
@@ -164,16 +164,16 @@ resolver 함수는 field가 요청했을 때 실제로 호출될 함수이다.
 ```jsx
 // args는 GraphQL 쿼리의 필드에 제공된 인수
 const resolvers = {
- Query: {
-  allTweets() {
-   console.log("트윗을 가져옵니다");
-   return tweets;
-  },
-  tweet(root, args) {
-   return tweets.find(tweet => tweet.id === args.id);
-  },
- },
-};
+	Query: {
+		allTweets() {
+			console.log("트윗을 가져옵니다")
+			return tweets
+		},
+		tweet(root, args) {
+			return tweets.find(tweet => tweet.id === args.id)
+		},
+	},
+}
 ```
 
 <https://graphql.org/learn/execution/#root-fields-resolvers>
@@ -190,21 +190,22 @@ type User의 fullName에 대한 resolver를 만들 수 있다
 
 ```tsx
 const typeDefs = gql`
- type User {
-  id: ID
-  firstName: String!
-  lastName: String!
-  fullName: String
- }
-`;
+	type User {
+		id: ID
+		firstName: String!
+		lastName: String!
+		fullName: String
+	}
+`
 
 const resolvers = {
- User: {
-  fullName({ firstName, lastName }) {  // type User의 fullName에 대한 resolver
-   return `${firstName} ${lastName}`;
-  },
- },
-};
+	User: {
+		fullName({ firstName, lastName }) {
+			// type User의 fullName에 대한 resolver
+			return `${firstName} ${lastName}`
+		},
+	},
+}
 ```
 
 ## 6. 문서화

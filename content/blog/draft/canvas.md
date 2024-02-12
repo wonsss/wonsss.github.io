@@ -6,8 +6,6 @@ thumbnail: { thumbnailSrc }
 draft: true
 ---
 
-
-
 [MDN - Canvas tutorial](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial)
 
 [stackoverflow - Downloading Canvas element to an image](https://stackoverflow.com/questions/8126623/downloading-canvas-element-to-an-image/8126887#8126887)

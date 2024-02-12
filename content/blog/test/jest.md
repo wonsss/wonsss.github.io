@@ -1,5 +1,5 @@
 ---
-title: React 컴포넌트 테스트를 위한 좌충우돌 Jest 환경설정(React Testing Library, React Query, MSW) 
+title: React 컴포넌트 테스트를 위한 좌충우돌 Jest 환경설정(React Testing Library, React Query, MSW)
 date: 2022-11-04 22:11:57
 category: test
 thumbnail: { thumbnailSrc }
@@ -14,19 +14,19 @@ GET 요청의 결과 응답값으로 리액트 컴포넌트가 의도한대로 �
 
 POST, PUT, DELETE 같은 요청의 결과 응답값 등으로 리액트 컴포넌트가 의도한대로 변경되었는지 Mutation 테스트한다.
 
-- React Query (테스트를 위한 것은 아님)
+-   React Query (테스트를 위한 것은 아님)
 
 스모디 프로젝트에서는 React에서 서버와 네트워크 통신을 쉽게 다루게 해주는 라이브러리인 [React Query](https://wonsss.github.io/etc/react-query/)를 사용하고 있는데, 테스트 시 이와 관련한 설정이 필요하다.
 
-- MSW
+-   MSW
 
 이를 테스트하기 위해, 네트워크 통신을 흉내내는 것을 돕는 도구인 `MSW`(Mock Service Worker)를 사용한다. MSW는 네트워크 호출을 차단한 후, 새로 정의한 핸들러에 따른 가짜 네트워크 응답을 반환한다.
 
-- Jest
+-   Jest
 
 코드가 제대로 동작하는지 확인하는 test case를 만드는 테스팅 프레임워크인 `Jest`를 사용한다. 프레임워크라고 불리는 것처럼, Jest는 여러 테스팅 라이브러리의 기능(Test Runner, Test Matcher, Test Mock 등)을 통합하여 제공하기 때문에 이전에 비해 편리하다고 한다.
 
-- React Testing Library(길다..줄여서 RTL)
+-   React Testing Library(길다..줄여서 RTL)
 
 `RTL`은 마치 최종 사용자가 사용하는 것처럼 리액트 컴포넌트를 테스트하기 위한 테스팅 라이브러리이다. [React 공식문서](https://reactjs.org/docs/test-utils.html#overview)에서 사용을 권장하는 라이브리러이다.
 RTL을 통해 실제 화면에 무엇이 보이고 어떤 이벤트가 발생했을 때 화면에 원하는 변화가 생겼는지 등을 확인할 수 있다. 즉, 사용자의 관점에서 테스트할 수 있도록 DOM 위주의 렌더링 결과에 집중하는 테스팅 라이브러리라고 말할 수 있다.
@@ -60,8 +60,12 @@ yarn add @babel/preset-typescript -D  // typescript 사용시
 ```javascript
 // babel.config.js
 module.exports = {
-  presets: ['@babel/preset-env', '@babel/preset-react', '@babel/preset-typescript'],
-};
+	presets: [
+		"@babel/preset-env",
+		"@babel/preset-react",
+		"@babel/preset-typescript",
+	],
+}
 ```
 
 ## 2. Jest 환경 설정하기(jest.config.ts)
@@ -110,13 +114,15 @@ moduleNameMapper: {
 
 ```jsx
 // mocks/fileMock.js
-const path = require('path');
+const path = require("path")
 
 module.exports = {
-  process(src, filename, config, options) {
-    return 'module.exports = ' + JSON.stringify(path.basename(filename)) + ';';
-  },
-};
+	process(src, filename, config, options) {
+		return (
+			"module.exports = " + JSON.stringify(path.basename(filename)) + ";"
+		)
+	},
+}
 ```
 
 ### 2-3. transform
@@ -132,12 +138,13 @@ transformer에게 `{filePattern: ['path-to-transformer', {options}]}`와 같은 
   },
 ```
 
-- [ts-jest](https://www.npmjs.com/package/ts-jest)
-  - ts-jest는 typescript로 작성된 프로젝트를 Jest로 테스트할 수 있도록 도와주는 Jest transformer이다.
-  - 이번 프로젝트에서는 typescript를 사용하고 있어서 transform 설정에  `'^.+\\.(js|jsx|ts|tsx)?$': 'ts-jest',`처럼 ts-jest를 사용하였다.
+-   [ts-jest](https://www.npmjs.com/package/ts-jest)
 
-- [jest-transfomer-svg](https://www.npmjs.com/package/jest-transformer-svg)
-  - jest, react용으로 svg 파일을 깔끔한 스냅샷으로 변환하는 Jest transformer이다. 웹팩에서 [@svgr/webpack](https://www.npmjs.com/package/@svgr/webpack) 로더를 사용하여 svg를 리액트 컴포넌트로 바로 사용하고 있는데, 이 트랜스포머를 사용함으로써 svg도 스냅샷을 얻을 수 있다.
+    -   ts-jest는 typescript로 작성된 프로젝트를 Jest로 테스트할 수 있도록 도와주는 Jest transformer이다.
+    -   이번 프로젝트에서는 typescript를 사용하고 있어서 transform 설정에 `'^.+\\.(js|jsx|ts|tsx)?$': 'ts-jest',`처럼 ts-jest를 사용하였다.
+
+-   [jest-transfomer-svg](https://www.npmjs.com/package/jest-transformer-svg)
+    -   jest, react용으로 svg 파일을 깔끔한 스냅샷으로 변환하는 Jest transformer이다. 웹팩에서 [@svgr/webpack](https://www.npmjs.com/package/@svgr/webpack) 로더를 사용하여 svg를 리액트 컴포넌트로 바로 사용하고 있는데, 이 트랜스포머를 사용함으로써 svg도 스냅샷을 얻을 수 있다.
 
 ### 2-4. testEnvironment
 
@@ -148,8 +155,8 @@ transformer에게 `{filePattern: ['path-to-transformer', {options}]}`와 같은 
 테스트하는 데 사용되는 테스트 환경을 의미한다. Jest의 기본 환경은 [jsdom](https://github.com/jsdom/jsdom) 을 통한 브라우저 같은 환경이다.
 만약 node 서비스를 만든다면, `node` 옵션을 설정하여 node-like 환경을 대신 사용할 수 있다.
 
-- jsdom
-  - jsdom은 Node.js와 함께 사용하기 위해 많은 웹 표준(특히 WHATWG DOM 및 HTML 표준)의 순수 자바스크립트 구현체이다. 실제 웹 앱에 대한 test나 scrap에 유용하도록 웹 브라우저의 subset을 모방한 것이다
+-   jsdom
+    -   jsdom은 Node.js와 함께 사용하기 위해 많은 웹 표준(특히 WHATWG DOM 및 HTML 표준)의 순수 자바스크립트 구현체이다. 실제 웹 앱에 대한 test나 scrap에 유용하도록 웹 브라우저의 subset을 모방한 것이다
 
 ### 2-5. testMatch
 
@@ -167,7 +174,7 @@ Jest가 테스트할 파일을 감지하는 데 사용하는 패턴이다. 기�
 
 디렉터리의 이름의 배열이며, 이는 요청된 모듈 위치를 찾는데 사용된다. 옵션을 설정하면 기본값을 덮어쓰므로, 여전히 `node_modules` 패키지를 찾고 싶으면 다른 옵션과 함께 적어야 한다.
 
-### 2-7.  rootDir
+### 2-7. rootDir
 
 ```json
   rootDir: './src',
@@ -196,9 +203,9 @@ setupFiles는 setupFilesAfterEnv가 실행되기 전에 실행된다.
 
 프로젝트 내부에서 indexedDB를 사용하는 코드가 있어서, Jest가 그 코드를 읽지 못하고 에러가 발생하는 문제가 있었다. 이를 해결하기 위해, IndexedDB API의 구현체인 `fake-indexeddb/auto`를 사용했다.
 
-- [fake-indexeddb/auto](https://www.npmjs.com/package/fake-indexeddb)
-  - 이 라이브러리의 주요 용도는 IndexedDB 의존적인 코드를 Node.js 환경에서 테스트하는 데 도움을 주기 위해서이다.
-  - 모든 Jest 테스트 파일에서 매번 이 라이브러리를 가져올 필요 없이, Jest의 setupFiles 설정을 통해 자동으로 스크립트를 setup할 수 있다.
+-   [fake-indexeddb/auto](https://www.npmjs.com/package/fake-indexeddb)
+    -   이 라이브러리의 주요 용도는 IndexedDB 의존적인 코드를 Node.js 환경에서 테스트하는 데 도움을 주기 위해서이다.
+    -   모든 Jest 테스트 파일에서 매번 이 라이브러리를 가져올 필요 없이, Jest의 setupFiles 설정을 통해 자동으로 스크립트를 setup할 수 있다.
 
 ## 3. 테스팅 프레임워크 구성(setupTests.ts)
 
@@ -215,29 +222,29 @@ setupFiles는 setupFilesAfterEnv가 실행되기 전에 실행된다.
 MSW로 API 모킹의 시작과 마무리 및 리셋 등의 작업은 아래 코드에 주석으로 달았다.
 
 ```typescript
-import MockIntersectionObserver from 'mocks/MockIntersectionObserver';
-import 'mocks/matchMedia';
-import { server } from 'mocks/server';
+import MockIntersectionObserver from "mocks/MockIntersectionObserver"
+import "mocks/matchMedia"
+import { server } from "mocks/server"
 
-import '@testing-library/jest-dom';
-import { cleanup } from '@testing-library/react';
+import "@testing-library/jest-dom"
+import { cleanup } from "@testing-library/react"
 
 beforeAll(() => {
-  // 모든 테스트들이 시작되기 전에 API 모킹을 준비되도록 한다
-  server.listen(); 
-  window.IntersectionObserver = MockIntersectionObserver;
-});
+	// 모든 테스트들이 시작되기 전에 API 모킹을 준비되도록 한다
+	server.listen()
+	window.IntersectionObserver = MockIntersectionObserver
+})
 
 afterEach(() => {
-  // 테스트 도중 추가한 모든 요청 핸들러를 초기화하하여, 다른 테스트에 영향을 미치지 않도록 한다.
-  server.resetHandlers(); 
-});
+	// 테스트 도중 추가한 모든 요청 핸들러를 초기화하하여, 다른 테스트에 영향을 미치지 않도록 한다.
+	server.resetHandlers()
+})
 
-afterAll(() => { 
-  // 테스크가 끝난 후 마무리한다.
-  server.close(); 
-  jest.resetAllMocks();
-});
+afterAll(() => {
+	// 테스크가 끝난 후 마무리한다.
+	server.close()
+	jest.resetAllMocks()
+})
 ```
 
 jest.resetAllMocks()은 모든 mock들의 상태를 초기화한다.
@@ -249,58 +256,58 @@ jest.resetAllMocks()은 모든 mock들의 상태를 초기화한다.
 이 에러를 해결하려면 부족한 함수를 mocking하고, 그것을 setupTests에서 호출해주면 된다.
 
 ```jsx
-import MockIntersectionObserver from 'mocks/MockIntersectionObserver';
-import 'mocks/matchMedia';
+import MockIntersectionObserver from "mocks/MockIntersectionObserver"
+import "mocks/matchMedia"
 ```
 
-- mocks/MockIntersectionObserver.ts 코드 전체
+-   mocks/MockIntersectionObserver.ts 코드 전체
 
 ```typescript
 export default class {
-  readonly root: Element | null;
+	readonly root: Element | null
 
-  readonly rootMargin: string;
+	readonly rootMargin: string
 
-  readonly thresholds: ReadonlyArray<number>;
+	readonly thresholds: ReadonlyArray<number>
 
-  constructor() {
-    this.root = null;
-    this.rootMargin = '';
-    this.thresholds = [];
-  }
+	constructor() {
+		this.root = null
+		this.rootMargin = ""
+		this.thresholds = []
+	}
 
-  disconnect() {}
+	disconnect() {}
 
-  observe() {}
+	observe() {}
 
-  takeRecords(): IntersectionObserverEntry[] {
-    return [];
-  }
+	takeRecords(): IntersectionObserverEntry[] {
+		return []
+	}
 
-  unobserve() {}
+	unobserve() {}
 }
 ```
 
 [JS - Testing code that uses an IntersectionObserver](https://stackoverflow.com/questions/44249985/js-testing-code-that-uses-an-intersectionobserver)
 
-- mocks/matchMedia.ts 코드 전체
+-   mocks/matchMedia.ts 코드 전체
 
 ```typescript
-import '@testing-library/jest-dom';
+import "@testing-library/jest-dom"
 
-Object.defineProperty(window, 'matchMedia', {
-  writable: true,
-  value: jest.fn().mockImplementation((query) => ({
-    matches: false,
-    media: query,
-    onchange: null,
-    addListener: jest.fn(), // Deprecated
-    removeListener: jest.fn(), // Deprecated
-    addEventListener: jest.fn(),
-    removeEventListener: jest.fn(),
-    dispatchEvent: jest.fn(),
-  })),
-});
+Object.defineProperty(window, "matchMedia", {
+	writable: true,
+	value: jest.fn().mockImplementation(query => ({
+		matches: false,
+		media: query,
+		onchange: null,
+		addListener: jest.fn(), // Deprecated
+		removeListener: jest.fn(), // Deprecated
+		addEventListener: jest.fn(),
+		removeEventListener: jest.fn(),
+		dispatchEvent: jest.fn(),
+	})),
+})
 ```
 
 이외에도 undefined 에러가 발생하는 Web API 인터페이스는 이와 같이 모킹하여 setupTest에서 실행해준다.
@@ -329,44 +336,44 @@ describe('프로필 페이지 테스트', () => {
 
 ```tsx
 // testUtils.tsx
-import { generateQueryClient } from 'queryClient';
-import { ReactElement } from 'react';
-import { QueryClientProvider } from 'react-query';
-import { BrowserRouter, MemoryRouter } from 'react-router-dom';
-import { RecoilRoot } from 'recoil';
-import { ThemeProvider } from 'styled-components';
+import { generateQueryClient } from "queryClient"
+import { ReactElement } from "react"
+import { QueryClientProvider } from "react-query"
+import { BrowserRouter, MemoryRouter } from "react-router-dom"
+import { RecoilRoot } from "recoil"
+import { ThemeProvider } from "styled-components"
 
-import { render, RenderResult } from '@testing-library/react';
+import { render, RenderResult } from "@testing-library/react"
 
-import { darkTheme } from 'styles/theme';
+import { darkTheme } from "styles/theme"
 
 export const generateTestQueryClient = () =>
-  new QueryClient({
-    defaultOptions: {
-      queries: {
-        retry: 0,
-      },
-    },
-  });
+	new QueryClient({
+		defaultOptions: {
+			queries: {
+				retry: 0,
+			},
+		},
+	})
 
 export const renderWithProviders = (Component: ReactElement): RenderResult => {
-  return render(
-    <RecoilRoot>
-      <QueryClientProvider client={generateTestQueryClient()}>
-        <ThemeProvider theme={darkTheme}>
-          <MemoryRouter>{Component}</MemoryRouter>
-        </ThemeProvider>
-      </QueryClientProvider>
-    </RecoilRoot>,
-  );
-};
+	return render(
+		<RecoilRoot>
+			<QueryClientProvider client={generateTestQueryClient()}>
+				<ThemeProvider theme={darkTheme}>
+					<MemoryRouter>{Component}</MemoryRouter>
+				</ThemeProvider>
+			</QueryClientProvider>
+		</RecoilRoot>
+	)
+}
 ```
 
-- recoil 사용했다면 `<RecoilRoot>`로 감싼다.
-- ReactQuery를 사용했다면 client와 함께 `<QueryClientProvider>`로 감싼다.
-- styled-components를 통해 다크모드도 적용했기에 `<ThemeProvider>`로 감산다.
-- react-router-dom의 `[<MemoryRouter>](https://reactrouter.com/en/main/router-components/memory-router)`은 위치를 배열로서 내부에 저장한다. BrowserHistory나 HashHistory와 다르게, 브라우저의 히스토리 스택과 같은 외부 소스에 묶이지 않는다. 테스트와 같이 히스토리 스택에 대한 완벽한 제어가 필요한 경우 사용하는 것이 적절하다.
-  
+-   recoil 사용했다면 `<RecoilRoot>`로 감싼다.
+-   ReactQuery를 사용했다면 client와 함께 `<QueryClientProvider>`로 감싼다.
+-   styled-components를 통해 다크모드도 적용했기에 `<ThemeProvider>`로 감산다.
+-   react-router-dom의 `[<MemoryRouter>](https://reactrouter.com/en/main/router-components/memory-router)`은 위치를 배열로서 내부에 저장한다. BrowserHistory나 HashHistory와 다르게, 브라우저의 히스토리 스택과 같은 외부 소스에 묶이지 않는다. 테스트와 같이 히스토리 스택에 대한 완벽한 제어가 필요한 경우 사용하는 것이 적절하다.
+
 테스트 환경설정은 여기까지~ :)
 
 ## 참고

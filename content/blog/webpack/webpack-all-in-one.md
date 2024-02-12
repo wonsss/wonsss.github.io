@@ -2,7 +2,7 @@
 title: Webpack, Babel 설정 A to Z 정리(빌드 속도 개선, 폴리필 등)[Smody 프로젝트]
 date: 2022-10-29 12:10:38
 category: webpack
-thumbnail: '../image/webpack-1.png'
+thumbnail: "../image/webpack-1.png"
 draft: false
 ---
 
@@ -44,25 +44,23 @@ draft: false
 
 ```javascript
 // `webpack.production.js`
-const { merge } = require('webpack-merge');
-const common = require('./webpack.common');
+const { merge } = require("webpack-merge")
+const common = require("./webpack.common")
 
 module.exports = merge(common, {
-    mode: 'production',
-
+	mode: "production",
 })
 
 // `webpack.development.js`
-const { merge } = require('webpack-merge');
-const common = require('./webpack.common');
+const { merge } = require("webpack-merge")
+const common = require("./webpack.common")
 
 module.exports = merge(common, {
-    mode: 'development',
-
+	mode: "development",
 })
 ```
 
-- `package.json`의 scripts 속성에서 빌드하려는 모드에 따라 해당 웹팩 설정 파일을 config 옵션을 통해 적용하도록 설정한다.
+-   `package.json`의 scripts 속성에서 빌드하려는 모드에 따라 해당 웹팩 설정 파일을 config 옵션을 통해 적용하도록 설정한다.
 
 ```json
 // package.json
@@ -76,67 +74,67 @@ module.exports = merge(common, {
 
 ## 3. webpack.common.js
 
-- 프로젝트에서 사용한 공통 웹팩 설정의 코드는 다음과 같다.
+-   프로젝트에서 사용한 공통 웹팩 설정의 코드는 다음과 같다.
 
 ```javascript
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const ProgressPlugin = require('progress-webpack-plugin');
-const path = require('path');
+const HtmlWebpackPlugin = require("html-webpack-plugin")
+const CopyWebpackPlugin = require("copy-webpack-plugin")
+const ProgressPlugin = require("progress-webpack-plugin")
+const path = require("path")
 
 module.exports = {
-  entry: './src/index.tsx',
-  output: {
-    publicPath: '/',
-    path: path.join(__dirname, '../dist'),
-    filename: '[name].[chunkhash].js',
-    clean: true,
-  },
-  resolve: {
-    extensions: ['.js', '.jsx', '.ts', '.tsx'],
-    modules: [
-      path.resolve(__dirname, '../src'),
-      path.resolve(__dirname, '../node_modules'),
-    ],
-  },
-  module: {
-    rules: [
-      {
-        test: /\.(png|webp)$/,
-        type: 'asset',
-        generator: {
-          filename: 'assets/[name][hash][ext]',
-        },
-      },
-      {
-        test: /\.svg$/,
-        use: ['@svgr/webpack'],
-      },
-    ],
-  },
-  plugins: [
-    new HtmlWebpackPlugin({
-      template: './public/index.html',
-    }),
-    new CopyWebpackPlugin({
-      patterns: [
-        { from: './public/image', to: 'image' },
-        { from: './public/manifest.json', to: '.' },
-        { from: './public/pwaServiceWorker.js', to: '.' },
-      ],
-    }),
-    new ProgressPlugin(true),
-  ],
-  devServer: {
-    historyApiFallback: true,
-    port: 3000,
-    hot: true,
-    open: true,
-  },
-  performance: {
-    hints: false,
-  },
-};
+	entry: "./src/index.tsx",
+	output: {
+		publicPath: "/",
+		path: path.join(__dirname, "../dist"),
+		filename: "[name].[chunkhash].js",
+		clean: true,
+	},
+	resolve: {
+		extensions: [".js", ".jsx", ".ts", ".tsx"],
+		modules: [
+			path.resolve(__dirname, "../src"),
+			path.resolve(__dirname, "../node_modules"),
+		],
+	},
+	module: {
+		rules: [
+			{
+				test: /\.(png|webp)$/,
+				type: "asset",
+				generator: {
+					filename: "assets/[name][hash][ext]",
+				},
+			},
+			{
+				test: /\.svg$/,
+				use: ["@svgr/webpack"],
+			},
+		],
+	},
+	plugins: [
+		new HtmlWebpackPlugin({
+			template: "./public/index.html",
+		}),
+		new CopyWebpackPlugin({
+			patterns: [
+				{ from: "./public/image", to: "image" },
+				{ from: "./public/manifest.json", to: "." },
+				{ from: "./public/pwaServiceWorker.js", to: "." },
+			],
+		}),
+		new ProgressPlugin(true),
+	],
+	devServer: {
+		historyApiFallback: true,
+		port: 3000,
+		hot: true,
+		open: true,
+	},
+	performance: {
+		hints: false,
+	},
+}
 ```
 
 ### 3-1. entry, output
@@ -170,18 +168,18 @@ module.exports = {
 
 #### 3-1-3) output.path
 
-```javascript  
+```javascript
 path: path.join(__dirname, '../dist'),
 ```
 
 `path` 옵션은 출력 디렉터리를 설정한다.
- 해당 옵션에서 사용한 `path` 모듈은 내장 모듈이므로 별도의 라이브러리 설치 없이 `const path = require('path');` 와 같이 불러서 사용한다.
+해당 옵션에서 사용한 `path` 모듈은 내장 모듈이므로 별도의 라이브러리 설치 없이 `const path = require('path');` 와 같이 불러서 사용한다.
 
-`path.join([...paths])` 은 여러 인자를 넣으면 하나의 경로로 합쳐서 반환한다.  `__dirname` 키워드 변수를 넣으면 실행시 현재 파일 경로로 바뀐다.  
+`path.join([...paths])` 은 여러 인자를 넣으면 하나의 경로로 합쳐서 반환한다. `__dirname` 키워드 변수를 넣으면 실행시 현재 파일 경로로 바뀐다.
 
 결과적으로 이 옵션은 웹팩이 만든 결과물을 본 설정파일이 위치한 디렉터리의 상위 디렉터리에서 dist라는 이름의 디렉터리에 넣는다.
 
-[[참고] Nodejs, path module, __dirname, __filename 에 대해 톺아보기](https://p-iknow.netlify.app/node-js/path-moudle/)
+[[참고] Nodejs, path module, **dirname, **filename 에 대해 톺아보기](https://p-iknow.netlify.app/node-js/path-moudle/)
 
 #### 3-1-4) output.filename
 
@@ -258,8 +256,8 @@ hash 옵션에는 hash, chunkHash, contentHash가 존재한다.
 
 이미지를 불러오는 방법은 크게 두 가지 종류가 있다.
 
-- output 디렉터리에 파일을 emit하고 URL로 불러오는 방식(`asset/resource` 타입)
-- data URI을 inline으로 사용하는 방식(`asset/inline` 타입)
+-   output 디렉터리에 파일을 emit하고 URL로 불러오는 방식(`asset/resource` 타입)
+-   data URI을 inline으로 사용하는 방식(`asset/inline` 타입)
 
 data URI의 경우 성능상 좋진않지만, 네트워크 요청의 수가 줄어든다는 장점이 있다. 대개 URL로 불러오는 방식을 사용하나, 크기가 작은 이미지의 경우 data URI을 사용하는 것도 좋은 선택일 수 있다.
 
@@ -286,12 +284,10 @@ Asset Modules에 대한 내용은 이전에 작성한 아래의 포스팅을 참
 
 ```jsx
 // index.tsx
-import PlusIcon from 'assets/plus.svg';
+import PlusIcon from "assets/plus.svg"
 
 const index = () => {
-  return (
-    <PlusIcon />
-  )
+	return <PlusIcon />
 }
 ```
 
@@ -382,58 +378,62 @@ historyApiFallBack 옵션이 활성화된 devSever가 실행되면 콘솔에 다
 
 ```javascript
 // webpack.dev.js
-const webpack = require('webpack');
-const isLocal = process.env.NODE_ENV === 'local';
-const dotenv = require('dotenv');
-const { merge } = require('webpack-merge');
-const common = require('./webpack.common');
-const path = require('path');
-const SpeedMeasurePlugin = require('speed-measure-webpack-plugin');
-const smp = new SpeedMeasurePlugin();
+const webpack = require("webpack")
+const isLocal = process.env.NODE_ENV === "local"
+const dotenv = require("dotenv")
+const { merge } = require("webpack-merge")
+const common = require("./webpack.common")
+const path = require("path")
+const SpeedMeasurePlugin = require("speed-measure-webpack-plugin")
+const smp = new SpeedMeasurePlugin()
 
-dotenv.config({ path: path.join(__dirname, '../.env') });
+dotenv.config({ path: path.join(__dirname, "../.env") })
 
 module.exports = smp.wrap(
-  merge(common, {
-    mode: 'development',
-    devtool: 'eval-cheap-module-source-map',
-    cache: {
-      type: 'filesystem',
-    },
-    module: {
-      rules: [
-        {
-          test: /\.(js|jsx|ts|tsx)$/i,
-          exclude: /node_modules/,
-          loader: 'babel-loader',
-          options: {
-            cacheCompression: false,
-            cacheDirectory: true,
-            presets: [
-              '@babel/preset-env',
-              ['@babel/preset-react', { runtime: 'automatic' }],
-              '@babel/preset-typescript',
-            ],
-            plugins: [['babel-plugin-styled-components']],
-          },
-        },
-      ],
-    },
-    optimization: {
-      runtimeChunk: {
-        name: (entrypoint) => `runtime-${entrypoint.name}`,
-      },
-    },
-    plugins: [
-      new webpack.DefinePlugin({
-        'process.env.BASE_URL': JSON.stringify(process.env.DEV_BASE_URL),
-        'process.env.CLIENT_ID': JSON.stringify(process.env.CLIENT_ID),
-        'process.env.PUBLIC_KEY': JSON.stringify(process.env.PUBLIC_KEY),
-        'process.env.IS_LOCAL': JSON.stringify(isLocal),
-      }),
-    ],
-  }),
-);
+	merge(common, {
+		mode: "development",
+		devtool: "eval-cheap-module-source-map",
+		cache: {
+			type: "filesystem",
+		},
+		module: {
+			rules: [
+				{
+					test: /\.(js|jsx|ts|tsx)$/i,
+					exclude: /node_modules/,
+					loader: "babel-loader",
+					options: {
+						cacheCompression: false,
+						cacheDirectory: true,
+						presets: [
+							"@babel/preset-env",
+							["@babel/preset-react", { runtime: "automatic" }],
+							"@babel/preset-typescript",
+						],
+						plugins: [["babel-plugin-styled-components"]],
+					},
+				},
+			],
+		},
+		optimization: {
+			runtimeChunk: {
+				name: entrypoint => `runtime-${entrypoint.name}`,
+			},
+		},
+		plugins: [
+			new webpack.DefinePlugin({
+				"process.env.BASE_URL": JSON.stringify(
+					process.env.DEV_BASE_URL
+				),
+				"process.env.CLIENT_ID": JSON.stringify(process.env.CLIENT_ID),
+				"process.env.PUBLIC_KEY": JSON.stringify(
+					process.env.PUBLIC_KEY
+				),
+				"process.env.IS_LOCAL": JSON.stringify(isLocal),
+			}),
+		],
+	})
+)
 ```
 
 ### 4-1. mode
@@ -464,8 +464,8 @@ dotenv.config({ path: path.join(__dirname, '../.env') });
 #### 4-2-1) dotenv 라이브러리
 
 ```jsx
-const dotenv = require('dotenv');
-dotenv.config({ path: path.join(__dirname, '../.env') });
+const dotenv = require("dotenv")
+dotenv.config({ path: path.join(__dirname, "../.env") })
 ```
 
 [dotenv](https://www.npmjs.com/package/dotenv) 라이브러리는 환경 변수를 파일에 저장할 수 있도록 해준다.
@@ -493,34 +493,34 @@ devtool: 'eval-cheap-module-source-map',
 
 소스맵의 여러 옵션 중 `eval-cheap-module-source-map`을 사용하였다. 해당 옵션은 고품질 소스맵 옵션인 `eval-source-map`보다 빌드 속도가 더 빠르면서, 코드 품질 자체에서도 유의미한 차이가 나지 않았기 때문이다.
 
-- 소스맵 적용하지 않은 경우
-![소스맵 적용되지 않은 코드](../image/noSourceMap.png)
+-   소스맵 적용하지 않은 경우
+    ![소스맵 적용되지 않은 코드](../image/noSourceMap.png)
 
-- 소스맵 적용한 경우
-![소스맵 적용된 코드](../image/sourceMap.png)
-[[참고] webpack - Devtool](https://webpack.kr/configuration/devtool/)
+-   소스맵 적용한 경우
+    ![소스맵 적용된 코드](../image/sourceMap.png)
+    [[참고] webpack - Devtool](https://webpack.kr/configuration/devtool/)
 
 ### 4-4. babel-loader
 
 #### 4-4-1) esbuild-loader나 ts-loader 대신에 babel-loader를 선택한 이유
 
 로더는 모듈을 입력받아 원하는 형태로 변환하여 새로운 모듈을 출력한다.
-`babel-loader`, `ts-loader`, `esbuild-loader`와 같은 로더를 통해  ES6, 리액트, 타입스크립트에 대한 트랜스파일링을 기본적으로 할 수 있다.
+`babel-loader`, `ts-loader`, `esbuild-loader`와 같은 로더를 통해 ES6, 리액트, 타입스크립트에 대한 트랜스파일링을 기본적으로 할 수 있다.
 
-비슷한 기능을 하는 `babel-loader`, `ts-loader`, `esbuild-loader`들을 사용하면서 비교한 결과, 다음과 같은 이유에 의해  `babel-loader`를 사용하기로 결정하였다.
+비슷한 기능을 하는 `babel-loader`, `ts-loader`, `esbuild-loader`들을 사용하면서 비교한 결과, 다음과 같은 이유에 의해 `babel-loader`를 사용하기로 결정하였다.
 
-- [babel-loader](https://github.com/babel/babel-loader)
-  - 가능: 트랜스파일링(babel7 버전 이후에는 ts에 대한 트랜스파일링도 가능), 폴리필, 캐시
-  - 불가: 타입체킹(그러나 tsc --noEmit이나 ForkTsCheckerWebpackPlugin을 통해 가능)
-  - 특징: 폴리필이 가능하고, 캐시 활용 및 최적화 적용 시 속도도 빠름
-- [ts-loader](https://github.com/TypeStrong/ts-loader)
-  - 가능: 트랜스파일링, 타입체킹
-  - 불가: 폴리필, [HMR](https://github.com/TypeStrong/ts-loader#hot-module-replacement)
-  - 특징: 자체적인 강력한 타입체킹
-- [esbuild-loader](https://github.com/privatenumber/esbuild-loader)
-  - 가능: 트랜스파일링
-  - 불가: 폴리필, 타입체킹(그러나 tsc --noEmit이나 ForkTsCheckerWebpackPlugin을 통해 가능)
-  - 특징: 기본적으로 빠른 빌드 속도, 자체적인 minification 기능을 지원하므로 관련 플러그인 사용을 줄일 수 있음, 그러나 esbuild에서 지원하는 문법에 한계가 있어 타겟 브라우저에서도 잘 작동하는지 조금 더 검증이 필요함
+-   [babel-loader](https://github.com/babel/babel-loader)
+    -   가능: 트랜스파일링(babel7 버전 이후에는 ts에 대한 트랜스파일링도 가능), 폴리필, 캐시
+    -   불가: 타입체킹(그러나 tsc --noEmit이나 ForkTsCheckerWebpackPlugin을 통해 가능)
+    -   특징: 폴리필이 가능하고, 캐시 활용 및 최적화 적용 시 속도도 빠름
+-   [ts-loader](https://github.com/TypeStrong/ts-loader)
+    -   가능: 트랜스파일링, 타입체킹
+    -   불가: 폴리필, [HMR](https://github.com/TypeStrong/ts-loader#hot-module-replacement)
+    -   특징: 자체적인 강력한 타입체킹
+-   [esbuild-loader](https://github.com/privatenumber/esbuild-loader)
+    -   가능: 트랜스파일링
+    -   불가: 폴리필, 타입체킹(그러나 tsc --noEmit이나 ForkTsCheckerWebpackPlugin을 통해 가능)
+    -   특징: 기본적으로 빠른 빌드 속도, 자체적인 minification 기능을 지원하므로 관련 플러그인 사용을 줄일 수 있음, 그러나 esbuild에서 지원하는 문법에 한계가 있어 타겟 브라우저에서도 잘 작동하는지 조금 더 검증이 필요함
 
 처음에는 babel-loader를 사용하다가 빌드 속도를 개선하기 위해 esbuild-loader를 사용하였다. 당시에 빌드시간이 30초에서 8초로 감소하는 큰 효과가 있었다.
 
@@ -578,7 +578,7 @@ presets: [
 ],
 ```
 
-- '@babel/preset-env'
+-   '@babel/preset-env'
 
 `@babel/preset-env`는 ES6를 트랜스파일링하기 위해 사용한다. 예를 들어 자주 사용하는 화살표 함수 구문은 ES6 문법이다. 대부분의 브라우저가 ES6를 지원하지만 간혹 그렇지 않은 브라우저도 있으므로 ES5로 트랜스파일링 해줄 필요가 있으므로 해당 preset을 사용한다.
 
@@ -590,14 +590,14 @@ target: ['web', 'es5'],
 
 [[참고] StackOverFlow - JavaScript - babel-preset-env not transpiling arrow functions for IE11](https://stackoverflow.com/questions/52821427/javascript-babel-preset-env-not-transpiling-arrow-functions-for-ie11)
 
-- ['@babel/preset-react', { runtime: 'automatic' }]
+-   ['@babel/preset-react', { runtime: 'automatic' }]
 
 `@babel/preset-react`는 리액트 JSX 등을 트랜스파일링하기 위해 사용한다.
 해당 플러그인에 `{ runtime: 'automatic' }` 옵션을 설정하지 않으면 `Uncaught ReferenceError: React is not defined` 에러가 발생할 수 있음을 참고한다. 왜냐하면 이 플러그인 프리셋에 기본으로 속해있는 플러그인 중 [@babel/plugin-transform-react-jsx](https://babeljs.io/docs/en/babel-plugin-transform-react-jsx)이 JSX를 React.createElement 형태로 바꿔주고 있어서, React에 대한 import가 필요한데 `import React from 'react'`와 같은 코드를 누락했기 때문이다. React import를 자동으로 해주기 위해, 옵션에`{ runtime: 'automatic' }`을 추가한다.
 
 [[참고] StackOverFlow - Uncaught ReferenceError: React is not defined](https://stackoverflow.com/questions/32070303/uncaught-referenceerror-react-is-not-defined/)
 
-- `@babel/preset-typescript`
+-   `@babel/preset-typescript`
 
 `@babel/preset-typescript`는 TypeScript를 트랜스파일링하기 위해 사용한다.
 
@@ -625,7 +625,7 @@ target: ['web', 'es5'],
     },
 ```
 
-- 웹팩의 캐시
+-   웹팩의 캐시
 
 웹팩에서 `cache`의 타입을 `filesystem`으로 설정하면 캐시를 사용할 수 있게 된다.
 
@@ -633,7 +633,7 @@ target: ['web', 'es5'],
 
 [[참고] webpack - Cache](https://webpack.kr/configuration/cache/)
 
-- 바벨로더의 캐시
+-   바벨로더의 캐시
 
 바벨로더에서는 `options: {cacheCompression: false , cacheDirectory: true},`을 적용함으로써 캐시를 활성화할 수 있다.
 
@@ -652,69 +652,71 @@ target: ['web', 'es5'],
 
 ```jsx
 // webpack.prod.js
-const webpack = require('webpack');
-const dotenv = require('dotenv');
-const { merge } = require('webpack-merge');
-const common = require('./webpack.common');
-const path = require('path');
-const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+const webpack = require("webpack")
+const dotenv = require("dotenv")
+const { merge } = require("webpack-merge")
+const common = require("./webpack.common")
+const path = require("path")
+const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin")
 
-dotenv.config({ path: path.join(__dirname, '../.env') });
+dotenv.config({ path: path.join(__dirname, "../.env") })
 
 module.exports = smp.wrap(
-  merge(common, {
-    mode: 'production',
-    devtool: false,
-    target: ['web', 'es5'],
-    module: {
-      rules: [
-        {
-          test: /\.(js|jsx|ts|tsx)$/i,
-          exclude: /node_modules/,
-          loader: 'babel-loader',
-          options: {
-            presets: [
-              [
-                '@babel/preset-env',
-                {
-                  useBuiltIns: 'usage',
-                  corejs: {
-                    version: 3,
-                  },
-                },
-              ],
-              ['@babel/preset-react', { runtime: 'automatic' }],
-              '@babel/preset-typescript',
-            ],
-            plugins: [
-              [
-                'babel-plugin-styled-components',
-                {
-                  displayName: false,
-                  minify: true,
-                  transpileTemplateLiterals: true,
-                  pure: true,
-                },
-              ],
-            ],
-          },
-        },
-      ],
-    },
-    optimization: {
-      splitChunks: {
-        chunks: 'all',
-      },
-    },
-    plugins: [
-      new ForkTsCheckerWebpackPlugin(),
-      new webpack.DefinePlugin({
-        'process.env.BASE_URL': JSON.stringify(process.env.PROD_BASE_URL),
-        'process.env.IS_LOCAL': false,
-      }),
-    ],
-  }),
-);
+	merge(common, {
+		mode: "production",
+		devtool: false,
+		target: ["web", "es5"],
+		module: {
+			rules: [
+				{
+					test: /\.(js|jsx|ts|tsx)$/i,
+					exclude: /node_modules/,
+					loader: "babel-loader",
+					options: {
+						presets: [
+							[
+								"@babel/preset-env",
+								{
+									useBuiltIns: "usage",
+									corejs: {
+										version: 3,
+									},
+								},
+							],
+							["@babel/preset-react", { runtime: "automatic" }],
+							"@babel/preset-typescript",
+						],
+						plugins: [
+							[
+								"babel-plugin-styled-components",
+								{
+									displayName: false,
+									minify: true,
+									transpileTemplateLiterals: true,
+									pure: true,
+								},
+							],
+						],
+					},
+				},
+			],
+		},
+		optimization: {
+			splitChunks: {
+				chunks: "all",
+			},
+		},
+		plugins: [
+			new ForkTsCheckerWebpackPlugin(),
+			new webpack.DefinePlugin({
+				"process.env.BASE_URL": JSON.stringify(
+					process.env.PROD_BASE_URL
+				),
+				"process.env.IS_LOCAL": false,
+			}),
+		],
+	})
+)
 ```
 
 자세히 살펴보기 전에 production 설정을 요약하자면, 앞서 살펴본 development 모드와 달리, devtool을 껐고, 폴리필을 추가하였으며, 압축 최적화를 하였고, 타입체크를 추가하였다.
@@ -727,7 +729,7 @@ tsconfig.json에서 noEmitOnError 옵션도 활성화함으로써, 타입체킹�
 
 앞에서 살펴본 development 설정에서는 타입체킹을 하지 않았는데, 그 이유는 빠른 빌드를 통한 개발 속도 향상 때문이기도 하며 코드 수정 시점의 타입체킹은 vscode의 tsserver를 통해 확인할 수 있기 때문이다.
 
-그러나 최종 빌드할 때인 production에서는 코드 품질을 위해  전체적인 타입체킹을 할 필요가 있다고 판단하여, `ForkTsCheckerWebpackPlugin`을 웹팩 플러그인에 추가하였다.
+그러나 최종 빌드할 때인 production에서는 코드 품질을 위해 전체적인 타입체킹을 할 필요가 있다고 판단하여, `ForkTsCheckerWebpackPlugin`을 웹팩 플러그인에 추가하였다.
 
 참고로 타입체킹 방법으로 `ForkTsCheckerWebpackPlugin` 외에도 scripts에 `tsc && webpack`을 추가하는 방법도 있으나, `ForkTsCheckerWebpackPlugin`을 사용할 때보다 웹팩 실행 시간이 전체적으로 느려진다는 점을 확인하여 tsc는 사용하지 않았다.
 
@@ -741,7 +743,7 @@ plugins: [
       displayName: false,
       minify: true,
       transpileTemplateLiterals: true,
-      pure: true, 
+      pure: true,
     },
   ],
 ],
@@ -774,15 +776,16 @@ plugins: [
 ```jsx
 // 플러그인별 템플릿 리터럴 문법을 트랜스파일한 코드 비교
 // babel-plugin-transform-es2015-template-literals
-var _templateObject = _taggedTemplateLiteral(['width: 100%;'], ['width: 100%;'])
+var _templateObject = _taggedTemplateLiteral(["width: 100%;"], ["width: 100%;"])
 function _taggedTemplateLiteral(strings, raw) {
-  return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } }))
+	return Object.freeze(
+		Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })
+	)
 }
 var Simple = _styledComponents2.default.div(_templateObject)
 
-
 // babel-plugin-styled-components
-var Simple = _styledComponents2.default.div(['width: 100%;'])
+var Simple = _styledComponents2.default.div(["width: 100%;"])
 ```
 
 #### 5-2-4) pure
@@ -826,7 +829,7 @@ babel-loader에서 `@babel/preset-env`를 사용하면 ES6를 ES5로 `트랜스�
 
 #### 5-3-3) browserslist
 
-`targets` 옵션은 루트 디렉터리에 만든 `.browserslistrc` 파일을 통해서도 대체된다.  
+`targets` 옵션은 루트 디렉터리에 만든 `.browserslistrc` 파일을 통해서도 대체된다.
 
 브라우저스리스트는 브라우저를 선택하는 옵션 기능만 따로 뽑아 놓은 도구이다.
 `.browserslistrc` 파일 내에 다음과 같이 타겟 리스트 목록을 위한 쿼리를 적는다.
@@ -866,25 +869,25 @@ samsung 17.0
 
 `useBuiltIns` 옵션은 어떤 방식으로 폴리필을 사용할지 설정한다. 기본값은 false 이기 때문에, 해당 옵션을 설정하지 않으면 폴리필이 동작하지 않았다.
 
-- false
+-   false
 
 useBuiltIns 옵션에는 `false` 이외에 `usage`와 `entry` 가 있는데, 이들을 설정하면 폴리필 패키지인 core-js를 사용하여 폴리필이 동작한다.
 
-- entry
+-   entry
 
 `entry` 옵션은 타겟 브라우저에서 필요한 폴리필을 모두 포함시킨다. 이 옵션을 사용하면 entry point에 core-js를 직접 import해야 한다.
 
 ```jsx
 // entry 옵션 사용 시, entry point인 index.tsx에 import 추가
-import 'core-js/stable';
-import 'regenerator-runtime/runtime';
+import "core-js/stable"
+import "regenerator-runtime/runtime"
 ```
 
 entry 옵션을 통해 폴리필이 추가되어 빌드된 결과는 다음과 같다.
 
 ![폴리필-entry 옵션](../image/polyfill-entry.png)
 
-- usage
+-   usage
 
 `usage` 옵션은 타겟 브라우저에서 지원되지 않으며 해당 프로젝트 코드에서 사용하는 기능에 관련된 폴리필만 추가한다.
 
@@ -898,7 +901,7 @@ usage 옵션을 통해 폴리필이 추가되어 빌드된 결과는 다음과 �
 
 [[참고] babel - useBuiltIns](https://babeljs.io/docs/en/babel-preset-env#usebuiltins)
 
-- corejs
+-   corejs
 
 `corejs` 옵션은 버전을 의미하며 기본값은 2이다. 버전 2는 업데이트가 중단되었으므로 버전 3을 사용했다.
 
@@ -911,5 +914,5 @@ core-js@3의 변경 부분은 아래의 core-js의 github 문서를 통해 확�
 [BrowserStack](https://www.browserstack.com/) 등의 일부 무료 서비스를 통해 확인한 결과, 이전에 작동되지 않던 iOS 12의 safari에서도 팀 프로젝트 smody 사이트가 동작함을 확인하였다.(사실 타겟 브라우저는 iOS 13.4 이상이었으나, iOS 13과 iOS12가 지원하는 문법 기능에는 큰 차이가 없었나 보다)
 
 ![크로스 브라우징 테스트 결과](../image/browserstack.png)
-  
+
 웹팩 설정 끝😊.

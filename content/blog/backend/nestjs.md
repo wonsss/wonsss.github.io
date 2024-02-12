@@ -6,11 +6,10 @@ thumbnail: { thumbnailSrc }
 draft: false
 ---
 
-
 ## 0. Introduction
 
-- nest js 는 구조가 있다. 구조 덕분에 순서와 룰이 있어서, 이를 따르기만 하면 큰 규모의 백엔드를 쉽게 만들 수 있다.
-- nestJs는 nodeJs의 프레임워크로서, Express 위에서 동작한다.
+-   nest js 는 구조가 있다. 구조 덕분에 순서와 룰이 있어서, 이를 따르기만 하면 큰 규모의 백엔드를 쉽게 만들 수 있다.
+-   nestJs는 nodeJs의 프레임워크로서, Express 위에서 동작한다.
 
 ### Insomnia
 
@@ -38,21 +37,21 @@ nest new project-name
 ```jsx
 // app.module.ts
 
-import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { Module } from "@nestjs/common"
+import { AppController } from "./app.controller"
+import { AppService } from "./app.service"
 
 @Module({
-  imports: [],
-  controllers: [AppController],
-  providers: [AppService],
+	imports: [],
+	controllers: [AppController],
+	providers: [AppService],
 })
 export class AppModule {}
 ```
 
 `@Module` 로 시작하는 코드는 데코레이터이다. 데코레이터는 클래스에 함수 기능을 추가할 수 있다. Modules 모듈은 @Module 데코레이터로 주석이 달린 클래스이다. 데코레이터는 Nest가 애플레이케이션 구조를 구성하는 데 사용하는 메타데이터를 제공한다.
 
-모듈은 Nest에서 애플리케이션 구조를 범위로 구성하는 데 사용된다.  컨트롤러와 공급자는 선언된 모듈에 따라 범위가 지정된다. 모듈과 해당 클래스는 Nest가 DI(종속성 주입)를 수행하는 방법을 결정하는 그래프를 형성한다.
+모듈은 Nest에서 애플리케이션 구조를 범위로 구성하는 데 사용된다. 컨트롤러와 공급자는 선언된 모듈에 따라 범위가 지정된다. 모듈과 해당 클래스는 Nest가 DI(종속성 주입)를 수행하는 방법을 결정하는 그래프를 형성한다.
 
 <https://docs.nestjs.com/modules#modules>
 
@@ -65,17 +64,17 @@ NestJs는 main.ts 파일에서 시작하며, 해당 파일 안에서 하나의 A
 ```tsx
 // app.controller.ts
 
-import { Controller, Get } from '@nestjs/common';
-import { AppService } from './app.service';
+import { Controller, Get } from "@nestjs/common"
+import { AppService } from "./app.service"
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+	constructor(private readonly appService: AppService) {}
 
-  @Get("/hello")  
-  getHello(): string {
-    return this.appService.getHello();
-  }
+	@Get("/hello")
+	getHello(): string {
+		return this.appService.getHello()
+	}
 }
 ```
 
@@ -92,19 +91,19 @@ NestJS는 컨트롤러에서 비즈니스 로직을 분리하고 싶어한다. �
 ```jsx
 // app.service.ts
 
-import { Injectable } from '@nestjs/common';
+import { Injectable } from "@nestjs/common"
 
 @Injectable()
 export class AppService {
-  getHello(): string {
-    return 'Hello World!';
-  }
+	getHello(): string {
+		return "Hello World!"
+	}
 }
 ```
 
 ## 2. Rest API
 
-- nest 가능한 명령어 확인
+-   nest 가능한 명령어 확인
 
 ![이미지](../backend/image/1.png)
 
@@ -119,34 +118,34 @@ nest g co // 컨트롤러 생성
 Param은 Path Variable을 받아올 때 사용하며 요청 주소에 포함되어있는 변수를 담는다. (예, /users/123에서 123) 만약 어떤 resource를 식별하고 싶으면 Path Variable을 사용한다.
 
 ```jsx
-import { Controller, Get, Param, Post, Delete, Patch } from '@nestjs/common';
+import { Controller, Get, Param, Post, Delete, Patch } from "@nestjs/common"
 
-@Controller('movies')
+@Controller("movies")
 export class MoviesController {
-  @Get()
-  getAll() {
-    return 'This will return all movies';
-  }
+	@Get()
+	getAll() {
+		return "This will return all movies"
+	}
 
-  @Get('/:id')
-  getOne(@Param('id') movieId: string) {
-    return `This will return one movie with the id:${movieId}`;
-  }
+	@Get("/:id")
+	getOne(@Param("id") movieId: string) {
+		return `This will return one movie with the id:${movieId}`
+	}
 
-  @Post()
-  create() {
-    return 'This will create a movie';
-  }
+	@Post()
+	create() {
+		return "This will create a movie"
+	}
 
-  @Delete('/:id')
-  remove(@Param('id') movieId: string) {
-    return `This will delete a movie with the id:${movieId}`;
-  }
+	@Delete("/:id")
+	remove(@Param("id") movieId: string) {
+		return `This will delete a movie with the id:${movieId}`
+	}
 
-  @Patch('/:id')
-  patch(@Param('id') movieId: string) {
-    return `This will patch a movie with the id:${movieId}`;
-  }
+	@Patch("/:id")
+	patch(@Param("id") movieId: string) {
+		return `This will patch a movie with the id:${movieId}`
+	}
 }
 ```
 
@@ -197,16 +196,16 @@ nest g s
 
 entites에 실제로 데이터베이스 모델을 만들어야 한다.
 
-- 인터페이스는 컴파일 후 자바스크립트 코드로 남지 않는다. 반면, 클래스는 서버에서 컴파일 후 자바스크립트 코드로 남아 있으므로 사용할 수 있다.
+-   인터페이스는 컴파일 후 자바스크립트 코드로 남지 않는다. 반면, 클래스는 서버에서 컴파일 후 자바스크립트 코드로 남아 있으므로 사용할 수 있다.
 
 ```tsx
 // entities/movie.entity.ts
 
 export class Movie {
-  id: number;
-  title: string;
-  year: number;
-  genres: string[];
+	id: number
+	title: string
+	year: number
+	genres: string[]
 }
 ```
 
@@ -214,98 +213,98 @@ SRP에 따라 서비스에 비즈니스 로직을 짠다. 아래는 가짜 데�
 
 ```tsx
 // movies.service.ts'
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { Movie } from './entities/movie.entity';
+import { Injectable, NotFoundException } from "@nestjs/common"
+import { Movie } from "./entities/movie.entity"
 
 @Injectable()
 export class MoviesService {
-  private movies: Movie[] = [];
+	private movies: Movie[] = []
 
-  getAll(): Movie[] {
-    return this.movies;
-  }
+	getAll(): Movie[] {
+		return this.movies
+	}
 
-  getOne(id: string): Movie {
-    const movie = this.movies.find((movie) => movie.id === +id);
-    if (!movie) {
-      throw new NotFoundException(`Movie with ID ${id} not found.`);
-    }
-    return movie;
-  }
+	getOne(id: string): Movie {
+		const movie = this.movies.find(movie => movie.id === +id)
+		if (!movie) {
+			throw new NotFoundException(`Movie with ID ${id} not found.`)
+		}
+		return movie
+	}
 
-  deleteOne(id: string) {
-    this.getOne(id);
-    this.movies = this.movies.filter((movie) => movie.id !== +id);
-  }
+	deleteOne(id: string) {
+		this.getOne(id)
+		this.movies = this.movies.filter(movie => movie.id !== +id)
+	}
 
-  create(movieData) {
-    this.movies.push({
-      id: this.movies.length + 1,
-      ...movieData,
-    });
-  }
+	create(movieData) {
+		this.movies.push({
+			id: this.movies.length + 1,
+			...movieData,
+		})
+	}
 
-  update(id: string, updateData) {
-    const movie = this.getOne(id);
-    this.deleteOne(id);
-    this.movies.push({ ...movie, ...updateData });
-  }
+	update(id: string, updateData) {
+		const movie = this.getOne(id)
+		this.deleteOne(id)
+		this.movies.push({ ...movie, ...updateData })
+	}
 }
 ```
 
-- Built-in HTTP exceptions
-  - 위 코드에서 NotFoundException 같은 예외는 Nest가 제공하는 기본 HttpException에서 상속되는 일련의 표준 예외 중 하나이다. 이러한 표준 예외들은 @nestjs/common 패키지에서 가져올 수 있으며 일반적인 HTTP 예외를 나타낸다.
-  - <https://docs.nestjs.com/exception-filters#built-in-http-exceptions>
+-   Built-in HTTP exceptions
+    -   위 코드에서 NotFoundException 같은 예외는 Nest가 제공하는 기본 HttpException에서 상속되는 일련의 표준 예외 중 하나이다. 이러한 표준 예외들은 @nestjs/common 패키지에서 가져올 수 있으며 일반적인 HTTP 예외를 나타낸다.
+    -   <https://docs.nestjs.com/exception-filters#built-in-http-exceptions>
 
 ```tsx
 // movies.controller.ts
 
 import {
-  Controller,
-  Get,
-  Param,
-  Post,
-  Delete,
-  Patch,
-  Body,
-  Query,
-} from '@nestjs/common';
-import { MoviesService } from './movies.service';
-import { Movie } from './entities/movie.entity';
+	Controller,
+	Get,
+	Param,
+	Post,
+	Delete,
+	Patch,
+	Body,
+	Query,
+} from "@nestjs/common"
+import { MoviesService } from "./movies.service"
+import { Movie } from "./entities/movie.entity"
 
-@Controller('movies')
+@Controller("movies")
 export class MoviesController {
-  constructor(private readonly moviesService: MoviesService) {}
-  @Get()
-  getAll(): Movie[] {
-    return this.moviesService.getAll();
-  }
+	constructor(private readonly moviesService: MoviesService) {}
+	@Get()
+	getAll(): Movie[] {
+		return this.moviesService.getAll()
+	}
 
-  @Get('/:id')
-  getOne(@Param('id') movieId: string): Movie {
-    return this.moviesService.getOne(movieId);
-  }
+	@Get("/:id")
+	getOne(@Param("id") movieId: string): Movie {
+		return this.moviesService.getOne(movieId)
+	}
 
-  @Post()
-  create(@Body() movieData) {
-    return this.moviesService.create(movieData);
-  }
+	@Post()
+	create(@Body() movieData) {
+		return this.moviesService.create(movieData)
+	}
 
-  @Delete('/:id')
-  remove(@Param('id') movieId: string) {
-    return this.moviesService.deleteOne(movieId);
-  }
+	@Delete("/:id")
+	remove(@Param("id") movieId: string) {
+		return this.moviesService.deleteOne(movieId)
+	}
 
-  @Patch('/:id')
-  patch(@Param('id') movieId: string, @Body() updateData) {
-    return this.moviesService.update(movieId, updateData);
-  }
+	@Patch("/:id")
+	patch(@Param("id") movieId: string, @Body() updateData) {
+		return this.moviesService.update(movieId, updateData)
+	}
 }
 ```
 
 ### DTO - class-transformer, class-valiadator
 
-DTO(Data Transfer Object, 데이터 전송 객체) 타입을 통해 코드를 간결하게 만드는 데 도움을 주고, NestJS가  들어오는 쿼리에 대해 유효성을 검증할 수 있게 해준다.
+DTO(Data Transfer Object, 데이터 전송 객체) 타입을 통해 코드를 간결하게 만드는 데 도움을 주고, NestJS가 들어오는 쿼리에 대해 유효성을 검증할 수 있게 해준다.
 
 DTO를 만들고 유효성 검사를 할 데코레이터를 추가한다.
 
@@ -318,50 +317,50 @@ npm i class-transformer class-validator
 ```tsx
 // movie/dto/create-movie-dto.ts
 
-import { IsString, IsNumber } from 'class-validator';
+import { IsString, IsNumber } from "class-validator"
 
 export class CreateMovieDto {
-  @IsString()
-  readonly title: string;
+	@IsString()
+	readonly title: string
 
-  @IsNumber()
-  readonly year: number;
+	@IsNumber()
+	readonly year: number
 
-  @IsString({ each: true })
-  readonly genres: string[];
+	@IsString({ each: true })
+	readonly genres: string[]
 }
 ```
 
-들어오는 쿼리에 대해 유효성을 검증할 코드를 파이프라고 칭할 수 있으며 일종의 미들웨어와 유사하게 생각할 수 있다.  파이프를 만들어보자. `app.useGlobalPipes` 는 main.ts에 추가해야 한다.
+들어오는 쿼리에 대해 유효성을 검증할 코드를 파이프라고 칭할 수 있으며 일종의 미들웨어와 유사하게 생각할 수 있다. 파이프를 만들어보자. `app.useGlobalPipes` 는 main.ts에 추가해야 한다.
 
-- whitelist: true로 설정하면 유효성 검사기는 class-validator의 유효성 검사 데코레이터를 적어도 하나라도 사용하지 않은 모든 속성 객체를 제거합니다.
-- forbidNonWhitelisted: true로 설정했을 때, DTO에 데코레이터가 없는 속성은 HttpException 을 던진다. forbidNonWhitelisted 옵션은 whitelist에서 유효한 속성이 아닌 것을 제외하는 것 대신에 에러를 날려주는 것이기 때문에, 먼저 whitelist 옵션이 true로 되어있어야 사용 가능한 옵션이다.
-- transform: true로 설정하면 ValidationPipe는 payload를 DTO 클래스에 따라 유형이 지정된 객체로 자동 변환한다.
+-   whitelist: true로 설정하면 유효성 검사기는 class-validator의 유효성 검사 데코레이터를 적어도 하나라도 사용하지 않은 모든 속성 객체를 제거합니다.
+-   forbidNonWhitelisted: true로 설정했을 때, DTO에 데코레이터가 없는 속성은 HttpException 을 던진다. forbidNonWhitelisted 옵션은 whitelist에서 유효한 속성이 아닌 것을 제외하는 것 대신에 에러를 날려주는 것이기 때문에, 먼저 whitelist 옵션이 true로 되어있어야 사용 가능한 옵션이다.
+-   transform: true로 설정하면 ValidationPipe는 payload를 DTO 클래스에 따라 유형이 지정된 객체로 자동 변환한다.
 
 ```tsx
 // main.ts
 
-import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
-import { ValidationPipe } from '@nestjs/common';
+import { NestFactory } from "@nestjs/core"
+import { AppModule } from "./app.module"
+import { ValidationPipe } from "@nestjs/common"
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
-  app.useGlobalPipes(
-    new ValidationPipe({
-      whitelist: true,
-      forbidNonWhitelisted: true,
-      transform: true,
-    }),
-  );
-  await app.listen(3000);
+	const app = await NestFactory.create(AppModule)
+	app.useGlobalPipes(
+		new ValidationPipe({
+			whitelist: true,
+			forbidNonWhitelisted: true,
+			transform: true,
+		})
+	)
+	await app.listen(3000)
 }
-bootstrap();
+bootstrap()
 ```
 
 ![이미지](../backend/image/6.png)
 
-- class-validator의 @IsOptional() 은 값이 empty(또는 null또는 undefined)여도 유효성검사를 무시한다.
+-   class-validator의 @IsOptional() 은 값이 empty(또는 null또는 undefined)여도 유효성검사를 무시한다.
 
 ### DTO - mapped-types
 
@@ -374,59 +373,59 @@ mapped-types는 DTO 타입을 변환시키고 사용할 수 있게 해주는 패
 ```
 
 ```tsx
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty } from "@nestjs/swagger"
 
 export class CreateCatDto {
-  @ApiProperty()
-  name: string;
+	@ApiProperty()
+	name: string
 
-  @ApiProperty()
-  age: number;
+	@ApiProperty()
+	age: number
 
-  @ApiProperty()
-  breed: string;
+	@ApiProperty()
+	breed: string
 }
 ```
 
-- `PartialType()`부모 DTO의 모든 속성들을 물려받지만 전부 Optional
+-   `PartialType()`부모 DTO의 모든 속성들을 물려받지만 전부 Optional
 
 ```tsx
 export class UpdateCatDto extends PartialType(CreateCatDto) {}
 ```
 
-- `PickType()`부모 DTO의 속성 중 몇 개만 골라서 물려받음
+-   `PickType()`부모 DTO의 속성 중 몇 개만 골라서 물려받음
 
 ```tsx
-export class UpdateCatAgeDto extends PickType(CreateCatDto, ['age'] as const) {}
+export class UpdateCatAgeDto extends PickType(CreateCatDto, ["age"] as const) {}
 ```
 
-- `OmitType()`부모 DTO의 속성 중 몇 개를 제외하고 물려받음.
+-   `OmitType()`부모 DTO의 속성 중 몇 개를 제외하고 물려받음.
 
 ```tsx
-export class UpdateCatDto extends OmitType(CreateCatDto, ['name'] as const) {}
+export class UpdateCatDto extends OmitType(CreateCatDto, ["name"] as const) {}
 ```
 
-- `IntersectionType()` 은 여러 부모 DTO의 속성들을 모두 물려받음.
+-   `IntersectionType()` 은 여러 부모 DTO의 속성들을 모두 물려받음.
 
 ```tsx
 export class AdditionalCatInfo {
-  @ApiProperty()
-  color: string;
+	@ApiProperty()
+	color: string
 }
 ```
 
 ```tsx
 export class UpdateCatDto extends IntersectionType(
-  CreateCatDto,
-  AdditionalCatInfo,
+	CreateCatDto,
+	AdditionalCatInfo
 ) {}
 ```
 
-- `composition` : 위와 같은 타입 매핑 유틸리티 함수는 합성 가능하다.
+-   `composition` : 위와 같은 타입 매핑 유틸리티 함수는 합성 가능하다.
 
 ```tsx
 export class UpdateCatDto extends PartialType(
-  OmitType(CreateCatDto, ['name'] as const),
+	OmitType(CreateCatDto, ["name"] as const)
 ) {}
 ```
 
@@ -442,13 +441,13 @@ nest g mo
 ```tsx
 // app.module.ts
 
-import { Module } from '@nestjs/common';
-import { MoviesModule } from './movies/movies.module';
+import { Module } from "@nestjs/common"
+import { MoviesModule } from "./movies/movies.module"
 
 @Module({
-  imports: [MoviesModule],
-  controllers: [],
-  providers: [],
+	imports: [MoviesModule],
+	controllers: [],
+	providers: [],
 })
 export class AppModule {}
 ```
@@ -456,13 +455,13 @@ export class AppModule {}
 ```tsx
 // movies.module.ts
 
-import { Module } from '@nestjs/common';
-import { MoviesController } from './movies.controller';
-import { MoviesService } from './movies.service';
+import { Module } from "@nestjs/common"
+import { MoviesController } from "./movies.controller"
+import { MoviesService } from "./movies.service"
 
 @Module({
-  controllers: [MoviesController],
-  providers: [MoviesService],
+	controllers: [MoviesController],
+	providers: [MoviesService],
 })
 export class MoviesModule {}
 ```
@@ -475,7 +474,7 @@ Express 프레임워크 위에서 돌아가므로 @req, @res 객체를 사용할
 
 ## 3. Unit Test
 
-유닛 테스트는 시스템에서 함수 같은 하나의 유닛만을 각각 테스트하는 방법이다. 반면, e2e 테스트는 전체 시스템을 테스트하는 방법이다.  
+유닛 테스트는 시스템에서 함수 같은 하나의 유닛만을 각각 테스트하는 방법이다. 반면, e2e 테스트는 전체 시스템을 테스트하는 방법이다.
 
 ### Test setup - MoviesService 정의
 
@@ -502,170 +501,181 @@ describe('MoviesService', () => {
 ### getAll, getOne 테스트
 
 ```tsx
-describe('getAll', () => {
-    it('should return an array', () => {
-      const result = service.getAll();
-      expect(result).toBeInstanceOf(Array);
-    });
-  });
+describe("getAll", () => {
+	it("should return an array", () => {
+		const result = service.getAll()
+		expect(result).toBeInstanceOf(Array)
+	})
+})
 
-  describe('getOne', () => {
-    it('should return a movie', () => {
-      service.create({
-        title: 'Test Movie',
-        genres: ['test'],
-        year: 2000,
-      });
-      const movie = service.getOne(1);
-      expect(movie).toBeDefined();
-    });
+describe("getOne", () => {
+	it("should return a movie", () => {
+		service.create({
+			title: "Test Movie",
+			genres: ["test"],
+			year: 2000,
+		})
+		const movie = service.getOne(1)
+		expect(movie).toBeDefined()
+	})
 
-    it('should throw 404 error', () => {
-      try {
-        service.getOne(999);
-      } catch (e) {
-        expect(e).toBeInstanceOf(NotFoundException);
-      }
-    });
-  });
+	it("should throw 404 error", () => {
+		try {
+			service.getOne(999)
+		} catch (e) {
+			expect(e).toBeInstanceOf(NotFoundException)
+		}
+	})
+})
 ```
 
 ### delete, create 테스트
 
 ```tsx
-describe('deleteOne', () => {
-    it('deletes a movie', () => {
-      service.create({
-        title: 'Test Movie',
-        genres: ['test'],
-        year: 2000,
-      });
-      const beforeDelete = service.getAll().length;
-      service.deleteOne(1);
-      const afterDelete = service.getAll().length;
-      expect(afterDelete).toBeLessThan(beforeDelete);
-    });
-    it('should return a 404', () => {
-      try {
-        service.deleteOne(999);
-      } catch (e) {
-        expect(e).toBeInstanceOf(NotFoundException);
-      }
-    });
-  });
+describe("deleteOne", () => {
+	it("deletes a movie", () => {
+		service.create({
+			title: "Test Movie",
+			genres: ["test"],
+			year: 2000,
+		})
+		const beforeDelete = service.getAll().length
+		service.deleteOne(1)
+		const afterDelete = service.getAll().length
+		expect(afterDelete).toBeLessThan(beforeDelete)
+	})
+	it("should return a 404", () => {
+		try {
+			service.deleteOne(999)
+		} catch (e) {
+			expect(e).toBeInstanceOf(NotFoundException)
+		}
+	})
+})
 
-  describe('create', () => {
-    it('should create a movie', () => {
-      const beforeCreate = service.getAll().length;
-      service.create({
-        title: 'Test Movie',
-        genres: ['test'],
-        year: 2000,
-      });
-      const afterCreate = service.getAll().length;
-      expect(afterCreate).toBeGreaterThan(beforeCreate);
-    });
-  });
+describe("create", () => {
+	it("should create a movie", () => {
+		const beforeCreate = service.getAll().length
+		service.create({
+			title: "Test Movie",
+			genres: ["test"],
+			year: 2000,
+		})
+		const afterCreate = service.getAll().length
+		expect(afterCreate).toBeGreaterThan(beforeCreate)
+	})
+})
 ```
 
 ## 4. E2E Test
 
 ```tsx
-import { Test, TestingModule } from '@nestjs/testing';
-import { INestApplication, ValidationPipe } from '@nestjs/common';
-import * as request from 'supertest';
-import { AppModule } from './../src/app.module';
+import { Test, TestingModule } from "@nestjs/testing"
+import { INestApplication, ValidationPipe } from "@nestjs/common"
+import * as request from "supertest"
+import { AppModule } from "./../src/app.module"
 
-describe('AppController (e2e)', () => {
-  let app: INestApplication;
+describe("AppController (e2e)", () => {
+	let app: INestApplication
 
-  beforeAll(async () => {
-    const moduleFixture: TestingModule = await Test.createTestingModule({
-      imports: [AppModule],
-    }).compile();
+	beforeAll(async () => {
+		const moduleFixture: TestingModule = await Test.createTestingModule({
+			imports: [AppModule],
+		}).compile()
 
-    app = moduleFixture.createNestApplication();
-    app.useGlobalPipes(
-      new ValidationPipe({
-        whitelist: true,
-        forbidNonWhitelisted: true,
-        transform: true,
-      }),
-    );
-    await app.init();
-  });
+		app = moduleFixture.createNestApplication()
+		app.useGlobalPipes(
+			new ValidationPipe({
+				whitelist: true,
+				forbidNonWhitelisted: true,
+				transform: true,
+			})
+		)
+		await app.init()
+	})
 
-  describe('/movies', () => {
-    it('GET', () => {
-      return request(app.getHttpServer()).get('/movies').expect(200).expect([]);
-    });
-    it('POST 201', () => {
-      return request(app.getHttpServer())
-        .post('/movies')
-        .send({
-          title: 'Test',
-          year: 2000,
-          genres: ['test'],
-        })
-        .expect(201);
-    });
-    it('POST 400', () => {
-      return request(app.getHttpServer())
-        .post('/movies')
-        .send({
-          title: 'Test',
-          year: 2000,
-          genres: ['test'],
-          other: 'thing',
-        })
-        .expect(400);
-    });
-    it('DELETE', () => {
-      return request(app.getHttpServer()).delete('/movies').expect(404);
-    });
-  });
+	describe("/movies", () => {
+		it("GET", () => {
+			return request(app.getHttpServer())
+				.get("/movies")
+				.expect(200)
+				.expect([])
+		})
+		it("POST 201", () => {
+			return request(app.getHttpServer())
+				.post("/movies")
+				.send({
+					title: "Test",
+					year: 2000,
+					genres: ["test"],
+				})
+				.expect(201)
+		})
+		it("POST 400", () => {
+			return request(app.getHttpServer())
+				.post("/movies")
+				.send({
+					title: "Test",
+					year: 2000,
+					genres: ["test"],
+					other: "thing",
+				})
+				.expect(400)
+		})
+		it("DELETE", () => {
+			return request(app.getHttpServer())
+				.delete("/movies")
+				.expect(404)
+		})
+	})
 
-  describe('/movies/:id', () => {
-    it('GET 200', () => {
-      return request(app.getHttpServer()).get('/movies/1').expect(200);
-    });
-    it('GET 404', () => {
-      return request(app.getHttpServer()).get('/movies/999').expect(404);
-    });
-    it('PATCH 200', () => {
-      return request(app.getHttpServer())
-        .patch('/movies/1')
-        .send({ title: 'Updated Test' })
-        .expect(200);
-    });
-    it('DELETE 200', () => {
-      return request(app.getHttpServer()).delete('/movies/1').expect(200);
-    });
-  });
-});
+	describe("/movies/:id", () => {
+		it("GET 200", () => {
+			return request(app.getHttpServer())
+				.get("/movies/1")
+				.expect(200)
+		})
+		it("GET 404", () => {
+			return request(app.getHttpServer())
+				.get("/movies/999")
+				.expect(404)
+		})
+		it("PATCH 200", () => {
+			return request(app.getHttpServer())
+				.patch("/movies/1")
+				.send({ title: "Updated Test" })
+				.expect(200)
+		})
+		it("DELETE 200", () => {
+			return request(app.getHttpServer())
+				.delete("/movies/1")
+				.expect(200)
+		})
+	})
+})
 ```
 
-- 테스트에서도 실제 어플리케이션의 환경을 적용해줘야 한다. 아래와 같은  pipe 적용이 기존 테스트 설정에서 생략되어 있었는데 실제 어플리케이션 환경과 동일하게 하기 위해 추가한다.
+-   테스트에서도 실제 어플리케이션의 환경을 적용해줘야 한다. 아래와 같은 pipe 적용이 기존 테스트 설정에서 생략되어 있었는데 실제 어플리케이션 환경과 동일하게 하기 위해 추가한다.
 
     ```tsx
-        app.useGlobalPipes(
-          new ValidationPipe({
-            whitelist: true,
-            forbidNonWhitelisted: true,
-            transform: true,
-          }),
-        );
+    app.useGlobalPipes(
+    	new ValidationPipe({
+    		whitelist: true,
+    		forbidNonWhitelisted: true,
+    		transform: true,
+    	})
+    )
     ```
 
-- beforeEach(fn, timeout)
-  - 각각의 테스트가 실행되기 전에 매번 함수를 실행한다.
-  - 각각의 테스트 전에 각 테스트에서 사용할 전역 상태를 재설정하려는 경우에 유용하다.
-  - 함수가 promise을 반환하거나 generator인 경우 Jest는 테스트를 실행하기 전에 해당 promise가 해결될 때까지 기다린다.
-  - 밀리초로 대기할 시간을 지정할 수 있다. (기본 시간 5초)
-  - <https://jestjs.io/docs/api#beforeeachfn-timeout>
-- beforeAll(fn, timeout)
-  - 모든 테스트가 실행되기 전에 딱 한 번 함수를 실행한다.
-- afterEach(fn, timeout)
-  - 각각의 테스트가 완료된 후 함수를 실행한다.
-- afterAll(fn, timeout)
-  - 모든 테스트가 완료된 후 함수를 실행한다.
+-   beforeEach(fn, timeout)
+    -   각각의 테스트가 실행되기 전에 매번 함수를 실행한다.
+    -   각각의 테스트 전에 각 테스트에서 사용할 전역 상태를 재설정하려는 경우에 유용하다.
+    -   함수가 promise을 반환하거나 generator인 경우 Jest는 테스트를 실행하기 전에 해당 promise가 해결될 때까지 기다린다.
+    -   밀리초로 대기할 시간을 지정할 수 있다. (기본 시간 5초)
+    -   <https://jestjs.io/docs/api#beforeeachfn-timeout>
+-   beforeAll(fn, timeout)
+    -   모든 테스트가 실행되기 전에 딱 한 번 함수를 실행한다.
+-   afterEach(fn, timeout)
+    -   각각의 테스트가 완료된 후 함수를 실행한다.
+-   afterAll(fn, timeout)
+    -   모든 테스트가 완료된 후 함수를 실행한다.

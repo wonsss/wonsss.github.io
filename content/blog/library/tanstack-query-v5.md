@@ -14,7 +14,7 @@ v5는 메이저 버전이므로, 주의해야 할 주요 변경 사항이 있습
 
 ## 1. 하나의 함수 호출 시그니처(객체 형식)만을 지원
 
-useQuery와 그와 비슷한 친구들(useInfiniteQuery 등)은 타입스크립트에서 많은 오버로드를 가지곤 했습니다.  이는 타입을 잘 유지하기 어려웠을 뿐만 아니라, option을 올바르게 생성하기 위해 첫 번째 또는 두 번째 매개변수가 어떤 타입인지 확인하는 런타임 검사도 필요했습니다.
+useQuery와 그와 비슷한 친구들(useInfiniteQuery 등)은 타입스크립트에서 많은 오버로드를 가지곤 했습니다. 이는 타입을 잘 유지하기 어려웠을 뿐만 아니라, option을 올바르게 생성하기 위해 첫 번째 또는 두 번째 매개변수가 어떤 타입인지 확인하는 런타임 검사도 필요했습니다.
 
 따라서 v5부터는 오직 객체 형식만 지원합니다.
 
@@ -83,7 +83,6 @@ useQuery와 그와 비슷한 친구들(useInfiniteQuery 등)은 타입스크립�
 함수 오버로드를 제거하는 마이그레이션을 쉽게 하기 위해, v5에서는 codemode를 제공합니다.
 
 > codemode는 breaking change로 마이그레이션할 때 도와주는 최고의 도구입니다. 이를 통해 생성된 코드를 철저히 리뷰해주세요! 또한, codemode를 통해 발견되지 못한 엣지 케이스가 있을 수 있으므로, log 결과를 주의 깊게 살펴봐주세요.
->
 
 만약 `.js` 와 `.jsx` 파일을 대상으로 codemod를 실행하기 원한다면, 아래 명령어를 사용하세요.
 
@@ -106,12 +105,12 @@ npx jscodeshift ./path/to/src/ \
 
 Note: codmod를 적용하는 것은 코드 포맷에 영향을 줄 수 있으므로, codemode 실행 후 `prettier` 및 `eslinit` 를 실행하는 것을 잊지마세요!
 
-- codemod 동작 원리에 대한 참고 내용
-  - 첫 번째 매개변수가 객체 표현식이고 queryKey나 mutationKey 프로퍼티를 포함하고 있다면, 이 코드는 이미 새로운 함수 호출 시그니처를 충족하고 있으므로 codemode가 건드리지 않는다(럭키 케이스).
-  - 만약 상기 조건이 충족되지 않는다면, codemod는 첫 번째 매개변수가 배열 표현식이거나 배열 표현식을 참조하는 식별자인지 여부를 확인합니다. 만약 이 케이스에 해당한다면, codemode는 이 매개변수를 객체 표현식 안에 넣은 후 해당 객체를 매개변수로 만듭니다.
-  - 만약 매개변수의 타입이 객체로 추론된다면, codemod는 이미 존재하는 프로퍼티를 새로 생성된 프로퍼티에 복사하려고 시도합니다.
-  - 만약 codemod가 타입을 추론하지 못한다면, 콘솔에 해당 파일명과 라인 넘버가 담긴 메세지를 남깁니다. 이런 경우, 개발자가 해당 코드에 대하여 직접 마이그레이션을 해야 합니다.
-  - 만약 codemod로 인한 변경 결과 에러가 발생한다면, 콘솔에서 무언가 예상치 못한 동작이 발생했다는 메세지를 확인할 수 있습니다. 이런 경우도 마찬가지로 개발자가 직접 마이그레이션을 해야 합니다.
+-   codemod 동작 원리에 대한 참고 내용
+    -   첫 번째 매개변수가 객체 표현식이고 queryKey나 mutationKey 프로퍼티를 포함하고 있다면, 이 코드는 이미 새로운 함수 호출 시그니처를 충족하고 있으므로 codemode가 건드리지 않는다(럭키 케이스).
+    -   만약 상기 조건이 충족되지 않는다면, codemod는 첫 번째 매개변수가 배열 표현식이거나 배열 표현식을 참조하는 식별자인지 여부를 확인합니다. 만약 이 케이스에 해당한다면, codemode는 이 매개변수를 객체 표현식 안에 넣은 후 해당 객체를 매개변수로 만듭니다.
+    -   만약 매개변수의 타입이 객체로 추론된다면, codemod는 이미 존재하는 프로퍼티를 새로 생성된 프로퍼티에 복사하려고 시도합니다.
+    -   만약 codemod가 타입을 추론하지 못한다면, 콘솔에 해당 파일명과 라인 넘버가 담긴 메세지를 남깁니다. 이런 경우, 개발자가 해당 코드에 대하여 직접 마이그레이션을 해야 합니다.
+    -   만약 codemod로 인한 변경 결과 에러가 발생한다면, 콘솔에서 무언가 예상치 못한 동작이 발생했다는 메세지를 확인할 수 있습니다. 이런 경우도 마찬가지로 개발자가 직접 마이그레이션을 해야 합니다.
 
 ## 3. useQuery에서 `remove` 메서드가 제거됨
 
@@ -136,7 +135,7 @@ const queryClient = useQueryClient();
 
 `isDataEqual` 함수는 query에서 resovle된 데이터로서 이전 데이터를 사용할지 아니면 새 데이터를 사용할지 확인하는 데 사용됐습니다.
 
-이제는 `isDataEqual` 를 사용하지 않고,  동일한 기능을 **`structuralSharing` 에 함수를 넘김으로써 대신합니다.**
+이제는 `isDataEqual` 를 사용하지 않고, 동일한 기능을 **`structuralSharing` 에 함수를 넘김으로써 대신합니다.**
 
 ```diff
 import { replaceEqualDeep } from '@tanstack/react-query'
@@ -200,14 +199,14 @@ const queryClient = new QueryClient({
 에러의 기본 타입은 `Error` 입니다. 왜냐하면 이것이 대부분의 사용자가 기대하는 결과이기 때문입니다.
 
 ```tsx
-const { error } = useQuery({ queryKey: ['groups'], queryFn: fetchGroups })
+const { error } = useQuery({ queryKey: ["groups"], queryFn: fetchGroups })
 //      ^? const error: Error
 ```
 
 만약 커스텀 에러를 던지고 싶거나 Error가 아닌 것을 던지고 싶다면, 에러 필드의 타입을 구체화할 수 있습니다.
 
 ```tsx
-const { error } = useQuery<Group[], string>(['groups'], fetchGroups)
+const { error } = useQuery<Group[], string>(["groups"], fetchGroups)
 //      ^? const error: string | null
 ```
 
@@ -236,27 +235,27 @@ const {
 
 하지만 이 변경 사항에는 몇 가지 주의 사항이 있습니다.
 
-- `keepPreviousData` 가 이전 query의 상태를 주었던 것과 다르게, **`placeholderData` 는 언제나 `success` 상태를 줍니다. 이는 데이터를 성공적으로 가져온 후 백그라운드 refetch에러가 발생한 경우, 이러한 success 상태는 잘못된 것으로 볼 수 있습니다. 그러나 에러 자체가 공유되지는 않았으므로, `placeholderData` 의 동작을 그대로 사용하기로 결정했습니다.**
-- **`keepPreviousData` 를 사용할 때는 이전 데이터의 `dataUpdatedAt` 타임 스탬프가 제공되던 것과 다르게,`placeholderData` 를 사용하면 `dataUpdatedAt` 은 0으로 유지됩니다. 만약 타임스탬프를 화면에 계속적으로 보여주고 싶은 경우에 이러한 동작은 짜증이 날 수 있습니다. 하지만 `useEffect` 훅을 사용함으로써 이 문제를 해결할 수는 있습니다.**
+-   `keepPreviousData` 가 이전 query의 상태를 주었던 것과 다르게, **`placeholderData` 는 언제나 `success` 상태를 줍니다. 이는 데이터를 성공적으로 가져온 후 백그라운드 refetch에러가 발생한 경우, 이러한 success 상태는 잘못된 것으로 볼 수 있습니다. 그러나 에러 자체가 공유되지는 않았으므로, `placeholderData` 의 동작을 그대로 사용하기로 결정했습니다.**
+-   **`keepPreviousData` 를 사용할 때는 이전 데이터의 `dataUpdatedAt` 타임 스탬프가 제공되던 것과 다르게,`placeholderData` 를 사용하면 `dataUpdatedAt` 은 0으로 유지됩니다. 만약 타임스탬프를 화면에 계속적으로 보여주고 싶은 경우에 이러한 동작은 짜증이 날 수 있습니다. 하지만 `useEffect` 훅을 사용함으로써 이 문제를 해결할 수는 있습니다.**
 
 ```tsx
 const [updatedAt, setUpdatedAt] = useState(0)
 
 const { data, dataUpdatedAt } = useQuery({
-  queryKey: ['projects', page],
-  queryFn: () => fetchProjects(page),
+	queryKey: ["projects", page],
+	queryFn: () => fetchProjects(page),
 })
 
 useEffect(() => {
-  if (dataUpdatedAt > updatedAt) {
-    setUpdatedAt(dataUpdatedAt)
-  }
+	if (dataUpdatedAt > updatedAt) {
+		setUpdatedAt(dataUpdatedAt)
+	}
 }, [dataUpdatedAt])
 ```
 
 ## 14. Window focus refetch는 이제`focus` 이벤트를 listen하지 않음
 
- TanStack Query는 **`visibilitychange` 이벤트를 지원하는 브라우저만 지원하게 됐기 때문에, 이제 `visibilitychange` 이벤트만 독점적으로 사용됩니다.  이를 통해 [focus 이벤트와 관련된 버그](https://github.com/TanStack/query/pull/4805) 들이 해결됐습니다.**
+TanStack Query는 **`visibilitychange` 이벤트를 지원하는 브라우저만 지원하게 됐기 때문에, 이제 `visibilitychange` 이벤트만 독점적으로 사용됩니다. 이를 통해 [focus 이벤트와 관련된 버그](https://github.com/TanStack/query/pull/4805) 들이 해결됐습니다.**
 
 ## 15. 커스텀 `context` prop을 제거함
 
@@ -317,7 +316,7 @@ loading 상태의 이름이 pending으로 변경되었습니다.
 
 # 새 기능
 
-## 22.  simplified optimistic update
+## 22. simplified optimistic update
 
 optimistic update를 수행할 수 있는 간단한 새로운 방법으로서 `useMutation`에서 반환된 `variables` 를 이용합니다.
 
@@ -325,26 +324,26 @@ optimistic update를 수행할 수 있는 간단한 새로운 방법으로서 `u
 const queryInfo = useTodos()
 
 const addTodoMutation = useMutation({
-  mutationFn: (newTodo: string) => axios.post('/api/data', { text: newTodo }),
-  onSettled: () => queryClient.invalidateQueries({ queryKey: ['todos'] }),
+	mutationFn: (newTodo: string) => axios.post("/api/data", { text: newTodo }),
+	onSettled: () => queryClient.invalidateQueries({ queryKey: ["todos"] }),
 })
 
 if (queryInfo.data) {
-  return (
-    <ul>
-      {queryInfo.data.items.map((todo) => (
-        <li key={todo.id}>{todo.text}</li>
-      ))}
-      {addTodoMutation.isPending && (
-        <li
-          key={String(addTodoMutation.submittedAt)}
-          style={{opacity: 0.5}}
-        >
-          {addTodoMutation.variables}
-        </li>
-      )}
-    </ul>
-  )
+	return (
+		<ul>
+			{queryInfo.data.items.map(todo => (
+				<li key={todo.id}>{todo.text}</li>
+			))}
+			{addTodoMutation.isPending && (
+				<li
+					key={String(addTodoMutation.submittedAt)}
+					style={{ opacity: 0.5 }}
+				>
+					{addTodoMutation.variables}
+				</li>
+			)}
+		</ul>
+	)
 }
 ```
 
@@ -362,8 +361,8 @@ v5는 maxPages 옵션을 제공항므로써, 쿼리 데이터에 저장되며 �
 
 ```tsx
 const queryClient = new QueryClient({
-  queryCache: new QueryCache({
-    createStore: () => new Map()
-  }),
+	queryCache: new QueryCache({
+		createStore: () => new Map(),
+	}),
 })
 ```

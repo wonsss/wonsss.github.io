@@ -12,10 +12,10 @@ draft: false
 
 [Web Vitals](https://web.dev/vitals/)에서 권장하는 아래와 같은 성능 측정 지표를 따르려 한다.
 
-- LCP([Largest Contentful Paint, 최대 콘텐츠풀 페인트)](https://web.dev/lcp/): `로딩` 성능을 측정한다. 우수한 사용자 경험을 제공하려면 페이지가 처음으로 로딩된 후 `2.5초` 이내에 LCP가 발생해야 한다.
-- FID([First Input Delay, 최초 입력 지연)](https://web.dev/fid/): `상호 작용`을 측정한다. 우수한 사용자 경험을 제공하려면 페이지의 FID가 `100밀리초` 이하여야 한다.
-- CLS([Cumulative Layout Shift, 누적 레이아웃 시프트)](https://web.dev/cls/): `시각적 안정성`을 측정한다. 우수한 사용자 경험을 제공하려면 페이지에서 `0.1` 이하의 CLS를 유지해야 한다.
-  - 단, 버튼을 누른 이벤트에 의해 레이아웃이 변경되는 예시처럼 사용자가 화면의 변화를 예측할 수 있는 상황이라면 성능 측정의 대상으로 포함되지 않는다.
+-   LCP([Largest Contentful Paint, 최대 콘텐츠풀 페인트)](https://web.dev/lcp/): `로딩` 성능을 측정한다. 우수한 사용자 경험을 제공하려면 페이지가 처음으로 로딩된 후 `2.5초` 이내에 LCP가 발생해야 한다.
+-   FID([First Input Delay, 최초 입력 지연)](https://web.dev/fid/): `상호 작용`을 측정한다. 우수한 사용자 경험을 제공하려면 페이지의 FID가 `100밀리초` 이하여야 한다.
+-   CLS([Cumulative Layout Shift, 누적 레이아웃 시프트)](https://web.dev/cls/): `시각적 안정성`을 측정한다. 우수한 사용자 경험을 제공하려면 페이지에서 `0.1` 이하의 CLS를 유지해야 한다.
+    -   단, 버튼을 누른 이벤트에 의해 레이아웃이 변경되는 예시처럼 사용자가 화면의 변화를 예측할 수 있는 상황이라면 성능 측정의 대상으로 포함되지 않는다.
 
 Lighthouse를 통해 성능을 측정하면 LCP와 CLS를 측정할 수 있다. FID의 경우 Lighthouse로 측정이 불가능하지만, 대신 대체할 수 있는 TBT(Total Blocking Time)가 Lighthouse에서 제공된다. 따라서 해당 지표들은 Lighthouse를 통해 측정하기로 결정했다. TBT의 경우 Lighthouse에서 빠름의 기준이 되는 200ms 이하로 유지하는 것을 목표로 했다.
 
@@ -23,11 +23,11 @@ Lighthouse를 통해 성능을 측정하면 LCP와 CLS를 측정할 수 있다. 
 
 Lighthouse를 통하여 스모디 서비스의 성능을 측정하였다. Lighthouse에서 성능 점수가 70점으로서, 불안정한 네트워크 환경이나 오래된 기기의 경우 성능에 문제가 있지 않을까 싶다. 앞으로 설명할 다양한 웹 성능 최적화 방법을 적용한 결과, 데스크탑 기준으로 99점(이미지가 많은 페이지도 90점 상회)까지 올라갔다.
 
-- 성능 개선 전
-![성능 개선 전](../image/perf-before.png)
+-   성능 개선 전
+    ![성능 개선 전](../image/perf-before.png)
 
-- 성능 개선 후
-![성능 개선 후](../image/perf-after.png)
+-   성능 개선 후
+    ![성능 개선 후](../image/perf-after.png)
 
 # 2. 요청 크기 줄이기
 
@@ -81,8 +81,8 @@ Http 캐시를 적용하려면, 웹서버에서 보내주는 정적 리소스 �
 
 Cache Storage API를 사용하더라도 HTTP 캐시를 함께 사용하는 것이 좋다고 한다.
 
-- URL에 버전이 지정되지 않은 리소스(ex, index.html)는 `Cache-Control`에 `no-cache`(재검증하여 캐시)나 `no-store`(절대 캐시 안함)을 적용하는 것을 고려한다.
-- URL에 해시 같은 버전 정보가 포함된 리소스(ex, bundle.23zv8lcm13h.js)는 일반적으로 `Cache-Control`에 `max-age=31536000`(1년 캐시)를 적용한다.
+-   URL에 버전이 지정되지 않은 리소스(ex, index.html)는 `Cache-Control`에 `no-cache`(재검증하여 캐시)나 `no-store`(절대 캐시 안함)을 적용하는 것을 고려한다.
+-   URL에 해시 같은 버전 정보가 포함된 리소스(ex, bundle.23zv8lcm13h.js)는 일반적으로 `Cache-Control`에 `max-age=31536000`(1년 캐시)를 적용한다.
 
 Cache Storage API 캐시를 채울 때, 브라우저는 먼저 HTTP 캐시에서 기존 항목을 확인하고 발견된 경우 이를 사용하여 Cache Storage API 캐시를 채운다. 따라서, URL에 버전이 지정되지 않은 리소스에 대해 HTTP 캐시의 max-age를 길게 주면, Cache Storage API 캐시를 채울 때, 브라우저는 HTTP 캐시를 통해 오래된 해당 리소스만 계속 가져와서 문제가 될 수 있으니 조심해야 한다.
 
