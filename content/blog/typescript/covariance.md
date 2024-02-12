@@ -1,5 +1,5 @@
 ---
-title: 타입스크립트의 공변성과 함수의 매개변수 타입의 반공변성
+title: 타입스크립트의 공변성과 함수 매개변수 타입의 이변성
 date: 2024-02-12 23:02:51
 category: typescript
 thumbnail: { thumbnailSrc }
