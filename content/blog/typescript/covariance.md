@@ -166,7 +166,25 @@ type StringOrNumberFunc = (ns: string | number) => void
 let func: StringOrNumberFunc = fn // Type '(x: string) => void' is not assignable to type 'StringOrNumberFunc'. Types of parameters 'x' and 'ns' are incompatible. Type 'string | number' is not assignable to type 'string'. Type 'number' is not assignable to type 'string'.
 ```
 
-하지만 `strictFunctionTypes` 설정이 켜져있어도, 함수 타입을 <mark class="hltr-purple">method 구문</mark><mark class="hltr-purple">(ex, get(): void;)</mark>으로 쓰면, 그 함수는 다시 <mark class="hltr-pink">이변성</mark>으로 작동한다.
+하지만 `strictFunctionTypes` 설정이 켜져있어도, 함수 타입을 <mark class="hltr-purple">method 구문</mark>으로 쓰면, 그 함수는 다시 <mark class="hltr-pink">이변성</mark>으로 작동한다.
+
+-   Method Type Signature
+
+    -   <mark class="hltr-purple">method 구문의 함수</mark>
+
+        ```ts
+        interface Array<T> {
+            push(...items: T[]): number
+        }
+        ```
+
+    -   <mark class="hltr-blue">function 구문의 함수</mark>
+
+        ```ts
+        interface Array<T> {
+            push: (...items: T[]) => number
+        }
+        ```
 
 아래 예제에서, 슈퍼타입의 함수 호출 시그니처에 서브타입의 함수 호출 시그니처를 할당한 것은, 논리적으로 따지면 <mark class="hltr-green">반공변성</mark>에 따라 타입에러가 존재해야 한다. 하지만 <mark class="hltr-purple">method 구문 함수</mark>는 strictFunctionTypes 설정을 켜더라도 타입스크립트 설계상 <mark class="hltr-pink">이변성</mark>이라서, 해당 타입에러가 감지되지 않는 문제가 있다.
 
@@ -191,7 +209,7 @@ const m: Methodish = {
 m.func(10)
 ```
 
-따라서 특별히 이변성이 필요한 경우가 아니라면, 함수 타입을 <mark class="hltr-purple">method 구문</mark>이 아닌 <mark class="hltr-blue">function 구문</mark><mark class="hltr-blue">(ex, get: () ⇒ void;)</mark>으로 써서 <mark class="hltr-green">반공변성</mark>으로 동작하게 하는 것이 적절하다.
+따라서 특별히 이변성이 필요한 경우가 아니라면, 함수 타입을 <mark class="hltr-purple">method 구문</mark>이 아닌 <mark class="hltr-blue">function 구문</mark>으로 써서 <mark class="hltr-green">반공변성</mark>으로 동작하게 하는 것이 적절하다.
 
 ### strictFunctionTypes 설정을 켜도 <mark class="hltr-purple">method 구문으로 작성된 함수</mark>의 매개변수 타입이 이변성인 이유
 
