@@ -1,17 +1,17 @@
-import React, { useEffect } from 'react'
-import './index.scss'
+import React, { useEffect } from "react"
+import "./index.scss"
 
 export const Search = ({ posts }) => {
-  const [query, setQuery] = React.useState('')
+  const [query, setQuery] = React.useState("")
   const [result, setResult] = React.useState([])
 
   useEffect(() => {
-    if (query === '') {
+    if (query === "") {
       setResult([])
       return
     }
     const result = posts.filter(post => {
-      const headings = post.node.headings.map(({ value }) => value).join(',')
+      const headings = post.node.headings.map(({ value }) => value).join(",")
       const category = post.node.frontmatter.category
       const excerpt = post.node.excerpt
       const { title } = post.node.frontmatter
@@ -28,7 +28,7 @@ export const Search = ({ posts }) => {
       <div className="search-wrapper">
         <div className="search">
           <input
-            type="text"
+            type="search"
             value={query}
             onChange={e => setQuery(e.target.value)}
             placeholder=" search"
