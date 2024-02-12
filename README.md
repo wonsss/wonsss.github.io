@@ -17,4 +17,10 @@ node -p 'process.arch'
 3. `node -p 'process.arch'` 로 다시 확인하면 x64 출력됨
 4. 패키지 재설치 `rm -rf node_modules && npm install`
 
--
+## 진행중 이슈
+
+### Spaces after list markers
+
+-   [Removed excessive spaces after line prefixes for unordered lists in Markdown #15526
+    ](https://github.com/prettier/prettier/pull/15526)
+-   prettier에서 이 이슈가 해결되면, markdownlint에서 MD030 옵션을 다시 true로 켤 수 있을 것 같음.
