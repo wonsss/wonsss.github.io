@@ -32,7 +32,7 @@ type Subtype = string
 let subtypeArray: Array<Subtype> = []
 let supertypeArray: Array<Supertype> = []
 
-supertypeArray = subtypeArray // OK : 공변성, 즉, Array<Subtype>) ⊂ Array<Supertype>
+supertypeArray = subtypeArray // OK : 공변성, Array<Subtype>) ⊂ Array<Supertype>
 subtypeArray = supertypeArray // Type Error, Type '(string | number)[]' is not assignable to type 'string[]'.
 ```
 
@@ -64,7 +64,7 @@ let printSub: Print<Subtype> = param => {
 }
 
 printSuper = printSub // TypeError, Type 'Print<number>' is not assignable to type 'Print<string | number>'.
-printSub = printSuper // OK : 반공변성, 즉, Print<Supertype> ⊂ Print<Subtype>
+printSub = printSuper // OK : 반공변성, Print<Subtype> ⊃ Print<Supertype>
 ```
 
 ### 함수의 매개변수 타입은 왜 <mark class="hltr-pink">이변성</mark>인가?
