@@ -23,21 +23,17 @@ draft: false
 >
 > -   다른 한 타입을 포함하는 타입을 슈퍼타입(supertype)이라고 하고, 슈퍼타입에 포함되는 타입을 서브타입(subtype)이라고 말한다. 구조적 타입 시스템(structural type system)을 가진 타입스크립트의 경우, 한 타입이 다른 한 타입의 값을 모두 포함하고 있으면 그 타입을 포함한다고 한다.
 
-```tsx
-type Supertype = { x: boolean }
-type Subtype = { x: boolean; y: number }
-```
+[아래 코드에 대한 typescript playground](https://www.typescriptlang.org/play?#code/C4TwDgpgBAygrpATqSUC8UDOxEEsB2A5lAD5T5wC2ARhIgFArTzVPpY4GH30A2EwLHFbgIAQUSIAhiABcUCdJAAeFkwB87ANoBdPgKFImimfJMr4R0Zoy6emBHWOSZ7ByMjmoAem9QA8gDSUPKArzWAAz2AjIMANFCAkZOx5qrCGgCUUIBBRAouFo7I1vTuzkpuecWuvlAAKqJQAKKSAPaIsTWoAOQAFNh4RKTkVLSIqbrtULiY5I2CUpiYuIT4UtT8UMCNa7XtPVyjAHRAA)
 
-```tsx
+```ts
 type Supertype = string | number
 type Subtype = string
-let stringArray: Array<Subtype> = []
-let stringOrNumberArray: Array<Supertype> = []
 
-stringOrNumberArray = stringArray // OK
-stringArray = stringOrNumberArray // Type Error, Type '(string | number)[]' is not assignable to type 'string[]'.
+let subtypeArray: Array<Subtype> = []
+let supertypeArray: Array<Supertype> = []
 
-// 즉, stringArray(:Array<Subtype>) ⊂ stringOrNumberArray(:Array<Supertype>)
+supertypeArray = subtypeArray // OK : 공변성, 즉, Array<Subtype>) ⊂ Array<Supertype>
+subtypeArray = supertypeArray // Type Error, Type '(string | number)[]' is not assignable to type 'string[]'.
 ```
 
 -   기본적으로 타입스크립트의 모든 복합타입 멤버는 <mark class="hltr-red">공변성</mark>을 갖고 있다.
@@ -48,38 +44,27 @@ stringArray = stringOrNumberArray // Type Error, Type '(string | number)[]' is n
 
 ### 함수의 매개변수 타입에 <mark class="hltr-green">반공변성</mark> 특성도 있는 이유
 
-슈퍼타입과 서브타입을 함수의 매개변수 타입으로 전달해서 생긴 각각의 <mark class="hltr-orange">함수 호출 시그니처</mark>의 개수는 슈퍼타입이 서브타입보다 많다. 그리고 <mark class="hltr-orange">함수 호출 시그니처</mark>의 개수가 많을수록(오버로드) 그 타입은 더 좁아진다. 오버로드된 <mark class="hltr-orange">함수 호출 시그니처</mark>는 함수 타입들의 intersection이기 때문에 타입이 더 좁아진다.
+슈퍼타입과 서브타입을 함수의 매개변수 타입으로 전달해서 생긴 각각의 <mark class="hltr-orange">함수 호출 시그니처</mark>의 개수는 슈퍼타입이 서브타입보다 많다. 그리고 <mark class="hltr-orange">함수 호출 시그니처</mark>의 개수가 많을수록(오버로드) 그 타입은 더 좁아진다. <mark class="hltr-orange">함수 호출 시그니처</mark>들이 오버로드될수록 함수의 타입이 더 좁아진다.
 
 따라서, 함수의 매개변수 타입은 서브타입으로 생긴 함수 호출 시그니처가 슈퍼타입으로 생긴 함수 호출 시그니처를 포함하는 <mark class="hltr-green">반공변성</mark>이 형성된다.
 
-```tsx
+[아래 코드에 대한 typescript playground](https://www.typescriptlang.org/play?#code/C4TwDgpgBAygrpATqSUC8UDOxEEsB2A5lAD5T5wC2ARhIgFArTzVPrlW0NsAKe+wADwAVAHzsAFGACGiaZQBcUYQEp04gG4B7XABN69ADYRgUMP2DwkSvgSFW6TcRhlzK6qAG96UX1ADGWviYWsYAdIZahFKy8ir0AL4Gxqbmdiw2FoIsTuyu8h7efgFBIeGR0fmU8Un0aQIOiHkWLFAA9G3K4BAAooiIWogANF2oAOS2AoIUNHSiY1C4mORaptKYmLiE+NLUxlDAWgfdUBNZ2PzEZDNc82F1LXDUzekIdO2dAPIA0lBKgBg9gFeawADPYBGQZGgEjJkaTexvZDdcSAIKIoDDsk9ckA)
+
+```ts
 type Supertype = string | number
 type Subtype = number
 type Print<T> = (param: T) => void
 
 let printSuper: Print<Supertype> = param => {
-    console.log(param)
+	console.log(param)
 }
 
 let printSub: Print<Subtype> = param => {
-    console.log(param)
+	console.log(param)
 }
 
 printSuper = printSub // TypeError, Type 'Print<number>' is not assignable to type 'Print<string | number>'.
-printSub = printSuper // OK
-
-//참고
-
-type printSuper함수호출시그니처 = {
-    (param: string): void
-    (param: number): void
-}
-
-type printSub함수호출시그니처 = {
-    (param: number): void
-}
-
-// 즉, printSuper함수호출시그니처 ⊂ printSub함수호출시그니처 -> 반공변성
+printSub = printSuper // OK : 반공변성, 즉, Print<Supertype> ⊂ Print<Subtype>
 ```
 
 ### 함수의 매개변수 타입은 왜 <mark class="hltr-pink">이변성</mark>인가?
@@ -133,31 +118,31 @@ checkIfAnimalsAreAwake(myPets);
 
 타입스크립트에서 [strictFunctionTypes](https://www.typescriptlang.org/tsconfig#strictFunctionTypes) 설정이 꺼져있는 기본 모드에서는 이러한 함수 매개변수의 <mark class="hltr-pink">이변성</mark>을 다음 예제코드에서와 같이 확인할 수 있다.
 
-[typescript playground example](https://www.typescriptlang.org/play?strict=false&strictFunctionTypes=false#code/GYVwdgxgLglg9mABMMAKAHgLkQZygJxjAHMBKRAbwChFEIEc4AbAUwDom5jUAiACRZNOAGkQ9EAakTo2UOABk4Adxb4AwgEMcLVKVIBuKgF8aVKAE8ADi0QBlAkWIB5fADkQAWwBGqgGLgIRABeRFQwHGw8QhJEAB9EME8ffHIggD5EADc4GAATQ0QqAHoixABVcI1gGy0cGGIwDxYwKEQYHERLfBZM5qgWXKpWVtBIbHto5zckvwDg5DBDKlGIVABGAAYDIA)
+[아래 코드에 대한 typescript playground](https://www.typescriptlang.org/play?strict=false&strictFunctionTypes=false#code/PTAEGcBcCcEsGNIDECuA7RsD2aAqBPABwFNwAuULAMyoCgr1MdQq0AKADwqjjQHMAlKADetAJDwc4LABtiAOhlY+bAEQAJYjKUAaUKtABqUB3mQsAGSwB3YtADCAQ3DE2AgbQC+tWpCLFQAGUYWH4AeWgAORQAWwAjO1QMUABeUDY0cggQ-lAAH1A0WIToIRSAPlAANyxYABMfEFAAVUzHKgDncFg+NBjiNEhaOUgWRgpg3j4I6PjExlSWNB8GDDYARgAGISbW8HaA+EdtUABaUEAH9sABhcAQ8cAF0cAcQdBAStnAGebQQBwewF2BwA1VwBia0CAChbaEA)
 
 ```ts
 // strictFunctionTypes: off
 function fn(x: string) {
-    console.log("Hello, " + x.toLowerCase())
+	console.log("Hello, " + x.toLowerCase())
 }
 
 type StringOrNumberFunc = (ns: string | number) => void
 
 // Unsafe assignment
 let func: StringOrNumberFunc = fn
-// Unsafe call - will crash
-func(10)
+
+func(10) // Unsafe call - 런타임에서 충돌 발생하게 됨
 ```
 
 타입스크립트 설정에서 [strictFunctionTypes](https://www.typescriptlang.org/tsconfig#strictFunctionTypes) 설정을 켜면 <mark class="hltr-red">공변성</mark>이 제거되고 <mark class="hltr-green">반공변성</mark>만 남는다.
 그리고 이전 예제처럼 타입선언을 했을 때 이제는 타입에러가 검출되어 불안전한 할당을 방지할 수 있게 된다.
 
-[typescript playground example](https://www.typescriptlang.org/play?strict=false#code/GYVwdgxgLglg9mABMMAKAHgLkQZygJxjAHMBKRAbwChFEIEc4AbAUwDom5jUAiACRZNOAGkQ9EAakTo2UOABk4Adxb4AwgEMcLVKVIBuKgF8aVKAE8ADi0QBlAkWIB5fADkQAWwBGqgGLgIRABeRFQwHGw8QhJEAB9EME8ffHIggD5EADc4GAATQ0QqAHoixABVcI1gGy0cGGIwDxYwKEQYHERLfBZM5qgWXKpWVtBIbHto5zckvwDg5DBDKlGIVABGAAYDIA)
+[아래 코드에 대한 typescript playground](https://www.typescriptlang.org/play?strict=false#code/PTAEGcBcCcEsGNIDECuA7RsD2aAqBPABwFNwAuUHAKADN1MdQa0AKADwqjjQHMBKUAG8qASHg5wWADbEAdFKw8WAIgASxKQoA0oZaADUoNrMhYAMlgDuxaAGEAhuGIs+fKgF8qVSEWKgAyjCwvADy0AByKAC2AEY2qBigALygLGjkEEG8oAA+oGjRcdACSQB8oABuWLAAJl4goACq6fY0fo7gsDxoUcRokKCw4KCE0MQVfZDEdTIDdBgUgdw8YZGx8fTJTGigDQQkoADk7JxZ-MnlVbWHg8NoWAMdXWj2MTKgph++R0vBKxGFDYYQ6yUD7UiUGgjezQey9KbQYaHNg3exoGpHdKosaDDBYKKEeyQWBvORg76HLh-XL5QHQG5DfIPUBPbqvd6fHwHSlnEHk7kFdb025Mx7gTps0kfLBfblU3ggoA)
 
 ```ts
 // strictFunctionTypes: on
 function fn(x: string) {
-    console.log("Hello, " + x.toLowerCase())
+	console.log("Hello, " + x.toLowerCase())
 }
 
 type StringOrNumberFunc = (ns: string | number) => void
@@ -174,7 +159,7 @@ let func: StringOrNumberFunc = fn // Type '(x: string) => void' is not assignabl
 
         ```ts
         interface Array<T> {
-            push(...items: T[]): number
+        	push(...items: T[]): number
         }
         ```
 
@@ -182,29 +167,29 @@ let func: StringOrNumberFunc = fn // Type '(x: string) => void' is not assignabl
 
         ```ts
         interface Array<T> {
-            push: (...items: T[]) => number
+        	push: (...items: T[]) => number
         }
         ```
 
 아래 예제에서, 슈퍼타입의 함수 호출 시그니처에 서브타입의 함수 호출 시그니처를 할당한 것은, 논리적으로 따지면 <mark class="hltr-green">반공변성</mark>에 따라 타입에러가 존재해야 한다. 하지만 <mark class="hltr-purple">method 구문 함수</mark>는 strictFunctionTypes 설정을 켜더라도 타입스크립트 설계상 <mark class="hltr-pink">이변성</mark>이라서, 해당 타입에러가 감지되지 않는 문제가 있다.
 
-[typescript playground example](https://www.typescriptlang.org/play?strict=false#code/C4TwDgpgBAygrpATqSUC8UDOxEEsB2A5lAD5T5wC2ARhIgNwBQK081L6WOBhTz40ALIRgACwD2AE1yZRnAN6MoUAGZx8AYwAUADwBcsBHRYBKAwDdxuSUwC+TKIzWbgucfixxqAMXy6DbKZQisoa7pjiADYQAHSR4oRaAEQAEhCR8QA0UElQANRQOjHA4gAy4gDudADCAIaYEFomJnZKjAD07VAAqpGulLXA6SBQtR7qmLUq0PWYuIT4lBD4wNnUcMDk4puSIhAaQ5KMYfjYUJQGwmJSMnIYIarqGgaYXr7ZnVCAEUOAPsuAAwuAUPHABrjUEAFquADCHABxrgBzZwA7Q4AP2sAE02ADJnAAujUEAOIOAGD7ASCITCESjAD6dUEABquAT6bADqrUEAwTWAAXHsoAMHsArzWAAZ7AIyD6MADK2AF07AC5dUEBqMAN+2AABqoIAXCcANeOAF1XAD6jUEpgBOmmJQQAaq4ABycAM53nEQSSRQQA2tYAObrB4MAKU1QQAu4xyrYAB7sAOh1QGXkwUAkXiwAINRrABgtGqggClRy3GwA4E+LABHjKsY9kYlBizm0AEYAAwtIA)
+[아래 코드에 대한 typescript playground](https://www.typescriptlang.org/play?strict=false#code/C4TwDgpgBAygrpATqSUC8UDOxEEsB2A5lAD5T5wC2ARhIgNwBQK081L6WOBhTz40ALIRgACwD2AE1yZRnAN6MoUAGZx8AYwAUADwBcsBHRYBKAwDdxuSUwC+TKIzWbgucfixxqAMXy6DbKZQisoa7pjiADYQAHSR4oRaAEQAEhCR8QA0UElQANRQOjHA4gAy4gDudADCAIaYEFomJnZKjAD07VAAqpGulLXA6SBQtR7qmLUq0PWYuIT4lBD4wNnUcMDk4puSIhAaQ5KMYfjYUJQGwmJSMnIYIarqGgaYXr7ZnVCAEUOAPsuAAwuAUPHABrjUEAFquADCHABxrgBzZwA7Q4AP2sAE02ADJnAAujUEAOIOAGD7ASCITCESjAD6dUEABquAT6bADqrUEAwTWAAXHsoAMHsArzWAAZ7AIyD6MADK2AF07AC5dUEBqMAN+2AABqoIAXCcANeOAF1XAD6jUEpgBOmmJQQAaq4ABycAM53nEQSSRQQA2tYAObrB4MAKU1QQAu4xyrYAB7sAOh1QGXkwUAkXiwAINRrABgtGqggClRy3GwA4E+LABHjKsY9kYlBizm0AEYAAwtIA)
 
 ```ts
 type Supertype = string | number
 type Subtype = string
 
 type Methodish = {
-    func(x: Supertype): void
+	func(x: Supertype): void
 }
 
 function subFn(x: Subtype) {
-    console.log("Hello, " + x.toLowerCase())
+	console.log("Hello, " + x.toLowerCase())
 }
 
 // Ultimately an unsafe assignment, but not detected
 const m: Methodish = {
-    func: subFn, // 슈퍼타입의 함수호출시그니처에 서브타입의 함수호출시그니처를 할당했으나 타입에러가 감지되지 않음
+	func: subFn, // 슈퍼타입의 함수호출시그니처에 서브타입의 함수호출시그니처를 할당한 것은, 반공변성에 따르면 타입에러가 존재해야 한다. 하지만 method 구문 함수는 이변성이므로 해당 타입에러가 감지되지 않는 문제가 있다.
 }
 m.func(10)
 ```
@@ -213,7 +198,7 @@ m.func(10)
 
 ### strictFunctionTypes 설정을 켜도 <mark class="hltr-purple">method 구문으로 작성된 함수</mark>의 매개변수 타입이 이변성인 이유
 
-타입스크립트에서 `strictFunctionTypes` 기능을 개발할 때, DOM의 일부를 포함하여 본질적으로 안전하지 않은 class 계층 구조를 많이 발견했다고 한다. - 만약, <mark class="hltr-purple">method 구문 함수</mark>에도 엄격한 검사를 적용했다면 상당히 많은 제네릭 타입이 <mark class="hltr-grey">무공변성</mark>이 되는 엄청난 브레이킹 체인지가 발생했을 것이다. 따라서 이처럼 <mark class="hltr-purple">method 구문 함수</mark>에서 <mark class="hltr-grey">무공변성</mark>이 되지 않도록, <mark class="hltr-pink">이변성</mark>이라는 약간의 불건전성을 용인한 것으로 보인다.
+타입스크립트에서 `strictFunctionTypes` 기능을 개발할 때, DOM의 일부를 포함하여 본질적으로 안전하지 않은 class 계층 구조를 많이 발견했다고 한다. 만약, <mark class="hltr-purple">method 구문 함수</mark>에도 엄격한 검사를 적용했다면 상당히 많은 제네릭 타입이 <mark class="hltr-grey">무공변성</mark>이 되는 엄청난 브레이킹 체인지가 발생했을 것이다. 따라서 이처럼 <mark class="hltr-purple">method 구문 함수</mark>에서 <mark class="hltr-grey">무공변성</mark>이 되지 않도록, <mark class="hltr-pink">이변성</mark>이라는 약간의 불건전성을 용인한 것으로 보인다.
 
 즉, <mark class="hltr-purple">method 구문 함수</mark>는 제네릭 클래스나 제네릭 인터페이스(예를 들어 `Array<T>`)의 <mark class="hltr-green"> 반공변적</mark>인 관계를 유지하게 하기 위해 strictFunctionTypes 검사 기능에서 의도적으로 배제됐다.
 
