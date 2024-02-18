@@ -125,16 +125,16 @@ Next.js 파일 구조는 어떻게 생겼을까요? 이번 튜토리얼에서 �
 
 새 `app` 디렉터리를 사용한 Next.js 13 앱의 예시는 아래와 같습니다.
 
-```tsx
-;-app -
-	layout.tsx -
-	site -
-	page.tsx -
-	layout.tsx -
-	app -
-	dashboard -
-	page.tsx -
-	layout.tsx
+```plaintext
+- app
+  - layout.tsx
+  - (site)
+    - page.tsx
+    - layout.tsx
+  - app
+    - dashboard
+      - page.tsx
+    - layout.tsx
 ```
 
 보시다시피, 파일의 이름이 컴포넌트의 유형 자체를 반영합니다. 예를 들어, `layout.tsx` 는 레이아웃 컴포넌트이고, `page.tsx` 는 페이지 컴포넌트인 식입니다.
@@ -147,17 +147,14 @@ Next.js 파일 구조는 어떻게 생겼을까요? 이번 튜토리얼에서 �
 
 예를 들어, 특정한 페이지를 위한 컴포넌트들을 해당 페이지가 정의된 그 폴더에 정확히 둘 수 있습니다.
 
-```tsx
-;-app -
-	site -
-	components -
-	Dashboard.tsx -
-	hooks -
-	use -
-	fetch -
-	data -
-	hook.ts -
-	page.tsx
+```plaintext
+- app
+  - (site)
+    - components
+      - Dashboard.tsx
+    - hooks
+      - use-fetch-data-hook.ts
+    - page.tsx
 ```
 
 참고: `(site)` 는 왜 소괄호일까요? 소괄호를 사용함으로써, 이 `site` 디렉터리를 “경로 없음”으로 만들 수 있습니다. 이는 라우팅에 새 path segement를 추가하지 않고도 `site` 디렉터리 내에 새 레이아웃, 로딩 파일, 페이지들을 만들 수 있음을 의미합니다.
@@ -174,8 +171,13 @@ Next.js 13에서는 컴포넌트들을 어디에 둘까요? 답은 상황에 따
 
 `app` 디렉터리에서 파일들을 colocate 할 수 있기 때문에, 파일들을 그들이 사용되는 곳 가까이에 위치시킬 수 있습니다. 예를 들어, 컴포넌트를 자신을 사용하는 페이지와 같은 디렉터리 내에 둘 수 있습니다.
 
-```tsx
-;-app - site - page.tsx - components - PageComponent.tsx
+```plaintext
+- app
+  - (site)
+    - page.tsx
+ 
+    - components
+      - PageComponent.tsx
 ```
 
 위에서 볼 수 있듯이, `PageComponent` 를 그것을 사용하는 페이지와 같은 디렉터리 내에 둘 수 있습니다. 이는 별도의 디렉터리에 컴포넌트를 위치해야 했던 기존의 `pages` 디렉터리에 비해 큰 개선입니다.
@@ -192,38 +194,44 @@ Next.js 13에서는 컴포넌트들을 어디에 둘까요? 답은 상황에 따
 
 예를 들어, 앱 전체에서 사용되는 모든 컴포넌트들을 포함하는 `components` 디렉터리와 앱 전체에서 사용되는 라이브러리들을 포함하는 `lib` 디렉터리를 갖고 있습니다.
 
-```tsx
-;-src -
-	app -
-	layout.tsx -
-	site -
-	page.tsx -
-	layout.tsx -
-	components -
-	HomePage.tsx -
-	HomePageNewsletterInput.tsx -
-	components -
-	Button.tsx -
-	Input.tsx -
-	lib -
-	api.ts -
-	auth.ts -
-	storage.ts
+```plaintext
+- src
+  - app
+    - layout.tsx
+ 
+    - (site)
+      - page.tsx
+      - layout.tsx
+ 
+      - components
+        - HomePage.tsx
+        - HomePageNewsletterInput.tsx
+ 
+  - components
+    - Button.tsx
+    - Input.tsx
+ 
+  - lib
+    - api.ts
+    - auth.ts
+    - storage.ts
 ```
 
 ### route group을 언제 사용할까요
 
 Route group은 공통 path segement 나 공통 레이아웃, 또는 레이아웃에서 분리된 페이지 하위에서 URL 결과에 영향을 미치지 않고 페이지를 그룹화하는 방법입니다. 예를 들어, `/dashboard` 경로 하위에 모든 페이지를 묶고 싶다면, route group을 사용할 수 있습니다.
 
-```tsx
-;-app -
-	dashboard -
-	page.tsx -
-	layout.tsx -
-	analytics -
-	page.tsx -
-	billing -
-	page.tsx
+```plaintext
+- app
+  - (dashboard)
+    - page.tsx
+    - layout.tsx
+ 
+    - analytics
+      - page.tsx
+ 
+    - billing
+      - page.tsx
 ```
 
 위 케이스에서, `/dashboard` 하위의 페이지들은 root `/` 경로로 하위에서 접근 가능합니다. 예를 들어, `app/(dashboard)/analytics/page.tsx` 페이지는 `/analytics` 에서 접근 가능합니다.
@@ -238,19 +246,23 @@ Next.js는 root layout 컴포넌트가 필요합니다.
 
 ```tsx
 export const metadata = {
-	title: "Next.js Tutorial",
-	description: "A Next.js tutorial using the App Router",
+  title: 'Next.js Tutorial',
+  description: 'A Next.js tutorial using the App Router',
+};
+ 
+async function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang={'en'}>
+      <body>{children}</body>
+    </html>
+  );
 }
-
-async function RootLayout({ children }: { children: React.ReactNode }) {
-	return (
-		<html lang={"en"}>
-			<body>{children}</body>
-		</html>
-	)
-}
-
-export default RootLayout
+ 
+export default RootLayout;
 ```
 
 레이아웃은 `app` 디렉터리 내에서 `layout.tsx` 컨벤션을 사용함으로써 정의됩니다. Next.js는 레이아웃이 정의된 폴더 내에서 모든 페이지들을 자동으로 감쌉니다.
@@ -259,15 +271,17 @@ export default RootLayout
 
 ```tsx
 export default async function SiteLayout({
-	children,
+  children,
 }: {
-	children: React.ReactNode
+  children: React.ReactNode;
 }) {
-	return (
-		<div>
-			<main>{children}</main>
-		</div>
-	)
+  return (
+    <div>
+      <main>
+        {children}
+      </main>
+    </div>
+  );
 }
 ```
 
@@ -280,26 +294,30 @@ export default async function SiteLayout({
 Next.js의 레이아웃 컴포넌트에서 데이터를 fetch하면, `use` 라는 새로운 훅을 사용할 수 있습니다. 이는 서버에서 데이터를 fetch하기 위해서 `Suspense` 를 사용하는 실험적인 리액트의 훅입니다.
 
 ```tsx
-import { use } from "react"
-
+import { use } from "react";
+ 
 export default function SiteLayout({
-	children,
+  children,
 }: {
-	children: React.ReactNode
+  children: React.ReactNode;
 }) {
-	const data = use(getData())
-
-	return (
-		<div>
-			<header>{data.user ? <ProfileDropown /> : null}</header>
-
-			<main>{children}</main>
-		</div>
-	)
+  const data = use(getData());
+ 
+  return (
+    <div>
+      <header>
+        { data.user ? <ProfileDropown /> : null }
+      </header>
+ 
+      <main>
+        {children}
+      </main>
+    </div>
+  );
 }
-
+ 
 function getData() {
-	return fetch("/api/data").then(res => res.json())
+  return fetch('/api/data').then(res => res.json());
 }
 ```
 
