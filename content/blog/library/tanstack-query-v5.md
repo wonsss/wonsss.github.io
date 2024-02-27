@@ -192,7 +192,7 @@ const queryClient = new QueryClient({
 
 ## 10. `useErrorBoundary` 옵션 이름이 `throwErrors` 로 변경됨
 
-특정 프레임워크에 종속되지 않으면서 React의 훅의 접미사인 “use”와 “ErrorBoundary” 컴포넌트명과 혼동을 피하기 위해, `useErrorBoundary` 옵션의 이름을 `throwErrors` 로 변경하였습니다. 변경된 이름이 기능을 보다 정확하게 반영합니다.
+특정 프레임워크에 종속되지 않으면서 React의 훅의 접두사인 “use”와 “ErrorBoundary” 컴포넌트명과 혼동을 피하기 위해, `useErrorBoundary` 옵션의 이름을 `throwErrors` 로 변경하였습니다. 변경된 이름이 기능을 보다 정확하게 반영합니다.
 
 ## 11. 타입스크립트: 에러의 기본 타입이 `unknown` 에서 `Error` 로 변경됨
 

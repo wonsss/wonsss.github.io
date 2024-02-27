@@ -23,7 +23,7 @@ draft: false
 -   Number
     -   접두사로 `num`이나 접미사로 `count` 또는 `index`를 사용한다. (e.g. numItmes, itemCount, itemIndex)
 -   Bool
-    -   접미사 `is` , `can` , `has` 를 사용한다.
+    -   접두사 `is` , `can` , `has` 를 사용한다.
     -   `is`: 시각적/행동적 변화 (isVisible, isEnable, isActive)
     -   `can`: 행동적 변화와 조건적 시각적 변화 (e.g. canToggle, canExpand, canHaveCancelButton)
     -   `has` : UI 요소 토글링 (e.g. hasCancelButton, hasHeader)
@@ -60,8 +60,8 @@ props는 컴포넌트 그 자체를 설명하기 위해 이름이 붙여져야 �
 
 ## 이벤트 핸들러 props
 
-1. prop의 이름에 접미사 `on` 를 사용한다. (e.g. onSelect, onClick)
-2. 핸들러 함수의 이름에 `handle` 접미사를 사용한다. (e.g. <MyComp onClick={this.handleClick} />)
+1. prop의 이름에 접두사 `on` 를 사용한다. (e.g. onSelect, onClick)
+2. 핸들러 함수의 이름에 `handle` 접두사를 사용한다. (e.g. <MyComp onClick={this.handleClick} />)
 3. 내장된 이벤트 핸들러의 prop 이름을 커스텀 이벤트의 prop 이름에서 중복 사용하는 것을 피한다. 예를 들어, 만약 네이티브 focus/click 이벤트 사용이 관심사가 아니라면 prop이름으로 onFocus나 onClick 대신에 onSelect 같은 이름을 사용한다.
 
 ## Reference
